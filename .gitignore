@@ -1,4 +1,5 @@
 Thumbs.db
+.asscache
 .DS_Store
 .gradle
 build/
@@ -9,3 +10,4 @@ build/
 .project
 .settings
 .classpath
+/.nb-gradle/

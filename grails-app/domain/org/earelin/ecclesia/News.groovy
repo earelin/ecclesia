@@ -1,9 +1,9 @@
 package org.earelin.ecclesia
 
-class Organization {
-	
-    String name
-    Date dateCreated
+class News {
+    
+    String title
+    String body
 
     static constraints = {
     }
