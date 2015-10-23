@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title><g:layoutTitle default="Grails"/></title>
+      <title><g:layoutTitle default="Ecclesia"/></title>
       <asset:stylesheet src="bootstrap.css"/>
       <asset:stylesheet src="bootstrap-theme.css"/>
       <asset:stylesheet src="application.css"/>
@@ -15,7 +15,7 @@
       <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
           <div class="navbar-header">
-            <g:link class="navbar-brand" uri="/">Socialismo Precario</g:link>
+            <g:link class="navbar-brand" uri="/">Ecclesia</g:link>
           </div>
         </div>
       </nav>
