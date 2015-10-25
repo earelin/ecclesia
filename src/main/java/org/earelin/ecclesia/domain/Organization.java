@@ -1,5 +1,6 @@
 package org.earelin.ecclesia.domain;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,6 +19,15 @@ public class Organization {
     private String name;
     @OneToOne
     private ManagedImage logo;
+    private Date created;
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
     public long getId() {
         return id;
