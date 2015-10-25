@@ -18,6 +18,8 @@ dependencies {
   compile 'org.springframework:spring-tx:4.2.2.RELEASE'
   compile 'org.springframework:spring-orm:4.2.2.RELEASE'
   compile 'org.hibernate:hibernate-core:4.2.21.Final'
+  compile 'org.hibernate:hibernate-entitymanager:4.2.21.Final'
+  compile 'org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final'
 	compile 'javax.servlet:jstl:1.2'
   compile 'org.apache.commons:commons-dbcp2:2.1.1'
   compile 'mysql:mysql-connector-java:5.1.37'

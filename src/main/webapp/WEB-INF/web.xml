@@ -18,7 +18,7 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>hello-dispatcher</servlet-name>
+		<servlet-name>ecclesia-dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
