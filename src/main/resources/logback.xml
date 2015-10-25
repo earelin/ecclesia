@@ -15,7 +15,7 @@
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
-	<logger name="com.mkyong.helloworld" level="debug" additivity="false">
+	<logger name="org.earelin.ecclesia" level="debug" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	

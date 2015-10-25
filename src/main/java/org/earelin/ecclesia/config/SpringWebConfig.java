@@ -9,9 +9,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
  
-@EnableWebMvc
 @Configuration
-@ComponentScan({ "org.earelin.ecclesia.web" })
+@EnableWebMvc
+@ComponentScan({"org.earelin.ecclesia.web"})
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
  
 	@Override
@@ -27,5 +27,4 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;
 	}
- 
 }

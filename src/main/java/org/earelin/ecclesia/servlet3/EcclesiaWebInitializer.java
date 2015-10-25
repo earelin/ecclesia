@@ -5,7 +5,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 import org.earelin.ecclesia.config.SpringRootConfig;
 import org.earelin.ecclesia.config.SpringWebConfig;
 
-public class MyWebInitializer extends
+public class EcclesiaWebInitializer extends
 		AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
