@@ -12,7 +12,7 @@ import org.earelin.ecclesia.domain.resources.ManagedImage;
  * Users of the system
  */
 @Entity
-@Table(name="users")
+@Table(name="Users")
 public class User {
     
     @Id

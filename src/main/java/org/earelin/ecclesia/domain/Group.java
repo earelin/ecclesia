@@ -1,5 +1,6 @@
 package org.earelin.ecclesia.domain;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,7 +11,7 @@ import javax.persistence.Table;
  * Groups
  */
 @Entity
-@Table(name="groups")
+@Table(name="Groups")
 public class Group {
     
     @Id
@@ -21,6 +22,15 @@ public class Group {
     @ManyToOne
     private Group parent;
     private String name;
+    private Date created;
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
     public long getId() {
         return id;
