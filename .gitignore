@@ -2,3 +2,4 @@
 /.nb-gradle/
 /build/
 private
+/src/main/resources/import.sql

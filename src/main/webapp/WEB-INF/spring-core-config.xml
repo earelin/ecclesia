@@ -17,7 +17,7 @@
   
   <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
     <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-    <property name="url" value="jdbc:mysql://webserver.dev/ecclesia_devel"/>
+    <property name="url" value="jdbc:mysql://webserver.dev/ecclesia"/>
     <property name="username" value="root"/>
     <property name="password" value="123"/>
   </bean>
@@ -42,5 +42,7 @@
       class="org.springframework.orm.hibernate4.HibernateTransactionManager">
     <property name="sessionFactory" ref="sessionFactory" />
   </bean>
+  
+  <import resource="spring-security-config.xml"/>
 
 </beans>

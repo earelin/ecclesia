@@ -23,6 +23,9 @@ dependencies {
 	compile 'javax.servlet:jstl:1.2'
   compile 'org.apache.commons:commons-dbcp2:2.1.1'
   compile 'mysql:mysql-connector-java:5.1.37'
+  compile 'org.thymeleaf:thymeleaf-spring4:2.1.4.RELEASE'
+  compile 'org.springframework.security:spring-security-config:4.0.3.RELEASE'
+  compile 'org.springframework.security:spring-security-web:4.0.3.RELEASE'
 	
 	//include in compile only, exclude in the war
 	providedCompile 'javax.servlet:servlet-api:2.5'
