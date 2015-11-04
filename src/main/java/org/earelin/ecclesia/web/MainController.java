@@ -11,13 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MainController {
 
-	private final Logger logger = LoggerFactory.getLogger(MainController.class);
-
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Map<String, Object> model) {
-
-		logger.debug("index() is executed!");
-
 		return "index";
 	}
 

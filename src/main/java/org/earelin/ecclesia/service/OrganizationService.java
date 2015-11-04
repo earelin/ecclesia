@@ -5,10 +5,14 @@
  */
 package org.earelin.ecclesia.service;
 
+import java.util.List;
+import org.earelin.ecclesia.domain.Organization;
+
 /**
  *
  * @author xcarriba
  */
 public interface OrganizationService {
-    
+    public List<Organization> list();
+    public List<Organization> list(int limit, int offset);
 }

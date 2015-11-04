@@ -11,4 +11,8 @@
   <definition name="index" extends="base">
     <put-attribute name="body" value="/WEB-INF/views/index.jsp" />
   </definition>
+  
+  <definition name="admin_organization_index" extends="base">
+    <put-attribute name="body" value="/WEB-INF/views/admin/organization/index.jsp" />
+  </definition>
 </tiles-definitions>       

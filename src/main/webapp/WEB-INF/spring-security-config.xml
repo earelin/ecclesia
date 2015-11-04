@@ -12,6 +12,7 @@
   
   <http>
     <intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+    <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
     <intercept-url pattern="/**" access="hasRole('USER')" />
     <form-login />
     <logout />
