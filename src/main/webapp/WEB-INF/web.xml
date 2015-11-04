@@ -7,6 +7,7 @@
 	<description>Ecclesia web application</description>
 
 	<!-- For web context -->
+  
 	<servlet>
 		<servlet-name>ecclesia-dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -23,6 +24,7 @@
 	</servlet-mapping>
 
 	<!-- For root context -->
+  
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
@@ -33,6 +35,7 @@
 	</context-param>
   
   <!-- Security configuration -->
+  
   <filter>
     <filter-name>springSecurityFilterChain</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>

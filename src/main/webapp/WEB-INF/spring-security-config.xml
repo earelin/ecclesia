@@ -6,6 +6,10 @@
         http://www.springframework.org/schema/security/spring-security.xsd
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd ">
+  
+  <http pattern="/resources/**" security="none"/>
+  <http pattern="/" security="none"/>
+  
   <http>
     <intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
     <intercept-url pattern="/**" access="hasRole('USER')" />
