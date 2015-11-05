@@ -18,13 +18,11 @@
     <logout />
   </http>
   
+  <beans:bean name="bcryptEncoder"
+      class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+  
   <authentication-manager>
-    <authentication-provider>
-      <user-service>
-        <user name="admin" password="123" authorities="ROLE_USER, ROLE_ADMIN" />
-        <user name="user" password="123" authorities="ROLE_USER" />
-      </user-service>
-    </authentication-provider>
+    <authentication-provider user-service-ref='userServiceImpl'/>
   </authentication-manager>
 
 </beans:beans>
