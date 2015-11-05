@@ -54,4 +54,12 @@ public class UserGroup {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 }
