@@ -12,17 +12,19 @@
   
   <http>
     <intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-    <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
-    <intercept-url pattern="/**" access="hasRole('USER')" />
+    <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+    <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
     <form-login />
     <logout />
   </http>
   
+  <!--
   <beans:bean name="bcryptEncoder"
       class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+  -->
   
   <authentication-manager>
-    <authentication-provider user-service-ref='userServiceImpl'/>
+    <authentication-provider ref='authenticationProviderImpl'/>
   </authentication-manager>
 
 </beans:beans>

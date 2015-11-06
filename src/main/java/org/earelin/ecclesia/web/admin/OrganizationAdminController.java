@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class OrganizationAdminController {
 
-    private OrganizationService service;
+    private final OrganizationService service;
     
     @Autowired
     public OrganizationAdminController(OrganizationService service) {

@@ -1,20 +1,18 @@
 package org.earelin.ecclesia.service.impl;
 
 import org.earelin.ecclesia.dao.UserDAO;
+import org.earelin.ecclesia.domain.User;
 import org.earelin.ecclesia.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
  *
  */
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
     
-    private UserDAO dao;
+    private final UserDAO dao;
 
     @Autowired
     public UserServiceImpl(UserDAO dao) {
@@ -22,8 +20,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
-        return dao.loadUserByUsername(string);
+    public User authenticate(String email, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

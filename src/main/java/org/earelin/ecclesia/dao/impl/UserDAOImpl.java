@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserDAOImpl implements UserDAO {
     
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
     
     @Autowired
     public UserDAOImpl(SessionFactory sessionFactory) {
@@ -27,10 +27,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User loadUserByUsername(String username) {
+    public User authenticate(String email, String password) {
         return (User) currentSession()
-                .createQuery("from User as u where u.username = ?")
-                .setString(0, username)
+                .createQuery("from User as u where u.email = ? and u.password = ?")
+                .setString(0, email)
+                .setString(1, password)
                 .uniqueResult();
     }
 

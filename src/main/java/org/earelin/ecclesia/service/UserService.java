@@ -5,10 +5,12 @@
  */
 package org.earelin.ecclesia.service;
 
+import org.earelin.ecclesia.domain.User;
+
 /**
  *
  * @author xcarriba
  */
 public interface UserService {
-    
+    public User authenticate(String email, String password);
 }

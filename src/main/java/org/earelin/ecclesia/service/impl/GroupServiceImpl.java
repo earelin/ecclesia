@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GroupServiceImpl implements GroupService {
     
-    private GroupDAO dao;
+    private final GroupDAO dao;
     
     @Autowired
     public GroupServiceImpl(GroupDAO dao) {

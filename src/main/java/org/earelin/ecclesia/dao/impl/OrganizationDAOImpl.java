@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class OrganizationDAOImpl implements OrganizationDAO {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
     
     @Autowired
     public OrganizationDAOImpl(SessionFactory sessionFactory) {

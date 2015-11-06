@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
     
-    private OrganizationDAO dao;
+    private final OrganizationDAO dao;
     
     @Autowired
     public OrganizationServiceImpl(OrganizationDAO dao) {

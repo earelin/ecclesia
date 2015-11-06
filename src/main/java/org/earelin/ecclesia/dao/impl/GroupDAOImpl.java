@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class GroupDAOImpl implements GroupDAO {
     
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
     
     @Autowired
     public GroupDAOImpl(SessionFactory sessionFactory) {

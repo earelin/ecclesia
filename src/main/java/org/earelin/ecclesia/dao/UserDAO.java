@@ -12,5 +12,5 @@ import org.earelin.ecclesia.domain.User;
  * @author xcarriba
  */
 public interface UserDAO {
-    public User loadUserByUsername(String username);
+    public User authenticate(String email, String password);
 }
