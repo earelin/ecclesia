@@ -27,11 +27,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User authenticate(String email, String password) {
+    public User authenticate(String username, String password) {
         return (User) currentSession()
-                .createQuery("from User as u where u.email = ? and u.password = ?")
-                .setString(0, email)
-                .setString(1, password)
+                .createQuery("from User as u where u.username = :username and u.password = :password")
+                .setString("username", username)
+                .setString("password", password)
                 .uniqueResult();
     }
 
