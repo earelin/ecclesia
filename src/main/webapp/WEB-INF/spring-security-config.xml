@@ -11,10 +11,10 @@
   <http pattern="/" security="none"/>
   
   <http>
-    <intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+    <intercept-url pattern="/login*" access="isAnonymous()"/>
     <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
     <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
-    <form-login />
+    <form-login login-page="/login" />
     <logout />
   </http>
   

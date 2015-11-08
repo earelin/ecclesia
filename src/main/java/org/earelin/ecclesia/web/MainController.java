@@ -13,5 +13,10 @@ public class MainController {
 	public String index(Map<String, Object> model) {
 		return "index";
 	}
+    
+    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	public String dashboard(Map<String, Object> model) {
+		return "dashboard";
+	}
 
 }
