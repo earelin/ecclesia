@@ -1,5 +1,6 @@
 package org.earelin.ecclesia.dao.impl;
 
+import java.util.List;
 import org.earelin.ecclesia.dao.UserDAO;
 import org.earelin.ecclesia.domain.User;
 import org.hibernate.Session;
@@ -33,6 +34,37 @@ public class UserDAOImpl implements UserDAO {
                 .setString("username", username)
                 .setString("password", password)
                 .uniqueResult();
+    }
+    
+    @Override
+    public void add(User user) {
+        currentSession().save(user);
+    }
+    
+    @Override
+    public void update(User user) {
+        currentSession().saveOrUpdate(user);
+    }
+
+    @Override
+    public void remove(User user) {
+        currentSession().delete(user);
+    }
+
+    @Override
+    public List<User> list() {
+        return (List<User>) currentSession()
+                .createQuery("from User as u order by u.username")
+                .list();
+    }
+
+    @Override
+    public List<User> list(int limit, int offset) {
+        return (List<User>) currentSession()
+                .createQuery("from User as u order by u.username")
+                .setMaxResults(limit)
+                .setFirstResult(offset)
+                .list();
     }
 
 }

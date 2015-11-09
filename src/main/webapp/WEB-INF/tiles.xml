@@ -13,14 +13,25 @@
   </definition>
   
   <definition name="dashboard" extends="base">
-    <put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+    <put-attribute name="body" value="/WEB-INF/views/dashboard.jsp" />
   </definition>
   
   <definition name="login_form" extends="base">
     <put-attribute name="body" value="/WEB-INF/views/login.jsp" />
   </definition>
   
+  <definition name="register_form" extends="base">
+    <put-attribute name="body" value="/WEB-INF/views/register.jsp" />
+  </definition>
+  
+  <!-- Global admin interface -->
+  
   <definition name="admin_organization_index" extends="base">
     <put-attribute name="body" value="/WEB-INF/views/admin/organization/index.jsp" />
   </definition>
+  
+  <definition name="admin_user_index" extends="base">
+    <put-attribute name="body" value="/WEB-INF/views/admin/user/index.jsp" />
+  </definition>
+  
 </tiles-definitions>       

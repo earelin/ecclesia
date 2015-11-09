@@ -8,20 +8,19 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd ">
   
   <http pattern="/resources/**" security="none"/>
-  <http pattern="/" security="none"/>
   
   <http>
+    <intercept-url pattern="/" access="permitAll"/>
     <intercept-url pattern="/login*" access="isAnonymous()"/>
+    <intercept-url pattern="/register*" access="isAnonymous()"/>
     <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
     <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
     <form-login login-page="/login" />
-    <logout />
+    <logout logout-success-url="/" />
   </http>
   
-  <!--
   <beans:bean name="bcryptEncoder"
       class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-  -->
   
   <authentication-manager>
     <authentication-provider ref='authenticationProviderImpl'/>

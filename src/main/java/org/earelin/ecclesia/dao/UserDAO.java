@@ -5,6 +5,7 @@
  */
 package org.earelin.ecclesia.dao;
 
+import java.util.List;
 import org.earelin.ecclesia.domain.User;
 
 /**
@@ -13,4 +14,9 @@ import org.earelin.ecclesia.domain.User;
  */
 public interface UserDAO {
     public User authenticate(String username, String password);
+    public void add(User user);
+    public void update(User user);
+    public void remove(User user);
+    public List<User> list();
+    public List<User> list(int limit, int offset);
 }
