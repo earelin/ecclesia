@@ -6,7 +6,6 @@
     <tr>
       <th>Username</th>
       <th>Email</th>
-      <th>Password</th>
       <th>Created</th>
     </tr>
   </thead>
@@ -15,7 +14,6 @@
       <tr>
         <td>${user.username}</td>
         <td>${user.email}</td>
-        <td>${user.password}</td>
         <td>${user.created}</td>
       </tr>
     </c:forEach>

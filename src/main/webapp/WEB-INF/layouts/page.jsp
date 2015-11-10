@@ -11,6 +11,7 @@
       href="<s:url value="/resources/core/css/bootstrap.min.css" />" >
   <link rel="stylesheet" type="text/css"
       href="<s:url value="/resources/core/css/style.css" />" >
+  <script src="<s:url value="/resources/core/js/jquery-1.11.3.min.js" />"></script>
 </head>
 <body>
   <div id="page">
@@ -23,8 +24,7 @@
     <footer id="footer">
       <t:insertAttribute name="footer" />
     </footer>
-  </div>
-  <script src="<s:url value="/resources/core/js/jquery-1.11.3.min.js" />"></script>
+  </div>  
   <script src="<s:url value="/resources/core/js/bootstrap.min.js" />"></script>
 </body>
 </html>
