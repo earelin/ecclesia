@@ -4,6 +4,9 @@
   <h1>Ecclesia</h1>
   <p>A software for a democratic world</p>
   <sec:authorize access="isAnonymous()">
-    <p><a class="btn btn-primary btn-lg" href="<s:url value="/register" />" role="button">Register</a></p>
+    <p>
+      <a class="btn btn-primary btn-lg" href="<s:url value="/register" />" role="button">Register</a>
+      <a class="btn btn-success btn-lg" href="<s:url value="/login" />" role="button">Log in</a>
+    </p>
   </sec:authorize>
 </div>

@@ -6,6 +6,9 @@ import org.earelin.ecclesia.dao.UserDAO;
 import org.earelin.ecclesia.domain.User;
 import org.earelin.ecclesia.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,24 +16,15 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     
     private final UserDAO dao;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserDAO dao) {
+    public UserServiceImpl(UserDAO dao, PasswordEncoder passwordEncoder) {
         this.dao = dao;
-    }
-
-    @Autowired
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
-    }
-
-    @Override
-    public User authenticate(String username, String password) {
-        return dao.authenticate(username, password);
     }
 
     /**
@@ -47,15 +41,9 @@ public class UserServiceImpl implements UserService {
         user.setUsername(username);
         user.setEmail(email);
         user.setAdmin(false);
-        user.setCreated(now);
+        user.setCreated(now);      
+        user.setPassword(passwordEncoder.encode(password));
         
-        //Set password with encoding if a encoder is set
-        if (passwordEncoder != null) {
-            user.setPassword(passwordEncoder.encode(password));
-        } else {
-            user.setPassword(password);
-        }
-
         dao.add(user);
     }
 
@@ -67,6 +55,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> list(int limit, int offset) {
         return dao.list(limit, offset);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserDetails user = dao.loadUserByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid username or password");
+        }
+        return user;
     }
 
 }

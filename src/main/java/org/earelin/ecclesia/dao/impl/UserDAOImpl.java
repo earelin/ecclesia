@@ -6,6 +6,7 @@ import org.earelin.ecclesia.domain.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,15 +26,6 @@ public class UserDAOImpl implements UserDAO {
     
     private Session currentSession() {
         return sessionFactory.getCurrentSession();
-    }
-
-    @Override
-    public User authenticate(String username, String password) {
-        return (User) currentSession()
-                .createQuery("from User as u where u.username = :username and u.password = :password")
-                .setString("username", username)
-                .setString("password", password)
-                .uniqueResult();
     }
     
     @Override
@@ -65,6 +57,14 @@ public class UserDAOImpl implements UserDAO {
                 .setMaxResults(limit)
                 .setFirstResult(offset)
                 .list();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) {
+        return (UserDetails) currentSession()
+                .createQuery("from User as u where u.username = :username")
+                .setString("username", username)
+                .uniqueResult();
     }
 
 }

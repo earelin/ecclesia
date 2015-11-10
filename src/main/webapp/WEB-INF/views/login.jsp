@@ -7,14 +7,14 @@
   <c:if test="${not empty msg}">
     <div class="msg">${msg}</div>
   </c:if>
-	<p>
+	<div class="form-group">
 		<label for="username">Username</label>
-    <input type="text" id="username" name="username"/>
-	</p>
-	<p>
+    <input type="text" id="username" name="username" class="form-control" />
+	</div>
+	<div class="form-group">
 		<label for="password">Password</label>
-		<input type="password" id="password" name="password"/>
-	</p>
+    <input type="password" id="password" name="password" class="form-control" />
+	</div>
   <sec:csrfInput />
-  <input type="submit" name="submit" class="btn">
+  <input type="submit" name="submit" class="btn btn-primary">
 </form>

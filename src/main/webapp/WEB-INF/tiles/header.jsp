@@ -4,7 +4,13 @@
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="<s:url value="/" />">Ecclesia</a>
+      <sec:authorize access="isAnonymous()">
+        <s:url value="/" var="rootUrl" />
+      </sec:authorize>
+      <sec:authorize access="isAuthenticated()">
+        <s:url value="/dashboard" var="rootUrl" />
+      </sec:authorize>
+      <a class="navbar-brand" href="${rootUrl}">Ecclesia</a>
     </div>
     
     <!-- User menu -->
@@ -29,7 +35,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
                role="button" aria-haspopup="true" aria-expanded="false"> 
-              <sec:authentication property="principal" /> <span class="caret"></span></a>
+              <sec:authentication property="principal.username" /> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li>
                   <s:url value="/logout" var="logoutUrl" />

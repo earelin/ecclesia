@@ -17,5 +17,5 @@
     <label form="repeatPassword">Repeat password</label>
     <form:input path="repeatPassword" class="form-control" />
   </div>
-  <input type="submit" name="Register" class="btn btn-default">
+  <input type="submit" value="Register" class="btn btn-primary">
 </form:form>

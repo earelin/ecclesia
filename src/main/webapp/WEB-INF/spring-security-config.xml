@@ -15,7 +15,7 @@
     <intercept-url pattern="/register*" access="isAnonymous()"/>
     <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
     <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
-    <form-login login-page="/login" />
+    <form-login login-page="/login" default-target-url="/dashboard" />
     <logout logout-success-url="/" />
   </http>
   
