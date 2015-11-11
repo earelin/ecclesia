@@ -16,6 +16,10 @@
  
 	<mvc:resources mapping="/resources/**" location="/resources/" />
   
+  <!--
+  <mvc:resources mapping="${ECCLESIA_FILES_FOLDER}" location="/files/" />
+  -->
+  
   <bean id="tilesConfigurer" 
         class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
     <property name="definitions">

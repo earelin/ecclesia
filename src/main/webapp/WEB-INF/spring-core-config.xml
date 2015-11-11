@@ -15,11 +15,15 @@
  
 	<context:component-scan base-package="org.earelin.ecclesia.service,org.earelin.ecclesia.dao,org.earelin.ecclesia.security" />
   
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations" value="${ECCLESIA_CONFIG_FILE}"/>
+  </bean>
+  
   <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-    <property name="driverClassName" value="org.h2.Driver"/>
-    <property name="url" value="jdbc:h2:mem:devel"/>
-    <property name="username" value="sa"/>
-    <property name="password" value=""/>
+    <property name="driverClassName" value="${jdbc.driver}"/>
+    <property name="url" value="${jdbc.url}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
   </bean>
   
   <bean id="sessionFactory"
@@ -27,10 +31,10 @@
     <property name="dataSource" ref="dataSource" />
     <property name="hibernateProperties">
       <value>
-          hibernate.dialect=org.hibernate.dialect.H2Dialect
-          hibernate.hbm2ddl.auto=create-drop
-          hibernate.show_sql=true
-          hibernate.format_sql=true
+          hibernate.dialect=${hibernate.dialect}
+          hibernate.hbm2ddl.auto=${hibernate.hbm2ddl.auto}
+          hibernate.show_sql=${hibernate.show_sql}
+          hibernate.format_sql=${hibernate.format_sql}
       </value>
     </property>
     <property name="packagesToScan" value="org.earelin.ecclesia.domain" />
