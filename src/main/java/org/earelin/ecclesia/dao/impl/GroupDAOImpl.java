@@ -1,6 +1,7 @@
 package org.earelin.ecclesia.dao.impl;
 
 import org.earelin.ecclesia.dao.GroupDAO;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,6 +19,10 @@ public class GroupDAOImpl implements GroupDAO {
     @Autowired
     public GroupDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+    
+    private Session currentSession() {
+        return sessionFactory.getCurrentSession();
     }
     
 }

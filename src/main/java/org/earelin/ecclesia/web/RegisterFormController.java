@@ -36,14 +36,14 @@ public class RegisterFormController {
         binder.setValidator(formValidation);
     }
     
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value="/register", method=RequestMethod.GET)
 	public String register(Model model) {  
         RegisterFormAdapter registerForm = new RegisterFormAdapter();
         model.addAttribute("register", registerForm);
 		return "register_form";
 	}
     
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value="/register", method=RequestMethod.POST)
 	public String registerSubmit(
             @ModelAttribute("register") @Validated RegisterFormAdapter registerForm,
             BindingResult result, SessionStatus status) {

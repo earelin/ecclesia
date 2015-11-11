@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MainController {
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(path="/", method=RequestMethod.GET)
 	public String index(Map<String, Object> model) {
 		return "index";
 	}
     
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    @RequestMapping(value="/dashboard", method=RequestMethod.GET)
 	public String dashboard(Map<String, Object> model) {
 		return "dashboard";
 	}

@@ -29,5 +29,25 @@ public class OrganizationServiceImpl implements OrganizationService {
     public List<Organization> list(int limit, int offset) {
         return dao.list(limit, offset);
     }
+
+    @Override
+    public void add(Organization organization) {
+        dao.add(organization);
+    }
+
+    @Override
+    public void update(Organization organization) {
+        dao.update(organization);
+    }
+
+    @Override
+    public void remove(Organization organization) {
+        dao.remove(organization);
+    }
+
+    @Override
+    public Organization get(long id) {
+        return dao.get(id);
+    }
     
 }

@@ -13,6 +13,10 @@ import org.earelin.ecclesia.domain.Organization;
  * @author xcarriba
  */
 public interface OrganizationService {
+    public void add(Organization organization);
+    public void update(Organization organization);
+    public void remove(Organization organization);
+    public Organization get(long id);
     public List<Organization> list();
     public List<Organization> list(int limit, int offset);
 }
