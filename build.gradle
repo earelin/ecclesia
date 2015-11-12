@@ -44,13 +44,10 @@ dependencies {
 	providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1'
 }
 
-test {
-    jacoco {
-        append = false
-        destinationFile = file('$buildDir/jacoco/jacocoTest.exec')
-        classDumpFile = file('$buildDir/jacoco/classpathdumps')
-    }
+jacoco {
+  applyTo check
 }
+
 
 //Gretty
 buildscript {
