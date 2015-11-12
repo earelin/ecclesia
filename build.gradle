@@ -17,6 +17,7 @@ dependencies {
   compile 'org.springframework:spring-webmvc:4.2.2.RELEASE'
   compile 'org.springframework:spring-tx:4.2.2.RELEASE'
   compile 'org.springframework:spring-orm:4.2.2.RELEASE'
+  compile 'org.springframework:spring-test:4.2.2.RELEASE'
   
   compile 'org.hibernate:hibernate-core:4.3.11.Final'
   compile 'org.hibernate:hibernate-entitymanager:4.3.11.Final'
