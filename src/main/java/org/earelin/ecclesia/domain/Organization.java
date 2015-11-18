@@ -1,5 +1,6 @@
 package org.earelin.ecclesia.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,7 @@ import org.earelin.ecclesia.domain.resources.ManagedImage;
  * Organizations
  */
 @Entity
-public class Organization {
+public class Organization implements Serializable {
     
     @Id
     @GeneratedValue

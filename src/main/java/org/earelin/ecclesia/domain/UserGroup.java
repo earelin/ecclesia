@@ -1,5 +1,6 @@
 package org.earelin.ecclesia.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,7 @@ import javax.persistence.ManyToOne;
  *
  */
 @Entity
-public class UserGroup {
+public class UserGroup implements Serializable {
     
     @Id
     @GeneratedValue

@@ -42,12 +42,9 @@ dependencies {
 	//include in compile only, exclude in the war
 	providedCompile 'javax.servlet:servlet-api:2.5'
 	providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1'
+  
+  testCompile 'junit:junit:+'
 }
-
-jacoco {
-  applyTo check
-}
-
 
 //Gretty
 buildscript {

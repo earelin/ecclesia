@@ -1,5 +1,6 @@
 package org.earelin.ecclesia.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -19,7 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @Entity
 @Table(name="Users")
-public class User implements UserDetails {
+public class User implements UserDetails, Serializable {
     
     @Id
     @GeneratedValue
