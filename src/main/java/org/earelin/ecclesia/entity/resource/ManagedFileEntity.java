@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.entities.resources;
+package org.earelin.ecclesia.entity.resource;
 
 import java.util.Date;
 import javax.persistence.Entity;

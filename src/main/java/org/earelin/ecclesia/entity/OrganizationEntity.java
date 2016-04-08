@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.entities;
+package org.earelin.ecclesia.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import org.earelin.ecclesia.entities.resources.ManagedImageEntity;
+import org.earelin.ecclesia.entity.resource.ManagedImageEntity;
 
 /**
  * Organizations

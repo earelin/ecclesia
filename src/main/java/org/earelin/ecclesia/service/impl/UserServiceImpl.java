@@ -2,7 +2,7 @@ package org.earelin.ecclesia.service.impl;
 
 import java.util.Date;
 import java.util.List;
-import org.earelin.ecclesia.entities.UserEntity;
+import org.earelin.ecclesia.entity.UserEntity;
 import org.earelin.ecclesia.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.earelin.ecclesia.repositories.UserRepository;
+import org.earelin.ecclesia.repository.UserRepository;
 
 /**
  *

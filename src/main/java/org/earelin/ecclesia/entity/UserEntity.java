@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.entities;
+package org.earelin.ecclesia.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.earelin.ecclesia.entities.resources.ManagedImageEntity;
+import org.earelin.ecclesia.entity.resource.ManagedImageEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

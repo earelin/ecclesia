@@ -1,14 +1,14 @@
-package org.earelin.ecclesia.repositories.impl;
+package org.earelin.ecclesia.repository.impl;
 
 import java.util.List;
-import org.earelin.ecclesia.entities.UserEntity;
+import org.earelin.ecclesia.entity.UserEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.earelin.ecclesia.repositories.UserRepository;
+import org.earelin.ecclesia.repository.UserRepository;
 
 /**
  *

@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.entities.document;
+package org.earelin.ecclesia.entity.document;
 
 /**
  *

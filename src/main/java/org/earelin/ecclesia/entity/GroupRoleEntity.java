@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.entities;
+package org.earelin.ecclesia.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;

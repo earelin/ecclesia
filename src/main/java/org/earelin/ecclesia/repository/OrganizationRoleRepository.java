@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.earelin.ecclesia.repositories;
+package org.earelin.ecclesia.repository;
 
-import org.earelin.ecclesia.entities.OrganizationRoleEntity;
+import org.earelin.ecclesia.entity.OrganizationRoleEntity;
 
 /**
  *

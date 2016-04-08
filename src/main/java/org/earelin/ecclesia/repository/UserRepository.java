@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.earelin.ecclesia.repositories;
+package org.earelin.ecclesia.repository;
 
 import java.util.List;
-import org.earelin.ecclesia.entities.UserEntity;
+import org.earelin.ecclesia.entity.UserEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**

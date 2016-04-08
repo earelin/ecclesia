@@ -4,7 +4,7 @@
 package org.earelin.ecclesia.service;
 
 import java.util.List;
-import org.earelin.ecclesia.entities.UserEntity;
+import org.earelin.ecclesia.entity.UserEntity;
 
 /**
  * 

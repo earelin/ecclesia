@@ -2,11 +2,11 @@ package org.earelin.ecclesia.service.impl;
 
 import java.util.List;
 import org.earelin.ecclesia.domain.Organization;
-import org.earelin.ecclesia.entities.OrganizationEntity;
+import org.earelin.ecclesia.entity.OrganizationEntity;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.earelin.ecclesia.repositories.OrganizationReponsitory;
+import org.earelin.ecclesia.repository.OrganizationReponsitory;
 
 /**
  *
