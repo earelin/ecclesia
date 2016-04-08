@@ -1,4 +1,4 @@
-dpackage org.earelin.ecclesia.web;
+package org.earelin.ecclesia.web;
 
 import org.earelin.ecclesia.entities.OrganizationEntity;
 import org.earelin.ecclesia.service.OrganizationService;
