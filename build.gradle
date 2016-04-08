@@ -61,3 +61,12 @@ gretty {
   port = 8080
   servletContainer = 'jetty9'
 }
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
+check.dependsOn jacocoTestReport
