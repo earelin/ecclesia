@@ -1,26 +1,26 @@
-package org.earelin.ecclesia.dao.impl;
+package org.earelin.ecclesia.repositories.impl;
 
 import java.util.List;
-import org.earelin.ecclesia.dao.UserDAO;
-import org.earelin.ecclesia.domain.User;
+import org.earelin.ecclesia.entities.UserEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.earelin.ecclesia.repositories.UserRepository;
 
 /**
  *
  */
 @Repository
 @Transactional
-public class UserDAOImpl implements UserDAO {
+public class UserRepositoryDAO implements UserRepository {
     
     private final SessionFactory sessionFactory;
     
     @Autowired
-    public UserDAOImpl(SessionFactory sessionFactory) {
+    public UserRepositoryDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
     
@@ -29,30 +29,30 @@ public class UserDAOImpl implements UserDAO {
     }
     
     @Override
-    public void add(User user) {
+    public void add(UserEntity user) {
         currentSession().save(user);
     }
     
     @Override
-    public void update(User user) {
+    public void update(UserEntity user) {
         currentSession().saveOrUpdate(user);
     }
 
     @Override
-    public void remove(User user) {
+    public void remove(UserEntity user) {
         currentSession().delete(user);
     }
 
     @Override
-    public List<User> list() {
-        return (List<User>) currentSession()
+    public List<UserEntity> list() {
+        return (List<UserEntity>) currentSession()
                 .createQuery("from User as u order by u.username")
                 .list();
     }
 
     @Override
-    public List<User> list(int limit, int offset) {
-        return (List<User>) currentSession()
+    public List<UserEntity> list(int limit, int offset) {
+        return (List<UserEntity>) currentSession()
                 .createQuery("from User as u order by u.username")
                 .setMaxResults(limit)
                 .setFirstResult(offset)

@@ -1,34 +1,15 @@
 package org.earelin.ecclesia.domain;
 
-import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import org.earelin.ecclesia.domain.resources.ManagedImage;
 
 /**
- * Organizations
+ *
  */
-@Entity
-public class Organization implements Serializable {
+public class Organization {
     
-    @Id
-    @GeneratedValue
     private long id;
     private String name;
-    @OneToOne
-    private ManagedImage logo;
     private Date created;
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
 
     public long getId() {
         return id;
@@ -46,12 +27,11 @@ public class Organization implements Serializable {
         this.name = name;
     }
 
-    public ManagedImage getLogo() {
-        return logo;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setLogo(ManagedImage logo) {
-        this.logo = logo;
+    public void setCreated(Date created) {
+        this.created = created;
     }
-    
 }

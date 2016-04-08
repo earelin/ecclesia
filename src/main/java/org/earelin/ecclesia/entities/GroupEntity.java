@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.domain;
+package org.earelin.ecclesia.entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,15 +13,15 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="Groups")
-public class Group implements Serializable {
+public class GroupEntity implements Serializable {
     
     @Id
     @GeneratedValue
     private long id;
     @ManyToOne
-    private Organization organization;
+    private OrganizationEntity organization;
     @ManyToOne
-    private Group parent;
+    private GroupEntity parent;
     private String name;
     private Date created;
 
@@ -41,19 +41,19 @@ public class Group implements Serializable {
         this.id = id;
     }
 
-    public Organization getOrganization() {
+    public OrganizationEntity getOrganization() {
         return organization;
     }
 
-    public void setOrganization(Organization organization) {
+    public void setOrganization(OrganizationEntity organization) {
         this.organization = organization;
     }
 
-    public Group getParent() {
+    public GroupEntity getParent() {
         return parent;
     }
 
-    public void setParent(Group parent) {
+    public void setParent(GroupEntity parent) {
         this.parent = parent;
     }
 

@@ -1,25 +1,25 @@
-package org.earelin.ecclesia.dao.impl;
+package org.earelin.ecclesia.repositories.impl;
 
 import java.util.List;
-import org.earelin.ecclesia.dao.OrganizationDAO;
-import org.earelin.ecclesia.domain.Organization;
+import org.earelin.ecclesia.entities.OrganizationEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.earelin.ecclesia.repositories.OrganizationReponsitory;
 
 /**
  *
  */
 @Repository
 @Transactional
-public class OrganizationDAOImpl implements OrganizationDAO {
+public class OrganizationRepositoryDAO implements OrganizationReponsitory {
 
     private final SessionFactory sessionFactory;
     
     @Autowired
-    public OrganizationDAOImpl(SessionFactory sessionFactory) {
+    public OrganizationRepositoryDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
     
@@ -28,36 +28,36 @@ public class OrganizationDAOImpl implements OrganizationDAO {
     }
 
     @Override
-    public Organization get(long id) {
-        return (Organization) currentSession()
-                .get(Organization.class, id);
+    public OrganizationEntity get(long id) {
+        return (OrganizationEntity) currentSession()
+                .get(OrganizationEntity.class, id);
     }
 
     @Override
-    public void add(Organization organization) {
+    public void add(OrganizationEntity organization) {
         currentSession().save(organization);
     }
     
     @Override
-    public void update(Organization organization) {
+    public void update(OrganizationEntity organization) {
         currentSession().saveOrUpdate(organization);
     }
 
     @Override
-    public void remove(Organization organization) {
+    public void remove(OrganizationEntity organization) {
         currentSession().delete(organization);
     }
 
     @Override
-    public List<Organization> list() {
-        return (List<Organization>) currentSession()
+    public List<OrganizationEntity> list() {
+        return (List<OrganizationEntity>) currentSession()
                 .createQuery("from Organization as org order by org.name")
                 .list();
     }
 
     @Override
-    public List<Organization> list(int limit, int offset) {
-        return (List<Organization>) currentSession()
+    public List<OrganizationEntity> list(int limit, int offset) {
+        return (List<OrganizationEntity>) currentSession()
                 .createQuery("from Organization as org order by org.name")
                 .setMaxResults(limit)
                 .setFirstResult(offset)

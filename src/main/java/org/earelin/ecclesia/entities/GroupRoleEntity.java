@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.domain;
+package org.earelin.ecclesia.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -10,14 +10,14 @@ import javax.persistence.ManyToOne;
  * Roles of a group
  */
 @Entity
-public class GroupRole implements Serializable {
+public class GroupRoleEntity implements Serializable {
 
     @Id
     @GeneratedValue
     private long id;
     private String name;
     @ManyToOne
-    private Group group;
+    private GroupEntity group;
 
     public long getId() {
         return id;
@@ -35,11 +35,11 @@ public class GroupRole implements Serializable {
         this.name = name;
     }
 
-    public Group getGroup() {
+    public GroupEntity getGroup() {
         return group;
     }
 
-    public void setGroup(Group group) {
+    public void setGroup(GroupEntity group) {
         this.group = group;
     }
    

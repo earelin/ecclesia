@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.domain.resources;
+package org.earelin.ecclesia.entities.resources;
 
 import javax.persistence.Entity;
 
@@ -7,7 +7,7 @@ import javax.persistence.Entity;
  * Images managed by the system
  */
 @Entity
-public class ManagedImage extends ManagedFile {
+public class ManagedImageEntity extends ManagedFileEntity {
     private int width;
     private int height;
 

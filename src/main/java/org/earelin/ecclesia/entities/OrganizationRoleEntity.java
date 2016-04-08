@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.domain;
+package org.earelin.ecclesia.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -10,14 +10,14 @@ import javax.persistence.ManyToOne;
  * Roles in a organization
  */
 @Entity
-public class OrganizationRole implements Serializable {
+public class OrganizationRoleEntity implements Serializable {
 
     @Id
     @GeneratedValue
     private long id;
     private String name;
     @ManyToOne
-    private Organization organization;
+    private OrganizationEntity organization;
 
     public long getId() {
         return id;
@@ -35,11 +35,11 @@ public class OrganizationRole implements Serializable {
         this.name = name;
     }
 
-    public Organization getOrganization() {
+    public OrganizationEntity getOrganization() {
         return organization;
     }
 
-    public void setOrganization(Organization organization) {
+    public void setOrganization(OrganizationEntity organization) {
         this.organization = organization;
     }
     

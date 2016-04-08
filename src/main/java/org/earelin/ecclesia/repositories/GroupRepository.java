@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.earelin.ecclesia.dao;
+package org.earelin.ecclesia.repositories;
 
 /**
  *
  * @author xcarriba
  */
-public interface GroupDAO {
+public interface GroupRepository {
     
 }

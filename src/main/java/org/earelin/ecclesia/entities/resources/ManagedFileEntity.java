@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.domain.resources;
+package org.earelin.ecclesia.entities.resources;
 
 import java.util.Date;
 import javax.persistence.Entity;
@@ -12,7 +12,7 @@ import javax.persistence.InheritanceType;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class ManagedFile {
+public class ManagedFileEntity {
     @Id
     @GeneratedValue
     private long id;

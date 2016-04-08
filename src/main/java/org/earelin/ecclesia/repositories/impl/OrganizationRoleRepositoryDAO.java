@@ -1,24 +1,24 @@
-package org.earelin.ecclesia.dao.impl;
+package org.earelin.ecclesia.repositories.impl;
 
-import org.earelin.ecclesia.dao.OrganizationRoleDAO;
-import org.earelin.ecclesia.domain.OrganizationRole;
+import org.earelin.ecclesia.entities.OrganizationRoleEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.earelin.ecclesia.repositories.OrganizationRoleRepository;
 
 /**
  *
  */
 @Repository
 @Transactional
-public class OrganizationRoleDAOImpl implements OrganizationRoleDAO {
+public class OrganizationRoleRepositoryDAO implements OrganizationRoleRepository {
     
     private final SessionFactory sessionFactory;
     
     @Autowired
-    public OrganizationRoleDAOImpl(SessionFactory sessionFactory) {
+    public OrganizationRoleRepositoryDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
     
@@ -27,17 +27,17 @@ public class OrganizationRoleDAOImpl implements OrganizationRoleDAO {
     }
 
     @Override
-    public void add(OrganizationRole role) {
+    public void add(OrganizationRoleEntity role) {
         currentSession().save(role);
     }
 
     @Override
-    public void update(OrganizationRole role) {
+    public void update(OrganizationRoleEntity role) {
         currentSession().update(role);
     }
 
     @Override
-    public void remove(OrganizationRole role) {
+    public void remove(OrganizationRoleEntity role) {
         currentSession().delete(role);
     }
 

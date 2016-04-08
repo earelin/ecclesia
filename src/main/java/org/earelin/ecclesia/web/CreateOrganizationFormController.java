@@ -1,6 +1,6 @@
 package org.earelin.ecclesia.web;
 
-import org.earelin.ecclesia.domain.Organization;
+import org.earelin.ecclesia.entities.OrganizationEntity;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.web.form.CreateOrganizationFormAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +41,9 @@ public class CreateOrganizationFormController {
             return "create_organization_form";
         }
         
-        Organization organization = new Organization();
-        organization.setName(organizationForm.getName());
-
-        service.add(organization);
+        // TODO create the organization and redirect to page
         
-        return "redirect:/organization/" + organization.getId();
+        return "redirect:/organization/";
     }
     
 }

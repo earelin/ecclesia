@@ -1,6 +1,6 @@
-package org.earelin.ecclesia.web;
+dpackage org.earelin.ecclesia.web;
 
-import org.earelin.ecclesia.domain.Organization;
+import org.earelin.ecclesia.entities.OrganizationEntity;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,9 +25,7 @@ public class OrganizationController {
     @RequestMapping(path="/organization/{organizationId}", method=RequestMethod.GET)
     public String show(@PathVariable("organizationId") long organizationId,
             Model model) {
-        Organization organization = service.get(organizationId);
-        model.addAttribute("organization", organization);        
-        return "organization";
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

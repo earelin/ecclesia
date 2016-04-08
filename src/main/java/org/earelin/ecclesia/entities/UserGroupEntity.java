@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.domain;
+package org.earelin.ecclesia.entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,17 +11,17 @@ import javax.persistence.ManyToOne;
  *
  */
 @Entity
-public class UserOrganization implements Serializable {
+public class UserGroupEntity implements Serializable {
     
     @Id
     @GeneratedValue
     private long id;
     @ManyToOne
-    private OrganizationRole role;
+    private GroupRoleEntity role;
     @ManyToOne
-    private Organization organization;
+    private GroupEntity group;
     @ManyToOne
-    private User user;
+    private UserEntity user;
     private Date created;
 
     public long getId() {
@@ -32,27 +32,27 @@ public class UserOrganization implements Serializable {
         this.id = id;
     }
 
-    public OrganizationRole getRole() {
+    public GroupRoleEntity getRole() {
         return role;
     }
 
-    public void setRole(OrganizationRole role) {
+    public void setRole(GroupRoleEntity role) {
         this.role = role;
     }
 
-    public Organization getOrganization() {
-        return organization;
+    public GroupEntity getGroup() {
+        return group;
     }
 
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
+    public void setGroup(GroupEntity group) {
+        this.group = group;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 
@@ -63,5 +63,4 @@ public class UserOrganization implements Serializable {
     public void setCreated(Date created) {
         this.created = created;
     }
-    
 }
