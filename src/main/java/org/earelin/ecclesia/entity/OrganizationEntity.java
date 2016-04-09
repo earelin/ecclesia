@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import org.earelin.ecclesia.entity.resource.ManagedImageEntity;
 
 /**
- * Organizations
+ * Organization repository entity
  */
 @Entity
 @Table(name="Organizations")
@@ -23,14 +23,7 @@ public class OrganizationEntity implements Serializable {
     @OneToOne
     private ManagedImageEntity logo;
     private Date created;
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
+    private Date updated;
 
     public long getId() {
         return id;
@@ -54,6 +47,22 @@ public class OrganizationEntity implements Serializable {
 
     public void setLogo(ManagedImageEntity logo) {
         this.logo = logo;
+    }
+    
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
     
 }
