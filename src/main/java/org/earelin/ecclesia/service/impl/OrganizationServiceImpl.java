@@ -27,7 +27,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public void update(long id) {
+    public void update(Organization organization) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
