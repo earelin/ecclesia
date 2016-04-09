@@ -5,11 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * Roles of a group
  */
 @Entity
+@Table(name="GroupRoles")
 public class GroupRoleEntity implements Serializable {
 
     @Id

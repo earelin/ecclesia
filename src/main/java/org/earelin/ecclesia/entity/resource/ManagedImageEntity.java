@@ -1,12 +1,14 @@
 package org.earelin.ecclesia.entity.resource;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Managed images
  * Images managed by the system
  */
 @Entity
+@Table(name="ManagedImages")
 public class ManagedImageEntity extends ManagedFileEntity {
     private int width;
     private int height;

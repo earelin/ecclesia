@@ -6,12 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import org.earelin.ecclesia.entity.resource.ManagedImageEntity;
 
 /**
  * Organizations
  */
 @Entity
+@Table(name="Organizations")
 public class OrganizationEntity implements Serializable {
     
     @Id
