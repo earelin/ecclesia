@@ -3,3 +3,4 @@
 /build/
 private
 src/main/resources/import.sql
+/nbproject/
