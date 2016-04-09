@@ -48,6 +48,7 @@ dependencies {
   testCompile 'junit:junit:4.+'
   testCompile 'org.mockito:mockito-core:1.+'
   testCompile 'org.dbunit:dbunit:+'
+  testCompile 'org.hamcrest:hamcrest-junit:2.+'
 }
 
 //Gretty

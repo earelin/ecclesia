@@ -1,5 +1,6 @@
 package org.earelin.ecclesia.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import org.earelin.ecclesia.domain.Organization;
 import org.earelin.ecclesia.entity.OrganizationEntity;
@@ -27,7 +28,12 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public Organization add(Organization organization) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Date now = new Date();
+        OrganizationEntity entity = new OrganizationEntity(organization.getName());
+        entity.setCreated(now);
+        entity.setUpdated(now);
+        dao.add(entity);
+        return mapper.map(entity, Organization.class);
     }
 
     @Override

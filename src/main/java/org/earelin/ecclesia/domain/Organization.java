@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class Organization {
 
-    private long id;
+    private long id = 0;
     private String name;
     private Date created;
     private Date updated;

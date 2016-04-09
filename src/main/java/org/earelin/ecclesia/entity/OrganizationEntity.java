@@ -25,6 +25,12 @@ public class OrganizationEntity implements Serializable {
     private Date created;
     private Date updated;
 
+    public OrganizationEntity() {}
+    
+    public OrganizationEntity(String name) {
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }
