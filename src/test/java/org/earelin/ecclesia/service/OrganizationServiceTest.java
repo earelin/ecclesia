@@ -3,6 +3,8 @@ package org.earelin.ecclesia.service;
 import java.util.Date;
 import org.earelin.ecclesia.domain.Organization;
 import static org.junit.Assert.*;
+import static org.hamcrest.beans.SamePropertyValuesAs.*;
+import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -29,7 +31,7 @@ public class OrganizationServiceTest {
     }
 
     /**
-     * Test of add method, of class OrganizationServiceImpl.
+     * Test of add method.
      */
     @Test
     public void createNewOrganization() {
@@ -52,28 +54,35 @@ public class OrganizationServiceTest {
     }
 
     /**
-     * Test of update method, of class OrganizationServiceImpl.
+     * Test of update method.
      */
     @Ignore
     @Test
-    public void updateExistedOrganization() {
+    public void updateExistingOrganization() {
         
     }
 
     /**
-     * Test of remove method, of class OrganizationServiceImpl.
+     * Test of remove method.
      */
-    @Ignore
-    @Test
-    public void removeExistedOrganization() {
+    @Test(expected = OrganizationNotFoundException.class)
+    public void removeExistingOrganization() {
+        Organization organization = instance.add(new Organization(ORGANIZATION_NAME));
+        
+        instance.remove(organization.getId());
+        
+        instance.get(organization.getId());
     }
 
     /**
-     * Test of get method, of class OrganizationServiceImpl.
+     * Test of get method.
      */
-    @Ignore
     @Test
-    public void getExistedOrganization() {
+    public void getExistingOrganization() {
+        Organization organization = instance.add(new Organization(ORGANIZATION_NAME));
+        
+        Organization gottenOrganization = instance.get(organization.getId());
+        assertThat(gottenOrganization, samePropertyValuesAs(gottenOrganization));
     }
     
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.earelin.ecclesia.domain.Organization;
 import org.earelin.ecclesia.entity.OrganizationEntity;
 import org.earelin.ecclesia.service.OrganizationService;
+import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.repository.OrganizationReponsitory;
@@ -43,12 +44,24 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public void remove(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        OrganizationEntity entity = dao.get(id);
+        
+        if (entity == null) {
+            throw new OrganizationNotFoundException(id);
+        }
+        
+        dao.remove(entity);
     }
 
     @Override
     public Organization get(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        OrganizationEntity entity = dao.get(id);
+        
+        if (entity == null) {
+            throw new OrganizationNotFoundException(id);
+        }
+        
+        return mapper.map(entity, Organization.class);
     }
 
     @Override
