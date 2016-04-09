@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.earelin.ecclesia.entity.resource.ManagedImageEntity;
+import org.earelin.ecclesia.entity.resource.ManagedImage;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @Entity
 @Table(name="Users")
-public class UserEntity implements UserDetails, Serializable {
+public class User implements UserDetails, Serializable {
     
     @Id
     @GeneratedValue
@@ -33,7 +33,7 @@ public class UserEntity implements UserDetails, Serializable {
     private boolean enabled;
     private boolean admin;
     @OneToOne
-    private ManagedImageEntity avatar;
+    private ManagedImage avatar;
 
     @Override
     public boolean isEnabled() {
@@ -94,11 +94,11 @@ public class UserEntity implements UserDetails, Serializable {
         this.lastLogin = lastLogin;
     }
 
-    public ManagedImageEntity getAvatar() {
+    public ManagedImage getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(ManagedImageEntity avatar) {
+    public void setAvatar(ManagedImage avatar) {
         this.avatar = avatar;
     }
 

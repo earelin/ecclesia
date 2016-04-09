@@ -2,7 +2,7 @@ package org.earelin.ecclesia.service.impl;
 
 import java.util.Date;
 import java.util.List;
-import org.earelin.ecclesia.entity.UserEntity;
+import org.earelin.ecclesia.entity.User;
 import org.earelin.ecclesia.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     /**
-     * UserEntity registration process
+     * User registration process
      * @param username
      * @param email
      * @param password 
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void register(String username, String email, String password) {
         Date now = new Date();
         
-        UserEntity user = new UserEntity();
+        User user = new User();
         user.setUsername(username);
         user.setEmail(email);
         user.setAdmin(false);
@@ -48,12 +48,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public List<UserEntity> list() {
+    public List<User> list() {
         return repository.list();
     }
 
     @Override
-    public List<UserEntity> list(int limit, int offset) {
+    public List<User> list(int limit, int offset) {
         return repository.list(limit, offset);
     }
 

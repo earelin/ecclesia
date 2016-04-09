@@ -2,39 +2,32 @@ package org.earelin.ecclesia.service.impl;
 
 import java.util.Date;
 import java.util.List;
-import org.earelin.ecclesia.domain.Organization;
-import org.earelin.ecclesia.entity.OrganizationEntity;
+import org.earelin.ecclesia.entity.Organization;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.repository.OrganizationReponsitory;
-import org.modelmapper.ModelMapper;
 
 /**
- * Organization service implementation
+ * OrganizationDTO service implementation
  */
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
     
     private final OrganizationReponsitory dao;
-    private final ModelMapper mapper;
     
     @Autowired
-    public OrganizationServiceImpl(OrganizationReponsitory dao,
-            ModelMapper mapper) {
+    public OrganizationServiceImpl(OrganizationReponsitory dao) {
         this.dao = dao;
-        this.mapper = mapper;
     }
 
     @Override
-    public Organization add(Organization organization) {
+    public void add(Organization organization) {
         Date now = new Date();
-        OrganizationEntity entity = new OrganizationEntity(organization.getName());
-        entity.setCreated(now);
-        entity.setUpdated(now);
-        dao.add(entity);
-        return mapper.map(entity, Organization.class);
+        organization.setCreated(now);
+        organization.setUpdated(now);
+        dao.add(organization);
     }
 
     @Override
@@ -43,25 +36,19 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public void remove(long id) {
-        OrganizationEntity entity = dao.get(id);
-        
-        if (entity == null) {
-            throw new OrganizationNotFoundException(id);
-        }
-        
-        dao.remove(entity);
+    public void remove(Organization organization) {
+        dao.remove(organization);
     }
 
     @Override
     public Organization get(long id) {
-        OrganizationEntity entity = dao.get(id);
+        Organization organization = dao.get(id);
         
-        if (entity == null) {
+        if (organization == null) {
             throw new OrganizationNotFoundException(id);
         }
         
-        return mapper.map(entity, Organization.class);
+        return organization;
     }
 
     @Override

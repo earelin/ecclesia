@@ -12,14 +12,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="OrganizationRoles")
-public class OrganizationRoleEntity implements Serializable {
+public class OrganizationRole implements Serializable {
 
     @Id
     @GeneratedValue
     private long id;
     private String name;
     @ManyToOne
-    private OrganizationEntity organization;
+    private Organization organization;
 
     public long getId() {
         return id;
@@ -37,11 +37,11 @@ public class OrganizationRoleEntity implements Serializable {
         this.name = name;
     }
 
-    public OrganizationEntity getOrganization() {
+    public Organization getOrganization() {
         return organization;
     }
 
-    public void setOrganization(OrganizationEntity organization) {
+    public void setOrganization(Organization organization) {
         this.organization = organization;
     }
     

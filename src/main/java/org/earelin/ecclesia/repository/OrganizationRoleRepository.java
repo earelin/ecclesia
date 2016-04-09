@@ -5,14 +5,14 @@
  */
 package org.earelin.ecclesia.repository;
 
-import org.earelin.ecclesia.entity.OrganizationRoleEntity;
+import org.earelin.ecclesia.entity.OrganizationRole;
 
 /**
  *
  * @author xcarriba
  */
 public interface OrganizationRoleRepository {
-    public void add(OrganizationRoleEntity role);
-    public void update(OrganizationRoleEntity role);
-    public void remove(OrganizationRoleEntity role);
+    public void add(OrganizationRole role);
+    public void update(OrganizationRole role);
+    public void remove(OrganizationRole role);
 }

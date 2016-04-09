@@ -1,11 +1,11 @@
 package org.earelin.ecclesia.service;
 
 import java.util.Date;
-import org.earelin.ecclesia.domain.Organization;
+import org.earelin.ecclesia.entity.Organization;
+import org.earelin.ecclesia.web.dto.OrganizationDTO;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -25,32 +25,29 @@ public class OrganizationServiceTest {
     
     @Autowired
     private OrganizationService instance;
-    
-    @Before
-    public void init() {
-    }
 
     /**
      * Test of add method.
      */
     @Test
     public void createNewOrganization() {
-        Organization organization = new Organization(ORGANIZATION_NAME);
+        Organization organization = new Organization();
+        organization.setName(ORGANIZATION_NAME);
         
         Date beforeInsert = new Date();
-        Organization createdOrganization = instance.add(organization);
+        instance.add(organization);
         Date afterInsert = new Date();
         
-        assertNotSame("Created organization id should not be 0", 0, createdOrganization.getId());
+        assertNotSame("Created organization id should not be 0", 0, organization.getId());
         assertTrue("Created organization created field should have current date", 
-                createdOrganization.getCreated().after(beforeInsert) 
-                    || createdOrganization.getCreated().equals(beforeInsert)
-                && createdOrganization.getCreated().before(afterInsert)
-                    || createdOrganization.getCreated().equals(afterInsert));
+                organization.getCreated().after(beforeInsert) 
+                    || organization.getCreated().equals(beforeInsert)
+                && organization.getCreated().before(afterInsert)
+                    || organization.getCreated().equals(afterInsert));
         assertEquals("Created organization updated field should have the same value as created field", 
-                createdOrganization.getCreated(), createdOrganization.getUpdated());
+                organization.getCreated(), organization.getUpdated());
         assertEquals("Created organization name not equals to submited", 
-                ORGANIZATION_NAME, createdOrganization.getName());
+                ORGANIZATION_NAME, organization.getName());
     }
 
     /**
@@ -67,11 +64,13 @@ public class OrganizationServiceTest {
      */
     @Test(expected = OrganizationNotFoundException.class)
     public void removeExistingOrganization() {
-        Organization organization = instance.add(new Organization(ORGANIZATION_NAME));
+        Organization organization = new Organization(ORGANIZATION_NAME);
+        instance.add(organization);        
+        long organizationId = organization.getId();
         
-        instance.remove(organization.getId());
+        instance.remove(organization);
         
-        instance.get(organization.getId());
+        instance.get(organizationId);
     }
 
     /**
@@ -79,10 +78,11 @@ public class OrganizationServiceTest {
      */
     @Test
     public void getExistingOrganization() {
-        Organization organization = instance.add(new Organization(ORGANIZATION_NAME));
+        Organization organization = new Organization(ORGANIZATION_NAME);
+        instance.add(organization);
         
         Organization gottenOrganization = instance.get(organization.getId());
-        assertThat(gottenOrganization, samePropertyValuesAs(gottenOrganization));
+        assertThat(organization, samePropertyValuesAs(gottenOrganization));
     }
     
 }

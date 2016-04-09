@@ -8,8 +8,9 @@ import javax.persistence.Table;
  * Images managed by the system
  */
 @Entity
-@Table(name="ManagedImages")
-public class ManagedImageEntity extends ManagedFileEntity {
+@Table(name="Images")
+public class ManagedImage extends ManagedFile {
+    
     private int width;
     private int height;
 

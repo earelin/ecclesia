@@ -12,14 +12,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="GroupRoles")
-public class GroupRoleEntity implements Serializable {
+public class GroupRole implements Serializable {
 
     @Id
     @GeneratedValue
     private long id;
     private String name;
     @ManyToOne
-    private GroupEntity group;
+    private Group group;
 
     public long getId() {
         return id;
@@ -37,11 +37,11 @@ public class GroupRoleEntity implements Serializable {
         this.name = name;
     }
 
-    public GroupEntity getGroup() {
+    public Group getGroup() {
         return group;
     }
 
-    public void setGroup(GroupEntity group) {
+    public void setGroup(Group group) {
         this.group = group;
     }
    

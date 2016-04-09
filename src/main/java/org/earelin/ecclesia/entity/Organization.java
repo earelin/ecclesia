@@ -1,17 +1,30 @@
-package org.earelin.ecclesia.domain;
+package org.earelin.ecclesia.entity;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import org.earelin.ecclesia.entity.resource.ManagedImage;
 
 /**
- * Organization domain
+ * Organization repository entity
  */
-public class Organization {
-
-    private long id = 0;
+@Entity
+@Table(name="Organizations")
+public class Organization implements Serializable {
+    
+    @Id
+    @GeneratedValue
+    private long id;
     private String name;
+    @OneToOne
+    private ManagedImage logo;
     private Date created;
     private Date updated;
-    
+
     public Organization() {}
     
     public Organization(String name) {
@@ -34,6 +47,14 @@ public class Organization {
         this.name = name;
     }
 
+    public ManagedImage getLogo() {
+        return logo;
+    }
+
+    public void setLogo(ManagedImage logo) {
+        this.logo = logo;
+    }
+    
     public Date getCreated() {
         return created;
     }
@@ -41,7 +62,7 @@ public class Organization {
     public void setCreated(Date created) {
         this.created = created;
     }
-    
+
     public Date getUpdated() {
         return updated;
     }
@@ -49,5 +70,5 @@ public class Organization {
     public void setUpdated(Date updated) {
         this.updated = updated;
     }
-
+    
 }

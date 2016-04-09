@@ -3,6 +3,6 @@ package org.earelin.ecclesia.entity.document;
 /**
  *
  */
-public abstract class DocumentEntity {
+public abstract class Document {
     
 }

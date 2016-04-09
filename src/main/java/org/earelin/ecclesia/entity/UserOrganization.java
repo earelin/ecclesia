@@ -12,18 +12,18 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="UserGroups")
-public class UserGroupEntity implements Serializable {
+@Table(name="UserOrganizations")
+public class UserOrganization implements Serializable {
     
     @Id
     @GeneratedValue
     private long id;
     @ManyToOne
-    private GroupRoleEntity role;
+    private OrganizationRole role;
     @ManyToOne
-    private GroupEntity group;
+    private Organization organization;
     @ManyToOne
-    private UserEntity user;
+    private User user;
     private Date created;
 
     public long getId() {
@@ -34,27 +34,27 @@ public class UserGroupEntity implements Serializable {
         this.id = id;
     }
 
-    public GroupRoleEntity getRole() {
+    public OrganizationRole getRole() {
         return role;
     }
 
-    public void setRole(GroupRoleEntity role) {
+    public void setRole(OrganizationRole role) {
         this.role = role;
     }
 
-    public GroupEntity getGroup() {
-        return group;
+    public Organization getOrganization() {
+        return organization;
     }
 
-    public void setGroup(GroupEntity group) {
-        this.group = group;
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 
-    public UserEntity getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -65,4 +65,5 @@ public class UserGroupEntity implements Serializable {
     public void setCreated(Date created) {
         this.created = created;
     }
+    
 }

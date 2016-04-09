@@ -13,13 +13,15 @@ import javax.persistence.Table;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name="ManagedFiles")
-public class ManagedFileEntity {
+@Table(name="Files")
+public class ManagedFile {
+    
     @Id
     @GeneratedValue
     private long id;
     private String mime;
     private Date created;
+    private String uri;
 
     public String getMime() {
         return mime;
@@ -43,5 +45,13 @@ public class ManagedFileEntity {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 }

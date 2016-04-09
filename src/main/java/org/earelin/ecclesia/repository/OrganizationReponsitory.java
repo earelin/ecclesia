@@ -6,17 +6,17 @@
 package org.earelin.ecclesia.repository;
 
 import java.util.List;
-import org.earelin.ecclesia.entity.OrganizationEntity;
+import org.earelin.ecclesia.entity.Organization;
 
 /**
  *
  * @author xcarriba
  */
 public interface OrganizationReponsitory {    
-    public OrganizationEntity get(long id);
-    public void add(OrganizationEntity organization);
-    public void update(OrganizationEntity organization);
-    public void remove(OrganizationEntity organization);   
-    public List<OrganizationEntity> list();
-    public List<OrganizationEntity> list(int limit, int offset);
+    public Organization get(long id);
+    public void add(Organization organization);
+    public void update(Organization organization);
+    public void remove(Organization organization);   
+    public List<Organization> list();
+    public List<Organization> list(int limit, int offset);
 }

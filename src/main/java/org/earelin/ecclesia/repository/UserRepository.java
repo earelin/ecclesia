@@ -6,7 +6,7 @@
 package org.earelin.ecclesia.repository;
 
 import java.util.List;
-import org.earelin.ecclesia.entity.UserEntity;
+import org.earelin.ecclesia.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -14,10 +14,10 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author xcarriba
  */
 public interface UserRepository {
-    public void add(UserEntity user);
-    public void update(UserEntity user);
-    public void remove(UserEntity user);
-    public List<UserEntity> list();
-    public List<UserEntity> list(int limit, int offset);
+    public void add(User user);
+    public void update(User user);
+    public void remove(User user);
+    public List<User> list();
+    public List<User> list(int limit, int offset);
     public UserDetails loadUserByUsername(String string);
 }

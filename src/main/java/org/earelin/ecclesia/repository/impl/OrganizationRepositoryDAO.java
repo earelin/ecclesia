@@ -1,7 +1,7 @@
 package org.earelin.ecclesia.repository.impl;
 
 import java.util.List;
-import org.earelin.ecclesia.entity.OrganizationEntity;
+import org.earelin.ecclesia.entity.Organization;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,36 +28,36 @@ public class OrganizationRepositoryDAO implements OrganizationReponsitory {
     }
 
     @Override
-    public OrganizationEntity get(long id) {
-        return (OrganizationEntity) currentSession()
-                .get(OrganizationEntity.class, id);
+    public Organization get(long id) {
+        return (Organization) currentSession()
+                .get(Organization.class, id);
     }
 
     @Override
-    public void add(OrganizationEntity organization) {
+    public void add(Organization organization) {
         currentSession().save(organization);
     }
     
     @Override
-    public void update(OrganizationEntity organization) {
+    public void update(Organization organization) {
         currentSession().saveOrUpdate(organization);
     }
 
     @Override
-    public void remove(OrganizationEntity organization) {
+    public void remove(Organization organization) {
         currentSession().delete(organization);
     }
 
     @Override
-    public List<OrganizationEntity> list() {
-        return (List<OrganizationEntity>) currentSession()
+    public List<Organization> list() {
+        return (List<Organization>) currentSession()
                 .createQuery("from Organization as org order by org.name")
                 .list();
     }
 
     @Override
-    public List<OrganizationEntity> list(int limit, int offset) {
-        return (List<OrganizationEntity>) currentSession()
+    public List<Organization> list(int limit, int offset) {
+        return (List<Organization>) currentSession()
                 .createQuery("from Organization as org order by org.name")
                 .setMaxResults(limit)
                 .setFirstResult(offset)

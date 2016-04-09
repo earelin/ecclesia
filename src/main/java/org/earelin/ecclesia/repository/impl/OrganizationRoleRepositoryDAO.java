@@ -1,6 +1,6 @@
 package org.earelin.ecclesia.repository.impl;
 
-import org.earelin.ecclesia.entity.OrganizationRoleEntity;
+import org.earelin.ecclesia.entity.OrganizationRole;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +27,17 @@ public class OrganizationRoleRepositoryDAO implements OrganizationRoleRepository
     }
 
     @Override
-    public void add(OrganizationRoleEntity role) {
+    public void add(OrganizationRole role) {
         currentSession().save(role);
     }
 
     @Override
-    public void update(OrganizationRoleEntity role) {
+    public void update(OrganizationRole role) {
         currentSession().update(role);
     }
 
     @Override
-    public void remove(OrganizationRoleEntity role) {
+    public void remove(OrganizationRole role) {
         currentSession().delete(role);
     }
 

@@ -1,7 +1,7 @@
 package org.earelin.ecclesia.repository.impl;
 
 import java.util.List;
-import org.earelin.ecclesia.entity.UserEntity;
+import org.earelin.ecclesia.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,30 +29,30 @@ public class UserRepositoryDAO implements UserRepository {
     }
     
     @Override
-    public void add(UserEntity user) {
+    public void add(User user) {
         currentSession().save(user);
     }
     
     @Override
-    public void update(UserEntity user) {
+    public void update(User user) {
         currentSession().saveOrUpdate(user);
     }
 
     @Override
-    public void remove(UserEntity user) {
+    public void remove(User user) {
         currentSession().delete(user);
     }
 
     @Override
-    public List<UserEntity> list() {
-        return (List<UserEntity>) currentSession()
+    public List<User> list() {
+        return (List<User>) currentSession()
                 .createQuery("from User as u order by u.username")
                 .list();
     }
 
     @Override
-    public List<UserEntity> list(int limit, int offset) {
-        return (List<UserEntity>) currentSession()
+    public List<User> list(int limit, int offset) {
+        return (List<User>) currentSession()
                 .createQuery("from User as u order by u.username")
                 .setMaxResults(limit)
                 .setFirstResult(offset)

@@ -13,17 +13,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="Groups")
-public class GroupEntity implements Serializable {
+public class Group implements Serializable {
     
     @Id
     @GeneratedValue
     private long id;
     @ManyToOne
-    private OrganizationEntity organization;
+    private Organization organization;
     @ManyToOne
-    private GroupEntity parent;
+    private Group parent;
     private String name;
     private Date created;
+    private Date updated;
 
     public Date getCreated() {
         return created;
@@ -41,19 +42,19 @@ public class GroupEntity implements Serializable {
         this.id = id;
     }
 
-    public OrganizationEntity getOrganization() {
+    public Organization getOrganization() {
         return organization;
     }
 
-    public void setOrganization(OrganizationEntity organization) {
+    public void setOrganization(Organization organization) {
         this.organization = organization;
     }
 
-    public GroupEntity getParent() {
+    public Group getParent() {
         return parent;
     }
 
-    public void setParent(GroupEntity parent) {
+    public void setParent(Group parent) {
         this.parent = parent;
     }
 
@@ -63,6 +64,14 @@ public class GroupEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
     
 }
