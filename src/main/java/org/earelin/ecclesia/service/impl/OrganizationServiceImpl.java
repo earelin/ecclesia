@@ -7,22 +7,26 @@ import org.earelin.ecclesia.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.repository.OrganizationReponsitory;
+import org.modelmapper.ModelMapper;
 
 /**
- *
+ * Organization service implementation
  */
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
     
     private final OrganizationReponsitory dao;
+    private final ModelMapper mapper;
     
     @Autowired
-    public OrganizationServiceImpl(OrganizationReponsitory dao) {
+    public OrganizationServiceImpl(OrganizationReponsitory dao,
+            ModelMapper mapper) {
         this.dao = dao;
+        this.mapper = mapper;
     }
 
     @Override
-    public void add(Organization organization) {
+    public Organization add(Organization organization) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
