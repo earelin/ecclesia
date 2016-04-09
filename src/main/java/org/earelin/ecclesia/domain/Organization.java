@@ -6,7 +6,7 @@ import java.util.Date;
  *
  */
 public class Organization {
-    
+
     private long id;
     private String name;
     private Date created;
@@ -34,4 +34,5 @@ public class Organization {
     public void setCreated(Date created) {
         this.created = created;
     }
+
 }
