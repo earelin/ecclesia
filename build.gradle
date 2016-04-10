@@ -39,7 +39,7 @@ dependencies {
   compile 'org.springframework.security:spring-security-web:4.0.3.RELEASE'
   compile 'org.springframework.security:spring-security-taglibs:4.0.3.RELEASE'
   
-  compile 'org.mapstruct:mapstruct-jdk8:1.+'
+  compile 'org.modelmapper:modelmapper:0.+'
 	
 	//include in compile only, exclude in the war
 	providedCompile 'javax.servlet:servlet-api:2.5'

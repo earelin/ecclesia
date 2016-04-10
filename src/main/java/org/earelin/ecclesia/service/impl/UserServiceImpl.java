@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.repository.UserRepository;
+import org.earelin.ecclesia.service.dto.UserDTO;
 
 /**
  *
@@ -34,27 +35,29 @@ public class UserServiceImpl implements UserService, UserDetailsService {
      * @param password 
      */
     @Override
-    public void register(String username, String email, String password) {
-        Date now = new Date();
+    public UserDTO register(String username, String email, String password) {
+//        Date now = new Date();
+//        
+//        User user = new User();
+//        user.setUsername(username);
+//        user.setEmail(email);
+//        user.setAdmin(false);
+//        user.setCreated(now);      
+//        user.setPassword(passwordEncoder.encode(password));
+//        
+//        repository.add(user);
         
-        User user = new User();
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setAdmin(false);
-        user.setCreated(now);      
-        user.setPassword(passwordEncoder.encode(password));
-        
-        repository.add(user);
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<User> list() {
-        return repository.list();
+    public List<UserDTO> list() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<User> list(int limit, int offset) {
-        return repository.list(limit, offset);
+    public List<UserDTO> list(int limit, int offset) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override

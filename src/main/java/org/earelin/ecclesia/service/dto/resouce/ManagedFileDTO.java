@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.web.dto.resouce;
+package org.earelin.ecclesia.service.dto.resouce;
 
 import java.util.Date;
 

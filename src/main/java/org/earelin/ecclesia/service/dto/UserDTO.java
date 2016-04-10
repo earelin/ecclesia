@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.web.dto;
+package org.earelin.ecclesia.service.dto;
 
 /**
  * UserDTO domain class

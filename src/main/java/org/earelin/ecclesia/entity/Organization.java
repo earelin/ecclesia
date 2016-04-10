@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.earelin.ecclesia.entity.resource.ManagedImage;
+import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Organization repository entity
@@ -19,6 +21,7 @@ public class Organization implements Serializable {
     @Id
     @GeneratedValue
     private long id;
+    @NotBlank
     private String name;
     @OneToOne
     private ManagedImage logo;

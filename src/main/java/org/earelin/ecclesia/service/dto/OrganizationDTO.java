@@ -1,7 +1,7 @@
-package org.earelin.ecclesia.web.dto;
+package org.earelin.ecclesia.service.dto;
 
 import java.util.Date;
-import org.earelin.ecclesia.web.dto.resouce.ManagedImageDTO;
+import org.earelin.ecclesia.service.dto.resouce.ManagedImageDTO;
 
 /**
  * OrganizationDTO domain class

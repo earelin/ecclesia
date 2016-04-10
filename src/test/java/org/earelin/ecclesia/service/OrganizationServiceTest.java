@@ -1,12 +1,11 @@
 package org.earelin.ecclesia.service;
 
 import java.util.Date;
-import org.earelin.ecclesia.entity.Organization;
-import org.earelin.ecclesia.web.dto.OrganizationDTO;
+import javax.validation.ConstraintViolationException;
+import org.earelin.ecclesia.service.dto.OrganizationDTO;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import org.junit.runner.RunWith;
@@ -26,12 +25,9 @@ public class OrganizationServiceTest {
     @Autowired
     private OrganizationService instance;
 
-    /**
-     * Test of add method.
-     */
     @Test
     public void createNewOrganization() {
-        Organization organization = new Organization();
+        OrganizationDTO organization = new OrganizationDTO();
         organization.setName(ORGANIZATION_NAME);
         
         Date beforeInsert = new Date();
@@ -40,48 +36,68 @@ public class OrganizationServiceTest {
         
         assertNotSame("Created organization id should not be 0", 0, organization.getId());
         assertTrue("Created organization created field should have current date", 
-                organization.getCreated().after(beforeInsert) 
-                    || organization.getCreated().equals(beforeInsert)
-                && organization.getCreated().before(afterInsert)
-                    || organization.getCreated().equals(afterInsert));
+                organization.getCreated().compareTo(beforeInsert) >= 0
+                && organization.getCreated().compareTo(afterInsert) <= 0);
         assertEquals("Created organization updated field should have the same value as created field", 
                 organization.getCreated(), organization.getUpdated());
         assertEquals("Created organization name not equals to submited", 
                 ORGANIZATION_NAME, organization.getName());
     }
 
-    /**
-     * Test of update method.
-     */
-    @Ignore
-    @Test
-    public void updateExistingOrganization() {
-        
+    @Test(expected = ConstraintViolationException.class)
+    public void newOrganizationShouldHaveNotBlankName() {
+        instance.add(new OrganizationDTO("   "));
     }
 
-    /**
-     * Test of remove method.
-     */
+    @Test
+    public void updateExistingOrganization() {
+        OrganizationDTO organization = new OrganizationDTO(ORGANIZATION_NAME);
+        instance.add(organization);
+        
+        long organizationId = organization.getId();
+        String updatedName = "Testing organization updated";
+        organization.setName(updatedName);
+        Date beforeUpdate = new Date();
+        instance.update(organization); 
+        Date afterUpdate = new Date();
+        organization = instance.get(organizationId);
+        
+        System.out.println(beforeUpdate);
+        System.out.println(organization.getUpdated());
+        System.out.println(afterUpdate);
+        
+        assertTrue("Updated organization updated field should have current date", 
+                organization.getUpdated().compareTo(beforeUpdate) >= 0
+                && organization.getUpdated().compareTo(afterUpdate) <= 0);
+        assertEquals(updatedName, organization.getName());
+    }
+
+    @Test(expected = ConstraintViolationException.class)
+    public void updatedOrganizationShouldHaveNotBlankName() {
+        OrganizationDTO organization = new OrganizationDTO(ORGANIZATION_NAME);
+        instance.add(organization);    
+        organization.setName("   ");
+        instance.update(organization);
+    }
+
     @Test(expected = OrganizationNotFoundException.class)
     public void removeExistingOrganization() {
-        Organization organization = new Organization(ORGANIZATION_NAME);
-        instance.add(organization);        
+        OrganizationDTO organization = new OrganizationDTO(ORGANIZATION_NAME);
+        instance.add(organization);      
         long organizationId = organization.getId();
         
-        instance.remove(organization);
+        instance.remove(organizationId);
         
         instance.get(organizationId);
     }
 
-    /**
-     * Test of get method.
-     */
     @Test
     public void getExistingOrganization() {
-        Organization organization = new Organization(ORGANIZATION_NAME);
+        OrganizationDTO organization = new OrganizationDTO(ORGANIZATION_NAME);
         instance.add(organization);
         
-        Organization gottenOrganization = instance.get(organization.getId());
+        OrganizationDTO gottenOrganization = instance.get(organization.getId());
+        
         assertThat(organization, samePropertyValuesAs(gottenOrganization));
     }
     
