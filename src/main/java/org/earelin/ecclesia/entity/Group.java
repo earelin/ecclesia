@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Groups
@@ -19,9 +21,11 @@ public class Group implements Serializable {
     @GeneratedValue
     private long id;
     @ManyToOne
+    @NotNull
     private Organization organization;
     @ManyToOne
     private Group parent;
+    @NotBlank
     private String name;
     private Date created;
     private Date updated;

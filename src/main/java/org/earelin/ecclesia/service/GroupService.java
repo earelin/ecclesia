@@ -1,14 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.earelin.ecclesia.service;
 
+import java.util.List;
+import org.earelin.ecclesia.service.dto.GroupDTO;
+
 /**
- *
- * @author xcarriba
+ * 
  */
 public interface GroupService {
-    
+    public void add(GroupDTO group);
+    public void update(GroupDTO group);
+    public void remove(long id);
+    public GroupDTO get(long id);
+    public List<GroupDTO> list();
+    public List<GroupDTO> list(int limit, int offset);
 }

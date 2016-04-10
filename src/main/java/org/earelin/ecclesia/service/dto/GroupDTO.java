@@ -3,7 +3,7 @@ package org.earelin.ecclesia.service.dto;
 import java.util.Date;
 
 /**
- * GroupDTO domain class
+ * Group data transfer object class
  */
 public class GroupDTO {
 
@@ -13,7 +13,25 @@ public class GroupDTO {
     private String name;
     private Date created;
     private Date updated;
+    
+    public GroupDTO() {}
+    
+    public GroupDTO(OrganizationDTO organization, String name) {
+        this.organization = organization;
+        this.name = name;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof GroupDTO) {
+            GroupDTO group = (GroupDTO) o;
+            if (this.id == group.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public long getId() {
         return id;
     }

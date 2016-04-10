@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * OrganizationServiceImpl unit test
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/spring-test-config.xml"})
+@ContextConfiguration(locations = {"classpath:/spring-test-config.xml"})
 public class OrganizationServiceTest {
     
     private static final String ORGANIZATION_NAME = "Testing organization";
@@ -61,10 +61,6 @@ public class OrganizationServiceTest {
         instance.update(organization); 
         Date afterUpdate = new Date();
         organization = instance.get(organizationId);
-        
-        System.out.println(beforeUpdate);
-        System.out.println(organization.getUpdated());
-        System.out.println(afterUpdate);
         
         assertTrue("Updated organization updated field should have current date", 
                 organization.getUpdated().compareTo(beforeUpdate) >= 0

@@ -1,7 +1,7 @@
 package org.earelin.ecclesia.service.dto;
 
 /**
- * UserDTO domain class
+ * UserDTO data transfer object class
  */
 public class UserDTO {
 

@@ -1,6 +1,3 @@
-/*
- * 
- */
 package org.earelin.ecclesia.service;
 
 import java.util.List;

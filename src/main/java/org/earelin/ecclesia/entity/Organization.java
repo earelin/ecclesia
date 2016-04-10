@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.earelin.ecclesia.entity.resource.ManagedImage;
-import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**

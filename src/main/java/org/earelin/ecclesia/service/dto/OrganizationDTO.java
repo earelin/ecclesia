@@ -4,7 +4,7 @@ import java.util.Date;
 import org.earelin.ecclesia.service.dto.resouce.ManagedImageDTO;
 
 /**
- * OrganizationDTO domain class
+ * Organization data transfer object class
  */
 public class OrganizationDTO {
 
@@ -18,6 +18,17 @@ public class OrganizationDTO {
     
     public OrganizationDTO(String name) {
         this.name = name;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof OrganizationDTO) {
+            OrganizationDTO organization = (OrganizationDTO) o;
+            if (this.id == organization.getId()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public long getId() {

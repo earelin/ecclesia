@@ -40,6 +40,7 @@ dependencies {
   compile 'org.springframework.security:spring-security-taglibs:4.0.3.RELEASE'
   
   compile 'org.modelmapper:modelmapper:0.+'
+  compile 'org.passay:passay:1.+'
 	
 	//include in compile only, exclude in the war
 	providedCompile 'javax.servlet:servlet-api:2.5'
