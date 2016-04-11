@@ -13,6 +13,7 @@ apply plugin: 'net.serenity-bdd.aggregator'
 dependencies {
   testCompile 'net.serenity-bdd:serenity-core:1.+'
   testCompile 'net.serenity-bdd:serenity-junit:1.+'
+  testCompile 'net.serenity-bdd:serenity-jbehave:1.+'
   testCompile 'junit:junit:4.+'
   testCompile 'org.assertj:assertj-core:1.7.+'
   testCompile 'org.slf4j:slf4j-simple:1.+'

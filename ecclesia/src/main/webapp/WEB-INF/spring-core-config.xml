@@ -47,7 +47,9 @@
     <property name="sessionFactory" ref="sessionFactory" />
   </bean>
   
-  <bean id="passwordValidator" class="org.passay.PasswordValidatord" />
+  <!--
+  <bean id="passwordValidator" class="org.passay.PasswordValidator" />
+  -->
   
   <import resource="spring-security-config.xml"/>
 
