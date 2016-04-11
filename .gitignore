@@ -5,3 +5,4 @@ ecclesia-bdd-test/build
 ecclesia/build
 ecclesia/private
 ecclesia/src/main/resources/import.sql
+ecclesia-bdd-test/target
