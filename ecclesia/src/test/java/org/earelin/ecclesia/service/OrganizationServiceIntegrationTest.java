@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-test-config.xml"})
-public class OrganizationServiceTest {
+public class OrganizationServiceIntegrationTest {
     
     private static final String ORGANIZATION_NAME = "Testing organization";
     

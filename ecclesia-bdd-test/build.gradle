@@ -1,0 +1,21 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+    
+  dependencies {
+    classpath 'net.serenity-bdd:serenity-gradle-plugin:1.1.1'
+  }
+}
+
+apply plugin: 'net.serenity-bdd.aggregator'
+
+dependencies {
+  testCompile 'net.serenity-bdd:serenity-core:1.+'
+  testCompile 'net.serenity-bdd:serenity-junit:1.+'
+  testCompile 'junit:junit:4.+'
+  testCompile 'org.assertj:assertj-core:1.7.+'
+  testCompile 'org.slf4j:slf4j-simple:1.+'
+}
+
+gradle.startParameter.continueOnFailure = true

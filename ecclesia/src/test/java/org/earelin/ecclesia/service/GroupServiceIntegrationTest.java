@@ -20,7 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-test-config.xml"})
-public class GroupServiceTest {
+public class GroupServiceIntegrationTest {
     
     private static final String GROUP_NAME = "Testing group";
     private static final String ORGANIZATION_NAME = "Testing groups organization";
