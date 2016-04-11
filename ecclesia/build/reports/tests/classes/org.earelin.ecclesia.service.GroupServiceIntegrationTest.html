@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class org.earelin.ecclesia.service.GroupServiceIntegrationTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class org.earelin.ecclesia.service.GroupServiceIntegrationTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/org.earelin.ecclesia.service.html">org.earelin.ecclesia.service</a> &gt; GroupServiceIntegrationTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">8</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.250s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">createNewGroup</td>
+<td>0.149s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">getExistingGroup</td>
+<td>0.016s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">newGroupShouldBelongToAnOrganization</td>
+<td>0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">newGroupShouldHaveNotBlankName</td>
+<td>0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">removeExistingGroup</td>
+<td>0.012s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">updateExistingGroup</td>
+<td>0.044s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">updatedGroupShouldBelongToAnOrganization</td>
+<td>0.016s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">updatedGroupShouldHaveNotBlankName</td>
+<td>0.005s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>20:08:25,501 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.groovy]
+20:08:25,501 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+20:08:25,502 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/Users/xcarriba/Documents/Projects/ecclesia/ecclesia/build/resources/main/logback.xml]
+20:08:25,570 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+20:08:25,571 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+20:08:25,580 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [STDOUT]
+20:08:25,623 |-WARN in ch.qos.logback.core.ConsoleAppender[STDOUT] - This appender no longer admits a layout as a sub-component, set an encoder instead.
+20:08:25,623 |-WARN in ch.qos.logback.core.ConsoleAppender[STDOUT] - To ensure compatibility, wrapping your layout in LayoutWrappingEncoder.
+20:08:25,623 |-WARN in ch.qos.logback.core.ConsoleAppender[STDOUT] - See also http://logback.qos.ch/codes.html#layoutInsteadOfEncoder for details
+20:08:25,624 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.springframework] to INFO
+20:08:25,624 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting additivity of logger [org.springframework] to false
+20:08:25,624 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[org.springframework]
+20:08:25,625 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.earelin.ecclesia] to DEBUG
+20:08:25,625 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting additivity of logger [org.earelin.ecclesia] to false
+20:08:25,625 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[org.earelin.ecclesia]
+20:08:25,625 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+20:08:25,625 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[ROOT]
+20:08:25,625 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+20:08:25,627 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@5f086360 - Registering current configuration as safe fallback point
+
+2016-04-11 20:08:25 [Test worker] INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-04-11 20:08:25 [Test worker] INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3526a78a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@37dc83ca, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@63cba428, org.springframework.test.context.support.DirtiesContextTestExecutionListener@e26e866, org.springframework.test.context.transaction.TransactionalTestExecutionListener@ebc04df, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5d2d0411]
+2016-04-11 20:08:25 [Test worker] INFO  o.s.b.f.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring-test-config.xml]
+2016-04-11 20:08:26 [Test worker] INFO  o.s.b.f.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring-test-security-config.xml]
+2016-04-11 20:08:26 [Test worker] INFO  o.s.s.core.SpringSecurityCoreVersion - You are running with Spring Security Core 4.0.3.RELEASE
+2016-04-11 20:08:26 [Test worker] INFO  o.s.s.c.SecurityNamespaceHandler - Spring Security 'config' module version is 4.0.3.RELEASE
+2016-04-11 20:08:26 [Test worker] INFO  o.s.c.s.GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@229b50a2: startup date [Mon Apr 11 20:08:26 BST 2016]; root of context hierarchy
+2016-04-11 20:08:26 [Test worker] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-04-11 20:08:26 [Test worker] INFO  org.hibernate.Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-04-11 20:08:26 [Test worker] INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2016-04-11 20:08:26 [Test worker] INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+2016-04-11 20:08:27 [Test worker] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2016-04-11 20:08:27 [Test worker] INFO  o.h.e.t.i.TransactionFactoryInitiator - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2016-04-11 20:08:27 [Test worker] INFO  o.h.h.i.a.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-04-11 20:08:27 [Test worker] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 4.3.2.Final
+2016-04-11 20:08:27 [Test worker] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+2016-04-11 20:08:27 [Test worker] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+2016-04-11 20:08:27 [Test worker] INFO  o.s.o.h.HibernateTransactionManager - Using DataSource [org.apache.commons.dbcp2.BasicDataSource@2827655a] of Hibernate SessionFactory for HibernateTransactionManager
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 2.8</a> at 11-Apr-2016 20:08:28</p>
+</div>
+</div>
+</body>
+</html>

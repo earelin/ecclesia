@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>RegisterFormController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ecclesia</a> &gt; <a href="index.source.html" class="el_package">org.earelin.ecclesia.web</a> &gt; <span class="el_source">RegisterFormController.java</span></div><h1>RegisterFormController.java</h1><pre class="source lang-java linenums">package org.earelin.ecclesia.web;
+
+import org.earelin.ecclesia.service.UserService;
+import org.earelin.ecclesia.web.form.RegisterFormAdapter;
+import org.earelin.ecclesia.web.form.validation.RegisterFormAdapterValidation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
+
+/**
+ * User registration controller
+ */
+@Controller
+public class RegisterFormController {
+    
+    private final UserService service;
+    private final RegisterFormAdapterValidation formValidation;
+    
+    @Autowired
+    public RegisterFormController(UserService service,
+<span class="nc" id="L29">                RegisterFormAdapterValidation formValidation) {</span>
+<span class="nc" id="L30">        this.service = service;</span>
+<span class="nc" id="L31">        this.formValidation = formValidation;</span>
+<span class="nc" id="L32">    }</span>
+    
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+<span class="nc" id="L36">        binder.setValidator(formValidation);</span>
+<span class="nc" id="L37">    }</span>
+    
+    @RequestMapping(value=&quot;/register&quot;, method=RequestMethod.GET)
+	public String register(Model model) {  
+<span class="nc" id="L41">        RegisterFormAdapter registerForm = new RegisterFormAdapter();</span>
+<span class="nc" id="L42">        model.addAttribute(&quot;register&quot;, registerForm);</span>
+<span class="nc" id="L43">		return &quot;register_form&quot;;</span>
+	}
+    
+    @RequestMapping(value=&quot;/register&quot;, method=RequestMethod.POST)
+	public String registerSubmit(
+            @ModelAttribute(&quot;register&quot;) @Validated RegisterFormAdapter registerForm,
+            BindingResult result, SessionStatus status) {
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="nc" id="L51">            return &quot;register_form&quot;;</span>
+        }
+        
+<span class="nc" id="L54">        service.register(registerForm.getUsername(), registerForm.getEmail(), </span>
+<span class="nc" id="L55">                registerForm.getPassword());</span>
+<span class="nc" id="L56">		return &quot;register_form&quot;;</span>
+	}
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

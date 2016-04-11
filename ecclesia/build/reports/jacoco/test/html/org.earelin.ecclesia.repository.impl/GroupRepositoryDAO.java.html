@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GroupRepositoryDAO.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ecclesia</a> &gt; <a href="index.source.html" class="el_package">org.earelin.ecclesia.repository.impl</a> &gt; <span class="el_source">GroupRepositoryDAO.java</span></div><h1>GroupRepositoryDAO.java</h1><pre class="source lang-java linenums">package org.earelin.ecclesia.repository.impl;
+
+import java.util.List;
+import org.earelin.ecclesia.entity.Group;
+import org.earelin.ecclesia.entity.Organization;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import org.earelin.ecclesia.repository.GroupRepository;
+
+/**
+ *
+ */
+@Repository
+@Transactional
+public class GroupRepositoryDAO implements GroupRepository {
+    
+    private final SessionFactory sessionFactory;
+    
+    @Autowired
+<span class="fc" id="L23">    public GroupRepositoryDAO(SessionFactory sessionFactory) {</span>
+<span class="fc" id="L24">        this.sessionFactory = sessionFactory;</span>
+<span class="fc" id="L25">    }</span>
+    
+    private Session currentSession() {
+<span class="fc" id="L28">        return sessionFactory.getCurrentSession();</span>
+    }
+
+    @Override
+    public Group get(long id) {
+<span class="fc" id="L33">        return (Group) currentSession().get(Group.class, id);</span>
+    }
+
+    @Override
+    public void add(Group group) {
+<span class="fc" id="L38">        currentSession().save(group);</span>
+<span class="fc" id="L39">    }</span>
+
+    @Override
+    public void update(Group group) {
+<span class="fc" id="L43">        currentSession().saveOrUpdate(group);</span>
+<span class="fc" id="L44">    }</span>
+
+    @Override
+    public void remove(Group group) {
+<span class="fc" id="L48">        currentSession().delete(group);</span>
+<span class="fc" id="L49">    }</span>
+
+    @Override
+    public List&lt;Group&gt; list(Organization organization) {
+<span class="nc" id="L53">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    }
+
+    @Override
+    public List&lt;Group&gt; list(Organization organization, int limit, int offset) {
+<span class="nc" id="L58">        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

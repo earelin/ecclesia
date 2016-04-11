@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.earelin.ecclesia.service.GroupServiceIntegrationTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2016-04-11T19:08:28" hostname="UBM58820MAC" time="0.254">
+  <properties/>
+  <testcase name="createNewGroup" classname="org.earelin.ecclesia.service.GroupServiceIntegrationTest" time="0.149"/>
+  <testcase name="updateExistingGroup" classname="org.earelin.ecclesia.service.GroupServiceIntegrationTest" time="0.044"/>
+  <testcase name="removeExistingGroup" classname="org.earelin.ecclesia.service.GroupServiceIntegrationTest" time="0.012"/>
+  <testcase name="updatedGroupShouldBelongToAnOrganization" classname="org.earelin.ecclesia.service.GroupServiceIntegrationTest" time="0.016"/>
+  <testcase name="newGroupShouldHaveNotBlankName" classname="org.earelin.ecclesia.service.GroupServiceIntegrationTest" time="0.004"/>
+  <testcase name="updatedGroupShouldHaveNotBlankName" classname="org.earelin.ecclesia.service.GroupServiceIntegrationTest" time="0.005"/>
+  <testcase name="newGroupShouldBelongToAnOrganization" classname="org.earelin.ecclesia.service.GroupServiceIntegrationTest" time="0.004"/>
+  <testcase name="getExistingGroup" classname="org.earelin.ecclesia.service.GroupServiceIntegrationTest" time="0.016"/>
+  <system-out><![CDATA[20:08:25,501 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.groovy]
+20:08:25,501 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+20:08:25,502 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [file:/Users/xcarriba/Documents/Projects/ecclesia/ecclesia/build/resources/main/logback.xml]
+20:08:25,570 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - debug attribute not set
+20:08:25,571 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+20:08:25,580 |-INFO in ch.qos.logback.core.joran.action.AppenderAction - Naming appender as [STDOUT]
+20:08:25,623 |-WARN in ch.qos.logback.core.ConsoleAppender[STDOUT] - This appender no longer admits a layout as a sub-component, set an encoder instead.
+20:08:25,623 |-WARN in ch.qos.logback.core.ConsoleAppender[STDOUT] - To ensure compatibility, wrapping your layout in LayoutWrappingEncoder.
+20:08:25,623 |-WARN in ch.qos.logback.core.ConsoleAppender[STDOUT] - See also http://logback.qos.ch/codes.html#layoutInsteadOfEncoder for details
+20:08:25,624 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.springframework] to INFO
+20:08:25,624 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting additivity of logger [org.springframework] to false
+20:08:25,624 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[org.springframework]
+20:08:25,625 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting level of logger [org.earelin.ecclesia] to DEBUG
+20:08:25,625 |-INFO in ch.qos.logback.classic.joran.action.LoggerAction - Setting additivity of logger [org.earelin.ecclesia] to false
+20:08:25,625 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[org.earelin.ecclesia]
+20:08:25,625 |-INFO in ch.qos.logback.classic.joran.action.RootLoggerAction - Setting level of ROOT logger to INFO
+20:08:25,625 |-INFO in ch.qos.logback.core.joran.action.AppenderRefAction - Attaching appender named [STDOUT] to Logger[ROOT]
+20:08:25,625 |-INFO in ch.qos.logback.classic.joran.action.ConfigurationAction - End of configuration.
+20:08:25,627 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@5f086360 - Registering current configuration as safe fallback point
+
+2016-04-11 20:08:25 [Test worker] INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-04-11 20:08:25 [Test worker] INFO  o.s.t.c.s.DefaultTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3526a78a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@37dc83ca, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@63cba428, org.springframework.test.context.support.DirtiesContextTestExecutionListener@e26e866, org.springframework.test.context.transaction.TransactionalTestExecutionListener@ebc04df, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5d2d0411]
+2016-04-11 20:08:25 [Test worker] INFO  o.s.b.f.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring-test-config.xml]
+2016-04-11 20:08:26 [Test worker] INFO  o.s.b.f.xml.XmlBeanDefinitionReader - Loading XML bean definitions from class path resource [spring-test-security-config.xml]
+2016-04-11 20:08:26 [Test worker] INFO  o.s.s.core.SpringSecurityCoreVersion - You are running with Spring Security Core 4.0.3.RELEASE
+2016-04-11 20:08:26 [Test worker] INFO  o.s.s.c.SecurityNamespaceHandler - Spring Security 'config' module version is 4.0.3.RELEASE
+2016-04-11 20:08:26 [Test worker] INFO  o.s.c.s.GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@229b50a2: startup date [Mon Apr 11 20:08:26 BST 2016]; root of context hierarchy
+2016-04-11 20:08:26 [Test worker] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-04-11 20:08:26 [Test worker] INFO  org.hibernate.Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-04-11 20:08:26 [Test worker] INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2016-04-11 20:08:26 [Test worker] INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist
+2016-04-11 20:08:27 [Test worker] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2016-04-11 20:08:27 [Test worker] INFO  o.h.e.t.i.TransactionFactoryInitiator - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2016-04-11 20:08:27 [Test worker] INFO  o.h.h.i.a.ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-04-11 20:08:27 [Test worker] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 4.3.2.Final
+2016-04-11 20:08:27 [Test worker] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000227: Running hbm2ddl schema export
+2016-04-11 20:08:27 [Test worker] INFO  o.h.tool.hbm2ddl.SchemaExport - HHH000230: Schema export complete
+2016-04-11 20:08:27 [Test worker] INFO  o.s.o.h.HibernateTransactionManager - Using DataSource [org.apache.commons.dbcp2.BasicDataSource@2827655a] of Hibernate SessionFactory for HibernateTransactionManager
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
