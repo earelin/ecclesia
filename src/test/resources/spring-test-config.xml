@@ -43,8 +43,6 @@
     <property name="sessionFactory" ref="sessionFactory" />
   </bean>
   
-  <bean id="modelMapper" class="org.modelmapper.ModelMapper" />
-  
   <import resource="spring-test-security-config.xml"/>
 
 </beans>

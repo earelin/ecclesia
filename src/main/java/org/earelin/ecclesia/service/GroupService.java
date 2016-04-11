@@ -1,16 +1,16 @@
 package org.earelin.ecclesia.service;
 
 import java.util.List;
-import org.earelin.ecclesia.service.dto.GroupDTO;
+import org.earelin.ecclesia.entity.Group;
 
 /**
  * 
  */
 public interface GroupService {
-    public void add(GroupDTO group);
-    public void update(GroupDTO group);
+    public void add(Group group);
+    public void update(Group group);
     public void remove(long id);
-    public GroupDTO get(long id);
-    public List<GroupDTO> list();
-    public List<GroupDTO> list(int limit, int offset);
+    public Group get(long id);
+    public List<Group> list();
+    public List<Group> list(int limit, int offset);
 }

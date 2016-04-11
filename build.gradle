@@ -39,7 +39,7 @@ dependencies {
   compile 'org.springframework.security:spring-security-web:4.0.3.RELEASE'
   compile 'org.springframework.security:spring-security-taglibs:4.0.3.RELEASE'
   
-  compile 'org.modelmapper:modelmapper:0.+'
+  // password validator
   compile 'org.passay:passay:1.+'
 	
 	//include in compile only, exclude in the war

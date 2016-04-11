@@ -11,7 +11,7 @@ import org.earelin.ecclesia.entity.resource.ManagedImage;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- * Organization repository entity
+ * Organization domain class
  */
 @Entity
 @Table(name="Organizations")
@@ -26,11 +26,20 @@ public class Organization implements Serializable {
     private ManagedImage logo;
     private Date created;
     private Date updated;
-
+    
     public Organization() {}
     
     public Organization(String name) {
         this.name = name;
+    }
+    
+    public boolean equals(Object o) {
+        if (o instanceof Organization) {
+            if (((Organization) o).getId() == this.getId()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public long getId() {

@@ -2,8 +2,8 @@ package org.earelin.ecclesia.service;
 
 import java.util.Date;
 import javax.validation.ConstraintViolationException;
-import org.earelin.ecclesia.service.dto.GroupDTO;
-import org.earelin.ecclesia.service.dto.OrganizationDTO;
+import org.earelin.ecclesia.entity.Group;
+import org.earelin.ecclesia.entity.Organization;
 import org.earelin.ecclesia.service.exception.GroupNotFoundException;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
@@ -25,7 +25,7 @@ public class GroupServiceTest {
     private static final String GROUP_NAME = "Testing group";
     private static final String ORGANIZATION_NAME = "Testing groups organization";
     
-    private OrganizationDTO organization;
+    private Organization organization;
     
     @Autowired
     private GroupService instance;
@@ -35,13 +35,13 @@ public class GroupServiceTest {
     
     @Before
     public void init() {
-        organization = new OrganizationDTO(ORGANIZATION_NAME);
+        organization = new Organization(ORGANIZATION_NAME);
         organizationService.add(organization);
     }
     
     @Test
     public void createNewGroup() {
-        GroupDTO group = new GroupDTO(organization, GROUP_NAME);
+        Group group = new Group(organization, GROUP_NAME);
 
         Date beforeInsert = new Date();
         instance.add(group);
@@ -59,19 +59,19 @@ public class GroupServiceTest {
     
     @Test(expected = ConstraintViolationException.class)
     public void newGroupShouldHaveNotBlankName() {
-        instance.add(new GroupDTO(organization, "  "));
+        instance.add(new Group(organization, "  "));
     }
     
     @Test(expected = ConstraintViolationException.class)
     public void newGroupShouldBelongToAnOrganization() {
-        GroupDTO group = new GroupDTO();
+        Group group = new Group();
         group.setName(GROUP_NAME);
         instance.add(group);
     }
     
     @Test
     public void updateExistingGroup() {
-        GroupDTO group = new GroupDTO(organization, GROUP_NAME);
+        Group group = new Group(organization, GROUP_NAME);
         instance.add(group);
         
         long groupId = group.getId();
@@ -90,16 +90,15 @@ public class GroupServiceTest {
     
     @Test(expected = ConstraintViolationException.class)
     public void updatedGroupShouldHaveNotBlankName() {
-        GroupDTO group = new GroupDTO(organization, GROUP_NAME);
+        Group group = new Group(organization, GROUP_NAME);
         instance.add(group);    
         group.setName("   ");
         instance.update(group);
     }
     
-    @Ignore
     @Test(expected = ConstraintViolationException.class)
     public void updatedGroupShouldBelongToAnOrganization() {
-        GroupDTO group = new GroupDTO(organization, GROUP_NAME);
+        Group group = new Group(organization, GROUP_NAME);
         instance.add(group);    
         group.setOrganization(null);
         instance.update(group);
@@ -107,7 +106,7 @@ public class GroupServiceTest {
     
     @Test(expected = GroupNotFoundException.class)
     public void removeExistingGroup() {
-        GroupDTO group = new GroupDTO(organization, GROUP_NAME);
+        Group group = new Group(organization, GROUP_NAME);
         instance.add(group);      
         long groupId = group.getId();
         
@@ -118,10 +117,10 @@ public class GroupServiceTest {
     
     @Test
     public void getExistingGroup() {
-        GroupDTO group = new GroupDTO(organization, GROUP_NAME);
+        Group group = new Group(organization, GROUP_NAME);
         instance.add(group);
         
-        GroupDTO gottenGroup = instance.get(group.getId());
+        Group gottenGroup = instance.get(group.getId());
         
         assertThat(group, samePropertyValuesAs(gottenGroup));
     }

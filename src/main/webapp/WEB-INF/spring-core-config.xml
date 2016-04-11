@@ -46,8 +46,8 @@
       class="org.springframework.orm.hibernate4.HibernateTransactionManager">
     <property name="sessionFactory" ref="sessionFactory" />
   </bean>
-
-  <bean id="modelMapper" class="org.modelmapper.ModelMapper" />
+  
+  <bean id="passwordValidator" class="org.passay.PasswordValidatord" />
   
   <import resource="spring-security-config.xml"/>
 

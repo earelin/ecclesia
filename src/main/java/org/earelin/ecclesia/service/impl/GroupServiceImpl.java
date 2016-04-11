@@ -7,9 +7,7 @@ import org.earelin.ecclesia.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.repository.GroupRepository;
-import org.earelin.ecclesia.service.dto.GroupDTO;
 import org.earelin.ecclesia.service.exception.GroupNotFoundException;
-import org.modelmapper.ModelMapper;
 
 /**
  *
@@ -18,34 +16,26 @@ import org.modelmapper.ModelMapper;
 public class GroupServiceImpl implements GroupService {
     
     private final GroupRepository dao;
-    private final ModelMapper modelMapper;
     
     @Autowired
-    public GroupServiceImpl(GroupRepository dao,
-            ModelMapper modelMapper) {
+    public GroupServiceImpl(GroupRepository dao) {
         this.dao = dao;
-        this.modelMapper = modelMapper;
     }
 
     @Override
-    public void add(GroupDTO group) {
+    public void add(Group group) {
         Date now = new Date();
         group.setCreated(now);
         group.setUpdated(now);
         
-        Group entity = modelMapper.map(group, Group.class);  // TODO implement custom mapping      
-        dao.add(entity);
-        
-        group.setId(entity.getId());
+        dao.add(group);
     }
 
     @Override
-    public void update(GroupDTO group) {
+    public void update(Group group) {
         Date now = new Date();
         group.setUpdated(now);
-        Group entity = dao.get(group.getId());
-        modelMapper.map(group, entity);
-        dao.update(entity);
+        dao.update(group);
     }
 
     @Override
@@ -60,23 +50,23 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public GroupDTO get(long id) {
-        Group entity = dao.get(id);
+    public Group get(long id) {
+        Group group = dao.get(id);
         
-        if (entity == null) {
+        if (group == null) {
             throw new GroupNotFoundException(id);
         }
         
-        return modelMapper.map(entity, GroupDTO.class);
+        return group;
     }
 
     @Override
-    public List<GroupDTO> list() {
+    public List<Group> list() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<GroupDTO> list(int limit, int offset) {
+    public List<Group> list(int limit, int offset) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

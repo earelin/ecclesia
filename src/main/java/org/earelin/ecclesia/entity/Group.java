@@ -29,6 +29,13 @@ public class Group implements Serializable {
     private String name;
     private Date created;
     private Date updated;
+    
+    public Group() {}
+    
+    public Group(Organization organization, String name) {
+        this.organization = organization;
+        this.name = name;
+    }
 
     public Date getCreated() {
         return created;

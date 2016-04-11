@@ -2,7 +2,7 @@ package org.earelin.ecclesia.service;
 
 import java.util.Date;
 import javax.validation.ConstraintViolationException;
-import org.earelin.ecclesia.service.dto.OrganizationDTO;
+import org.earelin.ecclesia.entity.Organization;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
@@ -27,8 +27,7 @@ public class OrganizationServiceTest {
 
     @Test
     public void createNewOrganization() {
-        OrganizationDTO organization = new OrganizationDTO();
-        organization.setName(ORGANIZATION_NAME);
+        Organization organization = new Organization(ORGANIZATION_NAME);
         
         Date beforeInsert = new Date();
         instance.add(organization);
@@ -46,12 +45,12 @@ public class OrganizationServiceTest {
 
     @Test(expected = ConstraintViolationException.class)
     public void newOrganizationShouldHaveNotBlankName() {
-        instance.add(new OrganizationDTO("   "));
+        instance.add(new Organization("   "));
     }
 
     @Test
     public void updateExistingOrganization() {
-        OrganizationDTO organization = new OrganizationDTO(ORGANIZATION_NAME);
+        Organization organization = new Organization(ORGANIZATION_NAME);
         instance.add(organization);
         
         long organizationId = organization.getId();
@@ -70,7 +69,7 @@ public class OrganizationServiceTest {
 
     @Test(expected = ConstraintViolationException.class)
     public void updatedOrganizationShouldHaveNotBlankName() {
-        OrganizationDTO organization = new OrganizationDTO(ORGANIZATION_NAME);
+        Organization organization = new Organization(ORGANIZATION_NAME);
         instance.add(organization);    
         organization.setName("   ");
         instance.update(organization);
@@ -78,7 +77,7 @@ public class OrganizationServiceTest {
 
     @Test(expected = OrganizationNotFoundException.class)
     public void removeExistingOrganization() {
-        OrganizationDTO organization = new OrganizationDTO(ORGANIZATION_NAME);
+        Organization organization = new Organization(ORGANIZATION_NAME);
         instance.add(organization);      
         long organizationId = organization.getId();
         
@@ -89,10 +88,10 @@ public class OrganizationServiceTest {
 
     @Test
     public void getExistingOrganization() {
-        OrganizationDTO organization = new OrganizationDTO(ORGANIZATION_NAME);
+        Organization organization = new Organization(ORGANIZATION_NAME);
         instance.add(organization);
         
-        OrganizationDTO gottenOrganization = instance.get(organization.getId());
+        Organization gottenOrganization = instance.get(organization.getId());
         
         assertThat(organization, samePropertyValuesAs(gottenOrganization));
     }
