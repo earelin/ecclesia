@@ -1,8 +1,7 @@
 .gradle
 .nb-gradle
 nbproject
-ecclesia-bdd-test/build
-ecclesia/build
-ecclesia/private
-ecclesia/src/main/resources/import.sql
-ecclesia-bdd-test/target
+build/
+private/
+src/main/resources/import.sql
+target/

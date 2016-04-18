@@ -1,0 +1,6 @@
+User registration
+
+Narrative:
+  In order to improve the organization management process
+  As an organization
+  I want to manage my (online or offline) members data using the system

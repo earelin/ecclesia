@@ -1,0 +1,6 @@
+Organization management
+
+Narrative:
+  In order to comunicate and work with other members
+  As a member
+  I want to create and edit documents inside the groups
