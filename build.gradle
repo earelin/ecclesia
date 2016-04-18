@@ -100,7 +100,7 @@ task testUI(type: Test) {
   }
 }
 
-//check.dependsOn testUI
+check.dependsOn testUI
 
 jacocoTestReport {
   reports {
