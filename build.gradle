@@ -16,32 +16,41 @@ repositories {
 dependencies {
   compile 'ch.qos.logback:logback-classic:1.+'
 	
+  // spring
   compile 'org.springframework:spring-webmvc:4.2.2.RELEASE'
   compile 'org.springframework:spring-tx:4.2.2.RELEASE'
   compile 'org.springframework:spring-orm:4.2.2.RELEASE'
   compile 'org.springframework:spring-test:4.2.2.RELEASE'
   
+  // hibernate
   compile 'org.hibernate:hibernate-core:4.3.11.Final'
   compile 'org.hibernate:hibernate-entitymanager:4.3.11.Final'
   compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
   
   compile 'org.hibernate:hibernate-validator:4.3.2.Final'
 	
+  // jstl
   compile 'javax.servlet:jstl:1.2'
   
+  // databases
   compile 'org.apache.commons:commons-dbcp2:2.+'
   compile 'mysql:mysql-connector-java:5.+'
   compile 'com.h2database:h2:1.+'
   
+  // tiles
   compile 'org.apache.tiles:tiles-jsp:3.+'
   compile 'org.apache.tiles:tiles-el:3.+'
   
+  // spring security
   compile 'org.springframework.security:spring-security-config:4.0.3.RELEASE'
   compile 'org.springframework.security:spring-security-web:4.0.3.RELEASE'
   compile 'org.springframework.security:spring-security-taglibs:4.0.3.RELEASE'
   
   // password validator
   compile 'org.passay:passay:1.+'
+  
+  // object conversion
+  compile 'net.sf.dozer:dozer:5.+'
 	
 	//include in compile only, exclude in the war
 	providedCompile 'javax.servlet:servlet-api:2.5'
@@ -67,27 +76,25 @@ buildscript {
   }
 }
 
+[jettyRun, jettyRunWar, jettyStop]*.stopPort = 8090
+[jettyRun, jettyRunWar, jettyStop]*.stopKey = 'stop-key'
+
 test {
   include 'org/earelin/ecclesia/integration/**'
   exclude 'org/earelin/ecclesia/bdd/**'
 }
 
-
-
 task testUI(type: Test) {
   include 'org/earelin/ecclesia/bdd/**'
-}
-
-[jettyRun, jettyRunWar, jettyStop]*.stopPort = 8090
-[jettyRun, jettyRunWar, jettyStop]*.stopKey = 'stop-key'
-
-testUI.doFirst {
-  [jettyRun, jettyRunWar]*.daemon = true
-  tasks.jettyRun.execute()
-}
-
-testUI.doLast {
-  tasks.jettyStop.execute()
+  
+  doFirst {
+    jettyRun.daemon = true
+    tasks.jettyRun.execute()
+  }
+  
+  doLast {
+    tasks.jettyStop.execute()
+  }
 }
 
 check.dependsOn testUI

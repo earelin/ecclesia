@@ -43,6 +43,8 @@
     <property name="sessionFactory" ref="sessionFactory" />
   </bean>
   
+  <bean id="org.dozer.Mapper" class="org.dozer.DozerBeanMapper" />
+  
   <import resource="spring-test-security-config.xml"/>
 
 </beans>

@@ -2,6 +2,7 @@ package org.earelin.ecclesia.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import org.dozer.Mapper;
 import org.earelin.ecclesia.entity.Group;
 import org.earelin.ecclesia.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,12 @@ import org.earelin.ecclesia.service.exception.GroupNotFoundException;
 public class GroupServiceImpl implements GroupService {
     
     private final GroupRepository dao;
+    private final Mapper mapper;
     
     @Autowired
-    public GroupServiceImpl(GroupRepository dao) {
+    public GroupServiceImpl(GroupRepository dao, Mapper mapper) {
         this.dao = dao;
+        this.mapper = mapper;
     }
 
     @Override
@@ -29,7 +32,10 @@ public class GroupServiceImpl implements GroupService {
         group.setCreated(now);
         group.setUpdated(now);
         
-        throw new UnsupportedOperationException("Not supported yet.");
+        Group groupEntity = mapper.map(group, Group.class);
+        dao.add(groupEntity);
+        
+        group.setId(groupEntity.getId());
     }
 
     @Override

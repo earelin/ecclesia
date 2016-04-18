@@ -2,6 +2,7 @@ package org.earelin.ecclesia.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import org.dozer.Mapper;
 import org.earelin.ecclesia.entity.Organization;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
@@ -17,10 +18,12 @@ import org.earelin.ecclesia.service.dto.OrganizationDTO;
 public class OrganizationServiceImpl implements OrganizationService {
     
     private final OrganizationReponsitory dao;
+    private final Mapper mapper;
     
     @Autowired
-    public OrganizationServiceImpl(OrganizationReponsitory dao) {
+    public OrganizationServiceImpl(OrganizationReponsitory dao, Mapper mapper) {
         this.dao = dao;
+        this.mapper = mapper;
     }
 
     @Override
@@ -29,7 +32,10 @@ public class OrganizationServiceImpl implements OrganizationService {
         organizationDTO.setCreated(now);
         organizationDTO.setUpdated(now);
         
-        throw new UnsupportedOperationException("Not supported yet.");
+        Organization organization = mapper.map(organizationDTO, Organization.class);
+        dao.add(organization);
+        
+        organizationDTO.setId(organization.getId());
     }
 
     @Override

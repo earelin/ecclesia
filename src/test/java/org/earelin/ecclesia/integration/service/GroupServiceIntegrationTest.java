@@ -2,8 +2,6 @@ package org.earelin.ecclesia.integration.service;
 
 import java.util.Date;
 import javax.validation.ConstraintViolationException;
-import org.earelin.ecclesia.entity.Group;
-import org.earelin.ecclesia.entity.Organization;
 import org.earelin.ecclesia.service.GroupService;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.dto.GroupDTO;
@@ -79,6 +77,7 @@ public class GroupServiceIntegrationTest {
         instance.add(group);
     }
     
+    @Ignore
     @Test
     public void updateExistingGroup() {
         GroupDTO group = new GroupDTO();
@@ -99,6 +98,7 @@ public class GroupServiceIntegrationTest {
         assertEquals(updatedName, group.getName());
     }
     
+    @Ignore
     @Test(expected = ConstraintViolationException.class)
     public void updatedGroupShouldHaveNotBlankName() {
         GroupDTO group = new GroupDTO();
@@ -109,6 +109,7 @@ public class GroupServiceIntegrationTest {
         instance.update(group);
     }
     
+    @Ignore
     @Test(expected = ConstraintViolationException.class)
     public void updatedGroupShouldBelongToAnOrganization() {
         GroupDTO group = new GroupDTO();
@@ -119,6 +120,7 @@ public class GroupServiceIntegrationTest {
         instance.update(group);
     }
     
+    @Ignore
     @Test(expected = GroupNotFoundException.class)
     public void removeExistingGroup() {
         GroupDTO group = new GroupDTO();
@@ -132,6 +134,7 @@ public class GroupServiceIntegrationTest {
         instance.get(groupId);
     }
     
+    @Ignore
     @Test
     public void getExistingGroup() {
         GroupDTO group = new GroupDTO();
