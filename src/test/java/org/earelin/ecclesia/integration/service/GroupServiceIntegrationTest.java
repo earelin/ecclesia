@@ -10,7 +10,6 @@ import org.earelin.ecclesia.service.exception.GroupNotFoundException;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,12 +76,12 @@ public class GroupServiceIntegrationTest {
         instance.add(group);
     }
     
-    @Ignore
     @Test
     public void updateExistingGroup() {
         GroupDTO group = new GroupDTO();
         group.setOrganization(organization);
         group.setName(GROUP_NAME);
+        instance.add(group);
         
         long groupId = group.getId();
         String updatedName = "Testing group updated";
@@ -98,7 +97,6 @@ public class GroupServiceIntegrationTest {
         assertEquals(updatedName, group.getName());
     }
     
-    @Ignore
     @Test(expected = ConstraintViolationException.class)
     public void updatedGroupShouldHaveNotBlankName() {
         GroupDTO group = new GroupDTO();
@@ -109,7 +107,6 @@ public class GroupServiceIntegrationTest {
         instance.update(group);
     }
     
-    @Ignore
     @Test(expected = ConstraintViolationException.class)
     public void updatedGroupShouldBelongToAnOrganization() {
         GroupDTO group = new GroupDTO();
@@ -120,7 +117,6 @@ public class GroupServiceIntegrationTest {
         instance.update(group);
     }
     
-    @Ignore
     @Test(expected = GroupNotFoundException.class)
     public void removeExistingGroup() {
         GroupDTO group = new GroupDTO();
@@ -134,7 +130,6 @@ public class GroupServiceIntegrationTest {
         instance.get(groupId);
     }
     
-    @Ignore
     @Test
     public void getExistingGroup() {
         GroupDTO group = new GroupDTO();

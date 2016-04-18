@@ -43,7 +43,13 @@ public class OrganizationServiceImpl implements OrganizationService {
         Date now = new Date();
         organizationDTO.setUpdated(now);
         
-        throw new UnsupportedOperationException("Not supported yet.");
+        Organization organization = dao.get(organizationDTO.getId());        
+        if (organization == null) {
+            throw new OrganizationNotFoundException(organizationDTO.getId());
+        }        
+        mapper.map(organizationDTO, organization);
+        
+        dao.update(organization);
     }
 
     @Override
@@ -65,7 +71,7 @@ public class OrganizationServiceImpl implements OrganizationService {
             throw new OrganizationNotFoundException(id);
         }
         
-        throw new UnsupportedOperationException("Not supported yet.");
+        return mapper.map(organization, OrganizationDTO.class);
     }
 
     @Override

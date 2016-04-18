@@ -7,9 +7,7 @@ import org.earelin.ecclesia.service.dto.OrganizationDTO;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
-import org.junit.Ignore;
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -27,7 +25,6 @@ public class OrganizationServiceIntegrationTest {
     @Autowired
     private OrganizationService instance;
 
-    @Ignore
     @Test
     public void createNewOrganization() {
         OrganizationDTO organization = new OrganizationDTO();
@@ -47,15 +44,13 @@ public class OrganizationServiceIntegrationTest {
                 ORGANIZATION_NAME, organization.getName());
     }
 
-    @Ignore
     @Test(expected = ConstraintViolationException.class)
     public void newOrganizationShouldHaveNotBlankName() {
         OrganizationDTO organization = new OrganizationDTO();
-        organization.setName(ORGANIZATION_NAME);
+        organization.setName("  ");
         instance.add(organization);
     }
 
-    @Ignore
     @Test
     public void updateExistingOrganization() {
         OrganizationDTO organization = new OrganizationDTO();
@@ -76,7 +71,6 @@ public class OrganizationServiceIntegrationTest {
         assertEquals(updatedName, organization.getName());
     }
 
-    @Ignore
     @Test(expected = ConstraintViolationException.class)
     public void updatedOrganizationShouldHaveNotBlankName() {
         OrganizationDTO organization = new OrganizationDTO();
@@ -86,7 +80,6 @@ public class OrganizationServiceIntegrationTest {
         instance.update(organization);
     }
 
-    @Ignore
     @Test(expected = OrganizationNotFoundException.class)
     public void removeExistingOrganization() {
         OrganizationDTO organization = new OrganizationDTO();
@@ -99,7 +92,6 @@ public class OrganizationServiceIntegrationTest {
         instance.get(organizationId);
     }
 
-    @Ignore
     @Test
     public void getExistingOrganization() {
         OrganizationDTO organization = new OrganizationDTO();

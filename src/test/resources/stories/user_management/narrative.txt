@@ -1,6 +1,0 @@
-User registration
-
-Narrative:
-  In order to involve people in the organization
-  As an organization
-  I want members to be able to register on the system

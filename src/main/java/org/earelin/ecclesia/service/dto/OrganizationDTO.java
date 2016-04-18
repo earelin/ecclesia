@@ -13,6 +13,15 @@ public class OrganizationDTO {
     private ManagedImageDTO logo;
     private Date created;
     private Date updated;
+    
+    public boolean equals(Object o) {
+        if (o instanceof OrganizationDTO) {
+            if (((OrganizationDTO) o).getId() == this.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public long getId() {
         return id;

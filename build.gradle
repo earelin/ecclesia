@@ -87,6 +87,9 @@ test {
 task testUI(type: Test) {
   include 'org/earelin/ecclesia/bdd/**'
   
+  reports.junitXml.destination = "$buildDir/ui-test-results"
+  reports.html.destination = "$buildDir/reports/ui-tests"
+  
   doFirst {
     jettyRun.daemon = true
     tasks.jettyRun.execute()

@@ -5,3 +5,4 @@ build/
 private/
 src/main/resources/import.sql
 target/
+phantomjsdriver.log

@@ -39,11 +39,17 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public void update(GroupDTO group) {
+    public void update(GroupDTO groupDTO) {
         Date now = new Date();
-        group.setUpdated(now);
+        groupDTO.setUpdated(now);
         
-        throw new UnsupportedOperationException("Not supported yet.");
+        Group group = dao.get(groupDTO.getId());        
+        if (group == null) {
+            throw new GroupNotFoundException(groupDTO.getId());
+        }        
+        mapper.map(groupDTO, group);
+        
+        dao.update(group);
     }
 
     @Override
@@ -65,7 +71,7 @@ public class GroupServiceImpl implements GroupService {
             throw new GroupNotFoundException(id);
         }
         
-        throw new UnsupportedOperationException("Not supported yet.");
+        return mapper.map(group, GroupDTO.class);
     }
 
     @Override
