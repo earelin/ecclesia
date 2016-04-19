@@ -103,4 +103,9 @@ public class OrganizationServiceIntegrationTest {
         assertThat(organization, samePropertyValuesAs(gottenOrganization));
     }
     
+    @Test(expected = OrganizationNotFoundException.class)
+    public void getNotExistingOrganization() {
+        OrganizationDTO organization = instance.get(100000);        
+    }
+    
 }

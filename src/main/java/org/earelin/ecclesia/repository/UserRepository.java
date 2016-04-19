@@ -7,7 +7,6 @@ package org.earelin.ecclesia.repository;
 
 import java.util.List;
 import org.earelin.ecclesia.entity.User;
-import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
@@ -19,5 +18,5 @@ public interface UserRepository {
     public void remove(User user);
     public List<User> list();
     public List<User> list(int limit, int offset);
-    public UserDetails loadUserByUsername(String string);
+    public User loadUserByUsername(String string);
 }

@@ -60,8 +60,8 @@ public class UserRepositoryDAO implements UserRepository {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) {
-        return (UserDetails) currentSession()
+    public User loadUserByUsername(String username) {
+        return (User) currentSession()
                 .createQuery("from User as u where u.username = :username")
                 .setString("username", username)
                 .uniqueResult();

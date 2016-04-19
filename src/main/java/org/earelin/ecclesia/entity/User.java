@@ -1,9 +1,14 @@
 package org.earelin.ecclesia.entity;
 
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.earelin.ecclesia.entity.resource.ManagedImage;
@@ -22,11 +27,15 @@ public class User {
     private String password;
     private String email;
     private Date created;
+    private Date updated;
     private Date lastLogin;
     private boolean enabled;
-    private boolean admin;
     @OneToOne
     private ManagedImage avatar;
+    @ElementCollection
+    @CollectionTable(name="SystemRoles", joinColumns=@JoinColumn(name="user_id"))
+    @Column(name="role")
+    private List<String> systemRoles;
 
     public boolean isEnabled() {
         return enabled;
@@ -76,6 +85,14 @@ public class User {
         this.created = created;
     }
 
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
+
     public Date getLastLogin() {
         return lastLogin;
     }
@@ -92,14 +109,6 @@ public class User {
         this.avatar = avatar;
     }
 
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
-
     public boolean isAccountNonExpired() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -110,6 +119,14 @@ public class User {
 
     public boolean isCredentialsNonExpired() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<String> getSystemRoles() {
+        return systemRoles;
+    }
+
+    public void setSystemRoles(List<String> systemRoles) {
+        this.systemRoles = systemRoles;
     }
 
 }

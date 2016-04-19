@@ -23,7 +23,7 @@
       class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
   
   <authentication-manager>
-    <authentication-provider ref='authenticationProviderImpl'/>
+    <authentication-provider user-service-ref="ecclesiaUserDetailsService"/>
   </authentication-manager>
 
 </beans:beans>

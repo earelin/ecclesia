@@ -1,14 +1,14 @@
 package org.earelin.ecclesia.service.exception;
 
 /**
- * Exception raised when organization service cannon found a organization
+ * Exception raised when user service cannon found an user
  */
-public class OrganizationNotFoundException extends RuntimeException
+public class UserNotFoundException extends RuntimeException
         implements EntityNotFoundException {
-
+    
     private long id;
     
-    public OrganizationNotFoundException(long id) {
+    public UserNotFoundException(long id) {
         this.id = id;
     }
     
@@ -16,5 +16,4 @@ public class OrganizationNotFoundException extends RuntimeException
     public long getId() {
         return id;
     }
-
 }

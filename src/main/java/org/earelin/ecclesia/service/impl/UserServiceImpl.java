@@ -2,30 +2,31 @@ package org.earelin.ecclesia.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import org.dozer.Mapper;
 import org.earelin.ecclesia.entity.User;
 import org.earelin.ecclesia.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.repository.UserRepository;
 import org.earelin.ecclesia.service.dto.UserDTO;
 
 /**
- *
+ * User service implementation
  */
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
     
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
+    private final Mapper mapper;
 
     @Autowired
-    public UserServiceImpl(UserRepository dao, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository dao,  Mapper mapper, 
+            PasswordEncoder passwordEncoder) {
         this.repository = dao;
         this.passwordEncoder = passwordEncoder;
+        this.mapper = mapper;
     }
 
     /**
@@ -41,13 +42,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
-        user.setAdmin(false);
-        user.setCreated(now);      
+        user.setCreated(now);
+        user.setUpdated(now);
         user.setPassword(passwordEncoder.encode(password));
         
         repository.add(user);
         
-        throw new UnsupportedOperationException("Not supported yet.");
+        return mapper.map(user, UserDTO.class);
     }
 
     @Override
@@ -58,15 +59,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public List<UserDTO> list(int limit, int offset) {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetails user = repository.loadUserByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("Invalid username or password");
-        }
-        return user;
     }
 
 }

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Main configuration class
  */
 @Configuration
-@Import(EcclesiaSecurityConfig.class)
+@ImportResource("classpath:/spring-security-config.xml")
 @EnableTransactionManagement
 @PropertySource("classpath:/default.properties")
 @PropertySource(value = "file:${ECCLESIA_CONFIG_FILE}", ignoreResourceNotFound = true)
@@ -82,8 +82,8 @@ public class EcclesiaCoreConfig {
     }
     
     @Bean
-	public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
-		return new PropertySourcesPlaceholderConfigurer();
-	}
+    public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
     
 }
