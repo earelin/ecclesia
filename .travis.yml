@@ -18,5 +18,5 @@ addons:
       description: "Build submitted via Travis CI"
     notification_email: xavier.carriba@gmail.com
     build_command_prepend: "gradle clean"
-    build_command: "gradle compileJava"
+    build_command: "gradle check"
     branch_pattern: "*"
