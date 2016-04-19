@@ -1,7 +1,7 @@
 Ecclesia
 ===============================
 
-[![Build Status](https://api.travis-ci.org/earelin/ecclesia.png)](https://travis-ci.org/earelin/ecclesia)
+[![Build Status](https://travis-ci.org/earelin/ecclesia.svg)](https://travis-ci.org/earelin/ecclesia)
 [![codecov.io](https://codecov.io/github/earelin/ecclesia/coverage.svg?branch=master)](https://codecov.io/github/earelin/ecclesia?branch=master)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/8623/badge.svg)](https://scan.coverity.com/projects/earelin-ecclesia)
 
