@@ -1,22 +1,5 @@
-#env:
-#  global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-#   - secure: "N8RZqP2SvDyVLuopZeXsR73kBYxQk9Q1z1V5PwmWYikL9xt/7laYCrtri9atwyfqTCsUcfOLrJvciDqK0vArMHcSHn2QmtJdE1Ba3tKxx+J9dYXIbubsWmGRIf5xC1EKE/uVyRiVL1b45nb3rhqZUnF6EZVh6Qhr8zpUMnbZROC2RSJP7B52+uD8QEi2QaSAZ+eo4bkiL4HoDydvvZFjKn2L8A3hmD1esfSPKeZkzYpdRf2MS1+nKRYPKdxHezx64Faxn4n9fDtiXVdnnTBu0PHrtmPPVpli9UFiJhlGv1TQVI7CoJRHV1BkiAeqvLlzLCKFduqJlslFF40oHT6IQ6KQYXFtEr9jh+R4Nsyp2nLBaUDReJ4nx4R5orhg+D28zoL9ZWaLmiOX84s82D1E5p2tQsUT0xLNa1TImKwX81tGU8rOB6KPAteaXixjNzc7W0ZCv9BiXAKj8PitY3SEh36qR/H1dVmN/YvUg2EJvR49Pt2DjOpn0LUALJqy5yD+hHnmJ0lZFlEDao5qBgiauQ6meZD9K6+1e7c3iQ320+Dt4w2X0uT6kHX4ON+IV3YKzBUyzd1wnrRQQAx2tlzEKOsh29hnOjhdMkviI4JQpiF32msILvcXQQf6Y8JfniWdRANHh2ZaDSiNioD8b7GS34ZonQbcfRLwMcG//bSDQfw="
-
 language: java
 jdk:
   - oraclejdk8
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-
-
-#addons:
-#  coverity_scan:
-#    project:
-#      name: "earelin/ecclesia"
-#      description: "Build submitted via Travis CI"
-#    notification_email: xavier.carriba@gmail.com
-#    build_command_prepend: "gradle clean"
-#    build_command: "gradle check"
-#    branch_pattern: "*"
