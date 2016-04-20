@@ -1,6 +1,5 @@
 package org.earelin.ecclesia.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,11 +10,11 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- * Groups
+ * Group entity
  */
 @Entity
 @Table(name="Groups")
-public class Group implements Serializable {
+public class Group {
     
     @Id
     @GeneratedValue

@@ -1,6 +1,5 @@
 package org.earelin.ecclesia.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +14,7 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 @Entity
 @Table(name="Organizations")
-public class Organization implements Serializable {
+public class Organization {
     
     @Id
     @GeneratedValue

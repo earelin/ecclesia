@@ -1,6 +1,5 @@
 package org.earelin.ecclesia.entity;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +11,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="OrganizationRoles")
-public class OrganizationRole implements Serializable {
+public class OrganizationRole {
 
     @Id
     @GeneratedValue

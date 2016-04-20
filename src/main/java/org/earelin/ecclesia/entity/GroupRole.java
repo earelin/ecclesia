@@ -1,6 +1,5 @@
 package org.earelin.ecclesia.entity;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,11 +7,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Roles of a group
+ * Roles of a group entity
  */
 @Entity
 @Table(name="GroupRoles")
-public class GroupRole implements Serializable {
+public class GroupRole {
 
     @Id
     @GeneratedValue
