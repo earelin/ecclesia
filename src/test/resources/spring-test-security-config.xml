@@ -6,7 +6,7 @@
         http://www.springframework.org/schema/security/spring-security.xsd
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd ">
-  <!--
+  
   <http pattern="/resources/**" security="none"/>
   
   <http>
@@ -18,7 +18,7 @@
     <form-login login-page="/login" default-target-url="/dashboard" />
     <logout logout-success-url="/" />
   </http>
-  -->
+  
   <beans:bean name="bcryptEncoder"
       class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
   
