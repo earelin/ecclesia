@@ -2,8 +2,7 @@ Ecclesia
 ===============================
 
 [![Build Status](https://travis-ci.org/earelin/ecclesia.svg)](https://travis-ci.org/earelin/ecclesia)
-[![codecov.io](https://codecov.io/github/earelin/ecclesia/coverage.svg?branch=master)](https://codecov.io/github/earelin/ecclesia?branch=master)
-[![Coverity Scan Build Status](https://scan.coverity.com/projects/8623/badge.svg)](https://scan.coverity.com/projects/earelin-ecclesia)
+[![codecov.io](https://codecov.io/github/earelin/ecclesia/coverage.svg)](https://codecov.io/github/earelin/ecclesia)
 
 Ecclesia is a tool for participatory democracy. 
 The project is in a early development phase.
