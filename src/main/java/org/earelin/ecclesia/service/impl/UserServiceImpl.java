@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.repository.UserRepository;
 import org.earelin.ecclesia.service.dto.UserDTO;
+import org.earelin.ecclesia.service.exception.UserNotFoundException;
 
 /**
  * User service implementation
@@ -51,6 +52,33 @@ public class UserServiceImpl implements UserService {
         return mapper.map(user, UserDTO.class);
     }
 
+    @Override
+    public void update(UserDTO user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void remove(long id) {
+        User user = repository.get(id);
+        
+        if (user == null) {
+            throw new UserNotFoundException(id);
+        }
+        
+        repository.remove(user);
+    }
+
+    @Override
+    public UserDTO get(long id) {
+        User user = repository.get(id);
+        
+        if (user == null) {
+            throw new UserNotFoundException(id);
+        }
+        
+        return mapper.map(user, UserDTO.class);
+    }
+    
     @Override
     public List<UserDTO> list() {
         throw new UnsupportedOperationException("Not supported yet.");

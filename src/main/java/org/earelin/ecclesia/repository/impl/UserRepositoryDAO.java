@@ -5,7 +5,6 @@ import org.earelin.ecclesia.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.earelin.ecclesia.repository.UserRepository;
@@ -65,6 +64,12 @@ public class UserRepositoryDAO implements UserRepository {
                 .createQuery("from User as u where u.username = :username")
                 .setString("username", username)
                 .uniqueResult();
+    }
+
+    @Override
+    public User get(long id) {
+        return (User) currentSession()
+                .get(User.class, id);
     }
 
 }

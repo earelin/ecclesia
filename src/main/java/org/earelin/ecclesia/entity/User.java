@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.earelin.ecclesia.entity.resource.ManagedImage;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Users of the system
@@ -23,8 +25,12 @@ public class User {
     @Id
     @GeneratedValue
     private long id;
+    @NotBlank
+    @Column(unique=true)
     private String username;
+    @NotBlank
     private String password;
+    @Email
     private String email;
     private Date created;
     private Date updated;
