@@ -17,4 +17,4 @@ The main objective of the project is to improve NGO effectiveness and social imp
 
 ### Code coverage evolution
 
-(https://codecov.io/github/earelin/ecclesia/branch.svg?branch=master)
+![Coverage timeline](https://codecov.io/github/earelin/ecclesia/branch.svg?branch=master)
