@@ -19,8 +19,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:/spring-test-config.xml"})
 public class UserDetailsServiceIntegrationTest {
     
-    private static final String USER_NAME = "testing user";
-    private static final String USER_EMAIL = "user@localhost.local";
+    private static final String USER_NAME = "testing get existing user";
+    private static final String USER_EMAIL = "user1@localhost.local";
     private static final String USER_PASSWORD = "secret";
     
     @Autowired
@@ -29,7 +29,6 @@ public class UserDetailsServiceIntegrationTest {
     @Autowired
     private UserDetailsService instance;
     
-    @Ignore
     @Test
     public void getExistingUser() {
         UserDTO user = userService.register(USER_NAME, USER_EMAIL, USER_PASSWORD);

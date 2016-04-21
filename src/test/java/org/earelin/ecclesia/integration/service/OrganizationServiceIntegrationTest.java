@@ -1,6 +1,7 @@
 package org.earelin.ecclesia.integration.service;
 
 import java.util.Date;
+import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.dto.OrganizationDTO;

@@ -5,6 +5,7 @@ import javax.validation.ConstraintViolationException;
 import org.earelin.ecclesia.service.UserService;
 import org.earelin.ecclesia.service.dto.UserDTO;
 import org.earelin.ecclesia.service.exception.UserNotFoundException;
+import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -21,7 +22,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:/spring-test-config.xml"})
 public class UserServiceIntegrationTest {
     
-    private static final String USER_NAME = "testing user";
     private static final String USER_EMAIL = "user@localhost.local";
     private static final String USER_PASSWORD = "secret";
     
@@ -33,8 +33,10 @@ public class UserServiceIntegrationTest {
     
     @Test
     public void registerNewUser() {
+        String username = "test user register";
+        
         Date beforeRegister = new Date();
-        UserDTO user = instance.register(USER_NAME, USER_EMAIL, USER_PASSWORD);
+        UserDTO user = instance.register(username, USER_EMAIL, USER_PASSWORD);
         Date afterRegister = new Date();
         
         assertNotSame("Registered user id should not be 0", 0, user.getId());
@@ -44,42 +46,39 @@ public class UserServiceIntegrationTest {
         assertEquals("Registered user updated field should have the same value as created field", 
                 user.getCreated(), user.getUpdated());
         assertEquals("Registered user name should be equals to submited", 
-                USER_NAME, user.getUsername());
+                username, user.getUsername());
         assertEquals("Registered user email should be equals to submited", 
                 USER_EMAIL, user.getEmail());
         assertTrue("Registered user encrypted password should match with submited",
                 passwordEncoder.matches(USER_PASSWORD, user.getPassword()));
     }
     
-    @Ignore
     @Test(expected = ConstraintViolationException.class)
     public void newUserShouldHaveNotBlankName() {
         instance.register("  ", USER_EMAIL, USER_PASSWORD);
     }
     
-    @Ignore
     @Test(expected = ConstraintViolationException.class)
     public void newUserShouldHaveNotBlankEmail() {
-        instance.register("  ", USER_EMAIL, USER_PASSWORD);
+        instance.register("test register blank email", "  ", USER_PASSWORD);
     }
     
-    @Ignore
     @Test(expected = ConstraintViolationException.class)
     public void newUserShouldHaveValidEmail() {
-        instance.register(USER_NAME, "adsfad", USER_PASSWORD);
+        instance.register("test register valid email", "adsfad", USER_PASSWORD);
     }
     
     @Ignore
     @Test(expected = ConstraintViolationException.class)
     public void newUserShouldHaveNotBlankPassword() {
-        instance.register(USER_NAME, USER_EMAIL, "  ");
+        instance.register("test register blank password", USER_EMAIL, "  ");
     }
     
-    @Ignore
     @Test
     public void getExistingUser() {
-         UserDTO user = instance.register(USER_NAME, USER_EMAIL, USER_PASSWORD);         
-         user = instance.get(user.getId());
+         UserDTO user = instance.register("test get existing user", USER_EMAIL, USER_PASSWORD);         
+         UserDTO gettedUser = instance.get(user.getId());
+         assertThat(user, samePropertyValuesAs(gettedUser));
     }
     
     @Test(expected = UserNotFoundException.class)
@@ -87,33 +86,47 @@ public class UserServiceIntegrationTest {
         instance.get(100000);
     }
     
-    @Ignore
     @Test
     public void updatingExistingUser() {
+        UserDTO user = instance.register("test updating existing user", USER_EMAIL, USER_PASSWORD);         
+        String updatedEmail = "updated.user@localhost.local";
+        user.setEmail(updatedEmail);
+        Date beforeUpdate = new Date();
+        instance.update(user);
+        Date afterUpdate = new Date();
         
+        assertTrue("Updated organization updated field should have current date", 
+                user.getUpdated().compareTo(beforeUpdate) >= 0
+                && user.getUpdated().compareTo(afterUpdate) <= 0);
+        assertEquals(updatedEmail, user.getEmail());
     }
     
-    @Ignore
-    @Test
+    @Test(expected = UserNotFoundException.class)
     public void updatingNotExistingUser() {
-        
+        UserDTO user = new UserDTO();
+        user.setId(100000);
+        user.setUsername("test updating not existing user");
+        user.setEmail("updated.not.existing.user@localhost.local");
+        instance.update(user);
     }
-    
-    @Ignore
+
     @Test(expected = ConstraintViolationException.class)
     public void updatedUserShouldHaveNotBlankName() {
-
+        UserDTO user = instance.register("test updating user blank name", USER_EMAIL, USER_PASSWORD);
+        user.setUsername("   ");
+        instance.update(user);
     }
-    
-    @Ignore
-    @Test(expected = ConstraintViolationException.class)
-    public void updatedUserShouldHaveValidEmail() {
 
+    @Test(expected = org.hibernate.exception.ConstraintViolationException.class)
+    public void updatedUserShouldHaveValidEmail() {
+        UserDTO user = instance.register("test updating user blank name", USER_EMAIL, USER_PASSWORD);
+        user.setEmail("sadfasd");
+        instance.update(user);
     }
     
     @Test(expected = UserNotFoundException.class)
     public void removeExistingUser() {
-        UserDTO user = instance.register(USER_NAME, USER_EMAIL, USER_PASSWORD);
+        UserDTO user = instance.register("test remove existing user", USER_EMAIL, USER_PASSWORD);
         long userId = user.getId();
         instance.remove(userId);
         instance.get(userId);

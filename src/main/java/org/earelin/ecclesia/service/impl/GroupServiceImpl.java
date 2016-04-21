@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.repository.GroupRepository;
 import org.earelin.ecclesia.service.dto.GroupDTO;
 import org.earelin.ecclesia.service.exception.GroupNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  */
 @Service
+@Transactional
 public class GroupServiceImpl implements GroupService {
     
     private final GroupRepository dao;

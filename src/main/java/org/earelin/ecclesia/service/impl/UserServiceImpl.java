@@ -1,5 +1,7 @@
 package org.earelin.ecclesia.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import org.dozer.Mapper;
@@ -11,11 +13,13 @@ import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.repository.UserRepository;
 import org.earelin.ecclesia.service.dto.UserDTO;
 import org.earelin.ecclesia.service.exception.UserNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * User service implementation
  */
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     
     private final UserRepository repository;
@@ -47,6 +51,7 @@ public class UserServiceImpl implements UserService {
         user.setUpdated(now);
         user.setPassword(passwordEncoder.encode(password));
         user.setEnabled(true);
+        user.setSystemRoles(new ArrayList(Arrays.asList("USER_ROLE")));
         
         repository.add(user);
         
@@ -54,8 +59,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(UserDTO user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(UserDTO userDTO) {
+        long userId = userDTO.getId();
+        User user = repository.get(userId);
+        
+        if (user == null) {
+            throw new UserNotFoundException(userId);
+        }
+        
+        userDTO.setUpdated(new Date());
+        mapper.map(userDTO, user);
+        repository.update(user);
     }
 
     @Override

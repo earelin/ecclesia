@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.repository.OrganizationReponsitory;
 import org.earelin.ecclesia.service.dto.OrganizationDTO;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Organization service implementation
  */
 @Service
+@Transactional
 public class OrganizationServiceImpl implements OrganizationService {
     
     private final OrganizationReponsitory dao;
