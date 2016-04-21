@@ -81,6 +81,7 @@ buildscript {
 
 test {
   include 'org/earelin/ecclesia/integration/**'
+  include 'org/earelin/ecclesia/unit/**'
   exclude 'org/earelin/ecclesia/bdd/**'
 }
 

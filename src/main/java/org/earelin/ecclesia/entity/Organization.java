@@ -26,12 +26,6 @@ public class Organization {
     private Date created;
     private Date updated;
     
-    public Organization() {}
-    
-    public Organization(String name) {
-        this.name = name;
-    }
-    
     public boolean equals(Object o) {
         if (o instanceof Organization) {
             if (((Organization) o).getId() == this.getId()) {

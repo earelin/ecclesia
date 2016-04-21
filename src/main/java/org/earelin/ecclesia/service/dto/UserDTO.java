@@ -17,7 +17,6 @@ public class UserDTO {
     private Date updated;
     private Date lastLogin;
     private boolean enabled;
-    private boolean admin;
     private ManagedImageDTO avatar;
     private List<String> systemRoles;
 
@@ -83,14 +82,6 @@ public class UserDTO {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
     }
 
     public ManagedImageDTO getAvatar() {

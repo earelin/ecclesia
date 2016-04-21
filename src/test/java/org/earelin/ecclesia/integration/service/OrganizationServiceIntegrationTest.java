@@ -1,14 +1,12 @@
 package org.earelin.ecclesia.integration.service;
 
 import java.util.Date;
-import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.dto.OrganizationDTO;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-test-config.xml"})
-@Transactional
 public class OrganizationServiceIntegrationTest {
     
     private static final String ORGANIZATION_NAME = "Testing organization";
@@ -74,13 +71,20 @@ public class OrganizationServiceIntegrationTest {
         assertEquals(updatedName, organization.getName());
     }
 
-    @Ignore
     @Test(expected = ConstraintViolationException.class)
     public void updatedOrganizationShouldHaveNotBlankName() {
         OrganizationDTO organization = new OrganizationDTO();
         organization.setName(ORGANIZATION_NAME);
         instance.add(organization);    
         organization.setName("   ");
+        instance.update(organization);
+    }
+    
+    @Test(expected = OrganizationNotFoundException.class)
+    public void updateANoExistingOrganization() {
+        OrganizationDTO organization = new OrganizationDTO();
+        organization.setId(100000);
+        organization.setName(ORGANIZATION_NAME);
         instance.update(organization);
     }
 
@@ -94,6 +98,11 @@ public class OrganizationServiceIntegrationTest {
         instance.remove(organizationId);
         
         instance.get(organizationId);
+    }
+    
+    @Test(expected = OrganizationNotFoundException.class)
+    public void removeNoExistingOrganization() {
+        instance.remove(100000);
     }
 
     @Test
