@@ -68,19 +68,19 @@ public class Organization {
     }
     
     public Date getCreated() {
-        return created != null ? new Date(created.getTime()) : null;
+        return created;
     }
 
     public void setCreated(Date created) {
-        this.created = created != null ? new Date(created.getTime()) : null;
+        this.created = created;
     }
 
     public Date getUpdated() {
-        return updated != null ? new Date(updated.getTime()) : null;
+        return updated;
     }
 
     public void setUpdated(Date updated) {
-        this.updated = updated != null ? new Date(updated.getTime()) : null;
+        this.updated = updated;
     }
     
 }
