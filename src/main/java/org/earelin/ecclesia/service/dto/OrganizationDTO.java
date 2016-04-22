@@ -13,22 +13,30 @@ public class OrganizationDTO {
     private ManagedFileDTO logo;
     private Date created;
     private Date updated;
-    
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof OrganizationDTO) {
-            if (((OrganizationDTO) o).getId() == this.getId()) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 3;
+        hash = 41 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OrganizationDTO other = (OrganizationDTO) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
     }
 
     public long getId() {
@@ -56,19 +64,19 @@ public class OrganizationDTO {
     }
 
     public Date getCreated() {
-        return created != null ? new Date(created.getTime()) : null;
+        return created;
     }
 
     public void setCreated(Date created) {
-        this.created = created != null ? new Date(created.getTime()) : null;
+        this.created = created;
     }
 
     public Date getUpdated() {
-        return updated != null ? new Date(updated.getTime()) : null;
+        return updated;
     }
 
     public void setUpdated(Date updated) {
-        this.updated = updated != null ? new Date(updated.getTime()) : null;
+        this.updated = updated;
     }
     
 }
