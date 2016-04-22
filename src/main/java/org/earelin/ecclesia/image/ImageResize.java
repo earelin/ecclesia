@@ -11,6 +11,14 @@ public class ImageResize implements ImageProcessor {
     private int height;
     private boolean upscale;
 
+    public ImageResize() {}
+    
+    public ImageResize(int width, int height, boolean upscale) {
+        this.width = width;
+        this.height = height;
+        this.upscale = upscale;
+    }
+
     @Override
     public BufferedImage process(BufferedImage image) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ImportResource("classpath:/spring-security-config.xml")
 @EnableTransactionManagement
+@EnableAsync
 @PropertySource("classpath:/default.properties")
 @PropertySource(value = "file:${ECCLESIA_CONFIG_FILE}", ignoreResourceNotFound = true)
 @ComponentScan(basePackages="org.earelin.ecclesia.service,org.earelin.ecclesia.repository,org.earelin.ecclesia.security")

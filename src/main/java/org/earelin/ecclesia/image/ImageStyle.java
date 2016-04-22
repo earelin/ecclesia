@@ -9,8 +9,14 @@ import java.util.List;
  */
 public class ImageStyle {
     
-    private String id;
+    private String key;
     private List<ImageProcessor> processors = new ArrayList();
+    
+    public ImageStyle() {}
+    
+    public ImageStyle(String key) {
+        this.key = key;
+    }
 
     public void addProcessor(ImageProcessor processor) {
         this.processors.add(processor);
@@ -20,12 +26,12 @@ public class ImageStyle {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public String getId() {
-        return id;
+    public String getKey() {
+        return key;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setKey(String key) {
+        this.key = key;
     }
     
 }
