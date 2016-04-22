@@ -1,7 +1,7 @@
 package org.earelin.ecclesia.service.dto;
 
 import java.util.Date;
-import org.earelin.ecclesia.service.dto.resource.ManagedImageDTO;
+import org.earelin.ecclesia.service.dto.resource.ManagedFileDTO;
 
 /**
  * Organization data transfer object
@@ -10,7 +10,7 @@ public class OrganizationDTO {
     
     private long id;
     private String name;
-    private ManagedImageDTO logo;
+    private ManagedFileDTO logo;
     private Date created;
     private Date updated;
     
@@ -47,28 +47,28 @@ public class OrganizationDTO {
         this.name = name;
     }
 
-    public ManagedImageDTO getLogo() {
+    public ManagedFileDTO getLogo() {
         return logo;
     }
 
-    public void setLogo(ManagedImageDTO logo) {
+    public void setLogo(ManagedFileDTO logo) {
         this.logo = logo;
     }
 
     public Date getCreated() {
-        return created;
+        return created != null ? new Date(created.getTime()) : null;
     }
 
     public void setCreated(Date created) {
-        this.created = created;
+        this.created = created != null ? new Date(created.getTime()) : null;
     }
 
     public Date getUpdated() {
-        return updated;
+        return updated != null ? new Date(updated.getTime()) : null;
     }
 
     public void setUpdated(Date updated) {
-        this.updated = updated;
+        this.updated = updated != null ? new Date(updated.getTime()) : null;
     }
     
 }

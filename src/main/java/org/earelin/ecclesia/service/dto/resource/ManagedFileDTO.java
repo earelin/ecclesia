@@ -3,6 +3,6 @@ package org.earelin.ecclesia.service.dto.resource;
 /**
  *
  */
-public class ManagedImageDTO {
+public class ManagedFileDTO {
 
 }

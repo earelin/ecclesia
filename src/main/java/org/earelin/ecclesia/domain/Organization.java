@@ -26,6 +26,7 @@ public class Organization {
     private Date created;
     private Date updated;
     
+    @Override
     public boolean equals(Object o) {
         if (o instanceof Organization) {
             if (((Organization) o).getId() == this.getId()) {
@@ -33,6 +34,13 @@ public class Organization {
             }
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
     }
 
     public long getId() {
@@ -60,19 +68,19 @@ public class Organization {
     }
     
     public Date getCreated() {
-        return created;
+        return created != null ? new Date(created.getTime()) : null;
     }
 
     public void setCreated(Date created) {
-        this.created = created;
+        this.created = created != null ? new Date(created.getTime()) : null;
     }
 
     public Date getUpdated() {
-        return updated;
+        return updated != null ? new Date(updated.getTime()) : null;
     }
 
     public void setUpdated(Date updated) {
-        this.updated = updated;
+        this.updated = updated != null ? new Date(updated.getTime()) : null;
     }
     
 }

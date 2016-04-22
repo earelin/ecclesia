@@ -84,19 +84,19 @@ public class User {
     }
 
     public Date getCreated() {
-        return created;
+        return created != null ? new Date(created.getTime()) : null;
     }
 
     public void setCreated(Date created) {
-        this.created = created;
+        this.created = created != null ? new Date(created.getTime()) : null;
     }
 
     public Date getUpdated() {
-        return updated;
+        return updated != null ? new Date(updated.getTime()) : null;
     }
 
     public void setUpdated(Date updated) {
-        this.updated = updated;
+        this.updated = updated != null ? new Date(updated.getTime()) : null;
     }
 
     public Date getLastLogin() {

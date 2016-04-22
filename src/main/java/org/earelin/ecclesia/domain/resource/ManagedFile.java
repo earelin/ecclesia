@@ -40,11 +40,11 @@ public class ManagedFile {
     }
 
     public Date getCreated() {
-        return created;
+        return created != null ? new Date(created.getTime()) : null;
     }
 
     public void setCreated(Date created) {
-        this.created = created;
+        this.created = created != null ? new Date(created.getTime()) : null;
     }
 
     public String getUri() {
