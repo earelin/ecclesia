@@ -83,6 +83,7 @@ public class UserServiceImpl implements UserService {
         repository.remove(user);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public UserDTO get(long id) {
         User user = repository.get(id);
@@ -94,11 +95,13 @@ public class UserServiceImpl implements UserService {
         return mapper.map(user, UserDTO.class);
     }
     
+    @Transactional(readOnly = true)
     @Override
     public List<UserDTO> list() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<UserDTO> list(int limit, int offset) {
         throw new UnsupportedOperationException("Not supported yet.");

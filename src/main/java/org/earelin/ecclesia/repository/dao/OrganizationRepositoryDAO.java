@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.earelin.ecclesia.repository.OrganizationReponsitory;
 
 /**
- *
+ * Organization data access object
  */
 @Repository
 public class OrganizationRepositoryDAO implements OrganizationReponsitory {

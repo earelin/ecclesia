@@ -65,6 +65,7 @@ public class GroupServiceImpl implements GroupService {
         dao.remove(group);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public GroupDTO get(long id) {
         Group group = dao.get(id);
@@ -76,11 +77,13 @@ public class GroupServiceImpl implements GroupService {
         return mapper.map(group, GroupDTO.class);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<GroupDTO> list() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<GroupDTO> list(int limit, int offset) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

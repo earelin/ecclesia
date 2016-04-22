@@ -65,6 +65,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         dao.remove(organization);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public OrganizationDTO get(long id) {
         Organization organization = dao.get(id);
@@ -76,11 +77,13 @@ public class OrganizationServiceImpl implements OrganizationService {
         return mapper.map(organization, OrganizationDTO.class);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<OrganizationDTO> list() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<OrganizationDTO> list(int limit, int offset) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

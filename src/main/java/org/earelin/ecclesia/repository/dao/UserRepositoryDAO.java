@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.earelin.ecclesia.repository.UserRepository;
 
 /**
- *
+ * User data access object
  */
 @Repository
 public class UserRepositoryDAO implements UserRepository {

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.earelin.ecclesia.repository.OrganizationRoleRepository;
 
 /**
- *
+ * Organization role data access object
  */
 @Repository
 public class OrganizationRoleRepositoryDAO implements OrganizationRoleRepository {
@@ -38,6 +38,11 @@ public class OrganizationRoleRepositoryDAO implements OrganizationRoleRepository
     @Override
     public void remove(OrganizationRole role) {
         currentSession().delete(role);
+    }
+
+    @Override
+    public OrganizationRole get(long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

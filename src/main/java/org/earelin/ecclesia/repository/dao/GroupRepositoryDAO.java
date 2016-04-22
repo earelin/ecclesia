@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.earelin.ecclesia.repository.GroupRepository;
 
 /**
- *
+ * Group data access object
  */
 @Repository
 public class GroupRepositoryDAO implements GroupRepository {
