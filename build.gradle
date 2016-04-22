@@ -1,8 +1,10 @@
 apply plugin: 'war'
+apply plugin: 'findbugs'
 apply plugin: 'jacoco'
 apply plugin: 'java'
 apply plugin: 'jetty'
 apply plugin: 'net.serenity-bdd.aggregator'
+apply plugin: 'info.solidsoft.pitest'
 
 // JDK 8
 sourceCompatibility = 1.8
@@ -76,6 +78,7 @@ buildscript {
   
   dependencies {
     classpath 'net.serenity-bdd:serenity-gradle-plugin:1.+'
+    classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.+'
   }
 }
 
@@ -114,3 +117,21 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+findbugs {
+  effort = 'max'
+  ignoreFailures = true
+}
+
+pitest {
+    targetClasses = ['org.earelin.ecclesia.*']
+    threads = 4
+    outputFormats = ['XML', 'HTML']
+}
