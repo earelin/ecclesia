@@ -119,7 +119,7 @@ public class OrganizationServiceIntegrationTest {
     
     @Test(expected = OrganizationNotFoundException.class)
     public void getNotExistingOrganization() {
-        OrganizationDTO organization = instance.get(100000);        
+        instance.get(100000);        
     }
     
 }
