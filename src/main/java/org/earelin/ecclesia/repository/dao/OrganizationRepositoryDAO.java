@@ -13,7 +13,6 @@ import org.earelin.ecclesia.repository.OrganizationReponsitory;
  *
  */
 @Repository
-@Transactional
 public class OrganizationRepositoryDAO implements OrganizationReponsitory {
 
     private final SessionFactory sessionFactory;

@@ -14,7 +14,6 @@ import org.earelin.ecclesia.repository.GroupRepository;
  *
  */
 @Repository
-@Transactional
 public class GroupRepositoryDAO implements GroupRepository {
     
     private final SessionFactory sessionFactory;

@@ -12,7 +12,6 @@ import org.earelin.ecclesia.repository.OrganizationRoleRepository;
  *
  */
 @Repository
-@Transactional
 public class OrganizationRoleRepositoryDAO implements OrganizationRoleRepository {
     
     private final SessionFactory sessionFactory;

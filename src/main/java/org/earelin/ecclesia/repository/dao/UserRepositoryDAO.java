@@ -13,7 +13,6 @@ import org.earelin.ecclesia.repository.UserRepository;
  *
  */
 @Repository
-@Transactional
 public class UserRepositoryDAO implements UserRepository {
     
     private final SessionFactory sessionFactory;
