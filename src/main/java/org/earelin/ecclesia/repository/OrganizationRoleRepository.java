@@ -5,7 +5,7 @@
  */
 package org.earelin.ecclesia.repository;
 
-import org.earelin.ecclesia.entity.OrganizationRole;
+import org.earelin.ecclesia.domain.OrganizationRole;
 
 /**
  *

@@ -1,5 +1,6 @@
-package org.earelin.ecclesia.entity;
+package org.earelin.ecclesia.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,16 +12,16 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="UserGroups")
-public class UserGroup {
+@Table(name="UserOrganizations")
+public class UserOrganization {
     
     @Id
     @GeneratedValue
     private long id;
     @ManyToOne
-    private GroupRole role;
+    private OrganizationRole role;
     @ManyToOne
-    private Group group;
+    private Organization organization;
     @ManyToOne
     private User user;
     private Date created;
@@ -33,20 +34,20 @@ public class UserGroup {
         this.id = id;
     }
 
-    public GroupRole getRole() {
+    public OrganizationRole getRole() {
         return role;
     }
 
-    public void setRole(GroupRole role) {
+    public void setRole(OrganizationRole role) {
         this.role = role;
     }
 
-    public Group getGroup() {
-        return group;
+    public Organization getOrganization() {
+        return organization;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 
     public User getUser() {
@@ -64,4 +65,5 @@ public class UserGroup {
     public void setCreated(Date created) {
         this.created = created;
     }
+    
 }

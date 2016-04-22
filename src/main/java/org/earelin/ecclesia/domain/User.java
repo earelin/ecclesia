@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.entity;
+package org.earelin.ecclesia.domain;
 
 import java.util.Date;
 import java.util.List;
@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.earelin.ecclesia.entity.resource.ManagedImage;
+import org.earelin.ecclesia.domain.resource.ManagedFile;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -37,7 +37,7 @@ public class User {
     private Date lastLogin;
     private boolean enabled;
     @OneToOne
-    private ManagedImage avatar;
+    private ManagedFile avatar;
     @ElementCollection
     @CollectionTable(name="SystemRoles", joinColumns=@JoinColumn(name="user_id"))
     @Column(name="role")
@@ -107,11 +107,11 @@ public class User {
         this.lastLogin = lastLogin;
     }
 
-    public ManagedImage getAvatar() {
+    public ManagedFile getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(ManagedImage avatar) {
+    public void setAvatar(ManagedFile avatar) {
         this.avatar = avatar;
     }
 

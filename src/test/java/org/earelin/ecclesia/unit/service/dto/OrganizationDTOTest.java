@@ -34,7 +34,7 @@ public class OrganizationDTOTest {
         OrganizationDTO organization = new OrganizationDTO();
         organization.setId(1);
         GroupDTO group = new GroupDTO();
-        assertFalse("Organizations with different id should not be equals",
+        assertFalse("Organizations should not be equal to another class object",
                 organization.equals(group));
     }
 }

@@ -3,7 +3,7 @@ package org.earelin.ecclesia.service.impl;
 import java.util.Date;
 import java.util.List;
 import org.dozer.Mapper;
-import org.earelin.ecclesia.entity.Organization;
+import org.earelin.ecclesia.domain.Organization;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

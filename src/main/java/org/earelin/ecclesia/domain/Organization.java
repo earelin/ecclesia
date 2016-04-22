@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.entity;
+package org.earelin.ecclesia.domain;
 
 import java.util.Date;
 import javax.persistence.Entity;
@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.earelin.ecclesia.entity.resource.ManagedImage;
+import org.earelin.ecclesia.domain.resource.ManagedFile;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
@@ -22,7 +22,7 @@ public class Organization {
     @NotBlank
     private String name;
     @OneToOne
-    private ManagedImage logo;
+    private ManagedFile logo;
     private Date created;
     private Date updated;
     
@@ -51,11 +51,11 @@ public class Organization {
         this.name = name;
     }
 
-    public ManagedImage getLogo() {
+    public ManagedFile getLogo() {
         return logo;
     }
 
-    public void setLogo(ManagedImage logo) {
+    public void setLogo(ManagedFile logo) {
         this.logo = logo;
     }
     

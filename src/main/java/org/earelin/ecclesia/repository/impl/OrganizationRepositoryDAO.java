@@ -1,7 +1,7 @@
 package org.earelin.ecclesia.repository.impl;
 
 import java.util.List;
-import org.earelin.ecclesia.entity.Organization;
+import org.earelin.ecclesia.domain.Organization;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

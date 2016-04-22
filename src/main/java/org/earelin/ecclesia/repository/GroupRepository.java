@@ -6,8 +6,8 @@
 package org.earelin.ecclesia.repository;
 
 import java.util.List;
-import org.earelin.ecclesia.entity.Group;
-import org.earelin.ecclesia.entity.Organization;
+import org.earelin.ecclesia.domain.Group;
+import org.earelin.ecclesia.domain.Organization;
 
 /**
  *

@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.entity;
+package org.earelin.ecclesia.domain;
 
 import java.util.Date;
 import javax.persistence.Entity;

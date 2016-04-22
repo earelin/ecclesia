@@ -33,7 +33,7 @@
           hibernate.format_sql=true
       </value>
     </property>
-    <property name="packagesToScan" value="org.earelin.ecclesia.entity" />
+    <property name="packagesToScan" value="org.earelin.ecclesia.domain" />
   </bean>
   
   <tx:annotation-driven />

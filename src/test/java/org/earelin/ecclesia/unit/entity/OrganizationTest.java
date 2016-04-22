@@ -1,7 +1,7 @@
 package org.earelin.ecclesia.unit.entity;
 
-import org.earelin.ecclesia.entity.Group;
-import org.earelin.ecclesia.entity.Organization;
+import org.earelin.ecclesia.domain.Group;
+import org.earelin.ecclesia.domain.Organization;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -35,7 +35,7 @@ public class OrganizationTest {
         Organization organization = new Organization();
         organization.setId(1);
         Group group = new Group();
-        assertFalse("Organizations with different id should not be equals",
+        assertFalse("Organizations should not be equal to another class object",
                 organization.equals(group));
     }
     

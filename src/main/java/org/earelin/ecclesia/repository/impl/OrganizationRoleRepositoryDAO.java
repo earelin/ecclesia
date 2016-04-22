@@ -1,6 +1,6 @@
 package org.earelin.ecclesia.repository.impl;
 
-import org.earelin.ecclesia.entity.OrganizationRole;
+import org.earelin.ecclesia.domain.OrganizationRole;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

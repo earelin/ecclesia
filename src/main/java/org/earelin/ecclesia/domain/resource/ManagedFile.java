@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.entity.resource;
+package org.earelin.ecclesia.domain.resource;
 
 import java.util.Date;
 import javax.persistence.Entity;
@@ -23,6 +23,14 @@ public class ManagedFile {
     private Date created;
     private String uri;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
     public String getMime() {
         return mime;
     }
@@ -37,14 +45,6 @@ public class ManagedFile {
 
     public void setCreated(Date created) {
         this.created = created;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getUri() {

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import org.dozer.Mapper;
-import org.earelin.ecclesia.entity.User;
+import org.earelin.ecclesia.domain.User;
 import org.earelin.ecclesia.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

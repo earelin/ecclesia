@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.entity;
+package org.earelin.ecclesia.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

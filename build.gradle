@@ -51,8 +51,11 @@ dependencies {
   
   // object conversion
   compile 'net.sf.dozer:dozer:5.+'
+  
+  // image transformation
+  compile 'net.coobird:thumbnailator:0.4.8'
 	
-	//include in compile only, exclude in the war
+	// include in compile only, exclude in the war
 	providedCompile 'javax.servlet:servlet-api:2.5'
 	providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1'
   

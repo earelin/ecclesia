@@ -1,6 +1,6 @@
 package org.earelin.ecclesia.web;
 
-import org.earelin.ecclesia.entity.Organization;
+import org.earelin.ecclesia.domain.Organization;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

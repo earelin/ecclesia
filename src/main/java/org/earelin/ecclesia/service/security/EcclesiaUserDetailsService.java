@@ -1,7 +1,7 @@
 package org.earelin.ecclesia.service.security;
 
 import org.dozer.Mapper;
-import org.earelin.ecclesia.entity.User;
+import org.earelin.ecclesia.domain.User;
 import org.earelin.ecclesia.repository.UserRepository;
 import org.earelin.ecclesia.service.dto.security.UserDetailsDTO;
 import org.springframework.beans.factory.annotation.Autowired;

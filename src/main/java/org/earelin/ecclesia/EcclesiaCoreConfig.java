@@ -69,7 +69,7 @@ public class EcclesiaCoreConfig {
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
-        sessionFactory.setPackagesToScan(new String[] {"org.earelin.ecclesia.entity"});
+        sessionFactory.setPackagesToScan(new String[] {"org.earelin.ecclesia.domain"});
         sessionFactory.setHibernateProperties(new Properties() {
             {
                 setProperty("hibernate.dialect", hibernateDialect);
