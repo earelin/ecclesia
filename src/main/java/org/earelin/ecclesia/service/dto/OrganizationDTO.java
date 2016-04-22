@@ -14,6 +14,7 @@ public class OrganizationDTO {
     private Date created;
     private Date updated;
     
+    @Override
     public boolean equals(Object o) {
         if (o instanceof OrganizationDTO) {
             if (((OrganizationDTO) o).getId() == this.getId()) {
@@ -21,6 +22,13 @@ public class OrganizationDTO {
             }
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
     }
 
     public long getId() {

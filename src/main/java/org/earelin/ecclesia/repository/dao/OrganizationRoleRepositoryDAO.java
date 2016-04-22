@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.repository.impl;
+package org.earelin.ecclesia.repository.dao;
 
 import org.earelin.ecclesia.domain.OrganizationRole;
 import org.hibernate.Session;
