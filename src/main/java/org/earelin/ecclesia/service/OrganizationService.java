@@ -7,10 +7,10 @@ import org.earelin.ecclesia.service.dto.OrganizationDTO;
  * Organizations service
  */
 public interface OrganizationService {
-    public void add(OrganizationDTO organization);
-    public void update(OrganizationDTO organization);
-    public void remove(long id);
-    public OrganizationDTO get(long id);
-    public List<OrganizationDTO> list();
-    public List<OrganizationDTO> list(int limit, int offset);
+    void add(OrganizationDTO organization);
+    void update(OrganizationDTO organization);
+    void remove(long id);
+    OrganizationDTO get(long id);
+    List<OrganizationDTO> list();
+    List<OrganizationDTO> list(int limit, int offset);
 }

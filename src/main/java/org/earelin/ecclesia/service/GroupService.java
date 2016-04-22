@@ -7,10 +7,10 @@ import org.earelin.ecclesia.service.dto.GroupDTO;
  * 
  */
 public interface GroupService {
-    public void add(GroupDTO group);
-    public void update(GroupDTO group);
-    public void remove(long id);
-    public GroupDTO get(long id);
-    public List<GroupDTO> list();
-    public List<GroupDTO> list(int limit, int offset);
+    void add(GroupDTO group);
+    void update(GroupDTO group);
+    void remove(long id);
+    GroupDTO get(long id);
+    List<GroupDTO> list();
+    List<GroupDTO> list(int limit, int offset);
 }
