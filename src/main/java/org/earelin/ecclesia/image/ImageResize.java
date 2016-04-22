@@ -32,7 +32,7 @@ public class ImageResize implements ImageProcessor {
         this.height = height;
     }
 
-    public boolean isUpscale() {
+    public boolean canUpscale() {
         return upscale;
     }
 
