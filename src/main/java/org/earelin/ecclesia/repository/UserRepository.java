@@ -13,11 +13,11 @@ import org.earelin.ecclesia.domain.User;
  * @author xcarriba
  */
 public interface UserRepository {
-    public void add(User user);
-    public void update(User user);
-    public void remove(User user);
-    public User get(long id);
-    public List<User> list();
-    public List<User> list(int limit, int offset);
-    public User loadUserByUsername(String string);
+    void add(User user);
+    void update(User user);
+    void remove(User user);
+    User get(long id);
+    List<User> list();
+    List<User> list(int limit, int offset);
+    User loadUserByUsername(String string);
 }

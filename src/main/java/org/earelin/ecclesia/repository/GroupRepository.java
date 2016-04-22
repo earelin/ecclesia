@@ -14,10 +14,10 @@ import org.earelin.ecclesia.domain.Organization;
  * @author xcarriba
  */
 public interface GroupRepository {
-    public Group get(long id);
-    public void add(Group group);
-    public void update(Group group);
-    public void remove(Group group);   
-    public List<Group> list(Organization organization);
-    public List<Group> list(Organization organization, int limit, int offset);
+    Group get(long id);
+    void add(Group group);
+    void update(Group group);
+    void remove(Group group);   
+    List<Group> list(Organization organization);
+    List<Group> list(Organization organization, int limit, int offset);
 }

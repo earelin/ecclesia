@@ -12,7 +12,7 @@ import org.earelin.ecclesia.domain.OrganizationRole;
  * @author xcarriba
  */
 public interface OrganizationRoleRepository {
-    public void add(OrganizationRole role);
-    public void update(OrganizationRole role);
-    public void remove(OrganizationRole role);
+    void add(OrganizationRole role);
+    void update(OrganizationRole role);
+    void remove(OrganizationRole role);
 }
