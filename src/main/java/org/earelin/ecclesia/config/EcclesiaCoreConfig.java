@@ -60,6 +60,9 @@ public class EcclesiaCoreConfig {
     @Value("${public.files.folder}")
     private String publicFilesFolder;
     
+    @Value("${public.files.url}")
+    private String publicFilesURL;
+    
     @Bean
     public Mapper mapper() {
         return new DozerBeanMapper();
@@ -67,7 +70,8 @@ public class EcclesiaCoreConfig {
     
     @Bean
     public FileService fileService() {
-        return new FileServiceImpl(privateFilesFolder, publicFilesFolder);
+        return new FileServiceImpl(privateFilesFolder, publicFilesFolder,
+                publicFilesURL);
     }
     
     @Bean

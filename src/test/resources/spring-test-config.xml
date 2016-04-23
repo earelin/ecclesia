@@ -47,6 +47,7 @@
   <bean id="fileService" class="org.earelin.ecclesia.service.impl.resource.FileServiceImpl">
     <constructor-arg value="file:///tmp/ecclesia_folder/private" />
 		<constructor-arg value="file:///tmp/ecclesia_folder/public" />
+    <constructor-arg value="http://localhost:8080/ecclesia/cdn" />
   </bean>
   
   <bean id="transactionManager"

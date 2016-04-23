@@ -10,10 +10,13 @@ public class FileServiceImpl implements FileService {
     
     private final String privateFileFolder;
     private final String publicFileFolder;
+    private final String publicFilesURL;
 
-    public FileServiceImpl(String privateFileFolder, String publicFileFolder) {
+    public FileServiceImpl(String privateFileFolder, String publicFileFolder,
+            String publicFilesURL) {
         this.privateFileFolder = privateFileFolder;
         this.publicFileFolder = publicFileFolder;
+        this.publicFilesURL = publicFilesURL;
     }
 
     @Override
@@ -22,7 +25,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public String getFileUrl(String uri) {
+    public String getFileUrl(String url) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
