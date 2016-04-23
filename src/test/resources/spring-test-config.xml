@@ -18,8 +18,8 @@
  
 	<context:component-scan base-package="org.earelin.ecclesia.service,org.earelin.ecclesia.repository,org.earelin.ecclesia.security" />
   
-  <task:executor id="myexecutor" pool-size="5"  />
-  <task:annotation-driven executor="myexecutor"/>
+  <task:executor id="myexecutor" pool-size="5" />
+  <task:annotation-driven executor="myexecutor" />
   
   <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
     <property name="driverClassName" value="org.h2.Driver" />
@@ -51,6 +51,6 @@
   
   <bean id="org.dozer.Mapper" class="org.dozer.DozerBeanMapper" />
   
-  <import resource="spring-test-security-config.xml"/>
+  <import resource="spring-test-security-config.xml" />
 
 </beans>
