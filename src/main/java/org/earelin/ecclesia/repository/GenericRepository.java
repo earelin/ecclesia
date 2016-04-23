@@ -6,9 +6,10 @@ import java.util.List;
  * Generic dao
  */
 public interface GenericRepository<E> {
-    public void add(E entity) ;
-    public void update(E entity) ;
-    public void remove(E entity);
-    public E get(long id);
-    public List<E> findAll();
+    void add(E entity) ;
+    void update(E entity) ;
+    void remove(E entity);
+    boolean exists(long id);
+    E get(long id);
+    List<E> findAll();
 }

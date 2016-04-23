@@ -49,6 +49,12 @@ public abstract class GenericDaoImpl<E> implements GenericRepository<E> {
     }
 
     @Override
+    public boolean exists(long id) {
+        E entity = (E) currentSession().get(daoType, id);
+        return entity != null;
+    }
+
+    @Override
     public List<E> findAll() {
         return currentSession().createCriteria(daoType).list();
     }
