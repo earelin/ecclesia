@@ -79,6 +79,13 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Transactional(readOnly = true)
     @Override
+    public boolean exists(long id) {
+        Organization organization = dao.get(id);
+        return organization != null;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
     public List<OrganizationDto> list() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

@@ -7,6 +7,8 @@ import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.dto.GroupDto;
 import org.earelin.ecclesia.service.dto.OrganizationDto;
 import org.earelin.ecclesia.service.exception.GroupNotFoundException;
+import org.earelin.ecclesia.service.exception.GroupWithoutOrganizationException;
+import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
 import org.junit.Before;
@@ -69,9 +71,19 @@ public class GroupServiceIntegrationTest {
         instance.add(group);
     }
     
-    @Test(expected = ConstraintViolationException.class)
+    @Test(expected = GroupWithoutOrganizationException.class)
     public void newGroupShouldBelongToAnOrganization() {
         GroupDto group = new GroupDto();
+        group.setName(GROUP_NAME);
+        instance.add(group);
+    }
+    
+    @Test(expected = OrganizationNotFoundException.class)
+    public void newGroupShouldBelongToAnExistingOrganization() {
+        OrganizationDto organization = new OrganizationDto();
+        organization.setName(ORGANIZATION_NAME);
+        GroupDto group = new GroupDto();
+        group.setOrganization(organization);
         group.setName(GROUP_NAME);
         instance.add(group);
     }
@@ -117,13 +129,27 @@ public class GroupServiceIntegrationTest {
         instance.update(group);
     }
     
-    @Test(expected = ConstraintViolationException.class)
+    @Test(expected = GroupWithoutOrganizationException.class)
     public void updatedGroupShouldBelongToAnOrganization() {
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
         group.setName(GROUP_NAME);
         instance.add(group);    
         group.setOrganization(null);
+        instance.update(group);
+    }
+    
+    @Test(expected = OrganizationNotFoundException.class)
+    public void updatedGroupShouldBelongToAnExistingOrganization() {
+        GroupDto group = new GroupDto();
+        group.setOrganization(organization);
+        group.setName(GROUP_NAME);
+        instance.add(group);
+        
+        OrganizationDto organization1 = new OrganizationDto();
+        organization1.setName(ORGANIZATION_NAME);
+        group.setOrganization(organization1);
+        
         instance.update(group);
     }
     

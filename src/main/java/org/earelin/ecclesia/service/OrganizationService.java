@@ -11,6 +11,7 @@ public interface OrganizationService {
     void update(OrganizationDto organization);
     void remove(long id);
     OrganizationDto get(long id);
+    boolean exists(long id);
     List<OrganizationDto> list();
     List<OrganizationDto> list(int limit, int offset);
 }
