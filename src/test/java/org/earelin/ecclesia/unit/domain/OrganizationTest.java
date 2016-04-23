@@ -23,6 +23,8 @@ public class OrganizationTest {
     public void organizationsShouldBeEqualToItself() {
         assertTrue("Organization object should be equal to itself",
                 organization.equals(organization));
+        assertTrue("Organization object should have the same hash code",
+                organization.hashCode() == organization.hashCode());
     }
     
     @Test
@@ -31,6 +33,8 @@ public class OrganizationTest {
         organization1.setId(1);
         assertTrue("Organizations with same id should be equals",
                 organization.equals(organization1));
+        assertTrue("Organizations with the same id should have the same hash code",
+                organization.hashCode() == organization1.hashCode());
     }
     
     @Test
@@ -39,6 +43,8 @@ public class OrganizationTest {
         organization1.setId(2);
         assertFalse("Organizations with different id should not be equals",
                 organization.equals(organization1));
+        assertFalse("Organizations with different id should not have the same hash code",
+                organization.hashCode() == organization1.hashCode());
     }
     
     @Test
@@ -47,6 +53,8 @@ public class OrganizationTest {
         group.setId(1);
         assertFalse("Organizations should not be equal to another class object",
                 organization.equals(group));
+        assertFalse("Organizations should not have the same hash code that another class",
+                organization.hashCode() == group.hashCode());
     }
     
     @Test

@@ -23,6 +23,8 @@ public class UserTest {
     public void usersShouldBeEqualToItself() {        
         assertTrue("User object should be equal to itself",
                 user.equals(user));
+        assertTrue("User object should have the same hash code",
+                user.hashCode() == user.hashCode());
     }
     
     @Test
