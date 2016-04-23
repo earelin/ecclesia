@@ -7,11 +7,7 @@ import org.earelin.ecclesia.domain.Organization;
 /**
  * Group repository
  */
-public interface GroupRepository {
-    Group get(long id);
-    void add(Group group);
-    void update(Group group);
-    void remove(Group group);   
-    List<Group> list(Organization organization);
-    List<Group> list(Organization organization, int limit, int offset);
+public interface GroupRepository extends GenericRepository<Group> {
+    List<Group> findByOrganization(Organization organization);
+    List<Group> findByOrganization(Organization organization, int limit, int offset);
 }

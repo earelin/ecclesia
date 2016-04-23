@@ -9,5 +9,8 @@ import java.io.File;
  */
 public interface FileService {
     String getMimeType(File file);
+    String getFile(String uri);
     String getFileUrl(String uri);
+    String getFilePath(String uri);
+    String saveFile(File file, String folderUri);
 }

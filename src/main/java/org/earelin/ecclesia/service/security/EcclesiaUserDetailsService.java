@@ -29,7 +29,7 @@ public class EcclesiaUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
-        User user = repository.loadUserByUsername(string);
+        User user = repository.findByUsername(string);
         
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username/password.");

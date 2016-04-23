@@ -1,13 +1,12 @@
 package org.earelin.ecclesia.repository.resource;
 
 import org.earelin.ecclesia.domain.resource.ManagedFile;
+import org.earelin.ecclesia.repository.GenericRepository;
 
 /**
  * Managed files repository
  */
-public interface ManagedFileRepository {
-    ManagedFile get(long id);
-    void add(ManagedFile file);
-    void update(ManagedFile file);
-    void remove(ManagedFile file);
+public interface ManagedFileRepository 
+        extends GenericRepository<ManagedFile> {
+
 }
