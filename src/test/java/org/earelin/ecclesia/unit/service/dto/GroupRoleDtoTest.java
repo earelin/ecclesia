@@ -23,6 +23,8 @@ public class GroupRoleDtoTest {
     public void groupRolesShouldBeEqualToItself() {
         assertTrue("Group role object should be equal to itself",
                 role.equals(role));
+        assertTrue("Group role should have the same hash code than itself",
+                role.hashCode() == role.hashCode());
     }
     
     @Test

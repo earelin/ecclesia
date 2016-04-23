@@ -23,6 +23,8 @@ public class OrganizationDtoTest {
     public void organizationShouldBeEqualToItself() {
         assertTrue("Organization object should be equal to itself",
                 organization.equals(organization));
+        assertTrue("Organization object should have the same hash code than itself",
+                organization.hashCode() == organization.hashCode());
     }
     
     @Test

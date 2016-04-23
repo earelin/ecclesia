@@ -23,6 +23,8 @@ public class OrganizationRoleDtoTest {
     public void organizationRolesShouldBeEqualToItself() {
         assertTrue("Organization role object should be equal to itself",
                 role.equals(role));
+        assertTrue("Organization role object should have the same hash code than itself",
+                role.hashCode() == role.hashCode());
     }
     
     @Test
@@ -31,6 +33,8 @@ public class OrganizationRoleDtoTest {
         role1.setId(1);
         assertTrue("Organization roles with same id should be equals",
                 role.equals(role1));
+        assertTrue("Organization roles with same id should have the same hash code",
+                role.hashCode() == role1.hashCode());
     }
     
     @Test
@@ -39,6 +43,8 @@ public class OrganizationRoleDtoTest {
         role1.setId(2);
         assertFalse("Organization roles with different id should not be equals",
                 role.equals(role1));
+        assertFalse("Organization roles with different id should not have the same hash code",
+                role.hashCode() == role1.hashCode());
     }
     
     @Test
@@ -47,6 +53,8 @@ public class OrganizationRoleDtoTest {
         group.setId(1);
         assertFalse("Organization roles should not be equal to another class object",
                 role.equals(group));
+        assertFalse("Organization roles should not have the same hash code to another class object",
+                role.hashCode() == group.hashCode());
     }
     
     @Test

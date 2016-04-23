@@ -23,7 +23,7 @@ public class ManagedFileTest {
     public void managedFilesShouldBeEqualToItself() {        
         assertTrue("Managed file object should be equal to itself",
                 file.equals(file));
-        assertTrue("Managed file object should have the same hash code",
+        assertTrue("Managed file object should have the same hash code as itself",
                 file.hashCode() == file.hashCode());
     }
     

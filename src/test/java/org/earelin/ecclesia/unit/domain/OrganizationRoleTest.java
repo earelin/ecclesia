@@ -23,7 +23,7 @@ public class OrganizationRoleTest {
     public void organizationRolesShouldBeEqualToItself() {
         assertTrue("Organization role object should be equal to itself",
                 role.equals(role));
-        assertTrue("Organization role object should have the same hash code",
+        assertTrue("Organization role object should have the same hash code than itself",
                 role.hashCode() == role.hashCode());
     }
     

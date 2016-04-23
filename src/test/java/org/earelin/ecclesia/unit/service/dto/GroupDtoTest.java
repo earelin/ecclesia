@@ -23,6 +23,8 @@ public class GroupDtoTest {
     public void groupsShouldBeEqualToItself() {
         assertTrue("Group object should be equal to itself",
                 group.equals(group));
+        assertTrue("Group object should have the same hash code than itself",
+                group.hashCode() == group.hashCode());
     }
     
     @Test

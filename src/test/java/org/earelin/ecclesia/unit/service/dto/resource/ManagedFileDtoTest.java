@@ -25,6 +25,8 @@ public class ManagedFileDtoTest {
     public void managedFilesShouldBeEqualToItself() {        
         assertTrue("Managed file object should be equal to itself",
                 file.equals(file));
+        assertTrue("Managed file object should have the same hash code as itself",
+                file.hashCode() == file.hashCode());
     }
     
     @Test

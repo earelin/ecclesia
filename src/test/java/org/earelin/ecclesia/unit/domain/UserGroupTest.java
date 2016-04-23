@@ -23,7 +23,7 @@ public class UserGroupTest {
     public void userGroupsShouldBeEqualToItself() {        
         assertTrue("User group object should be equal to itself",
                 userGroup.equals(userGroup));
-        assertTrue("User grup object should have the same hash code",
+        assertTrue("User grup object should have the same hash code than itself",
                 userGroup.hashCode() == userGroup.hashCode());
     }
     
