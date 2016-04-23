@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * User class test
  */
-public class UserGroupDTOTest {
+public class UserGroupDtoTest {
     
     UserGroupDto userGroup;
     

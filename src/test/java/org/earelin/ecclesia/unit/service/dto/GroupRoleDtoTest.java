@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * Group class test
  */
-public class GroupRoleDTOTest {
+public class GroupRoleDtoTest {
     
     GroupRoleDto role;
     

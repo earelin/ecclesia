@@ -11,7 +11,7 @@ import org.junit.Test;
 /**
  * Managed file data transfer object class test
  */
-public class ManagedFileDTOTest {
+public class ManagedFileDtoTest {
     
     ManagedFileDto file;
     

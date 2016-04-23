@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * User class test
  */
-public class UserOrganizationDTOTest {
+public class UserOrganizationDtoTest {
     
     UserOrganizationDto userOrganization;
     

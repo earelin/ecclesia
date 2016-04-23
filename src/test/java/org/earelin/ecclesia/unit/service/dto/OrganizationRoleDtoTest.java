@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * Testing role domain class
  */
-public class OrganizationRoleDTOTest {
+public class OrganizationRoleDtoTest {
     
     OrganizationRoleDto role;
     

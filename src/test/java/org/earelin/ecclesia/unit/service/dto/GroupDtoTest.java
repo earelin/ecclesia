@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  *
  */
-public class GroupDTOTest {
+public class GroupDtoTest {
     
     GroupDto group;
     

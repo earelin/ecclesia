@@ -12,7 +12,7 @@ import org.junit.Test;
 /**
  * User data transfer object class test
  */
-public class UserDTOTest {
+public class UserDtoTest {
     
     UserDto user;
     
