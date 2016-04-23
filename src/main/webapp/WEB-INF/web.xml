@@ -17,7 +17,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>org.earelin.ecclesia.EcclesiaCoreConfig</param-value>
+		<param-value>org.earelin.ecclesia.config.EcclesiaCoreConfig</param-value>
 	</context-param>
   
   <listener>
@@ -37,7 +37,7 @@
     </init-param>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>org.earelin.ecclesia.EcclesiaMVCConfig</param-value>
+			<param-value>org.earelin.ecclesia.config.EcclesiaMVCConfig</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -48,7 +48,7 @@
 	</servlet-mapping>
   
   <!-- Security configuration -->
-  
+    
   <!--
   <filter>
     <filter-name>springSecurityFilterChain</filter-name>
