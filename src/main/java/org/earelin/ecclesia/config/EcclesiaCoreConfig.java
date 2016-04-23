@@ -5,6 +5,8 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
+import org.earelin.ecclesia.service.impl.resource.FileServiceImpl;
+import org.earelin.ecclesia.service.resource.FileService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -52,9 +54,20 @@ public class EcclesiaCoreConfig {
     @Value("${hibernate.format_sql}")
     private String hibernateFormatSql;
     
+    @Value("${private.files.folder}")
+    private String privateFilesFolder;
+    
+    @Value("${public.files.folder}")
+    private String publicFilesFolder;
+    
     @Bean
     public Mapper mapper() {
         return new DozerBeanMapper();
+    }
+    
+    @Bean
+    public FileService fileService() {
+        return new FileServiceImpl(privateFilesFolder, publicFilesFolder);
     }
     
     @Bean

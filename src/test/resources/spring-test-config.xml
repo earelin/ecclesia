@@ -21,9 +21,9 @@
   <task:executor id="myexecutor" pool-size="5" />
   <task:annotation-driven executor="myexecutor" />
   
-  <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+  <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
     <property name="driverClassName" value="org.h2.Driver" />
-		<property name="url" value="jdbc:h2:mem:dataSource;DB_CLOSE_ON_EXIT=FALSE" />
+		<property name="url" value="jdbc:h2:mem:dataSource" />
 		<property name="username" value="sa" />
 		<property name="password" value="" />
   </bean>
@@ -43,6 +43,11 @@
   </bean>
   
   <tx:annotation-driven />
+  
+  <bean id="fileService" class="org.earelin.ecclesia.service.impl.resource.FileServiceImpl">
+    <constructor-arg value="file:///tmp/ecclesia_folder/private" />
+		<constructor-arg value="file:///tmp/ecclesia_folder/public" />
+  </bean>
   
   <bean id="transactionManager"
       class="org.springframework.orm.hibernate4.HibernateTransactionManager">

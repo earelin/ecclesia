@@ -6,6 +6,8 @@ import java.util.Map;
 import org.earelin.ecclesia.image.ImageScale;
 import org.earelin.ecclesia.image.ImageScaleAndCrop;
 import org.earelin.ecclesia.image.ImageStyle;
+import org.earelin.ecclesia.service.resource.FileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,11 @@ public class ImageProcessingServiceImpl implements ImageProcessingService {
             
     private final Map<String, ImageStyle> imageStyles;
     
-    public ImageProcessingServiceImpl() {
+    private final FileService fileService;
+    
+    @Autowired
+    public ImageProcessingServiceImpl(FileService fileService) {
+        this.fileService = fileService;
         this.imageStyles = generateImageStyles();
     }
     

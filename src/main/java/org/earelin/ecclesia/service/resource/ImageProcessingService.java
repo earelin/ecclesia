@@ -7,7 +7,7 @@ package org.earelin.ecclesia.service.resource;
 public interface ImageProcessingService {
 
     /**
-     * Process an image
+     * Process an image applying image styles
      * @param uri 
      */
     void processImage(String uri);
