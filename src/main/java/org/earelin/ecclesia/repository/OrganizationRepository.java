@@ -6,7 +6,7 @@ import org.earelin.ecclesia.domain.Organization;
 /**
  * Organization repository
  */
-public interface OrganizationReponsitory {    
+public interface OrganizationRepository {    
     Organization get(long id);
     void add(Organization organization);
     void update(Organization organization);

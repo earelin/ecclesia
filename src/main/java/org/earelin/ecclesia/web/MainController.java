@@ -11,7 +11,7 @@ public class MainController {
 
 	@RequestMapping(path="/", method=RequestMethod.GET)
 	public String index(Map<String, Object> model) {
-		return "index";
+		return "home";
 	}
     
     @RequestMapping(value="/dashboard", method=RequestMethod.GET)

@@ -8,9 +8,9 @@ import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.earelin.ecclesia.repository.OrganizationReponsitory;
 import org.earelin.ecclesia.service.dto.OrganizationDTO;
 import org.springframework.transaction.annotation.Transactional;
+import org.earelin.ecclesia.repository.OrganizationRepository;
 
 /**
  * Organization service implementation
@@ -19,11 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class OrganizationServiceImpl implements OrganizationService {
     
-    private final OrganizationReponsitory dao;
+    private final OrganizationRepository dao;
     private final Mapper mapper;
     
     @Autowired
-    public OrganizationServiceImpl(OrganizationReponsitory dao, Mapper mapper) {
+    public OrganizationServiceImpl(OrganizationRepository dao, Mapper mapper) {
         this.dao = dao;
         this.mapper = mapper;
     }

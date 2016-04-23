@@ -5,7 +5,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.earelin.ecclesia.repository.OrganizationRoleRepository;
 
 /**
@@ -42,7 +41,8 @@ public class OrganizationRoleRepositoryDAO implements OrganizationRoleRepository
 
     @Override
     public OrganizationRole get(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (OrganizationRole) currentSession()
+                .get(OrganizationRole.class, id);
     }
 
 }

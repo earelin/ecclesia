@@ -6,14 +6,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import org.earelin.ecclesia.repository.OrganizationReponsitory;
+import org.earelin.ecclesia.repository.OrganizationRepository;
 
 /**
  * Organization data access object
  */
 @Repository
-public class OrganizationRepositoryDAO implements OrganizationReponsitory {
+public class OrganizationRepositoryDAO implements OrganizationRepository {
 
     private final SessionFactory sessionFactory;
     
@@ -39,7 +38,7 @@ public class OrganizationRepositoryDAO implements OrganizationReponsitory {
     
     @Override
     public void update(Organization organization) {
-        currentSession().saveOrUpdate(organization);
+        currentSession().update(organization);
     }
 
     @Override

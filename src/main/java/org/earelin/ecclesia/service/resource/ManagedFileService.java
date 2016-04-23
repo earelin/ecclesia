@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.earelin.ecclesia.service.resource;
 
+import org.earelin.ecclesia.service.dto.resource.ManagedFileDTO;
+
 /**
- *
- * @author xcarriba
+ * Managed files service
  */
 public interface ManagedFileService {
-    
+    void add(ManagedFileDTO file);
+    void update(ManagedFileDTO file);
+    void remove(long id);
+    ManagedFileDTO get(long id);
 }

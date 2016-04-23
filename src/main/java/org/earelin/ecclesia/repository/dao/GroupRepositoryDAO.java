@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.earelin.ecclesia.repository.GroupRepository;
 
 /**
@@ -39,7 +38,7 @@ public class GroupRepositoryDAO implements GroupRepository {
 
     @Override
     public void update(Group group) {
-        currentSession().saveOrUpdate(group);
+        currentSession().update(group);
     }
 
     @Override

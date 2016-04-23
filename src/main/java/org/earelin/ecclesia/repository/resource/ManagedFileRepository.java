@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.earelin.ecclesia.repository.resource;
 
+import org.earelin.ecclesia.domain.resource.ManagedFile;
+
 /**
- *
- * @author xcarriba
+ * Managed files repository
  */
 public interface ManagedFileRepository {
-    
+    ManagedFile get(long id);
+    void add(ManagedFile file);
+    void update(ManagedFile file);
+    void remove(ManagedFile file);
 }

@@ -1,7 +1,10 @@
 package org.earelin.ecclesia.service.impl;
 
+import org.dozer.Mapper;
+import org.earelin.ecclesia.repository.OrganizationRoleRepository;
 import org.earelin.ecclesia.service.OrganizationRoleService;
 import org.earelin.ecclesia.service.dto.OrganizationRoleDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class OrganizationRoleServiceImpl implements OrganizationRoleService {
+    
+    private final OrganizationRoleRepository repository;
+    private final Mapper mapper;
+
+    @Autowired
+    public OrganizationRoleServiceImpl(OrganizationRoleRepository repository, Mapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
 
     @Override
     public void add(OrganizationRoleDTO organizationRole) {

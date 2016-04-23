@@ -1,7 +1,10 @@
 package org.earelin.ecclesia.service.impl;
 
+import org.dozer.Mapper;
+import org.earelin.ecclesia.repository.GroupRoleRepository;
 import org.earelin.ecclesia.service.GroupRoleService;
 import org.earelin.ecclesia.service.dto.GroupRoleDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class GroupRoleServiceImpl implements GroupRoleService {
+    
+    private final GroupRoleRepository repository;
+    private final Mapper mapper;
+
+    @Autowired
+    public GroupRoleServiceImpl(GroupRoleRepository repository, Mapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
 
     @Override
     public void add(GroupRoleDTO groupRole) {

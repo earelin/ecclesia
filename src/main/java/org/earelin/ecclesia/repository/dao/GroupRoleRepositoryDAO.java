@@ -2,6 +2,9 @@ package org.earelin.ecclesia.repository.dao;
 
 import org.earelin.ecclesia.domain.GroupRole;
 import org.earelin.ecclesia.repository.GroupRoleRepository;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,25 +12,37 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class GroupRoleRepositoryDAO implements GroupRoleRepository {
+    
+    private final SessionFactory sessionFactory;
+    
+    @Autowired
+    public GroupRoleRepositoryDAO(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+    
+    private Session currentSession() {
+        return sessionFactory.getCurrentSession();
+    }
 
     @Override
     public void add(GroupRole role) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        currentSession().save(role);
     }
 
     @Override
     public void update(GroupRole role) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        currentSession().update(role);
     }
 
     @Override
     public void remove(GroupRole role) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        currentSession().delete(role);
     }
 
     @Override
     public GroupRole get(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (GroupRole) currentSession()
+                .get(GroupRole.class, id);
     }
 
 }

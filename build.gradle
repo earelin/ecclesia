@@ -39,9 +39,9 @@ dependencies {
   compile 'mysql:mysql-connector-java:5.+'
   compile 'com.h2database:h2:1.+'
   
-  // tiles
-  compile 'org.apache.tiles:tiles-jsp:3.+'
-  compile 'org.apache.tiles:tiles-el:3.+'
+  // thymeleaf
+  compile 'org.thymeleaf:thymeleaf:2.+'
+  compile 'org.thymeleaf:thymeleaf-spring4:2.+'
   
   // spring security
   compile 'org.springframework.security:spring-security-config:4.0.4.RELEASE'
