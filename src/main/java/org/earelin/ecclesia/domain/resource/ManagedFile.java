@@ -9,7 +9,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 /**
+ * Managed file domain object
  *
+ * Used to reference a file from another domain objects 
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
