@@ -11,6 +11,7 @@ public interface GroupService {
     void update(GroupDto group);
     void remove(long id);
     GroupDto get(long id);
+    boolean exists(long id);
     List<GroupDto> list();
     List<GroupDto> list(int limit, int offset);
 }

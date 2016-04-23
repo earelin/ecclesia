@@ -14,6 +14,8 @@ import org.earelin.ecclesia.service.dto.OrganizationDto;
 import org.earelin.ecclesia.service.exception.GroupNotFoundException;
 import org.earelin.ecclesia.service.exception.GroupWithoutOrganizationException;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
+import org.earelin.ecclesia.service.exception.ParentGroupBelongsToDiferentOrganizationException;
+import org.earelin.ecclesia.service.exception.ParentGroupNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -36,12 +38,12 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public void add(GroupDto group) {
+    public void add(GroupDto groupDto) {
         Date now = new Date();
-        group.setCreated(now);
-        group.setUpdated(now);
+        groupDto.setCreated(now);
+        groupDto.setUpdated(now);
         
-        OrganizationDto organization = group.getOrganization();
+        OrganizationDto organization = groupDto.getOrganization();
         if (organization == null) {
             throw new GroupWithoutOrganizationException();
         }
@@ -50,23 +52,35 @@ public class GroupServiceImpl implements GroupService {
             throw new OrganizationNotFoundException(organization.getId());
         }
         
-        Group groupEntity = mapper.map(group, Group.class);
-        repository.add(groupEntity);
+        GroupDto parentGroupDto = groupDto.getParent();
+        if (parentGroupDto != null) {            
+            Group parentGroup = repository.get(parentGroupDto.getId());
+            if (parentGroup == null) {
+                throw new ParentGroupNotFoundException();
+            } 
+            if (parentGroup.getOrganization().getId()
+                    != groupDto.getOrganization().getId()) {
+                throw new ParentGroupBelongsToDiferentOrganizationException();
+            }
+        }
         
-        group.setId(groupEntity.getId());
+        Group group = mapper.map(groupDto, Group.class);
+        repository.add(group);
+        
+        groupDto.setId(group.getId());
     }
 
     @Override
-    public void update(GroupDto groupDTO) {
+    public void update(GroupDto groupDto) {
         Date now = new Date();
-        groupDTO.setUpdated(now);
+        groupDto.setUpdated(now);
         
-        Group group = repository.get(groupDTO.getId());        
+        Group group = repository.get(groupDto.getId());        
         if (group == null) {
-            throw new GroupNotFoundException(groupDTO.getId());
+            throw new GroupNotFoundException(groupDto.getId());
         }
         
-        OrganizationDto organization = groupDTO.getOrganization();
+        OrganizationDto organization = groupDto.getOrganization();
         if (organization == null) {
             throw new GroupWithoutOrganizationException();
         }
@@ -75,7 +89,19 @@ public class GroupServiceImpl implements GroupService {
             throw new OrganizationNotFoundException(organization.getId());
         }
         
-        mapper.map(groupDTO, group);
+        GroupDto parentGroupDto = groupDto.getParent();
+        if (parentGroupDto != null) {            
+            Group parentGroup = repository.get(parentGroupDto.getId());
+            if (parentGroup == null) {
+                throw new ParentGroupNotFoundException();
+            } 
+            if (parentGroup.getOrganization().getId()
+                    != groupDto.getOrganization().getId()) {
+                throw new ParentGroupBelongsToDiferentOrganizationException();
+            }
+        }
+        
+        mapper.map(groupDto, group);
         
         repository.update(group);
     }
@@ -101,6 +127,12 @@ public class GroupServiceImpl implements GroupService {
         }
         
         return mapper.map(group, GroupDto.class);
+    }
+
+    @Override
+    public boolean exists(long id) {
+        Group group = repository.get(id);
+        return group != null;
     }
 
     @Transactional(readOnly = true)

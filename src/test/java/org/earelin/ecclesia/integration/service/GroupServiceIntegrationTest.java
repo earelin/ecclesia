@@ -9,9 +9,12 @@ import org.earelin.ecclesia.service.dto.OrganizationDto;
 import org.earelin.ecclesia.service.exception.GroupNotFoundException;
 import org.earelin.ecclesia.service.exception.GroupWithoutOrganizationException;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
+import org.earelin.ecclesia.service.exception.ParentGroupBelongsToDiferentOrganizationException;
+import org.earelin.ecclesia.service.exception.ParentGroupNotFoundException;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +88,39 @@ public class GroupServiceIntegrationTest {
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
         group.setName(GROUP_NAME);
+        instance.add(group);
+    }
+    
+    @Test(expected = ParentGroupNotFoundException.class)
+    public void newGroupParentShouldExists() {
+        GroupDto parent = new GroupDto();
+        parent.setOrganization(organization);
+        parent.setName("Parent group name");
+        
+        GroupDto group = new GroupDto();
+        group.setOrganization(organization);
+        group.setName(GROUP_NAME);
+        group.setParent(parent);
+        
+        instance.add(group);
+    }
+    
+    @Test(expected = ParentGroupBelongsToDiferentOrganizationException.class)
+    public void newGroupParentShouldBelongToTheSameOrganization() {
+        OrganizationDto organization1 = new OrganizationDto();
+        organization1.setName(ORGANIZATION_NAME);
+        organizationService.add(organization1);
+        
+        GroupDto parent = new GroupDto();
+        parent.setOrganization(organization1);
+        parent.setName("Parent group name");
+        instance.add(parent);
+        
+        GroupDto group = new GroupDto();
+        group.setOrganization(organization);
+        group.setName(GROUP_NAME);
+        group.setParent(parent);
+        
         instance.add(group);
     }
     
