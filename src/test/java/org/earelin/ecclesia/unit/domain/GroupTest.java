@@ -1,18 +1,18 @@
-package org.earelin.ecclesia.unit.service.dto;
+package org.earelin.ecclesia.unit.domain;
 
-import org.earelin.ecclesia.service.dto.GroupDTO;
-import org.earelin.ecclesia.service.dto.OrganizationDTO;
+import org.earelin.ecclesia.domain.Group;
+import org.earelin.ecclesia.domain.Organization;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- *
+ * Group class test
  */
-public class GroupDTOTest {
-    
+public class GroupTest {
+
     @Test
     public void groupsShouldBeEqualToItself() {
-        GroupDTO group = new GroupDTO();
+        Group group = new Group();
         group.setId(1);
         assertTrue("Group object should be equal to itself",
                 group.equals(group));
@@ -20,9 +20,9 @@ public class GroupDTOTest {
     
     @Test
     public void groupsWithSameIdShouldBeEquals() {
-        GroupDTO group1 = new GroupDTO();
+        Group group1 = new Group();
         group1.setId(1);
-        GroupDTO group2 = new GroupDTO();
+        Group group2 = new Group();
         group2.setId(1);
         assertTrue("Groups with same id should be equals",
                 group1.equals(group2));
@@ -32,9 +32,9 @@ public class GroupDTOTest {
     
     @Test
     public void groupsWithDifferentIdShouldNotBeEquals() {
-        GroupDTO group1 = new GroupDTO();
+        Group group1 = new Group();
         group1.setId(1);
-        GroupDTO group2 = new GroupDTO();
+        Group group2 = new Group();
         group2.setId(2);
         assertFalse("Groups with different id should not be equals",
                 group1.equals(group2));
@@ -44,9 +44,9 @@ public class GroupDTOTest {
     
     @Test
     public void groupsShouldNotBeEqualToAnotherClass() {
-        GroupDTO group = new GroupDTO();
+        Group group = new Group();
         group.setId(1);
-        OrganizationDTO organization = new OrganizationDTO();
+        Organization organization = new Organization();
         organization.setId(1);
         assertFalse("Groups should not be equal to another class object",
                 organization.equals(group));
@@ -56,7 +56,7 @@ public class GroupDTOTest {
     
     @Test
     public void groupsShouldNotBeEqualToNull() {
-        GroupDTO group = new GroupDTO();
+        Group group = new Group();
         group.setId(1);
         assertFalse("Groups should not be equal to null",
                 group.equals(null));

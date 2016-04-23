@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.unit.entity;
+package org.earelin.ecclesia.unit.domain;
 
 import org.earelin.ecclesia.domain.Group;
 import org.earelin.ecclesia.domain.Organization;
@@ -9,6 +9,14 @@ import org.junit.Test;
  * Testing organization domain class
  */
 public class OrganizationTest {
+    
+    @Test
+    public void organizationsShouldBeEqualToItself() {
+        Organization organization = new Organization();
+        organization.setId(1);
+        assertTrue("Organization object should be equal to itself",
+                organization.equals(organization));
+    }
     
     @Test
     public void organizationsWithSameIdShouldBeEquals() {
@@ -31,12 +39,20 @@ public class OrganizationTest {
     }
     
     @Test
-    public void organizationShouldNotBeEqualToAnotherClass() {
+    public void organizationsShouldNotBeEqualToAnotherClass() {
         Organization organization = new Organization();
         organization.setId(1);
         Group group = new Group();
         assertFalse("Organizations should not be equal to another class object",
                 organization.equals(group));
+    }
+    
+    @Test
+    public void organizationsShouldNotBeEqualToNull() {
+        Organization organization = new Organization();
+        organization.setId(1);
+        assertFalse("Organizations should not be equal to null",
+                organization.equals(null));
     }
     
 }

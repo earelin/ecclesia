@@ -9,6 +9,31 @@ public class GroupRoleDTO {
     private String name;
     private GroupDTO group;
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GroupRoleDTO other = (GroupRoleDTO) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
     public long getId() {
         return id;
     }

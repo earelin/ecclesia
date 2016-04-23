@@ -58,7 +58,7 @@ public class OrganizationDTOTest {
     public void organizationShouldNotBeEqualToNull() {
         OrganizationDTO organization = new OrganizationDTO();
         organization.setId(1);
-        assertFalse("Groups should not be equal to null",
+        assertFalse("Organization should not be equal to null",
                 organization.equals(null));
     }
     
