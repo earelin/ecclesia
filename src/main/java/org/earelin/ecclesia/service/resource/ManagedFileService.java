@@ -1,13 +1,13 @@
 package org.earelin.ecclesia.service.resource;
 
-import org.earelin.ecclesia.service.dto.resource.ManagedFileDTO;
+import org.earelin.ecclesia.service.dto.resource.ManagedFileDto;
 
 /**
  * Managed files service
  */
 public interface ManagedFileService {
-    void add(ManagedFileDTO file);
-    void update(ManagedFileDTO file);
+    void add(ManagedFileDto file);
+    void update(ManagedFileDto file);
     void remove(long id);
-    ManagedFileDTO get(long id);
+    ManagedFileDto get(long id);
 }

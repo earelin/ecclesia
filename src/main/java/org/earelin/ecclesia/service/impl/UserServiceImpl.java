@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.repository.UserRepository;
-import org.earelin.ecclesia.service.dto.UserDTO;
+import org.earelin.ecclesia.service.dto.UserDto;
 import org.earelin.ecclesia.service.exception.UserNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
      * @param password 
      */
     @Override
-    public UserDTO register(String username, String email, String password) {
+    public UserDto register(String username, String email, String password) {
         Date now = new Date();
         
         User user = new User();
@@ -55,11 +55,11 @@ public class UserServiceImpl implements UserService {
         
         repository.add(user);
         
-        return mapper.map(user, UserDTO.class);
+        return mapper.map(user, UserDto.class);
     }
 
     @Override
-    public void update(UserDTO userDTO) {
+    public void update(UserDto userDTO) {
         long userId = userDTO.getId();
         User user = repository.get(userId);
         
@@ -85,25 +85,25 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(readOnly = true)
     @Override
-    public UserDTO get(long id) {
+    public UserDto get(long id) {
         User user = repository.get(id);
         
         if (user == null) {
             throw new UserNotFoundException(id);
         }
         
-        return mapper.map(user, UserDTO.class);
+        return mapper.map(user, UserDto.class);
     }
     
     @Transactional(readOnly = true)
     @Override
-    public List<UserDTO> list() {
+    public List<UserDto> list() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<UserDTO> list(int limit, int offset) {
+    public List<UserDto> list(int limit, int offset) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

@@ -4,7 +4,7 @@ import org.earelin.ecclesia.unit.domain.*;
 import org.earelin.ecclesia.domain.Group;
 import org.earelin.ecclesia.domain.Organization;
 import org.earelin.ecclesia.domain.User;
-import org.earelin.ecclesia.service.dto.UserDTO;
+import org.earelin.ecclesia.service.dto.UserDto;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,11 +14,11 @@ import org.junit.Test;
  */
 public class UserDTOTest {
     
-    UserDTO user;
+    UserDto user;
     
     @Before
     public void initialize() {
-        user = new UserDTO();
+        user = new UserDto();
         user.setId(1);
     }
 
@@ -30,7 +30,7 @@ public class UserDTOTest {
     
     @Test
     public void usersWithSameIdShouldBeEquals() {
-        UserDTO user1 = new UserDTO();
+        UserDto user1 = new UserDto();
         user1.setId(1);
         assertTrue("Groups with same id should be equals",
                 user.equals(user1));
@@ -40,7 +40,7 @@ public class UserDTOTest {
     
     @Test
     public void usersWithDifferentIdShouldNotBeEquals() {
-        UserDTO user1 = new UserDTO();
+        UserDto user1 = new UserDto();
         user1.setId(2);
         assertFalse("Groups with different id should not be equals",
                 user.equals(user1));

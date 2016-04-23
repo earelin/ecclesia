@@ -5,12 +5,12 @@ import java.util.Date;
 /**
  * User group data transfer object
  */
-public class UserGroupDTO {
+public class UserGroupDto {
 
     private long id;
-    private GroupRoleDTO role;
-    private GroupDTO group;
-    private UserDTO user;
+    private GroupRoleDto role;
+    private GroupDto group;
+    private UserDto user;
     private Date created;
 
     @Override
@@ -31,7 +31,7 @@ public class UserGroupDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final UserGroupDTO other = (UserGroupDTO) obj;
+        final UserGroupDto other = (UserGroupDto) obj;
         if (this.id != other.id) {
             return false;
         }
@@ -46,27 +46,27 @@ public class UserGroupDTO {
         this.id = id;
     }
 
-    public GroupRoleDTO getRole() {
+    public GroupRoleDto getRole() {
         return role;
     }
 
-    public void setRole(GroupRoleDTO role) {
+    public void setRole(GroupRoleDto role) {
         this.role = role;
     }
 
-    public GroupDTO getGroup() {
+    public GroupDto getGroup() {
         return group;
     }
 
-    public void setGroup(GroupDTO group) {
+    public void setGroup(GroupDto group) {
         this.group = group;
     }
 
-    public UserDTO getUser() {
+    public UserDto getUser() {
         return user;
     }
 
-    public void setUser(UserDTO user) {
+    public void setUser(UserDto user) {
         this.user = user;
     }
 

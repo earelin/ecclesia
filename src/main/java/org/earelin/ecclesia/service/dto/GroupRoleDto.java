@@ -1,18 +1,18 @@
 package org.earelin.ecclesia.service.dto;
 
 /**
- * Organization role data transfer object
+ * Group role data transfer object
  */
-public class OrganizationRoleDTO {
+public class GroupRoleDto {
     
     private long id;
     private String name;
-    private OrganizationDTO organization;
+    private GroupDto group;
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 3;
+        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -27,7 +27,7 @@ public class OrganizationRoleDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final OrganizationRoleDTO other = (OrganizationRoleDTO) obj;
+        final GroupRoleDto other = (GroupRoleDto) obj;
         if (this.id != other.id) {
             return false;
         }
@@ -50,12 +50,12 @@ public class OrganizationRoleDTO {
         this.name = name;
     }
 
-    public OrganizationDTO getOrganization() {
-        return organization;
+    public GroupDto getGroup() {
+        return group;
     }
 
-    public void setOrganization(OrganizationDTO organization) {
-        this.organization = organization;
+    public void setGroup(GroupDto group) {
+        this.group = group;
     }
     
 }

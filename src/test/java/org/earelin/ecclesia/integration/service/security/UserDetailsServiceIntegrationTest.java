@@ -1,7 +1,7 @@
 package org.earelin.ecclesia.integration.service.security;
 
 import org.earelin.ecclesia.service.UserService;
-import org.earelin.ecclesia.service.dto.UserDTO;
+import org.earelin.ecclesia.service.dto.UserDto;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,8 +31,8 @@ public class UserDetailsServiceIntegrationTest {
     
     @Test
     public void getExistingUser() {
-        UserDTO user = userService.register(USER_NAME, USER_EMAIL, USER_PASSWORD);
-        UserDTO gottenUser = (UserDTO) instance.loadUserByUsername(USER_NAME);
+        UserDto user = userService.register(USER_NAME, USER_EMAIL, USER_PASSWORD);
+        UserDto gottenUser = (UserDto) instance.loadUserByUsername(USER_NAME);
         assertEquals("Register user id should be the same as loaded by username",
                 user.getId(), gottenUser.getId());
     }

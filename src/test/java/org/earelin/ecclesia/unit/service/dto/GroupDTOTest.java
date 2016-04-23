@@ -1,7 +1,7 @@
 package org.earelin.ecclesia.unit.service.dto;
 
-import org.earelin.ecclesia.service.dto.GroupDTO;
-import org.earelin.ecclesia.service.dto.OrganizationDTO;
+import org.earelin.ecclesia.service.dto.GroupDto;
+import org.earelin.ecclesia.service.dto.OrganizationDto;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,11 +11,11 @@ import org.junit.Test;
  */
 public class GroupDTOTest {
     
-    GroupDTO group;
+    GroupDto group;
     
     @Before
     public void initialize() {
-        group = new GroupDTO();
+        group = new GroupDto();
         group.setId(1);
     }
     
@@ -27,7 +27,7 @@ public class GroupDTOTest {
     
     @Test
     public void groupsWithSameIdShouldBeEquals() {
-        GroupDTO group1 = new GroupDTO();
+        GroupDto group1 = new GroupDto();
         group1.setId(1);
         assertTrue("Groups with same id should be equals",
                 group.equals(group1));
@@ -37,7 +37,7 @@ public class GroupDTOTest {
     
     @Test
     public void groupsWithDifferentIdShouldNotBeEquals() {
-        GroupDTO group1 = new GroupDTO();
+        GroupDto group1 = new GroupDto();
         group1.setId(2);
         assertFalse("Groups with different id should not be equals",
                 group.equals(group1));
@@ -47,7 +47,7 @@ public class GroupDTOTest {
     
     @Test
     public void groupsShouldNotBeEqualToAnotherClass() {
-        OrganizationDTO organization = new OrganizationDTO();
+        OrganizationDto organization = new OrganizationDto();
         organization.setId(1);
         assertFalse("Groups should not be equal to another class object",
                 group.equals(organization));

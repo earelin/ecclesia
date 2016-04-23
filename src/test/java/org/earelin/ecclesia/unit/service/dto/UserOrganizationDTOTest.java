@@ -1,7 +1,7 @@
 package org.earelin.ecclesia.unit.service.dto;
 
 import org.earelin.ecclesia.domain.Organization;
-import org.earelin.ecclesia.service.dto.UserOrganizationDTO;
+import org.earelin.ecclesia.service.dto.UserOrganizationDto;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,11 +11,11 @@ import org.junit.Test;
  */
 public class UserOrganizationDTOTest {
     
-    UserOrganizationDTO userOrganization;
+    UserOrganizationDto userOrganization;
     
     @Before
     public void initialize() {
-        userOrganization = new UserOrganizationDTO();
+        userOrganization = new UserOrganizationDto();
         userOrganization.setId(1);
     }
 
@@ -27,7 +27,7 @@ public class UserOrganizationDTOTest {
     
     @Test
     public void userOrganizationsWithSameIdShouldBeEquals() {
-        UserOrganizationDTO userOrganization1 = new UserOrganizationDTO();
+        UserOrganizationDto userOrganization1 = new UserOrganizationDto();
         userOrganization1.setId(1);
         assertTrue("User organizations with same id should be equals",
                 userOrganization.equals(userOrganization1));
@@ -37,7 +37,7 @@ public class UserOrganizationDTOTest {
     
     @Test
     public void userOrganizationsWithDifferentIdShouldNotBeEquals() {
-        UserOrganizationDTO userOrganization1 = new UserOrganizationDTO();
+        UserOrganizationDto userOrganization1 = new UserOrganizationDto();
         userOrganization1.setId(2);
         assertFalse("User organizations with different id should not be equals",
                 userOrganization.equals(userOrganization1));

@@ -8,7 +8,7 @@ import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.earelin.ecclesia.service.dto.OrganizationDTO;
+import org.earelin.ecclesia.service.dto.OrganizationDto;
 import org.springframework.transaction.annotation.Transactional;
 import org.earelin.ecclesia.repository.OrganizationRepository;
 
@@ -29,7 +29,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public void add(OrganizationDTO organizationDTO) {
+    public void add(OrganizationDto organizationDTO) {
         Date now = new Date();
         organizationDTO.setCreated(now);
         organizationDTO.setUpdated(now);
@@ -41,7 +41,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public void update(OrganizationDTO organizationDTO) {
+    public void update(OrganizationDto organizationDTO) {
         Date now = new Date();
         organizationDTO.setUpdated(now);
         
@@ -67,25 +67,25 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Transactional(readOnly = true)
     @Override
-    public OrganizationDTO get(long id) {
+    public OrganizationDto get(long id) {
         Organization organization = dao.get(id);
         
         if (organization == null) {
             throw new OrganizationNotFoundException(id);
         }
         
-        return mapper.map(organization, OrganizationDTO.class);
+        return mapper.map(organization, OrganizationDto.class);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<OrganizationDTO> list() {
+    public List<OrganizationDto> list() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<OrganizationDTO> list(int limit, int offset) {
+    public List<OrganizationDto> list(int limit, int offset) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

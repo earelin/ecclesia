@@ -5,11 +5,11 @@ import java.util.Date;
 /**
  * Group data transfer object
  */
-public class GroupDTO {
+public class GroupDto {
     
     private long id;
-    private OrganizationDTO organization;
-    private GroupDTO parent;
+    private OrganizationDto organization;
+    private GroupDto parent;
     private String name;
     private Date created;
     private Date updated;
@@ -32,7 +32,7 @@ public class GroupDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final GroupDTO other = (GroupDTO) obj;
+        final GroupDto other = (GroupDto) obj;
         if (this.id != other.id) {
             return false;
         }
@@ -47,19 +47,19 @@ public class GroupDTO {
         this.id = id;
     }
 
-    public OrganizationDTO getOrganization() {
+    public OrganizationDto getOrganization() {
         return organization;
     }
 
-    public void setOrganization(OrganizationDTO organization) {
+    public void setOrganization(OrganizationDto organization) {
         this.organization = organization;
     }
 
-    public GroupDTO getParent() {
+    public GroupDto getParent() {
         return parent;
     }
 
-    public void setParent(GroupDTO parent) {
+    public void setParent(GroupDto parent) {
         this.parent = parent;
     }
 

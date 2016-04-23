@@ -2,7 +2,7 @@ package org.earelin.ecclesia.service.impl.resource;
 
 import org.dozer.Mapper;
 import org.earelin.ecclesia.repository.resource.ManagedFileRepository;
-import org.earelin.ecclesia.service.dto.resource.ManagedFileDTO;
+import org.earelin.ecclesia.service.dto.resource.ManagedFileDto;
 import org.earelin.ecclesia.service.resource.ManagedFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,12 +25,12 @@ public class ManagedFileServiceImpl implements ManagedFileService {
     }            
 
     @Override
-    public void add(ManagedFileDTO file) {
+    public void add(ManagedFileDto file) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(ManagedFileDTO file) {
+    public void update(ManagedFileDto file) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -41,7 +41,7 @@ public class ManagedFileServiceImpl implements ManagedFileService {
 
     @Transactional(readOnly = true)
     @Override
-    public ManagedFileDTO get(long id) {
+    public ManagedFileDto get(long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

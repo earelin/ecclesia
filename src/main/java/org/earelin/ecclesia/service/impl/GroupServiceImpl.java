@@ -8,7 +8,7 @@ import org.earelin.ecclesia.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.repository.GroupRepository;
-import org.earelin.ecclesia.service.dto.GroupDTO;
+import org.earelin.ecclesia.service.dto.GroupDto;
 import org.earelin.ecclesia.service.exception.GroupNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +29,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public void add(GroupDTO group) {
+    public void add(GroupDto group) {
         Date now = new Date();
         group.setCreated(now);
         group.setUpdated(now);
@@ -41,7 +41,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public void update(GroupDTO groupDTO) {
+    public void update(GroupDto groupDTO) {
         Date now = new Date();
         groupDTO.setUpdated(now);
         
@@ -67,25 +67,25 @@ public class GroupServiceImpl implements GroupService {
 
     @Transactional(readOnly = true)
     @Override
-    public GroupDTO get(long id) {
+    public GroupDto get(long id) {
         Group group = dao.get(id);
         
         if (group == null) {
             throw new GroupNotFoundException(id);
         }
         
-        return mapper.map(group, GroupDTO.class);
+        return mapper.map(group, GroupDto.class);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<GroupDTO> list() {
+    public List<GroupDto> list() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<GroupDTO> list(int limit, int offset) {
+    public List<GroupDto> list(int limit, int offset) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -3,7 +3,7 @@ package org.earelin.ecclesia.service.security;
 import org.dozer.Mapper;
 import org.earelin.ecclesia.domain.User;
 import org.earelin.ecclesia.repository.UserRepository;
-import org.earelin.ecclesia.service.dto.security.UserDetailsDTO;
+import org.earelin.ecclesia.service.dto.security.UserDetailsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,7 +35,7 @@ public class EcclesiaUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Invalid username/password.");
         }
         
-        UserDetailsDTO userDetails = mapper.map(user, UserDetailsDTO.class);
+        UserDetailsDto userDetails = mapper.map(user, UserDetailsDto.class);
         return userDetails;
     }
 

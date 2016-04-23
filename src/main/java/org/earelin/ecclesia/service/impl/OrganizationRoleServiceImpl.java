@@ -3,7 +3,7 @@ package org.earelin.ecclesia.service.impl;
 import org.dozer.Mapper;
 import org.earelin.ecclesia.repository.OrganizationRoleRepository;
 import org.earelin.ecclesia.service.OrganizationRoleService;
-import org.earelin.ecclesia.service.dto.OrganizationRoleDTO;
+import org.earelin.ecclesia.service.dto.OrganizationRoleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,12 +25,12 @@ public class OrganizationRoleServiceImpl implements OrganizationRoleService {
     }
 
     @Override
-    public void add(OrganizationRoleDTO organizationRole) {
+    public void add(OrganizationRoleDto organizationRole) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(OrganizationRoleDTO organizationRole) {
+    public void update(OrganizationRoleDto organizationRole) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -41,7 +41,7 @@ public class OrganizationRoleServiceImpl implements OrganizationRoleService {
 
     @Transactional(readOnly = true)
     @Override
-    public OrganizationRoleDTO get(long id) {
+    public OrganizationRoleDto get(long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

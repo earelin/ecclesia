@@ -2,12 +2,12 @@ package org.earelin.ecclesia.service.dto;
 
 import java.util.Date;
 import java.util.List;
-import org.earelin.ecclesia.service.dto.resource.ManagedFileDTO;
+import org.earelin.ecclesia.service.dto.resource.ManagedFileDto;
 
 /**
  *
  */
-public class UserDTO {
+public class UserDto {
     
     private long id;
     private String username;
@@ -17,7 +17,7 @@ public class UserDTO {
     private Date updated;
     private Date lastLogin;
     private boolean enabled;
-    private ManagedFileDTO avatar;
+    private ManagedFileDto avatar;
     private List<String> systemRoles;
 
     @Override
@@ -38,7 +38,7 @@ public class UserDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final UserDTO other = (UserDTO) obj;
+        final UserDto other = (UserDto) obj;
         if (this.id != other.id) {
             return false;
         }
@@ -109,11 +109,11 @@ public class UserDTO {
         this.enabled = enabled;
     }
 
-    public ManagedFileDTO getAvatar() {
+    public ManagedFileDto getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(ManagedFileDTO avatar) {
+    public void setAvatar(ManagedFileDto avatar) {
         this.avatar = avatar;
     }
 

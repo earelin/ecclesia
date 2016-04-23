@@ -3,7 +3,7 @@ package org.earelin.ecclesia.integration.service;
 import java.util.Date;
 import javax.validation.ConstraintViolationException;
 import org.earelin.ecclesia.service.UserService;
-import org.earelin.ecclesia.service.dto.UserDTO;
+import org.earelin.ecclesia.service.dto.UserDto;
 import org.earelin.ecclesia.service.exception.UserNotFoundException;
 import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
 import static org.junit.Assert.*;
@@ -36,7 +36,7 @@ public class UserServiceIntegrationTest {
         String username = "test user register";
         
         Date beforeRegister = new Date();
-        UserDTO user = instance.register(username, USER_EMAIL, USER_PASSWORD);
+        UserDto user = instance.register(username, USER_EMAIL, USER_PASSWORD);
         Date afterRegister = new Date();
         
         assertNotSame("Registered user id should not be 0", 0, user.getId());
@@ -76,8 +76,8 @@ public class UserServiceIntegrationTest {
     
     @Test
     public void getExistingUser() {
-         UserDTO user = instance.register("test get existing user", USER_EMAIL, USER_PASSWORD);         
-         UserDTO gettedUser = instance.get(user.getId());
+         UserDto user = instance.register("test get existing user", USER_EMAIL, USER_PASSWORD);         
+         UserDto gettedUser = instance.get(user.getId());
          assertThat(user, samePropertyValuesAs(gettedUser));
     }
     
@@ -88,7 +88,7 @@ public class UserServiceIntegrationTest {
     
     @Test
     public void updatingExistingUser() {
-        UserDTO user = instance.register("test updating existing user", USER_EMAIL, USER_PASSWORD);         
+        UserDto user = instance.register("test updating existing user", USER_EMAIL, USER_PASSWORD);         
         String updatedEmail = "updated.user@localhost.local";
         user.setEmail(updatedEmail);
         Date beforeUpdate = new Date();
@@ -103,7 +103,7 @@ public class UserServiceIntegrationTest {
     
     @Test(expected = UserNotFoundException.class)
     public void updatingNotExistingUser() {
-        UserDTO user = new UserDTO();
+        UserDto user = new UserDto();
         user.setId(100000);
         user.setUsername("test updating not existing user");
         user.setEmail("updated.not.existing.user@localhost.local");
@@ -112,21 +112,21 @@ public class UserServiceIntegrationTest {
 
     @Test(expected = ConstraintViolationException.class)
     public void updatedUserShouldHaveNotBlankName() {
-        UserDTO user = instance.register("test updating user blank name", USER_EMAIL, USER_PASSWORD);
+        UserDto user = instance.register("test updating user blank name", USER_EMAIL, USER_PASSWORD);
         user.setUsername("   ");
         instance.update(user);
     }
 
     @Test(expected = org.hibernate.exception.ConstraintViolationException.class)
     public void updatedUserShouldHaveValidEmail() {
-        UserDTO user = instance.register("test updating user blank name", USER_EMAIL, USER_PASSWORD);
+        UserDto user = instance.register("test updating user blank name", USER_EMAIL, USER_PASSWORD);
         user.setEmail("sadfasd");
         instance.update(user);
     }
     
     @Test(expected = UserNotFoundException.class)
     public void removeExistingUser() {
-        UserDTO user = instance.register("test remove existing user", USER_EMAIL, USER_PASSWORD);
+        UserDto user = instance.register("test remove existing user", USER_EMAIL, USER_PASSWORD);
         long userId = user.getId();
         instance.remove(userId);
         instance.get(userId);

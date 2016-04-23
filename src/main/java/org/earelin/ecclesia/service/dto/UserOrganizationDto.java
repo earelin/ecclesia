@@ -5,12 +5,12 @@ import java.util.Date;
 /**
  * User organization data transfer object
  */
-public class UserOrganizationDTO {
+public class UserOrganizationDto {
 
     private long id;
-    private OrganizationRoleDTO role;
-    private OrganizationDTO organization;
-    private UserDTO user;
+    private OrganizationRoleDto role;
+    private OrganizationDto organization;
+    private UserDto user;
     private Date created;
 
     @Override
@@ -31,7 +31,7 @@ public class UserOrganizationDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final UserOrganizationDTO other = (UserOrganizationDTO) obj;
+        final UserOrganizationDto other = (UserOrganizationDto) obj;
         if (this.id != other.id) {
             return false;
         }
@@ -46,27 +46,27 @@ public class UserOrganizationDTO {
         this.id = id;
     }
 
-    public OrganizationRoleDTO getRole() {
+    public OrganizationRoleDto getRole() {
         return role;
     }
 
-    public void setRole(OrganizationRoleDTO role) {
+    public void setRole(OrganizationRoleDto role) {
         this.role = role;
     }
 
-    public OrganizationDTO getOrganization() {
+    public OrganizationDto getOrganization() {
         return organization;
     }
 
-    public void setOrganization(OrganizationDTO organization) {
+    public void setOrganization(OrganizationDto organization) {
         this.organization = organization;
     }
 
-    public UserDTO getUser() {
+    public UserDto getUser() {
         return user;
     }
 
-    public void setUser(UserDTO user) {
+    public void setUser(UserDto user) {
         this.user = user;
     }
 

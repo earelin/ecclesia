@@ -4,7 +4,7 @@ import java.util.Date;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 import org.earelin.ecclesia.service.OrganizationService;
-import org.earelin.ecclesia.service.dto.OrganizationDTO;
+import org.earelin.ecclesia.service.dto.OrganizationDto;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
@@ -28,7 +28,7 @@ public class OrganizationServiceIntegrationTest {
 
     @Test
     public void createNewOrganization() {
-        OrganizationDTO organization = new OrganizationDTO();
+        OrganizationDto organization = new OrganizationDto();
         organization.setName(ORGANIZATION_NAME);
         
         Date beforeInsert = new Date();
@@ -47,14 +47,14 @@ public class OrganizationServiceIntegrationTest {
 
     @Test(expected = ConstraintViolationException.class)
     public void newOrganizationShouldHaveNotBlankName() {
-        OrganizationDTO organization = new OrganizationDTO();
+        OrganizationDto organization = new OrganizationDto();
         organization.setName("  ");
         instance.add(organization);
     }
 
     @Test
     public void updateExistingOrganization() {
-        OrganizationDTO organization = new OrganizationDTO();
+        OrganizationDto organization = new OrganizationDto();
         organization.setName(ORGANIZATION_NAME);
         instance.add(organization);
         
@@ -74,7 +74,7 @@ public class OrganizationServiceIntegrationTest {
 
     @Test(expected = ConstraintViolationException.class)
     public void updatedOrganizationShouldHaveNotBlankName() {
-        OrganizationDTO organization = new OrganizationDTO();
+        OrganizationDto organization = new OrganizationDto();
         organization.setName(ORGANIZATION_NAME);
         instance.add(organization);    
         organization.setName("   ");
@@ -83,7 +83,7 @@ public class OrganizationServiceIntegrationTest {
     
     @Test(expected = OrganizationNotFoundException.class)
     public void updateANoExistingOrganization() {
-        OrganizationDTO organization = new OrganizationDTO();
+        OrganizationDto organization = new OrganizationDto();
         organization.setId(100000);
         organization.setName(ORGANIZATION_NAME);
         instance.update(organization);
@@ -91,7 +91,7 @@ public class OrganizationServiceIntegrationTest {
 
     @Test(expected = OrganizationNotFoundException.class)
     public void removeExistingOrganization() {
-        OrganizationDTO organization = new OrganizationDTO();
+        OrganizationDto organization = new OrganizationDto();
         organization.setName(ORGANIZATION_NAME);
         instance.add(organization);      
         long organizationId = organization.getId();
@@ -108,11 +108,11 @@ public class OrganizationServiceIntegrationTest {
 
     @Test
     public void getExistingOrganization() {
-        OrganizationDTO organization = new OrganizationDTO();
+        OrganizationDto organization = new OrganizationDto();
         organization.setName(ORGANIZATION_NAME);
         instance.add(organization);
         
-        OrganizationDTO gottenOrganization = instance.get(organization.getId());
+        OrganizationDto gottenOrganization = instance.get(organization.getId());
         
         assertThat(organization, samePropertyValuesAs(gottenOrganization));
     }

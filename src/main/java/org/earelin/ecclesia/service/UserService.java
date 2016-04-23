@@ -1,16 +1,16 @@
 package org.earelin.ecclesia.service;
 
 import java.util.List;
-import org.earelin.ecclesia.service.dto.UserDTO;
+import org.earelin.ecclesia.service.dto.UserDto;
 
 /**
  * 
  */
 public interface UserService {
-    UserDTO register(String username, String email, String password);
-    void update(UserDTO user);
+    UserDto register(String username, String email, String password);
+    void update(UserDto user);
     void remove(long id);
-    UserDTO get(long id);
-    List<UserDTO> list();
-    List<UserDTO> list(int limit, int offset);
+    UserDto get(long id);
+    List<UserDto> list();
+    List<UserDto> list(int limit, int offset);
 }

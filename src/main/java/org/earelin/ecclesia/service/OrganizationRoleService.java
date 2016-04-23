@@ -1,14 +1,14 @@
 package org.earelin.ecclesia.service;
 
-import org.earelin.ecclesia.service.dto.OrganizationRoleDTO;
+import org.earelin.ecclesia.service.dto.OrganizationRoleDto;
 
 /**
  *
  * @author xcarriba
  */
 public interface OrganizationRoleService {
-    void add(OrganizationRoleDTO organizationRole);
-    void update(OrganizationRoleDTO organizationRole);
+    void add(OrganizationRoleDto organizationRole);
+    void update(OrganizationRoleDto organizationRole);
     void remove(long id);
-    OrganizationRoleDTO get(long id);
+    OrganizationRoleDto get(long id);
 }

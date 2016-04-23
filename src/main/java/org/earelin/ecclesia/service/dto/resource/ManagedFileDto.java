@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Managed file data transfer object
  */
-public class ManagedFileDTO {
+public class ManagedFileDto {
 
     private long id;
     private String mime;
@@ -30,7 +30,7 @@ public class ManagedFileDTO {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ManagedFileDTO other = (ManagedFileDTO) obj;
+        final ManagedFileDto other = (ManagedFileDto) obj;
         if (this.id != other.id) {
             return false;
         }

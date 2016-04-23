@@ -4,8 +4,8 @@ import java.util.Date;
 import javax.validation.ConstraintViolationException;
 import org.earelin.ecclesia.service.GroupService;
 import org.earelin.ecclesia.service.OrganizationService;
-import org.earelin.ecclesia.service.dto.GroupDTO;
-import org.earelin.ecclesia.service.dto.OrganizationDTO;
+import org.earelin.ecclesia.service.dto.GroupDto;
+import org.earelin.ecclesia.service.dto.OrganizationDto;
 import org.earelin.ecclesia.service.exception.GroupNotFoundException;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
@@ -26,7 +26,7 @@ public class GroupServiceIntegrationTest {
     private static final String GROUP_NAME = "Testing group";
     private static final String ORGANIZATION_NAME = "Testing groups organization";
     
-    private OrganizationDTO organization;
+    private OrganizationDto organization;
     
     @Autowired
     private GroupService instance;
@@ -36,14 +36,14 @@ public class GroupServiceIntegrationTest {
     
     @Before
     public void init() {
-        organization = new OrganizationDTO();
+        organization = new OrganizationDto();
         organization.setName(ORGANIZATION_NAME);
         organizationService.add(organization);
     }
     
     @Test
     public void createNewGroup() {
-        GroupDTO group = new GroupDTO();
+        GroupDto group = new GroupDto();
         group.setOrganization(organization);
         group.setName(GROUP_NAME);
 
@@ -63,7 +63,7 @@ public class GroupServiceIntegrationTest {
     
     @Test(expected = ConstraintViolationException.class)
     public void newGroupShouldHaveNotBlankName() {
-        GroupDTO group = new GroupDTO();
+        GroupDto group = new GroupDto();
         group.setOrganization(organization);
         group.setName("  ");
         instance.add(group);
@@ -71,14 +71,14 @@ public class GroupServiceIntegrationTest {
     
     @Test(expected = ConstraintViolationException.class)
     public void newGroupShouldBelongToAnOrganization() {
-        GroupDTO group = new GroupDTO();
+        GroupDto group = new GroupDto();
         group.setName(GROUP_NAME);
         instance.add(group);
     }
     
     @Test
     public void updateExistingGroup() {
-        GroupDTO group = new GroupDTO();
+        GroupDto group = new GroupDto();
         group.setOrganization(organization);
         group.setName(GROUP_NAME);
         instance.add(group);
@@ -89,7 +89,7 @@ public class GroupServiceIntegrationTest {
         Date beforeUpdate = new Date();
         instance.update(group); 
         Date afterUpdate = new Date();
-        GroupDTO updatedGroup = instance.get(groupId);
+        GroupDto updatedGroup = instance.get(groupId);
         
         assertTrue("Updated group updated field should have current date", 
                 updatedGroup.getUpdated().compareTo(beforeUpdate) >= 0
@@ -100,7 +100,7 @@ public class GroupServiceIntegrationTest {
     
     @Test(expected = GroupNotFoundException.class)
     public void updateNotExistingGroup() {
-        GroupDTO group = new GroupDTO();
+        GroupDto group = new GroupDto();
         group.setId(100000);
         group.setOrganization(organization);
         group.setName(GROUP_NAME);
@@ -109,7 +109,7 @@ public class GroupServiceIntegrationTest {
     
     @Test(expected = ConstraintViolationException.class)
     public void updatedGroupShouldHaveNotBlankName() {
-        GroupDTO group = new GroupDTO();
+        GroupDto group = new GroupDto();
         group.setOrganization(organization);
         group.setName(GROUP_NAME);
         instance.add(group);    
@@ -119,7 +119,7 @@ public class GroupServiceIntegrationTest {
     
     @Test(expected = ConstraintViolationException.class)
     public void updatedGroupShouldBelongToAnOrganization() {
-        GroupDTO group = new GroupDTO();
+        GroupDto group = new GroupDto();
         group.setOrganization(organization);
         group.setName(GROUP_NAME);
         instance.add(group);    
@@ -129,7 +129,7 @@ public class GroupServiceIntegrationTest {
     
     @Test(expected = GroupNotFoundException.class)
     public void removeExistingGroup() {
-        GroupDTO group = new GroupDTO();
+        GroupDto group = new GroupDto();
         group.setOrganization(organization);
         group.setName(GROUP_NAME);
         instance.add(group);      
@@ -147,12 +147,12 @@ public class GroupServiceIntegrationTest {
     
     @Test
     public void getExistingGroup() {
-        GroupDTO group = new GroupDTO();
+        GroupDto group = new GroupDto();
         group.setOrganization(organization);
         group.setName(GROUP_NAME);
         instance.add(group);
         
-        GroupDTO gottenGroup = instance.get(group.getId());
+        GroupDto gottenGroup = instance.get(group.getId());
         
         assertThat(group, samePropertyValuesAs(gottenGroup));
     }

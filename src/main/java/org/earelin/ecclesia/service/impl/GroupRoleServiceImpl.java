@@ -3,7 +3,7 @@ package org.earelin.ecclesia.service.impl;
 import org.dozer.Mapper;
 import org.earelin.ecclesia.repository.GroupRoleRepository;
 import org.earelin.ecclesia.service.GroupRoleService;
-import org.earelin.ecclesia.service.dto.GroupRoleDTO;
+import org.earelin.ecclesia.service.dto.GroupRoleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,12 +25,12 @@ public class GroupRoleServiceImpl implements GroupRoleService {
     }
 
     @Override
-    public void add(GroupRoleDTO groupRole) {
+    public void add(GroupRoleDto groupRole) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(GroupRoleDTO groupRole) {
+    public void update(GroupRoleDto groupRole) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -41,7 +41,7 @@ public class GroupRoleServiceImpl implements GroupRoleService {
 
     @Transactional(readOnly = true)
     @Override
-    public GroupRoleDTO get(long id) {
+    public GroupRoleDto get(long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -1,7 +1,7 @@
 package org.earelin.ecclesia.unit.service.dto;
 
 import org.earelin.ecclesia.domain.Group;
-import org.earelin.ecclesia.service.dto.OrganizationRoleDTO;
+import org.earelin.ecclesia.service.dto.OrganizationRoleDto;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,11 +11,11 @@ import org.junit.Test;
  */
 public class OrganizationRoleDTOTest {
     
-    OrganizationRoleDTO role;
+    OrganizationRoleDto role;
     
     @Before
     public void initialize() {
-        role = new OrganizationRoleDTO();
+        role = new OrganizationRoleDto();
         role.setId(1);
     }
     
@@ -27,7 +27,7 @@ public class OrganizationRoleDTOTest {
     
     @Test
     public void organizationRolesWithSameIdShouldBeEquals() {
-        OrganizationRoleDTO role1 = new OrganizationRoleDTO();
+        OrganizationRoleDto role1 = new OrganizationRoleDto();
         role1.setId(1);
         assertTrue("Organization roles with same id should be equals",
                 role.equals(role1));
@@ -35,7 +35,7 @@ public class OrganizationRoleDTOTest {
     
     @Test
     public void organizationRolesWithDifferentIdShouldNotBeEquals() {
-        OrganizationRoleDTO role1 = new OrganizationRoleDTO();
+        OrganizationRoleDto role1 = new OrganizationRoleDto();
         role1.setId(2);
         assertFalse("Organization roles with different id should not be equals",
                 role.equals(role1));

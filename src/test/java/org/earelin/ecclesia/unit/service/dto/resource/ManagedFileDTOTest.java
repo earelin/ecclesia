@@ -3,7 +3,7 @@ package org.earelin.ecclesia.unit.service.dto.resource;
 import org.earelin.ecclesia.unit.domain.resource.*;
 import org.earelin.ecclesia.domain.Organization;
 import org.earelin.ecclesia.domain.resource.ManagedFile;
-import org.earelin.ecclesia.service.dto.resource.ManagedFileDTO;
+import org.earelin.ecclesia.service.dto.resource.ManagedFileDto;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,11 +13,11 @@ import org.junit.Test;
  */
 public class ManagedFileDTOTest {
     
-    ManagedFileDTO file;
+    ManagedFileDto file;
     
     @Before
     public void initialize() {
-        file = new ManagedFileDTO();
+        file = new ManagedFileDto();
         file.setId(1);
     }
 
@@ -29,7 +29,7 @@ public class ManagedFileDTOTest {
     
     @Test
     public void managedFilesWithSameIdShouldBeEquals() {
-        ManagedFileDTO file1 = new ManagedFileDTO();
+        ManagedFileDto file1 = new ManagedFileDto();
         file1.setId(1);
         assertTrue("Managed files with same id should be equals",
                 file.equals(file1));
@@ -39,7 +39,7 @@ public class ManagedFileDTOTest {
     
     @Test
     public void managedFilesWithDifferentIdShouldNotBeEquals() {
-        ManagedFileDTO file1 = new ManagedFileDTO();
+        ManagedFileDto file1 = new ManagedFileDto();
         file1.setId(2);
         assertFalse("Managed files with different id should not be equals",
                 file.equals(file1));
