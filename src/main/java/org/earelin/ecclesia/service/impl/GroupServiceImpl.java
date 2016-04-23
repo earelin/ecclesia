@@ -12,10 +12,8 @@ import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.dto.GroupDto;
 import org.earelin.ecclesia.service.dto.OrganizationDto;
 import org.earelin.ecclesia.service.exception.GroupNotFoundException;
-import org.earelin.ecclesia.service.exception.GroupWithoutOrganizationException;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
-import org.earelin.ecclesia.service.exception.ParentGroupBelongsToDiferentOrganizationException;
-import org.earelin.ecclesia.service.exception.ParentGroupNotFoundException;
+import org.earelin.ecclesia.service.exception.ValidationException;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -43,26 +41,7 @@ public class GroupServiceImpl implements GroupService {
         groupDto.setCreated(now);
         groupDto.setUpdated(now);
         
-        OrganizationDto organization = groupDto.getOrganization();
-        if (organization == null) {
-            throw new GroupWithoutOrganizationException();
-        }
-        
-        if (!organizationService.exists(organization.getId())) {
-            throw new OrganizationNotFoundException(organization.getId());
-        }
-        
-        GroupDto parentGroupDto = groupDto.getParent();
-        if (parentGroupDto != null) {            
-            Group parentGroup = repository.get(parentGroupDto.getId());
-            if (parentGroup == null) {
-                throw new ParentGroupNotFoundException();
-            } 
-            if (parentGroup.getOrganization().getId()
-                    != groupDto.getOrganization().getId()) {
-                throw new ParentGroupBelongsToDiferentOrganizationException();
-            }
-        }
+        validate(groupDto);
         
         Group group = mapper.map(groupDto, Group.class);
         repository.add(group);
@@ -80,26 +59,7 @@ public class GroupServiceImpl implements GroupService {
             throw new GroupNotFoundException(groupDto.getId());
         }
         
-        OrganizationDto organization = groupDto.getOrganization();
-        if (organization == null) {
-            throw new GroupWithoutOrganizationException();
-        }
-        
-        if (!organizationService.exists(organization.getId())) {
-            throw new OrganizationNotFoundException(organization.getId());
-        }
-        
-        GroupDto parentGroupDto = groupDto.getParent();
-        if (parentGroupDto != null) {            
-            Group parentGroup = repository.get(parentGroupDto.getId());
-            if (parentGroup == null) {
-                throw new ParentGroupNotFoundException();
-            } 
-            if (parentGroup.getOrganization().getId()
-                    != groupDto.getOrganization().getId()) {
-                throw new ParentGroupBelongsToDiferentOrganizationException();
-            }
-        }
+        validate(groupDto);
         
         mapper.map(groupDto, group);
         
@@ -145,6 +105,33 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public List<GroupDto> list(int limit, int offset) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    /**
+     * Validates critical errors
+     * @param groupDto 
+     */
+    private void validate(GroupDto groupDto) {
+        OrganizationDto organization = groupDto.getOrganization();
+        if (organization == null) {
+            throw new ValidationException("Error validating GroupDto: field organization is null");
+        }
+        
+        if (!organizationService.exists(organization.getId())) {
+            throw new OrganizationNotFoundException(organization.getId());
+        }
+        
+        GroupDto parentGroupDto = groupDto.getParent();
+        if (parentGroupDto != null) {            
+            Group parentGroup = repository.get(parentGroupDto.getId());
+            if (parentGroup == null) {
+                throw new ValidationException("Error validating GroupDto: field parent does not exist");
+            } 
+            if (parentGroup.getOrganization().getId()
+                    != groupDto.getOrganization().getId()) {
+                throw new ValidationException("Error validating GroupDto: field parent does not belong to a organization");
+            }
+        }
     }
     
 }

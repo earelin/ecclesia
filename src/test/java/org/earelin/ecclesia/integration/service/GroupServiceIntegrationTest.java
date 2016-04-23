@@ -7,10 +7,8 @@ import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.dto.GroupDto;
 import org.earelin.ecclesia.service.dto.OrganizationDto;
 import org.earelin.ecclesia.service.exception.GroupNotFoundException;
-import org.earelin.ecclesia.service.exception.GroupWithoutOrganizationException;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
-import org.earelin.ecclesia.service.exception.ParentGroupBelongsToDiferentOrganizationException;
-import org.earelin.ecclesia.service.exception.ParentGroupNotFoundException;
+import org.earelin.ecclesia.service.exception.ValidationException;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
 import org.junit.Before;
@@ -89,7 +87,7 @@ public class GroupServiceIntegrationTest {
         instance.add(group);
     }
     
-    @Test(expected = GroupWithoutOrganizationException.class)
+    @Test(expected = ValidationException.class)
     public void newGroupShouldBelongToAnOrganization() {
         GroupDto group = new GroupDto();
         group.setName(GROUP_NAME);
@@ -106,7 +104,7 @@ public class GroupServiceIntegrationTest {
         instance.add(group);
     }
     
-    @Test(expected = ParentGroupNotFoundException.class)
+    @Test(expected = ValidationException.class)
     public void newGroupParentShouldExists() {
         GroupDto parent = new GroupDto();
         parent.setOrganization(organization);
@@ -120,7 +118,7 @@ public class GroupServiceIntegrationTest {
         instance.add(group);
     }
     
-    @Test(expected = ParentGroupBelongsToDiferentOrganizationException.class)
+    @Test(expected = ValidationException.class)
     public void newGroupParentShouldBelongToTheSameOrganization() {
         OrganizationDto organization1 = new OrganizationDto();
         organization1.setName(ORGANIZATION_NAME);
@@ -196,7 +194,7 @@ public class GroupServiceIntegrationTest {
         instance.update(group);
     }
     
-    @Test(expected = GroupWithoutOrganizationException.class)
+    @Test(expected = ValidationException.class)
     public void updatedGroupShouldBelongToAnOrganization() {
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
@@ -220,7 +218,7 @@ public class GroupServiceIntegrationTest {
         instance.update(group);
     }
     
-    @Test(expected = ParentGroupNotFoundException.class)
+    @Test(expected = ValidationException.class)
     public void updatedGroupParentShouldExists() {
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
@@ -236,7 +234,7 @@ public class GroupServiceIntegrationTest {
         instance.update(group);
     }
     
-    @Test(expected = ParentGroupBelongsToDiferentOrganizationException.class)
+    @Test(expected = ValidationException.class)
     public void updatedGroupParentShouldBelongToTheSameOrganization() {
         GroupDto group = new GroupDto();
         group.setOrganization(organization);

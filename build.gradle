@@ -115,6 +115,11 @@ jacocoTestReport {
     xml.enabled = true
     html.enabled = true
   }
+  afterEvaluate {
+    classDirectories = files(classDirectories.files.collect {
+      fileTree(dir: it, exclude: 'org/earelin/ecclesia/config')
+    })
+  }
 }
 
 check.dependsOn jacocoTestReport
