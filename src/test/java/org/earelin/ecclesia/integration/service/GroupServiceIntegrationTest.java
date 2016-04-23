@@ -66,6 +66,21 @@ public class GroupServiceIntegrationTest {
                 organization, group.getOrganization());
     }
     
+    @Test
+    public void createNewGroupWithParent() {
+        GroupDto group = new GroupDto();
+        group.setOrganization(organization);
+        group.setName(GROUP_NAME);
+        
+        GroupDto parent = new GroupDto();
+        parent.setOrganization(organization);
+        parent.setName("Parent group name");
+        instance.add(parent);
+        
+        group.setParent(parent);
+        instance.add(group);
+    }
+    
     @Test(expected = ConstraintViolationException.class)
     public void newGroupShouldHaveNotBlankName() {
         GroupDto group = new GroupDto();
@@ -146,6 +161,22 @@ public class GroupServiceIntegrationTest {
         assertEquals(updatedName, group.getName());
     }
     
+    @Test
+    public void updateExistingGroupWithParent() {
+        GroupDto group = new GroupDto();
+        group.setOrganization(organization);
+        group.setName(GROUP_NAME);
+        instance.add(group);
+        
+        GroupDto parent = new GroupDto();
+        parent.setOrganization(organization);
+        parent.setName("Parent group name");
+        instance.add(parent);
+        
+        group.setParent(parent);
+        instance.update(group);
+    }
+    
     @Test(expected = GroupNotFoundException.class)
     public void updateNotExistingGroup() {
         GroupDto group = new GroupDto();
@@ -185,6 +216,43 @@ public class GroupServiceIntegrationTest {
         OrganizationDto organization1 = new OrganizationDto();
         organization1.setName(ORGANIZATION_NAME);
         group.setOrganization(organization1);
+        
+        instance.update(group);
+    }
+    
+    @Test(expected = ParentGroupNotFoundException.class)
+    public void updatedGroupParentShouldExists() {
+        GroupDto group = new GroupDto();
+        group.setOrganization(organization);
+        group.setName(GROUP_NAME);
+        instance.add(group);
+        
+        GroupDto parent = new GroupDto();
+        parent.setOrganization(organization);
+        parent.setName("Parent group name");
+        
+        group.setParent(parent);
+        
+        instance.update(group);
+    }
+    
+    @Test(expected = ParentGroupBelongsToDiferentOrganizationException.class)
+    public void updatedGroupParentShouldBelongToTheSameOrganization() {
+        GroupDto group = new GroupDto();
+        group.setOrganization(organization);
+        group.setName(GROUP_NAME);
+        instance.add(group);
+        
+        OrganizationDto organization1 = new OrganizationDto();
+        organization1.setName(ORGANIZATION_NAME);
+        organizationService.add(organization1);
+        
+        GroupDto parent = new GroupDto();
+        parent.setOrganization(organization1);
+        parent.setName("Parent group name");
+        instance.add(parent);
+        
+        group.setParent(parent);
         
         instance.update(group);
     }
