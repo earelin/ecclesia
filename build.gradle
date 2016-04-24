@@ -59,6 +59,9 @@ dependencies {
   
   // file detection and parsing
   compile 'org.apache.tika:tika-java7:1.+'
+  
+  // file manipulation
+  compile 'commons-io:commons-io:2.+'
 	
 	// include in compile only, exclude in the war
 	providedCompile 'javax.servlet:servlet-api:2.5'

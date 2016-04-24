@@ -1,11 +1,16 @@
 package org.earelin.ecclesia.service.impl.resource;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.tika.Tika;
+import org.earelin.ecclesia.service.exception.FileNotFoundException;
 import org.earelin.ecclesia.service.exception.UnhandledFileProtocol;
 import org.earelin.ecclesia.service.resource.FileService;
 
@@ -57,8 +62,19 @@ public class FileServiceImpl implements FileService {
      * @param uri
      * @return 
      */
-    private String resolveUriToPath(String uri) throws UnhandledFileProtocol {
-        throw new UnsupportedOperationException("Not supported yet.");
+    private String resolveUriToPath(String uri) throws UnhandledFileProtocol, URISyntaxException {
+        final URI parsedUri = new URI(uri);        
+        final String scheme = parsedUri.getScheme();
+        
+        if (scheme.equals(PUBLIC_PROTOCOL)) {
+            return publicFileFolder + parsedUri.getPath();
+        }
+        
+        if (scheme.equals(PRIVATE_PROTOCOL)) {
+            return privateFileFolder + parsedUri.getPath();
+        }
+        
+        throw new UnhandledFileProtocol();
     }
     
     /**
@@ -66,38 +82,93 @@ public class FileServiceImpl implements FileService {
      * @param uri
      * @return 
      */
-    private String resolveUriToUrl(String uri) throws UnhandledFileProtocol {
-        throw new UnsupportedOperationException("Not supported yet.");
+    private String resolveUriToUrl(String uri) throws UnhandledFileProtocol, URISyntaxException {
+        final URI parsedUri = new URI(uri);        
+        final String scheme = parsedUri.getScheme();
+        
+        if (scheme.equals(PUBLIC_PROTOCOL)) {
+            return publicFilesBaseURL + parsedUri.getPath();
+        }
+        
+        if (scheme.equals(PRIVATE_PROTOCOL)) {
+            return PRIVATE_FILES_URL_PATH + parsedUri.getPath();
+        }
+        
+        throw new UnhandledFileProtocol();
     }
 
     @Override
-    public File get(String uri) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public File get(String uri) throws Exception {
+        final String stringPath = resolveUriToPath(uri);
+        Path path = Paths.get(stringPath);
+        
+        if (!Files.exists(path)) {
+            throw new FileNotFoundException();
+        }
+        
+        return new File(stringPath);
     }
 
     @Override
-    public String getUrl(String uri) throws UnhandledFileProtocol {
+    public String getUrl(String uri) throws Exception {
         return resolveUriToUrl(uri);
     }
 
     @Override
-    public String getPath(String uri) throws UnhandledFileProtocol {
+    public String getPath(String uri) throws Exception {
         return resolveUriToPath(uri);
     }
 
     @Override
-    public String getMimeType(File file) throws IOException {
+    public String getMimeType(File file) throws Exception {
         return tika.detect(file);
     }
 
     @Override
-    public String save(File file, String folderUri) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String save(File file, String folderUri) throws Exception {
+        final String folderStringPath = resolveUriToPath(folderUri);
+        final Path folderPath = Paths.get(folderStringPath);
+        
+        // Create folder if no exists
+        if (!Files.exists(folderPath)) {
+            Files.createDirectories(folderPath);
+        }
+        
+        // Check colisions with other
+        String fileName = file.getName();
+        String fileStringPath = folderStringPath + '/' + fileName;
+        Path filePath = Paths.get(fileStringPath);
+
+        if (Files.exists(filePath)) {
+            int i = 1;
+            String tmpFileName;
+            
+            do {
+                String fileExtension = FilenameUtils.getExtension(fileName);
+                String fileBaseName = FilenameUtils.getBaseName(fileName);
+                tmpFileName = fileBaseName + '_' + i + '.' + fileExtension;
+                i++;
+            } while (Files.exists(Paths.get(folderStringPath + '/' + tmpFileName)));
+            
+            fileName = tmpFileName;
+            filePath = Paths.get(folderStringPath + '/' + tmpFileName);
+        }
+        
+        Files.copy(new FileInputStream(file), filePath);
+        
+        return folderUri + '/' + fileName;
     }
 
     @Override
-    public String delete(String uri) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(String uri) throws Exception {
+        final String folderStringPath = resolveUriToPath(uri);
+        Path filePath = Paths.get(folderStringPath);
+        
+        if (!Files.exists(filePath)) {
+            throw new FileNotFoundException();
+        }
+        
+        Files.delete(filePath);
     }
 
 }

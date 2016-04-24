@@ -1,12 +1,9 @@
 package org.earelin.ecclesia.integration.service.resource;
 
 import java.io.File;
-import java.io.IOException;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.resource.FileService;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +26,7 @@ public class FileServiceIntegrationTest {
     private OrganizationService organizationService;
     
     @Test
-    public void fileTypeDetection() throws IOException {
+    public void fileTypeDetection() throws Exception {
         final String[] extensions = {"gif", "jpg", "pdf", "png"};
         final String[] mimeTypes = {"image/gif", "image/jpeg", "application/pdf", "image/png"};
         
