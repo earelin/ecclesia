@@ -122,4 +122,18 @@ public class OrganizationServiceIntegrationTest {
         instance.get(100000);        
     }
     
+    @Test
+    public void checkThanAnOrganizationExists() {
+        OrganizationDto organization = new OrganizationDto();
+        organization.setName(ORGANIZATION_NAME);
+        instance.add(organization);
+        
+        assertTrue(instance.exists(organization.getId()));
+    }
+    
+    @Test
+    public void checkThanAnOrganizationDoesNoExist() {
+        assertFalse(instance.exists(1000000));
+    }
+    
 }

@@ -285,4 +285,19 @@ public class GroupServiceIntegrationTest {
         assertThat(group, samePropertyValuesAs(gottenGroup));
     }
     
+    @Test
+    public void checkThanAGroupExists() {
+        GroupDto group = new GroupDto();
+        group.setOrganization(organization);
+        group.setName(GROUP_NAME);
+        instance.add(group);
+        
+        assertTrue(instance.exists(group.getId()));
+    }
+    
+    @Test
+    public void checkThanAGroupDoesNoExist() {
+        assertFalse(instance.exists(1000000));
+    }
+    
 }
