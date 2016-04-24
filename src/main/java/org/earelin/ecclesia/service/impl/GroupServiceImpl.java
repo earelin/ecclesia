@@ -11,8 +11,7 @@ import org.earelin.ecclesia.repository.GroupRepository;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.dto.GroupDto;
 import org.earelin.ecclesia.service.dto.OrganizationDto;
-import org.earelin.ecclesia.service.exception.GroupNotFoundException;
-import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
+import org.earelin.ecclesia.service.exception.EntityNotFoundException;
 import org.earelin.ecclesia.service.exception.ValidationException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,7 +55,7 @@ public class GroupServiceImpl implements GroupService {
         
         Group group = repository.get(groupDto.getId());        
         if (group == null) {
-            throw new GroupNotFoundException(groupDto.getId());
+            throw new EntityNotFoundException(groupDto.getId());
         }
         
         validate(groupDto);
@@ -71,7 +70,7 @@ public class GroupServiceImpl implements GroupService {
         Group group = repository.get(id);
         
         if (group == null) {
-            throw new GroupNotFoundException(id);
+            throw new EntityNotFoundException(id);
         }
         
         repository.remove(group);
@@ -83,7 +82,7 @@ public class GroupServiceImpl implements GroupService {
         Group group = repository.get(id);
         
         if (group == null) {
-            throw new GroupNotFoundException(id);
+            throw new EntityNotFoundException(id);
         }
         
         return mapper.map(group, GroupDto.class);
@@ -118,7 +117,7 @@ public class GroupServiceImpl implements GroupService {
         }
         
         if (!organizationService.exists(organization.getId())) {
-            throw new OrganizationNotFoundException(organization.getId());
+            throw new EntityNotFoundException(organization.getId());
         }
         
         GroupDto parentGroupDto = groupDto.getParent();

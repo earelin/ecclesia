@@ -7,12 +7,12 @@ import org.earelin.ecclesia.criteria.FilteringCriteria;
 import org.earelin.ecclesia.criteria.OrderingCriteria;
 import org.earelin.ecclesia.domain.Organization;
 import org.earelin.ecclesia.service.OrganizationService;
-import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.service.dto.OrganizationDto;
 import org.springframework.transaction.annotation.Transactional;
 import org.earelin.ecclesia.repository.OrganizationRepository;
+import org.earelin.ecclesia.service.exception.EntityNotFoundException;
 
 /**
  * Organization service implementation
@@ -49,7 +49,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         
         Organization organization = repository.get(organizationDTO.getId());        
         if (organization == null) {
-            throw new OrganizationNotFoundException(organizationDTO.getId());
+            throw new EntityNotFoundException(organizationDTO.getId());
         }        
         mapper.map(organizationDTO, organization);
         
@@ -61,7 +61,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         Organization organization = repository.get(id);
         
         if (organization == null) {
-            throw new OrganizationNotFoundException(id);
+            throw new EntityNotFoundException(id);
         }
         
         repository.remove(organization);
@@ -73,7 +73,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         Organization organization = repository.get(id);
         
         if (organization == null) {
-            throw new OrganizationNotFoundException(id);
+            throw new EntityNotFoundException(id);
         }
         
         return mapper.map(organization, OrganizationDto.class);

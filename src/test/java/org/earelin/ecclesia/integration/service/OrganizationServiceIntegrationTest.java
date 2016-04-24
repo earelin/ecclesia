@@ -4,9 +4,9 @@ import java.util.Date;
 import javax.validation.ConstraintViolationException;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.dto.OrganizationDto;
+import org.earelin.ecclesia.service.exception.EntityNotFoundException;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
-import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +80,7 @@ public class OrganizationServiceIntegrationTest {
         instance.update(organization);
     }
     
-    @Test(expected = OrganizationNotFoundException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void updateANoExistingOrganization() {
         OrganizationDto organization = new OrganizationDto();
         organization.setId(100000);
@@ -88,7 +88,7 @@ public class OrganizationServiceIntegrationTest {
         instance.update(organization);
     }
 
-    @Test(expected = OrganizationNotFoundException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void removeExistingOrganization() {
         OrganizationDto organization = new OrganizationDto();
         organization.setName(ORGANIZATION_NAME);
@@ -100,7 +100,7 @@ public class OrganizationServiceIntegrationTest {
         instance.get(organizationId);
     }
     
-    @Test(expected = OrganizationNotFoundException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void removeNoExistingOrganization() {
         instance.remove(100000);
     }
@@ -116,7 +116,7 @@ public class OrganizationServiceIntegrationTest {
         assertThat(organization, samePropertyValuesAs(gottenOrganization));
     }
     
-    @Test(expected = OrganizationNotFoundException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void getNotExistingOrganization() {
         instance.get(100000);        
     }

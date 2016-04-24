@@ -1,7 +1,6 @@
 package org.earelin.ecclesia.integration.service.resource;
 
 import java.io.File;
-import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.resource.FileService;
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -21,9 +20,6 @@ public class FileServiceIntegrationTest {
     
     @Autowired
     private FileService instance;
-    
-    @Autowired
-    private OrganizationService organizationService;
     
     @Test
     public void fileTypeDetection() throws Exception {

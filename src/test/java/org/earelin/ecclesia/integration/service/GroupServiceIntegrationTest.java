@@ -6,8 +6,7 @@ import org.earelin.ecclesia.service.GroupService;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.dto.GroupDto;
 import org.earelin.ecclesia.service.dto.OrganizationDto;
-import org.earelin.ecclesia.service.exception.GroupNotFoundException;
-import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
+import org.earelin.ecclesia.service.exception.EntityNotFoundException;
 import org.earelin.ecclesia.service.exception.ValidationException;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
@@ -93,7 +92,7 @@ public class GroupServiceIntegrationTest {
         instance.add(group);
     }
     
-    @Test(expected = OrganizationNotFoundException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void newGroupShouldBelongToAnExistingOrganization() {
         OrganizationDto organization = new OrganizationDto();
         organization.setName(ORGANIZATION_NAME);
@@ -174,7 +173,7 @@ public class GroupServiceIntegrationTest {
         instance.update(group);
     }
     
-    @Test(expected = GroupNotFoundException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void updateNotExistingGroup() {
         GroupDto group = new GroupDto();
         group.setId(100000);
@@ -203,7 +202,7 @@ public class GroupServiceIntegrationTest {
         instance.update(group);
     }
     
-    @Test(expected = OrganizationNotFoundException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void updatedGroupShouldBelongToAnExistingOrganization() {
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
@@ -254,7 +253,7 @@ public class GroupServiceIntegrationTest {
         instance.update(group);
     }
     
-    @Test(expected = GroupNotFoundException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void removeExistingGroup() {
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
@@ -267,7 +266,7 @@ public class GroupServiceIntegrationTest {
         instance.get(groupId);
     }
     
-    @Test(expected = GroupNotFoundException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void removeNotExistingGroup() {
         instance.remove(100000);
     }

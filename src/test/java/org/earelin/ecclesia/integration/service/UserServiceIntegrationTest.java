@@ -4,7 +4,7 @@ import java.util.Date;
 import javax.validation.ConstraintViolationException;
 import org.earelin.ecclesia.service.UserService;
 import org.earelin.ecclesia.service.dto.UserDto;
-import org.earelin.ecclesia.service.exception.UserNotFoundException;
+import org.earelin.ecclesia.service.exception.EntityNotFoundException;
 import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
@@ -81,7 +81,7 @@ public class UserServiceIntegrationTest {
          assertThat(user, samePropertyValuesAs(gettedUser));
     }
     
-    @Test(expected = UserNotFoundException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void getNotExistingUser() {
         instance.get(100000);
     }
@@ -101,7 +101,7 @@ public class UserServiceIntegrationTest {
         assertEquals(updatedEmail, user.getEmail());
     }
     
-    @Test(expected = UserNotFoundException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void updatingNotExistingUser() {
         UserDto user = new UserDto();
         user.setId(100000);
@@ -117,14 +117,14 @@ public class UserServiceIntegrationTest {
         instance.update(user);
     }
 
-    @Test(expected = org.hibernate.exception.ConstraintViolationException.class)
+    @Test(expected = ConstraintViolationException.class)
     public void updatedUserShouldHaveValidEmail() {
         UserDto user = instance.register("test updating user blank name", USER_EMAIL, USER_PASSWORD);
         user.setEmail("sadfasd");
         instance.update(user);
     }
     
-    @Test(expected = UserNotFoundException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void removeExistingUser() {
         UserDto user = instance.register("test remove existing user", USER_EMAIL, USER_PASSWORD);
         long userId = user.getId();
@@ -132,7 +132,7 @@ public class UserServiceIntegrationTest {
         instance.get(userId);
     }
     
-    @Test(expected = UserNotFoundException.class)
+    @Test(expected = EntityNotFoundException.class)
     public void removeNotExistingUser() {
         instance.remove(100000);
     }

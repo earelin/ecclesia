@@ -1,9 +1,14 @@
 package org.earelin.ecclesia.service.impl.resource;
 
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import org.dozer.Mapper;
+import org.earelin.ecclesia.domain.resource.ManagedFile;
 import org.earelin.ecclesia.repository.resource.ManagedFileRepository;
 import org.earelin.ecclesia.service.dto.resource.ManagedFileDto;
+import org.earelin.ecclesia.service.exception.EntityNotFoundException;
 import org.earelin.ecclesia.service.resource.FileService;
 import org.earelin.ecclesia.service.resource.ManagedFileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +35,33 @@ public class ManagedFileServiceImpl implements ManagedFileService {
     }            
 
     @Override
-    public void add(File file) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void add(File file) throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("public:///yyyy/MM/dd");
+        String dateString = formatter.format(LocalDateTime.now());
+        add(file, dateString);
     }
 
     @Override
-    public void remove(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void add(File file, String folderUri) throws Exception {
+        ManagedFile fileEntity = new ManagedFile();
+        fileEntity.setCreated(new Date());
+        fileEntity.setMime(fileService.getMimeType(file));
+        
+        String writtenFileUri = fileService.save(file, folderUri);
+        fileEntity.setUri(writtenFileUri);
+        
+        repository.add(fileEntity);
+    }
+
+    @Override
+    public void remove(long id) throws Exception {
+        ManagedFile file = repository.get(id);
+        
+        if (file == null) {
+            throw new EntityNotFoundException(id);
+        }
+        
+        repository.remove(file);
     }
 
     @Transactional(readOnly = true)

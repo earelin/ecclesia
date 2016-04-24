@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.repository.UserRepository;
 import org.earelin.ecclesia.service.dto.UserDto;
-import org.earelin.ecclesia.service.exception.UserNotFoundException;
+import org.earelin.ecclesia.service.exception.EntityNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
         User user = repository.get(userId);
         
         if (user == null) {
-            throw new UserNotFoundException(userId);
+            throw new EntityNotFoundException(userId);
         }
         
         userDTO.setUpdated(new Date());
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
         User user = repository.get(id);
         
         if (user == null) {
-            throw new UserNotFoundException(id);
+            throw new EntityNotFoundException(id);
         }
         
         repository.remove(user);
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
         User user = repository.get(id);
         
         if (user == null) {
-            throw new UserNotFoundException(id);
+            throw new EntityNotFoundException(id);
         }
         
         return mapper.map(user, UserDto.class);
