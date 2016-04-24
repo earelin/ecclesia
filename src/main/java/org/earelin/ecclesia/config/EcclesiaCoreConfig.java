@@ -1,8 +1,10 @@
 package org.earelin.ecclesia.config;
 
+import java.io.IOException;
 import java.util.Properties;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.tika.Tika;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.earelin.ecclesia.service.impl.resource.FileServiceImpl;
@@ -69,9 +71,14 @@ public class EcclesiaCoreConfig {
     }
     
     @Bean
-    public FileService fileService() {
+    public Tika tika() {
+        return new Tika();
+    }
+    
+    @Bean
+    public FileService fileService(Tika tika) throws IOException {
         return new FileServiceImpl(privateFilesFolder, publicFilesFolder,
-                publicFilesURL);
+                publicFilesURL, tika);
     }
     
     @Bean

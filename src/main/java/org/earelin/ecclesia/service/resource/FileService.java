@@ -1,6 +1,8 @@
 package org.earelin.ecclesia.service.resource;
 
 import java.io.File;
+import java.io.IOException;
+import org.earelin.ecclesia.service.exception.UnhandledFileProtocol;
 
 /**
  * File service
@@ -8,9 +10,10 @@ import java.io.File;
  * Manage low level file operations 
  */
 public interface FileService {
-    String getMimeType(File file);
-    String getFile(String uri);
-    String getFileUrl(String uri);
-    String getFilePath(String uri);
-    String saveFile(File file, String folderUri);
+    File get(String uri) throws IOException, UnhandledFileProtocol;
+    String getUrl(String uri) throws UnhandledFileProtocol;
+    String getPath(String uri) throws UnhandledFileProtocol;
+    String getMimeType(File file) throws IOException;
+    String save(File file, String folderUri) throws IOException, UnhandledFileProtocol;
+    String delete(String uri) throws IOException, UnhandledFileProtocol;
 }
