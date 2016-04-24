@@ -56,6 +56,9 @@ dependencies {
   
   // image transformation
   compile 'net.coobird:thumbnailator:0.4.8'
+  
+  // file detection and parsing
+  compile 'org.apache.tika:tika-java7:1.+'
 	
 	// include in compile only, exclude in the war
 	providedCompile 'javax.servlet:servlet-api:2.5'

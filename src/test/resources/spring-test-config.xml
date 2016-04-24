@@ -45,10 +45,13 @@
   <tx:annotation-driven />
   
   <bean id="fileService" class="org.earelin.ecclesia.service.impl.resource.FileServiceImpl">
-    <constructor-arg value="file:///tmp/ecclesia_folder/private" />
-		<constructor-arg value="file:///tmp/ecclesia_folder/public" />
+    <constructor-arg value="/tmp/ecclesia_folder/private" />
+		<constructor-arg value="/tmp/ecclesia_folder/public" />
     <constructor-arg value="http://localhost:8080/ecclesia/cdn" />
+    <constructor-arg ref="tika" />
   </bean>
+  
+  <bean id="tika" class="org.apache.tika.Tika" />
   
   <bean id="transactionManager"
       class="org.springframework.orm.hibernate4.HibernateTransactionManager">

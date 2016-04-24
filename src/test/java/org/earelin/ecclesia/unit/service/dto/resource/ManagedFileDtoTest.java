@@ -1,8 +1,6 @@
 package org.earelin.ecclesia.unit.service.dto.resource;
 
-import org.earelin.ecclesia.unit.domain.resource.*;
 import org.earelin.ecclesia.domain.Organization;
-import org.earelin.ecclesia.domain.resource.ManagedFile;
 import org.earelin.ecclesia.service.dto.resource.ManagedFileDto;
 import static org.junit.Assert.*;
 import org.junit.Before;

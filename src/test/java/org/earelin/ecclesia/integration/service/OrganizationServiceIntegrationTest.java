@@ -1,7 +1,6 @@
 package org.earelin.ecclesia.integration.service;
 
 import java.util.Date;
-import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.dto.OrganizationDto;
@@ -15,7 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * OrganizationServiceImpl unit test
+ * OrganizationService integration test
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/spring-test-config.xml"})
