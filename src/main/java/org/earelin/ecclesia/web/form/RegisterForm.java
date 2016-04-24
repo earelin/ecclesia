@@ -3,7 +3,7 @@ package org.earelin.ecclesia.web.form;
 /**
  * Register form adapter
  */
-public class RegisterFormAdapter {
+public class RegisterForm {
     
     private String username;
     private String email;

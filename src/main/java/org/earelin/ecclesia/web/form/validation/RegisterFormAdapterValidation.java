@@ -1,6 +1,6 @@
 package org.earelin.ecclesia.web.form.validation;
 
-import org.earelin.ecclesia.web.form.RegisterFormAdapter;
+import org.earelin.ecclesia.web.form.RegisterForm;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -13,7 +13,7 @@ public class RegisterFormAdapterValidation implements Validator {
 
     @Override
     public boolean supports(Class<?> type) {
-        return RegisterFormAdapter.class.equals(type);
+        return RegisterForm.class.equals(type);
     }
 
     @Override
