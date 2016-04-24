@@ -1,7 +1,7 @@
 package org.earelin.ecclesia.web;
 
 import org.earelin.ecclesia.service.UserService;
-import org.earelin.ecclesia.web.form.RegisterFormAdapter;
+import org.earelin.ecclesia.web.form.RegisterForm;
 import org.earelin.ecclesia.web.form.validation.RegisterFormAdapterValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,14 +38,14 @@ public class RegisterFormController {
     
     @RequestMapping(value="/register", method=RequestMethod.GET)
 	public String register(Model model) {  
-        RegisterFormAdapter registerForm = new RegisterFormAdapter();
+        RegisterForm registerForm = new RegisterForm();
         model.addAttribute("register", registerForm);
 		return "register_form";
 	}
     
     @RequestMapping(value="/register", method=RequestMethod.POST)
 	public String registerSubmit(
-            @ModelAttribute("register") @Validated RegisterFormAdapter registerForm,
+            @ModelAttribute("register") @Validated RegisterForm registerForm,
             BindingResult result, SessionStatus status) {
         if (result.hasErrors()) {
             return "register_form";
