@@ -21,12 +21,12 @@ import org.earelin.ecclesia.repository.OrganizationRepository;
 @Transactional
 public class OrganizationServiceImpl implements OrganizationService {
     
-    private final OrganizationRepository dao;
+    private final OrganizationRepository repository;
     private final Mapper mapper;
     
     @Autowired
     public OrganizationServiceImpl(OrganizationRepository dao, Mapper mapper) {
-        this.dao = dao;
+        this.repository = dao;
         this.mapper = mapper;
     }
 
@@ -37,7 +37,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         organizationDTO.setUpdated(now);
         
         Organization organization = mapper.map(organizationDTO, Organization.class);
-        dao.add(organization);
+        repository.add(organization);
         
         organizationDTO.setId(organization.getId());
     }
@@ -47,30 +47,30 @@ public class OrganizationServiceImpl implements OrganizationService {
         Date now = new Date();
         organizationDTO.setUpdated(now);
         
-        Organization organization = dao.get(organizationDTO.getId());        
+        Organization organization = repository.get(organizationDTO.getId());        
         if (organization == null) {
             throw new OrganizationNotFoundException(organizationDTO.getId());
         }        
         mapper.map(organizationDTO, organization);
         
-        dao.update(organization);
+        repository.update(organization);
     }
 
     @Override
     public void remove(long id) {
-        Organization organization = dao.get(id);
+        Organization organization = repository.get(id);
         
         if (organization == null) {
             throw new OrganizationNotFoundException(id);
         }
         
-        dao.remove(organization);
+        repository.remove(organization);
     }
 
     @Transactional(readOnly = true)
     @Override
     public OrganizationDto get(long id) {
-        Organization organization = dao.get(id);
+        Organization organization = repository.get(id);
         
         if (organization == null) {
             throw new OrganizationNotFoundException(id);
@@ -82,14 +82,14 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Transactional(readOnly = true)
     @Override
     public boolean exists(long id) {
-        Organization organization = dao.get(id);
+        Organization organization = repository.get(id);
         return organization != null;
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<OrganizationDto> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return mapper.map(repository.findAll(), List.class);
     }
 
     @Transactional(readOnly = true)
