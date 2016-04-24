@@ -3,6 +3,8 @@ package org.earelin.ecclesia.service.impl;
 import java.util.Date;
 import java.util.List;
 import org.dozer.Mapper;
+import org.earelin.ecclesia.criteria.FilteringCriteria;
+import org.earelin.ecclesia.criteria.OrderingCriteria;
 import org.earelin.ecclesia.domain.Organization;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.exception.OrganizationNotFoundException;
@@ -86,13 +88,18 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<OrganizationDto> list() {
+    public List<OrganizationDto> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<OrganizationDto> list(int limit, int offset) {
+    public List<OrganizationDto> findAll(int limit, int offset) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<OrganizationDto> findAll(FilteringCriteria filtering, OrderingCriteria order, int limit, int offset) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

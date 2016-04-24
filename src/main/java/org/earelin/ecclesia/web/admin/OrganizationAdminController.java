@@ -22,7 +22,7 @@ public class OrganizationAdminController {
     
     @RequestMapping(value = "/admin/organization", method = RequestMethod.GET)
 	public String index(Map<String, Object> model) {
-        model.put("organizations", service.list());
+        model.put("organizations", service.findAll());
 		return "admin_organization_index";
 	}
     

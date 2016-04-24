@@ -134,6 +134,7 @@ tasks.withType(FindBugs) {
 findbugs {
   effort = 'max'
   ignoreFailures = true
+  reportLevel = 'low'
 }
 
 pitest {

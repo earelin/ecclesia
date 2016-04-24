@@ -13,7 +13,7 @@ public class FilteringCriteria {
 
     public FilteringCriteria() {}
     
-    public FilteringCriteria(String property, String value) {
+    public FilteringCriteria(String property, Object value) {
         FilteringStatement statement = new FilteringStatement(property, value);
         statements.add(statement);
     }
@@ -22,7 +22,7 @@ public class FilteringCriteria {
         statements.add(operation);
     }
 
-    public List<FilteringStatement> getOperations() {
+    public List<FilteringStatement> getStatements() {
         return statements;
     }
 

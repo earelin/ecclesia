@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
  *
  */
 public class UserDetailsDto extends UserDto implements UserDetails {
+    
+    private static final long serialVersionUID = 1L;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
