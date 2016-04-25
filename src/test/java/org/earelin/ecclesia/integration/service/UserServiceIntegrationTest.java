@@ -117,7 +117,7 @@ public class UserServiceIntegrationTest {
         instance.update(user);
     }
 
-    @Test(expected = ConstraintViolationException.class)
+    @Test(expected = org.hibernate.exception.ConstraintViolationException.class)
     public void updatedUserShouldHaveValidEmail() {
         UserDto user = instance.register("test updating user blank name", USER_EMAIL, USER_PASSWORD);
         user.setEmail("sadfasd");

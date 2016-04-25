@@ -12,14 +12,13 @@ import org.earelin.ecclesia.service.impl.resource.FileServiceImpl;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
 /**
  * FileServiceImpl unit testing
  */
-public class FileServiceImplUnitTest {
+public class FileServiceImplTest {
     
     public static final String PRIVATE_FOLDER = "/tmp/ecclesia_test/private";
     public static final String PUBLIC_FOLDER = "/tmp/ecclesia_test/public";
