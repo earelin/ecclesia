@@ -11,14 +11,5 @@ import org.earelin.ecclesia.repository.OrganizationRepository;
 @Repository
 public class OrganizationRepositoryDao extends GenericDaoImpl<Organization>
         implements OrganizationRepository {
-
-    @Override
-    public List<Organization> findByOrganization(int limit, int offset) {
-        return (List<Organization>) currentSession()
-                .createQuery("from Organization as org order by org.name")
-                .setMaxResults(limit)
-                .setFirstResult(offset)
-                .list();
-    }
     
 }

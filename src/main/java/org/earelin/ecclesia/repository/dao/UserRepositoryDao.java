@@ -13,15 +13,6 @@ public class UserRepositoryDao  extends GenericDaoImpl<User>
         implements UserRepository {
 
     @Override
-    public List<User> findAll(int limit, int offset) {
-        return (List<User>) currentSession()
-                .createQuery("from User as u order by u.username")
-                .setMaxResults(limit)
-                .setFirstResult(offset)
-                .list();
-    }
-
-    @Override
     public User findByUsername(String username) {
         return (User) currentSession()
                 .createQuery("from User as u where u.username = :username")
