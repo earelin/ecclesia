@@ -1,5 +1,6 @@
 package org.earelin.ecclesia.image;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 /**
@@ -7,12 +8,10 @@ import java.awt.image.BufferedImage;
  */
 public class ImageResize implements ImageProcessor {
     
-    private int width;
-    private int height;
-    private boolean upscale;
+    private final int width;
+    private final int height;
+    private final boolean upscale;
 
-    public ImageResize() {}
-    
     public ImageResize(int width, int height, boolean upscale) {
         this.width = width;
         this.height = height;
@@ -20,32 +19,38 @@ public class ImageResize implements ImageProcessor {
     }
 
     @Override
-    public BufferedImage process(BufferedImage image) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public boolean canUpscale() {
-        return upscale;
-    }
-
-    public void setUpscale(boolean upscale) {
-        this.upscale = upscale;
+    public BufferedImage process(BufferedImage inputImage) {
+        final int inputImageWidth = inputImage.getWidth();
+        final int inputImageHeight = inputImage.getHeight();
+        
+        int outputImageWidth = width;
+        int outputImageHeight = height;
+        
+        if (!upscale && (inputImageWidth < outputImageWidth
+                || inputImageHeight < outputImageHeight)) {
+            
+            final float inputImageAspectRatio = (float) inputImageWidth / inputImageHeight;
+            final float outputImageAspectRatio = (float) outputImageWidth / outputImageHeight;
+            
+            if (inputImageAspectRatio > outputImageAspectRatio) {
+                outputImageWidth = (int) Math.ceil(outputImageAspectRatio * inputImageHeight);
+                outputImageHeight = inputImageHeight;                
+            } else {
+                outputImageWidth = inputImageWidth;
+                outputImageHeight = (int) Math.ceil(inputImageWidth / outputImageAspectRatio);
+            }
+            
+        }
+        
+        BufferedImage outputImage
+                = new BufferedImage(outputImageWidth, outputImageHeight, inputImage.getType());
+        
+        Graphics2D g = outputImage.createGraphics();
+        ImageStyle.setGraphics2dSettings(g);
+        g.drawImage(inputImage, 0, 0, outputImageWidth, outputImageHeight, null);
+        g.dispose();
+        
+        return outputImage;
     }
 
 }

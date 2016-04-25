@@ -7,12 +7,10 @@ import java.awt.image.BufferedImage;
  */
 public class ImageScale implements ImageProcessor {
     
-    private int width;
-    private int height;
-    private boolean upscale;
+    private final int width;
+    private final int height;
+    private final boolean upscale;
 
-    public ImageScale() {}
-    
     public ImageScale(int width, int height, boolean upscale) {
         this.width = width;
         this.height = height;
@@ -22,30 +20,6 @@ public class ImageScale implements ImageProcessor {
     @Override
     public BufferedImage process(BufferedImage image) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public boolean canUpscale() {
-        return upscale;
-    }
-
-    public void setUpscale(boolean upscale) {
-        this.upscale = upscale;
     }
 
 }
