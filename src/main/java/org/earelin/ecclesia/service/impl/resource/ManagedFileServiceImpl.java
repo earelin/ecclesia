@@ -60,14 +60,16 @@ public class ManagedFileServiceImpl implements ManagedFileService {
         if (file == null) {
             throw new EntityNotFoundException(id);
         }
-        
+                
+        fileService.delete(file.getUri());
         repository.remove(file);
     }
 
     @Transactional(readOnly = true)
     @Override
     public ManagedFileDto get(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

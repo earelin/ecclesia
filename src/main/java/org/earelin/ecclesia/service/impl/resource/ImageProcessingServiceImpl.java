@@ -1,8 +1,13 @@
 package org.earelin.ecclesia.service.impl.resource;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URI;
 import org.earelin.ecclesia.service.resource.ImageProcessingService;
 import java.util.HashMap;
 import java.util.Map;
+import javax.imageio.ImageIO;
+import org.apache.commons.io.FilenameUtils;
 import org.earelin.ecclesia.image.ImageScale;
 import org.earelin.ecclesia.image.ImageScaleAndCrop;
 import org.earelin.ecclesia.image.ImageStyle;
@@ -34,8 +39,24 @@ public class ImageProcessingServiceImpl implements ImageProcessingService {
     
     @Async
     @Override
-    public void processImage(String uri) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void processImage(String uri) throws Exception {
+        File image = fileService.get(uri);
+        URI parsedUri = new URI(uri);
+        BufferedImage bufferedImage = ImageIO.read(image);
+        
+        for (ImageStyle imageStyle : imageStyles.values()) {
+            BufferedImage styledImage = imageStyle.process(bufferedImage);
+            File tempStoredImage = File.createTempFile("tmp_image_", "tmp");
+            ImageIO.write(styledImage, FilenameUtils.getExtension(image.getName()), tempStoredImage);
+            fileService.save(tempStoredImage, parsedUri.getScheme() + ":///styled-images/"
+                    + imageStyle.getKey() + parsedUri.getPath());
+        }
+
+    }
+    
+    @Override
+    public void getDerivedImages(String uri) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     /**

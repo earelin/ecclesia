@@ -10,6 +10,8 @@ public interface ImageProcessingService {
      * Process an image applying image styles
      * @param uri 
      */
-    void processImage(String uri);
+    void processImage(String uri) throws Exception;
+    
+    void getDerivedImages(String uri);
     
 }
