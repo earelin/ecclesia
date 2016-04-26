@@ -13,8 +13,13 @@ public class ImageScale implements ImageProcessor {
     private final boolean upscale;
 
     public ImageScale(int width, int height, boolean upscale) {
-        if (width == height && height == 0) {
-            throw new IllegalArgumentException("Width or height should be different to 0");
+        
+        if (width < 0 || height < 0) {
+            throw new IllegalArgumentException("Width and height should be greather or equal to 0");
+        }
+        
+        if (width == 0 && height == 0) {
+            throw new IllegalArgumentException("Width or height should be greather than 0");
         }
         
         this.width = width;
@@ -29,26 +34,38 @@ public class ImageScale implements ImageProcessor {
         
         final float inputImageAspectRatio = (float) inputImageWidth / inputImageHeight;
         
-        int outputImageWidth;
-        int outputImageHeight;
+        int outputImageWidth = width;
+        int outputImageHeight = height;
         
-        if (width != 0 && height != 0) {
-            
-        } else {
-            
+        if (outputImageWidth != 0 && outputImageHeight != 0) {
+            final float outerAspectRatio = (float) outputImageWidth / outputImageHeight;
+            if (inputImageAspectRatio > outerAspectRatio) {
+                outputImageHeight = 0;
+            } else {
+                outputImageWidth = 0;
+            }
         }
         
-//        BufferedImage outputImage
-//                = new BufferedImage(outputImageWidth, outputImageHeight, inputImage.getType());
-//        
-//        Graphics2D g = outputImage.createGraphics();
-//        ImageStyle.setGraphics2dSettings(g);
-//        g.drawImage(inputImage, 0, 0, outputImageWidth, outputImageHeight, null);
-//        g.dispose();
-//        
-//        return outputImage;  
+        if (!upscale && (outputImageHeight > inputImageHeight
+                || outputImageWidth > inputImageWidth)) {
+            return inputImage;
+        }
         
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (outputImageWidth == 0) {
+            outputImageWidth = (int) Math.ceil(outputImageHeight * inputImageAspectRatio);            
+        } else {
+            outputImageHeight = (int) Math.ceil(outputImageWidth / inputImageAspectRatio);
+        }
+        
+        BufferedImage outputImage
+                = new BufferedImage(outputImageWidth, outputImageHeight, inputImage.getType());
+        
+        Graphics2D g = outputImage.createGraphics();
+        ImageStyle.setGraphics2dSettings(g);
+        g.drawImage(inputImage, 0, 0, outputImageWidth, outputImageHeight, null);
+        g.dispose();
+        
+        return outputImage;  
     }
 
 }

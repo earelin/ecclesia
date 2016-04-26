@@ -12,7 +12,18 @@ public class ImageResize implements ImageProcessor {
     private final int height;
     private final boolean upscale;
 
+    /**
+     * Constructor
+     * @param width 
+     * @param height
+     * @param upscale
+     */
     public ImageResize(int width, int height, boolean upscale) {
+        
+        if (width <= 0 || height <= 0) {
+            throw new IllegalArgumentException("Width and height should be greather than 0");
+        }
+        
         this.width = width;
         this.height = height;
         this.upscale = upscale;
