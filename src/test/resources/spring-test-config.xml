@@ -17,9 +17,10 @@
         http://www.springframework.org/schema/task/spring-task.xsd ">
  
 	<context:component-scan base-package="org.earelin.ecclesia.service,org.earelin.ecclesia.repository,org.earelin.ecclesia.security" />
-  
-  <task:executor id="myexecutor" pool-size="5" />
+  <!--
+  <task:executor id="myexecutor" pool-size="5" />  
   <task:annotation-driven executor="myexecutor" />
+  -->
   
   <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
     <property name="driverClassName" value="org.h2.Driver" />

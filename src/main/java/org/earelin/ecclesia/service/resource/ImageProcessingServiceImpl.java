@@ -3,7 +3,10 @@ package org.earelin.ecclesia.service.resource;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.FilenameUtils;
@@ -24,6 +27,8 @@ public class ImageProcessingServiceImpl implements ImageProcessingService {
     public static final String MEDIUM_STYLE = "medium";
     public static final String LARGE_STYLE = "large";
     public static final String RESPONSIVE_SCALED_STYLE = "responsive-scaled";
+    
+    public static final String GENERATED_IMAGES_PATH = "/styled-images";
             
     private final Map<String, ImageStyle> imageStyles;
     
@@ -46,15 +51,25 @@ public class ImageProcessingServiceImpl implements ImageProcessingService {
             BufferedImage styledImage = imageStyle.process(bufferedImage);
             File tempStoredImage = File.createTempFile("tmp_image_", "tmp");
             ImageIO.write(styledImage, FilenameUtils.getExtension(image.getName()), tempStoredImage);
-            fileService.save(tempStoredImage, parsedUri.getScheme() + ":///styled-images/"
-                    + imageStyle.getKey() + parsedUri.getPath());
+            fileService.save(tempStoredImage, buildGeneratedImagePath(imageStyle, parsedUri));
         }
 
     }
     
     @Override
-    public void getDerivedImages(String uri) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Map<String, String> getGeneratedImagesPaths(String uri) throws URISyntaxException {
+        URI parsedUri = new URI(uri);
+        Map<String, String> generatedImages = new HashMap();
+        
+        for (ImageStyle imageStyle : imageStyles.values()) {
+            generatedImages.put(imageStyle.getKey(), buildGeneratedImagePath(imageStyle, parsedUri));
+        }
+        
+        return generatedImages;
+    }
+    
+    private String buildGeneratedImagePath(ImageStyle imageStyle, URI uri) {
+        return uri.getScheme() + "://" + GENERATED_IMAGES_PATH + "/" + imageStyle.getKey() + uri.getPath();
     }
     
     /**
