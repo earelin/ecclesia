@@ -2,7 +2,6 @@ package org.earelin.ecclesia.service;
 
 import org.dozer.Mapper;
 import org.earelin.ecclesia.repository.OrganizationRoleRepository;
-import org.earelin.ecclesia.service.OrganizationRoleService;
 import org.earelin.ecclesia.service.dto.OrganizationRoleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

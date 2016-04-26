@@ -1,15 +1,13 @@
 package org.earelin.ecclesia.repository;
 
-import java.util.List;
 import org.earelin.ecclesia.domain.User;
 import org.springframework.stereotype.Repository;
-import org.earelin.ecclesia.repository.UserRepository;
 
 /**
  * User data access object
  */
 @Repository
-public class UserRepositoryDao  extends GenericDaoImpl<User>
+public class UserRepositoryDao  extends GenericRepositoryDaoImpl<User>
         implements UserRepository {
 
     @Override

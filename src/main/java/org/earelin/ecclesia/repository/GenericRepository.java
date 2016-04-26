@@ -14,5 +14,6 @@ public interface GenericRepository<E> {
     E get(long id);
     List<E> findAll();
     List<E> findAll(int limit, int offset);
+    List<E> findAll(FilteringCriteria filtering, OrderingCriteria ordering);
     List<E> findAll(FilteringCriteria filtering, OrderingCriteria ordering, int limit, int offset);
 }

@@ -9,8 +9,6 @@ import org.earelin.ecclesia.domain.resource.ManagedFile;
 import org.earelin.ecclesia.repository.resource.ManagedFileRepository;
 import org.earelin.ecclesia.service.dto.resource.ManagedFileDto;
 import org.earelin.ecclesia.service.exception.EntityNotFoundException;
-import org.earelin.ecclesia.service.resource.FileService;
-import org.earelin.ecclesia.service.resource.ManagedFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,18 +1,14 @@
 package org.earelin.ecclesia.repository.resource;
 
 import org.earelin.ecclesia.domain.resource.ManagedFile;
-import org.earelin.ecclesia.repository.GenericDaoImpl;
-import org.earelin.ecclesia.repository.resource.ManagedFileRepository;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.earelin.ecclesia.repository.GenericRepositoryDaoImpl;
 import org.springframework.stereotype.Repository;
 
 /**
  * ManagedFile data access object
  */
 @Repository
-public class ManagedFileRepositoryDao  extends GenericDaoImpl<ManagedFile>
+public class ManagedFileRepositoryDao  extends GenericRepositoryDaoImpl<ManagedFile>
         implements ManagedFileRepository {    
     
 }

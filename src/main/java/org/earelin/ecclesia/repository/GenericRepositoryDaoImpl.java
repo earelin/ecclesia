@@ -1,29 +1,26 @@
 package org.earelin.ecclesia.repository;
 
-
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 import org.earelin.ecclesia.criteria.FilteringCriteria;
 import org.earelin.ecclesia.criteria.OrderingCriteria;
-import org.earelin.ecclesia.repository.GenericRepository;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Generic dao implementation
+ * @param <E>
  */
-public abstract class GenericDaoImpl<E> implements GenericRepository<E> {
+public abstract class GenericRepositoryDaoImpl<E> implements GenericRepository<E> {
     
     @Autowired
     private SessionFactory sessionFactory;
      
     private final Class<E> daoType;
 
-    public GenericDaoImpl() {        
+    public GenericRepositoryDaoImpl() {        
         daoType = (Class<E>) ((ParameterizedType) getClass()
                     .getGenericSuperclass()).getActualTypeArguments()[0];
     }
@@ -63,6 +60,21 @@ public abstract class GenericDaoImpl<E> implements GenericRepository<E> {
                 .setMaxResults(limit)
                 .setFirstResult(offset)
                 .list();
+    }
+
+    @Override
+    public List<E> findAll(FilteringCriteria filtering, OrderingCriteria ordering) {
+        Criteria criteria = currentSession().createCriteria(daoType);
+        
+        if (filtering != null) {
+            criteria.add(CriteriaToHibernateConversor.filteringConvert(filtering));
+        }
+        
+        if (ordering != null) {
+            criteria.addOrder(CriteriaToHibernateConversor.orderingConvert(ordering));
+        }
+        
+        return criteria.list();
     }
 
     @Override

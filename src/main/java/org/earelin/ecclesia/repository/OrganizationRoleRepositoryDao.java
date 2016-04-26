@@ -2,12 +2,11 @@ package org.earelin.ecclesia.repository;
 
 import org.earelin.ecclesia.domain.OrganizationRole;
 import org.springframework.stereotype.Repository;
-import org.earelin.ecclesia.repository.OrganizationRoleRepository;
 
 /**
  * Organization role data access object
  */
 @Repository
-public class OrganizationRoleRepositoryDao  extends GenericDaoImpl<OrganizationRole>
+public class OrganizationRoleRepositoryDao  extends GenericRepositoryDaoImpl<OrganizationRole>
         implements OrganizationRoleRepository {
 }

@@ -4,13 +4,12 @@ import java.util.List;
 import org.earelin.ecclesia.domain.Group;
 import org.earelin.ecclesia.domain.Organization;
 import org.springframework.stereotype.Repository;
-import org.earelin.ecclesia.repository.GroupRepository;
 
 /**
  * Group data access object
  */
 @Repository
-public class GroupRepositoryDao extends GenericDaoImpl<Group>
+public class GroupRepositoryDao extends GenericRepositoryDaoImpl<Group>
         implements GroupRepository {
 
     @Override

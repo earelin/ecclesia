@@ -6,7 +6,6 @@ import org.dozer.Mapper;
 import org.earelin.ecclesia.criteria.FilteringCriteria;
 import org.earelin.ecclesia.criteria.OrderingCriteria;
 import org.earelin.ecclesia.domain.Organization;
-import org.earelin.ecclesia.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.earelin.ecclesia.service.dto.OrganizationDto;

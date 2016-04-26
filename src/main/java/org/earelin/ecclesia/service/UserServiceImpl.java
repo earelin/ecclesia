@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 import org.dozer.Mapper;
 import org.earelin.ecclesia.domain.User;
-import org.earelin.ecclesia.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -39,6 +38,7 @@ public class UserServiceImpl implements UserService {
      * @param username
      * @param email
      * @param password 
+     * @return  
      */
     @Override
     public UserDto register(String username, String email, String password) {

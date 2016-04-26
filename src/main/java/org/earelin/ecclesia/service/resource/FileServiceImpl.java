@@ -12,7 +12,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.tika.Tika;
 import org.earelin.ecclesia.service.exception.FileNotFoundException;
 import org.earelin.ecclesia.service.exception.UnhandledFileProtocol;
-import org.earelin.ecclesia.service.resource.FileService;
 
 /**
  * File service
