@@ -44,7 +44,7 @@
   
   <tx:annotation-driven />
   
-  <bean id="fileService" class="org.earelin.ecclesia.service.impl.resource.FileServiceImpl">
+  <bean id="fileService" class="org.earelin.ecclesia.service.resource.FileServiceImpl">
     <constructor-arg value="/tmp/ecclesia_folder/private" />
 		<constructor-arg value="/tmp/ecclesia_folder/public" />
     <constructor-arg value="http://localhost:8080/ecclesia/cdn" />
