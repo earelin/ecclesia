@@ -7,7 +7,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.tika.Tika;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
-import org.earelin.ecclesia.service.impl.resource.FileServiceImpl;
+import org.earelin.ecclesia.service.resource.FileServiceImpl;
 import org.earelin.ecclesia.service.resource.FileService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

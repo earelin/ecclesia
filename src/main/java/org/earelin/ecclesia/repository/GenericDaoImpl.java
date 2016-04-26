@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.repository.dao;
+package org.earelin.ecclesia.repository;
 
 
 import java.lang.reflect.ParameterizedType;

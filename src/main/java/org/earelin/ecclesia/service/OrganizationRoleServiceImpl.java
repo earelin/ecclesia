@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.service.impl;
+package org.earelin.ecclesia.service;
 
 import org.dozer.Mapper;
 import org.earelin.ecclesia.repository.OrganizationRoleRepository;

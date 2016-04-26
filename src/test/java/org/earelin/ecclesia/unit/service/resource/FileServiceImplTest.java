@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.unit.service.impl.resource;
+package org.earelin.ecclesia.unit.service.resource;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.tika.Tika;
 import org.earelin.ecclesia.service.exception.FileNotFoundException;
 import org.earelin.ecclesia.service.exception.UnhandledFileProtocol;
-import org.earelin.ecclesia.service.impl.resource.FileServiceImpl;
+import org.earelin.ecclesia.service.resource.FileServiceImpl;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
 import org.junit.Before;

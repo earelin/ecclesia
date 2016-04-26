@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.repository.dao;
+package org.earelin.ecclesia.repository;
 
 import java.util.List;
 import org.earelin.ecclesia.domain.User;

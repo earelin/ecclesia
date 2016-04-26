@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.repository.dao;
+package org.earelin.ecclesia.repository;
 
 import org.earelin.ecclesia.criteria.FilteringCriteria;
 import org.earelin.ecclesia.criteria.FilteringNexus;

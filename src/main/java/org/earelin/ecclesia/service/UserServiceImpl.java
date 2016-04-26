@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.service.impl;
+package org.earelin.ecclesia.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;

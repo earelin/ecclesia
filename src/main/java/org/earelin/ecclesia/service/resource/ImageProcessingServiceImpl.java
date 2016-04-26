@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.service.impl.resource;
+package org.earelin.ecclesia.service.resource;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

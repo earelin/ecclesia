@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.repository.dao;
+package org.earelin.ecclesia.repository;
 
 import org.earelin.ecclesia.domain.OrganizationRole;
 import org.springframework.stereotype.Repository;

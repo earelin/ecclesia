@@ -1,4 +1,4 @@
-package org.earelin.ecclesia.repository.dao;
+package org.earelin.ecclesia.repository;
 
 import org.earelin.ecclesia.domain.GroupRole;
 import org.earelin.ecclesia.repository.GroupRoleRepository;
