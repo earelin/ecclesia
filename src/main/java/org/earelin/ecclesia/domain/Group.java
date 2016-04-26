@@ -19,7 +19,7 @@ public class Group {
     @Id
     @GeneratedValue
     private long id;
-    @ManyToOne
+    @ManyToOne 
     @NotNull
     private Organization organization;
     @ManyToOne
