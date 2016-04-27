@@ -7,10 +7,17 @@ import java.util.Date;
  */
 public class ManagedFileDto {
 
-    private long id;
-    private String mime;
-    private Date created;
-    private String url;
+    private final long id;
+    private final String mime;
+    private final Date created;
+    private final String url;
+
+    public ManagedFileDto(long id, String mime, Date created, String url) {
+        this.id = id;
+        this.mime = mime;
+        this.created = created;
+        this.url = url;
+    }
 
     @Override
     public int hashCode() {
@@ -41,32 +48,16 @@ public class ManagedFileDto {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getMime() {
         return mime;
-    }
-
-    public void setMime(String mime) {
-        this.mime = mime;
     }
 
     public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
     public String getUrl() {
         return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
     
 }

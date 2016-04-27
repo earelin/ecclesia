@@ -34,11 +34,16 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public void add(GroupDto groupDto) {
+        
+        if (groupDto.getId() != 0) {
+            throw new ValidationException("Error validating GroupDto: field id is not 0");
+        }                
+        
+        validate(groupDto);
+        
         Date now = new Date();
         groupDto.setCreated(now);
         groupDto.setUpdated(now);
-        
-        validate(groupDto);
         
         Group group = mapper.map(groupDto, Group.class);
         repository.add(group);

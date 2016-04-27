@@ -1,5 +1,6 @@
 package org.earelin.ecclesia.unit.service.dto.resource;
 
+import java.util.Date;
 import org.earelin.ecclesia.domain.Organization;
 import org.earelin.ecclesia.service.dto.resource.ManagedFileDto;
 import static org.junit.Assert.*;
@@ -15,8 +16,8 @@ public class ManagedFileDtoTest {
     
     @Before
     public void initialize() {
-        file = new ManagedFileDto();
-        file.setId(1);
+        file = new ManagedFileDto(1, "image/png",
+                new Date(), "http://localhost/ecclesia/images/image.png");
     }
 
     @Test
@@ -29,8 +30,8 @@ public class ManagedFileDtoTest {
     
     @Test
     public void managedFilesWithSameIdShouldBeEquals() {
-        ManagedFileDto file1 = new ManagedFileDto();
-        file1.setId(1);
+        ManagedFileDto file1 = new ManagedFileDto(1, "image/png",
+                new Date(), "http://localhost/ecclesia/images/image.png");
         assertTrue("Managed files with same id should be equals",
                 file.equals(file1));
         assertTrue("Managed files with same id should have the same hash code",
@@ -39,8 +40,8 @@ public class ManagedFileDtoTest {
     
     @Test
     public void managedFilesWithDifferentIdShouldNotBeEquals() {
-        ManagedFileDto file1 = new ManagedFileDto();
-        file1.setId(2);
+        ManagedFileDto file1 = new ManagedFileDto(2, "image/png",
+                new Date(), "http://localhost/ecclesia/images/image.png");
         assertFalse("Managed files with different id should not be equals",
                 file.equals(file1));
         assertFalse("Managed files with different id should not have the same hash code",

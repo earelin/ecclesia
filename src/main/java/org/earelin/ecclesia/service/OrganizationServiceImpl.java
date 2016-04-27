@@ -12,6 +12,7 @@ import org.earelin.ecclesia.service.dto.OrganizationDto;
 import org.springframework.transaction.annotation.Transactional;
 import org.earelin.ecclesia.repository.OrganizationRepository;
 import org.earelin.ecclesia.service.exception.EntityNotFoundException;
+import org.earelin.ecclesia.service.exception.ValidationException;
 
 /**
  * Organization service implementation
@@ -31,6 +32,11 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public void add(OrganizationDto organizationDTO) {
+        
+        if (organizationDTO.getId() != 0) {
+            throw new ValidationException("Error validating OrganizationDto: field id is not 0");
+        } 
+        
         Date now = new Date();
         organizationDTO.setCreated(now);
         organizationDTO.setUpdated(now);

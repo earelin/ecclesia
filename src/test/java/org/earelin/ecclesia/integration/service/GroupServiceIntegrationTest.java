@@ -283,6 +283,11 @@ public class GroupServiceIntegrationTest {
         assertThat(group, samePropertyValuesAs(gottenGroup));
     }
     
+    @Test(expected = EntityNotFoundException.class)
+    public void getNotExistingGroup() {
+        instance.get(100000);
+    }
+    
     @Test
     public void checkThanAGroupExists() {
         GroupDto group = new GroupDto();
