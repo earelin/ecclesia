@@ -30,7 +30,7 @@ dependencies {
   compile "org.hibernate:hibernate-core:$hibernateVersion"
   compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
   compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'  
-  compile 'org.hibernate:hibernate-validator:4.3.2.Final'
+  compile 'org.hibernate:hibernate-validator:5.2.4.Final'
 	
   // jstl
   compile 'javax.servlet:jstl:1.2'
