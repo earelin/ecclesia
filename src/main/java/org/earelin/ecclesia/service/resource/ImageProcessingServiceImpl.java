@@ -99,7 +99,7 @@ public class ImageProcessingServiceImpl implements ImageProcessingService {
         
         ImageStyle responsiveScaledStyle = new ImageStyle(RESPONSIVE_SCALED_STYLE);
         responsiveScaledStyle.addProcessor(new ImageScale(980, 0, false));
-        imageStyles.put(THUMBNAIL_STYLE, responsiveScaledStyle);
+        imageStyles.put(RESPONSIVE_SCALED_STYLE, responsiveScaledStyle);
         
         return imageStyles;
     }

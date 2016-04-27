@@ -13,9 +13,7 @@ public class ImageStyle {
     
     private String key;
     private List<ImageProcessor> processors = new ArrayList();
-    
-    public ImageStyle() {}
-    
+
     public ImageStyle(String key) {
         this.key = key;
     }
@@ -54,10 +52,6 @@ public class ImageStyle {
     
     public String getKey() {
         return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
     }
     
 }
