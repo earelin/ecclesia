@@ -1,10 +1,7 @@
 package org.earelin.ecclesia.service.resource;
 
 import java.net.URISyntaxException;
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
-import org.earelin.ecclesia.image.ImageStyle;
 
 
 /**
@@ -24,4 +21,6 @@ public interface ImageProcessingService {
      * @return
      */
     Map<String, String> getGeneratedImagesPaths(String uri) throws URISyntaxException;
+    
+    void deleteGeneratedImages(String uri) throws Exception;
 }

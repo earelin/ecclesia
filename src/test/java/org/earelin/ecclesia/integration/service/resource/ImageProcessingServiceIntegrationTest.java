@@ -8,6 +8,7 @@ import java.util.Map;
 import org.earelin.ecclesia.service.resource.FileService;
 import org.earelin.ecclesia.service.resource.ImageProcessingService;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,25 @@ public class ImageProcessingServiceIntegrationTest {
         Map<String, String> styledImages = instance.getGeneratedImagesPaths(publicPath);
         for (String style : styledImages.keySet()) {
             String generatedImagePath = fileService.getPath(styledImages.get(style));
-            assertTrue("Styled image should be generated", Files.exists(Paths.get(generatedImagePath)));
+            assertEquals("Styled image should exists", true,
+                    Files.exists(Paths.get(generatedImagePath)));
+            assertEquals("Styled image should be regular files", true,
+                    Files.isRegularFile(Paths.get(generatedImagePath)));
+        }
+    }
+
+    @Test
+    public void shouldDeleteGenerateStyledImages() throws Exception {
+        File file = new File(TEST_IMAGE);
+        String publicPath = fileService.save(file, "public:///derived/delete");
+        
+        instance.processImage(publicPath);
+        instance.deleteGeneratedImages(publicPath);
+        
+        Map<String, String> styledImages = instance.getGeneratedImagesPaths(publicPath);
+        for (String style : styledImages.keySet()) {
+            String generatedImagePath = fileService.getPath(styledImages.get(style));
+            assertFalse("Generated image should be deleted", Files.exists(Paths.get(generatedImagePath)));
         }
     }
     

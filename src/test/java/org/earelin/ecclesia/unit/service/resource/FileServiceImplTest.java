@@ -1,6 +1,8 @@
 package org.earelin.ecclesia.unit.service.resource;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -40,6 +42,15 @@ public class FileServiceImplTest {
         Tika mockedTika = mock(Tika.class);
         instance = new FileServiceImpl(PRIVATE_FOLDER, PUBLIC_FOLDER,
                 PUBLIC_FILE_SERVER, mockedTika);
+    }
+    
+    @Test
+    public void shouldCreateAFile() throws Exception {
+        File file = instance.create("public:///creating/file/file.txt");
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        writer.write("Testing file");
+        writer.close();
+        assertTrue("File should be created", Files.exists(Paths.get(PUBLIC_FOLDER + "/creating/file/file.txt")));
     }
 
     @Test

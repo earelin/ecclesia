@@ -97,6 +97,16 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public File create(String uri) throws Exception {
+        String filePath = resolveUriToPath(uri);
+        Path folderPath = Paths.get(FilenameUtils.getFullPath(filePath));
+        if (!Files.exists(folderPath)) {
+            Files.createDirectories(folderPath);
+        }        
+        return new File(filePath);
+    }
+
+    @Override
     public File get(String uri) throws Exception {
         final String stringPath = resolveUriToPath(uri);
         Path path = Paths.get(stringPath);

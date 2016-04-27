@@ -4,9 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.FilenameUtils;
@@ -45,15 +43,13 @@ public class ImageProcessingServiceImpl implements ImageProcessingService {
     public void processImage(String uri) throws Exception {
         File image = fileService.get(uri);
         URI parsedUri = new URI(uri);
-        BufferedImage bufferedImage = ImageIO.read(image);
+        final BufferedImage bufferedImage = ImageIO.read(image);
         
         for (ImageStyle imageStyle : imageStyles.values()) {
             BufferedImage styledImage = imageStyle.process(bufferedImage);
-            File tempStoredImage = File.createTempFile("tmp_image_", "tmp");
-            ImageIO.write(styledImage, FilenameUtils.getExtension(image.getName()), tempStoredImage);
-            fileService.save(tempStoredImage, buildGeneratedImagePath(imageStyle, parsedUri));
+            File imageFile = fileService.create(buildGeneratedImagePath(imageStyle, parsedUri));
+            ImageIO.write(styledImage, FilenameUtils.getExtension(image.getName()), imageFile);
         }
-
     }
     
     @Override
@@ -62,10 +58,20 @@ public class ImageProcessingServiceImpl implements ImageProcessingService {
         Map<String, String> generatedImages = new HashMap();
         
         for (ImageStyle imageStyle : imageStyles.values()) {
-            generatedImages.put(imageStyle.getKey(), buildGeneratedImagePath(imageStyle, parsedUri));
+            generatedImages.put(imageStyle.getKey(),
+                    buildGeneratedImagePath(imageStyle, parsedUri));
         }
         
         return generatedImages;
+    }
+
+    @Override
+    public void deleteGeneratedImages(String uri) throws Exception {
+        URI parsedUri = new URI(uri);
+        
+        for (ImageStyle imageStyle : imageStyles.values()) {
+            fileService.delete(buildGeneratedImagePath(imageStyle, parsedUri));
+        }
     }
     
     private String buildGeneratedImagePath(ImageStyle imageStyle, URI uri) {

@@ -8,6 +8,7 @@ import java.io.File;
  * Manage low level file operations 
  */
 public interface FileService {
+    File create(String uri) throws Exception;
     File get(String uri) throws Exception;
     String getUrl(String uri) throws Exception;
     String getPath(String uri) throws Exception;

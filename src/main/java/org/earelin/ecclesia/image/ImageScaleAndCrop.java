@@ -44,22 +44,22 @@ public class ImageScaleAndCrop implements ImageProcessor {
         
         if (inputImageAspectRatio > outputImageAspectRatio) {
             if (!upscale && (height > inputImageHeight)) {
-                final int croppedImageX = (int) Math.ceil((inputImageWidth - width) / 2);
+                final int croppedImageX = (int) Math.ceil((float) (inputImageWidth - width) / 2);
                 return inputImage.getSubimage(croppedImageX, 0, width, inputImageHeight);
             }
             
             final int croppedImageWidth = (int) Math.ceil(inputImageHeight * outputImageAspectRatio);
-            final int croppedImageX = (int) Math.ceil((inputImageWidth - croppedImageWidth) / 2);
+            final int croppedImageX = (int) Math.ceil((float) (inputImageWidth - croppedImageWidth) / 2);
             croppedImage = inputImage.getSubimage(croppedImageX, 0, croppedImageWidth, inputImageHeight);
             
         } else {
             if (!upscale && (width > inputImageWidth)) {
-                final int croppedImageY = (int) Math.ceil((inputImageHeight - height) / 2);
+                final int croppedImageY = (int) Math.ceil((float) (inputImageHeight - height) / 2);
                 return inputImage.getSubimage(0, croppedImageY, inputImageWidth, height);
             }
             
-            final int croppedImageHeight = (int) Math.ceil(inputImageWidth / outputImageAspectRatio);
-            final int croppedImageY = (int) Math.ceil((inputImageHeight - croppedImageHeight) / 2);
+            final int croppedImageHeight = (int) Math.ceil((float) inputImageWidth / outputImageAspectRatio);
+            final int croppedImageY = (int) Math.ceil((float) (inputImageHeight - croppedImageHeight) / 2);
             croppedImage = inputImage.getSubimage(0, croppedImageY, inputImageWidth, croppedImageHeight);            
         }
         
