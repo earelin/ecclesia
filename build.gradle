@@ -11,24 +11,25 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-  mavenLocal()
   mavenCentral()
 }
 
 dependencies {
+  ext.springVersion = '4.2.5.RELEASE'
+  ext.hibernateVersion = '4.3.11.Final'
+  
   compile 'ch.qos.logback:logback-classic:1.+'
 	
   // spring
-  compile 'org.springframework:spring-webmvc:4.2.5.RELEASE'
-  compile 'org.springframework:spring-tx:4.2.5.RELEASE'
-  compile 'org.springframework:spring-orm:4.2.5.RELEASE'
-  compile 'org.springframework:spring-test:4.2.5.RELEASE'
+  compile "org.springframework:spring-webmvc:$springVersion"
+  compile "org.springframework:spring-tx:$springVersion"
+  compile "org.springframework:spring-orm:$springVersion"
+  compile "org.springframework:spring-test:$springVersion"
   
   // hibernate
-  compile 'org.hibernate:hibernate-core:4.3.11.Final'
-  compile 'org.hibernate:hibernate-entitymanager:4.3.11.Final'
-  compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
-  
+  compile "org.hibernate:hibernate-core:$hibernateVersion"
+  compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
+  compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'  
   compile 'org.hibernate:hibernate-validator:4.3.2.Final'
 	
   // jstl
@@ -36,7 +37,7 @@ dependencies {
   
   // databases
   compile 'org.apache.commons:commons-dbcp2:2.+'
-  compile 'mysql:mysql-connector-java:5.+'
+  compile 'mysql:mysql-connector-java:6.+'
   compile 'com.h2database:h2:1.+'
   
   // thymeleaf
@@ -73,7 +74,6 @@ dependencies {
   testCompile 'net.serenity-bdd:serenity-jbehave:1.+'
   testCompile 'junit:junit:4.+'
   testCompile 'org.mockito:mockito-core:1.+'
-  testCompile 'org.dbunit:dbunit:+'
   testCompile 'org.hamcrest:hamcrest-all:1.3'
 }
 
