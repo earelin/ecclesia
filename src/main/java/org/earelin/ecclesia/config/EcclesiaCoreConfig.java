@@ -56,6 +56,9 @@ public class EcclesiaCoreConfig {
     @Value("${hibernate.format_sql}")
     private String hibernateFormatSql;
     
+    @Value("${server.url}")
+    private String serverUrl;
+    
     @Value("${private.files.folder}")
     private String privateFilesFolder;
     
@@ -78,7 +81,7 @@ public class EcclesiaCoreConfig {
     @Bean
     public FileService fileService(Tika tika) throws IOException {
         return new FileServiceImpl(privateFilesFolder, publicFilesFolder,
-                publicFilesURL, tika);
+                publicFilesURL, serverUrl, tika);
     }
     
     @Bean

@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.apache.commons.io.FileUtils;
@@ -25,6 +27,7 @@ public class FileServiceImplTest {
     public static final String PRIVATE_FOLDER = "/tmp/ecclesia_test/private";
     public static final String PUBLIC_FOLDER = "/tmp/ecclesia_test/public";
     public static final String PUBLIC_FILE_SERVER = "http://www.example.com/public";
+    public static final String SERVER_URL = "http://localhost";
     public static final String EXAMPLE_FILE_NAME = "example.txt";
     public static final String ILLEGAL_PROTOCOL_URI = "illegal:///folder/example.txt";
     public static final String SAMPLE_FILE = "src/test/resources/test-data/files/sample.txt";
@@ -41,12 +44,12 @@ public class FileServiceImplTest {
     public void initialize() throws IOException {
         Tika mockedTika = mock(Tika.class);
         instance = new FileServiceImpl(PRIVATE_FOLDER, PUBLIC_FOLDER,
-                PUBLIC_FILE_SERVER, mockedTika);
+                PUBLIC_FILE_SERVER, SERVER_URL, mockedTika);
     }
     
     @Test
     public void shouldCreateAFile() throws Exception {
-        File file = instance.create("public:///creating/file/file.txt");
+        File file = instance.create(new URI("public:///creating/file/file.txt"));
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
         writer.write("Testing file");
         writer.close();
@@ -55,29 +58,29 @@ public class FileServiceImplTest {
 
     @Test
     public void shouldSaveAFileInPublicScheme() throws Exception {
-        String folderUri = "public:///testing/folder";
+        URI folderUri = new URI("public:///testing/folder");
         File file = new File(SAMPLE_FILE);
-        String savedFileUri = instance.save(file, folderUri);
+        URI savedFileUri = instance.save(file, folderUri);
         
         String savedFileExceptedPath = PUBLIC_FOLDER + "/testing/folder/sample.txt";
         assertTrue(Files.exists(Paths.get(savedFileExceptedPath)));
-        assertEquals(folderUri + "/sample.txt", savedFileUri);
+        assertEquals(new URI(folderUri + "/sample.txt"), savedFileUri);
     }
     
     @Test
     public void shouldSaveAFileInPrivateScheme() throws Exception {
-        String folderUri = "private:///testing/folder";
+        URI folderUri = new URI("private:///testing/folder");
         File file = new File(SAMPLE_FILE);
-        String savedFileUri = instance.save(file, folderUri);
+        URI savedFileUri = instance.save(file, folderUri);
         
         String savedFileExceptedPath = PRIVATE_FOLDER + "/testing/folder/sample.txt";
         assertTrue(Files.exists(Paths.get(savedFileExceptedPath)));
-        assertEquals(folderUri + "/sample.txt", savedFileUri);
+        assertEquals(new URI(folderUri + "/sample.txt"), savedFileUri);
     }
     
     @Test
     public void shouldSaveAFileInPublicSchemeWithoutOvewriting() throws Exception {
-        String folderUri = "public:///testing/overwriting";
+        URI folderUri = new URI("public:///testing/overwriting");
         File file = new File(SAMPLE_FILE);
         instance.save(file, folderUri);
         instance.save(file, folderUri);
@@ -91,7 +94,7 @@ public class FileServiceImplTest {
     
     @Test
     public void shouldSaveAFileInPrivateSchemeWithoutOvewriting() throws Exception {
-        String folderUri = "private:///testing/overwriting";
+        URI folderUri = new URI("private:///testing/overwriting");
         File file = new File(SAMPLE_FILE);
         instance.save(file, folderUri);
         instance.save(file, folderUri);
@@ -104,40 +107,31 @@ public class FileServiceImplTest {
     }
     
     @Test
-    public void shouldResolvePrivateUriToPathAndUrl() throws Exception {
-        String privateFileUri = "private:///folder/example.txt";
-        String resolvedFileUri = instance.getPath(privateFileUri);
-        String resolvedFileUrl = instance.getUrl(privateFileUri);
+    public void shouldResolvePrivateUriToUrl() throws Exception {
+        URI privateFileUri = new URI("private:///folder/example.txt");
+        URL resolvedFileUrl = instance.getUrl(privateFileUri);
         
-        assertEquals(PRIVATE_FOLDER + "/folder/example.txt", resolvedFileUri);
-        assertEquals("/files/folder/example.txt", resolvedFileUrl);
+        assertEquals(SERVER_URL + "/files/folder/example.txt", resolvedFileUrl.toString());
     }
     
     @Test
-    public void shouldResolvePublicUriToPathAndUrl() throws Exception {
-        String publicFileUri = "public:///folder/example.txt";
-        String resolvedFileUri = instance.getPath(publicFileUri);
-        String resolvedFileUrl = instance.getUrl(publicFileUri);
+    public void shouldResolvePublicUriToUrl() throws Exception {
+        URI publicFileUri = new URI("public:///folder/example.txt");
+        URL resolvedFileUrl = instance.getUrl(publicFileUri);
         
-        assertEquals(PUBLIC_FOLDER + "/folder/example.txt", resolvedFileUri);
-        assertEquals(PUBLIC_FILE_SERVER + "/folder/example.txt", resolvedFileUrl);
-    }
-    
-    @Test(expected = UnhandledFileProtocol.class)
-    public void shouldNotResolveNotHandledProtocolUriGettingPath() throws Exception {
-        instance.getPath(ILLEGAL_PROTOCOL_URI);
+        assertEquals(PUBLIC_FILE_SERVER + "/folder/example.txt", resolvedFileUrl.toString());
     }
 
     @Test(expected = UnhandledFileProtocol.class)
     public void shouldNotResolveNotHandledProtocolUriGettingUrl() throws Exception {
-        instance.getUrl(ILLEGAL_PROTOCOL_URI);
+        instance.getUrl(new URI(ILLEGAL_PROTOCOL_URI));
     }
 
     @Test
     public void shouldGetAPublicSavedFile() throws Exception {
-        String folderUri = "public:///testing/getting";
+        URI folderUri = new URI("public:///testing/getting");
         File file = new File(SAMPLE_FILE);
-        String savedFileUri = instance.save(file, folderUri);
+        URI savedFileUri = instance.save(file, folderUri);
         
         File gottenFile = instance.get(savedFileUri);
         assertTrue(FileUtils.contentEquals(file, gottenFile));
@@ -145,9 +139,9 @@ public class FileServiceImplTest {
 
     @Test
     public void shouldGetAPrivateSavedFile() throws Exception {
-        String folderUri = "private:///testing/getting";
+        URI folderUri = new URI("private:///testing/getting");
         File file = new File(SAMPLE_FILE);
-        String savedFileUri = instance.save(file, folderUri);
+        URI savedFileUri = instance.save(file, folderUri);
         
         File gottenFile = instance.get(savedFileUri);
         assertTrue(FileUtils.contentEquals(file, gottenFile));
@@ -155,39 +149,39 @@ public class FileServiceImplTest {
     
     @Test(expected = FileNotFoundException.class)
     public void shouldRaiseAnErrorIfTryesToGetANotExistingFile() throws Exception {
-        instance.get("private://testing/not_exists/sample.txt");
+        instance.get(new URI("private://testing/not_exists/sample.txt"));
     }
     
     @Test
     public void shouldDeleteAnPrivateExistingFile() throws Exception {
-        String folderUri = "private:///testing/deleting";
+        URI folderUri = new URI("private:///testing/deleting");
         File file = new File(SAMPLE_FILE);
-        String savedFileUri = instance.save(file, folderUri);
+        URI savedFileUri = instance.save(file, folderUri);
         
         instance.delete(savedFileUri);
         
-        assertFalse(Files.exists(Paths.get(savedFileUri)));
+        assertFalse(Files.exists(Paths.get(PRIVATE_FOLDER + savedFileUri.getPath())));
     }
     
     @Test
     public void shouldDeleteAnPublicExistingFile() throws Exception {
-        String folderUri = "public:///testing/deleting";
+        URI folderUri = new URI("public:///testing/deleting");
         File file = new File(SAMPLE_FILE);
-        String savedFileUri = instance.save(file, folderUri);
+        URI savedFileUri = instance.save(file, folderUri);
         
         instance.delete(savedFileUri);
         
-        assertFalse(Files.exists(Paths.get(savedFileUri)));
+        assertFalse(Files.exists(Paths.get(PUBLIC_FOLDER + savedFileUri)));
     }
     
     @Test(expected = FileNotFoundException.class)
     public void shouldRaiseAnErrorIfTryesToDeleteANotExistingPrivateFile() throws Exception {
-        instance.delete("private://testing/not_exists/sample.txt");
+        instance.delete(new URI("private://testing/not_exists/sample.txt"));
     }
     
     @Test(expected = FileNotFoundException.class)
     public void shouldRaiseAnErrorIfTryesToDeleteANotExistingPublicFile() throws Exception {
-        instance.delete("private://testing/not_exists/sample.txt");
+        instance.delete(new URI("private://testing/not_exists/sample.txt"));
     }
     
 }

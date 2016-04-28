@@ -1,6 +1,8 @@
 package org.earelin.ecclesia.service.resource;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URL;
 
 /**
  * File service
@@ -8,10 +10,9 @@ import java.io.File;
  * Manage low level file operations 
  */
 public interface FileService {
-    File create(String uri) throws Exception;
-    File get(String uri) throws Exception;
-    String getUrl(String uri) throws Exception;
-    String getPath(String uri) throws Exception;
+    File create(URI uri) throws Exception;
+    File get(URI uri) throws Exception;
+    URL getUrl(URI path) throws Exception;
     String getMimeType(File file) throws Exception;
 
     /**
@@ -21,6 +22,6 @@ public interface FileService {
      * @return
      * @throws Exception
      */
-    String save(File file, String folderUri) throws Exception;
-    void delete(String uri) throws Exception;
+    URI save(File file, URI folderUri) throws Exception;
+    void delete(URI uri) throws Exception;
 }

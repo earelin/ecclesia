@@ -1,6 +1,8 @@
 package org.earelin.ecclesia.service.resource;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -41,31 +43,31 @@ public class ManagedFileServiceImpl implements ManagedFileService {
     public ManagedFileDto addPublicFile(File file) throws Exception {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         final String dateString = formatter.format(LocalDateTime.now());
-        return add(file, "public:///" + dateString);
+        return add(file, new URI("public:///" + dateString));
     }
     
     @Override
     public ManagedFileDto addPrivateFile(File file) throws Exception {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         final String dateString = formatter.format(LocalDateTime.now());
-        return add(file, "private:///" + dateString);
+        return add(file, new URI("private:///" + dateString));
     }
 
     @Override
-    public ManagedFileDto add(File file, String folderUri) throws Exception {
+    public ManagedFileDto add(File file, URI folderUri) throws Exception {
         ManagedFile fileEntity = new ManagedFile();
         fileEntity.setCreated(new Date());
         fileEntity.setMime(fileService.getMimeType(file));
         
-        final String writtenFileUri = fileService.save(file, folderUri);
-        fileEntity.setUri(writtenFileUri);
+        final URI writtenFileUri = fileService.save(file, folderUri);
+        fileEntity.setUri(writtenFileUri.toString());
         
         repository.add(fileEntity);
         
         ManagedFileDto fileDto = generateDto(fileEntity);
         
         if (fileDto instanceof ManagedImageDto) {
-            imageService.processImage(fileEntity.getUri());
+            imageService.processImage(new URI(fileEntity.getUri()));
         }
         
         return fileDto;
@@ -79,10 +81,10 @@ public class ManagedFileServiceImpl implements ManagedFileService {
             throw new EntityNotFoundException(id);
         }
                 
-        fileService.delete(file.getUri());
+        fileService.delete(new URI(file.getUri()));
         
         if (isImage(file)) {
-            imageService.deleteGeneratedImages(file.getUri());
+            imageService.deleteGeneratedImages(new URI(file.getUri()));
         }
         
         repository.remove(file);      
@@ -103,11 +105,12 @@ public class ManagedFileServiceImpl implements ManagedFileService {
     private ManagedFileDto generateDto(ManagedFile fileEntity) throws Exception {
         ManagedFileDto fileDto;
         
-        final String fileUrl = fileService.getUrl(fileEntity.getUri());
+        final URI fileUri = new URI(fileEntity.getUri());
+        final URL fileUrl = fileService.getUrl(fileUri);
         
         if (isImage(fileEntity)) {
-            final Map<String, String> imageStyles
-                    = imageService.getGeneratedImagesPaths(fileUrl);
+            final Map<String, URL> imageStyles
+                    = imageService.getGeneratedImagesUrls(fileUri);
             fileDto = new ManagedImageDto(fileEntity.getId(), fileEntity.getMime(),
                     fileEntity.getCreated(), fileUrl, imageStyles);
         } else {

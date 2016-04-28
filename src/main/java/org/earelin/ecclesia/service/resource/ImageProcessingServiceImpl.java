@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
@@ -40,42 +41,50 @@ public class ImageProcessingServiceImpl implements ImageProcessingService {
     
     @Async
     @Override
-    public void processImage(String uri) throws Exception {
+    public void processImage(URI uri) throws Exception {
         File image = fileService.get(uri);
-        URI parsedUri = new URI(uri);
         final BufferedImage bufferedImage = ImageIO.read(image);
         
         for (ImageStyle imageStyle : imageStyles.values()) {
             BufferedImage styledImage = imageStyle.process(bufferedImage);
-            File imageFile = fileService.create(buildGeneratedImagePath(imageStyle, parsedUri));
+            File imageFile = fileService.create(buildGeneratedImagePath(imageStyle, uri));
             ImageIO.write(styledImage, FilenameUtils.getExtension(image.getName()), imageFile);
         }
     }
     
     @Override
-    public Map<String, String> getGeneratedImagesPaths(String uri) throws URISyntaxException {
-        URI parsedUri = new URI(uri);
-        Map<String, String> generatedImages = new HashMap();
+    public Map<String, URI> getGeneratedImagesPaths(URI uri) throws URISyntaxException {
+        Map<String, URI> generatedImages = new HashMap();
         
         for (ImageStyle imageStyle : imageStyles.values()) {
             generatedImages.put(imageStyle.getKey(),
-                    buildGeneratedImagePath(imageStyle, parsedUri));
+                    buildGeneratedImagePath(imageStyle, uri));
         }
         
         return generatedImages;
     }
 
     @Override
-    public void deleteGeneratedImages(String uri) throws Exception {
-        URI parsedUri = new URI(uri);
-        
+    public void deleteGeneratedImages(URI uri) throws Exception {        
         for (ImageStyle imageStyle : imageStyles.values()) {
-            fileService.delete(buildGeneratedImagePath(imageStyle, parsedUri));
+            fileService.delete(buildGeneratedImagePath(imageStyle, uri));
         }
     }
     
-    private String buildGeneratedImagePath(ImageStyle imageStyle, URI uri) {
-        return uri.getScheme() + "://" + GENERATED_IMAGES_PATH + "/" + imageStyle.getKey() + uri.getPath();
+    @Override
+    public Map<String, URL> getGeneratedImagesUrls(URI uri) throws Exception {
+        Map<String, URL> generatedImages = new HashMap();
+        
+        for (ImageStyle imageStyle : imageStyles.values()) {
+            generatedImages.put(imageStyle.getKey(),
+                    fileService.getUrl(buildGeneratedImagePath(imageStyle, uri)));
+        }
+        
+        return generatedImages;
+    }
+    
+    private URI buildGeneratedImagePath(ImageStyle imageStyle, URI uri) throws URISyntaxException {
+        return new URI(uri.getScheme() + "://" + GENERATED_IMAGES_PATH + "/" + imageStyle.getKey() + uri.getPath());
     }
     
     /**
@@ -103,5 +112,5 @@ public class ImageProcessingServiceImpl implements ImageProcessingService {
         
         return imageStyles;
     }
-    
+
 }

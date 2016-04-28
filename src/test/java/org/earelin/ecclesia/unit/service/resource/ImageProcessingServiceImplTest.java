@@ -1,11 +1,13 @@
 package org.earelin.ecclesia.unit.service.resource;
 
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 import org.earelin.ecclesia.service.resource.FileService;
 import org.earelin.ecclesia.service.resource.ImageProcessingServiceImpl;
 import static org.junit.Assert.*;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
@@ -26,12 +28,18 @@ public class ImageProcessingServiceImplTest {
     
     @Test
     public void shouldReturnDerivedImagesUri() throws URISyntaxException {
-        Map<String, String> paths = instance.getGeneratedImagesPaths(SAMPLE_IMAGE_PATH);
+        Map<String, URI> paths = instance.getGeneratedImagesPaths(new URI(SAMPLE_IMAGE_PATH));
         for (String imageKey : paths.keySet()) {
-            String expectedPath = "public://" + ImageProcessingServiceImpl.GENERATED_IMAGES_PATH
-                    + "/" + imageKey + "/samples/image.png";
+            URI expectedPath = new URI("public://" + ImageProcessingServiceImpl.GENERATED_IMAGES_PATH
+                    + "/" + imageKey + "/samples/image.png");
             assertEquals("Expected generated image path does not match", expectedPath, paths.get(imageKey));
         }
+    }
+    
+    @Ignore
+    @Test
+    public void shouldReturnDerivedImagesUrls() throws URISyntaxException {
+        // TODO implement test
     }
     
 }

@@ -47,8 +47,9 @@
   
   <bean id="fileService" class="org.earelin.ecclesia.service.resource.FileServiceImpl">
     <constructor-arg value="/tmp/ecclesia_folder/private" />
-		<constructor-arg value="/tmp/ecclesia_folder/public" />
+    <constructor-arg value="/tmp/ecclesia_folder/public" />
     <constructor-arg value="http://localhost:8080/ecclesia/cdn" />
+    <constructor-arg value="http://localhost:8080" />
     <constructor-arg ref="tika" />
   </bean>
   

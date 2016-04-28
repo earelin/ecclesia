@@ -1,5 +1,7 @@
 package org.earelin.ecclesia.unit.service.dto.resource;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 import org.earelin.ecclesia.domain.Organization;
 import org.earelin.ecclesia.service.dto.resource.ManagedFileDto;
@@ -15,9 +17,9 @@ public class ManagedFileDtoTest {
     ManagedFileDto file;
     
     @Before
-    public void initialize() {
+    public void initialize() throws MalformedURLException {
         file = new ManagedFileDto(1, "image/png",
-                new Date(), "http://localhost/ecclesia/images/image.png");
+                new Date(), new URL("http://localhost/ecclesia/images/image.png"));
     }
 
     @Test
@@ -29,9 +31,9 @@ public class ManagedFileDtoTest {
     }
     
     @Test
-    public void managedFilesWithSameIdShouldBeEquals() {
+    public void managedFilesWithSameIdShouldBeEquals() throws MalformedURLException {
         ManagedFileDto file1 = new ManagedFileDto(1, "image/png",
-                new Date(), "http://localhost/ecclesia/images/image.png");
+                new Date(), new URL("http://localhost/ecclesia/images/image.png"));
         assertTrue("Managed files with same id should be equals",
                 file.equals(file1));
         assertTrue("Managed files with same id should have the same hash code",
@@ -39,9 +41,9 @@ public class ManagedFileDtoTest {
     }
     
     @Test
-    public void managedFilesWithDifferentIdShouldNotBeEquals() {
+    public void managedFilesWithDifferentIdShouldNotBeEquals() throws MalformedURLException {
         ManagedFileDto file1 = new ManagedFileDto(2, "image/png",
-                new Date(), "http://localhost/ecclesia/images/image.png");
+                new Date(), new URL("http://localhost/ecclesia/images/image.png"));
         assertFalse("Managed files with different id should not be equals",
                 file.equals(file1));
         assertFalse("Managed files with different id should not have the same hash code",

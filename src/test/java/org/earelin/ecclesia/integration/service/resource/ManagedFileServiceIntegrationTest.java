@@ -40,7 +40,8 @@ public class ManagedFileServiceIntegrationTest {
     @Ignore
     @Test
     public void shouldStoreFilesInAGivenUriFolder() throws Exception {
-        final String folderUri = "private:///managed-file/add/to/uri";
+        // TODO implement method
+        final URI folderUri = new URI("private:///managed-file/add/to/uri");
         File file = new File(NORMAL_FILE_PATH);
         
         Date beforeCreate = new Date();

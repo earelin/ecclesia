@@ -1,5 +1,7 @@
 package org.earelin.ecclesia.service.dto.resource;
 
+import java.net.URI;
+import java.net.URL;
 import java.util.Date;
 
 /**
@@ -10,9 +12,9 @@ public class ManagedFileDto {
     private final long id;
     private final String mime;
     private final Date created;
-    private final String url;
+    private final URL url;
 
-    public ManagedFileDto(long id, String mime, Date created, String url) {
+    public ManagedFileDto(long id, String mime, Date created, URL url) {
         this.id = id;
         this.mime = mime;
         this.created = created;
@@ -54,10 +56,6 @@ public class ManagedFileDto {
 
     public Date getCreated() {
         return created;
-    }
-
-    public String getUrl() {
-        return url;
     }
     
 }

@@ -3,8 +3,10 @@ package org.earelin.ecclesia.service.resource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,14 +28,16 @@ public class FileServiceImpl implements FileService {
     private final String privateFileFolder;
     private final String publicFileFolder;
     private final String publicFilesBaseURL;
+    private final String serverURL;
     
     private final Tika tika;
 
     public FileServiceImpl(String privateFileFolder, String publicFileFolder,
-            String publicFilesBaseURL, Tika tika) throws IOException {
+            String publicFilesBaseURL, String serverURL, Tika tika) throws IOException {
         this.privateFileFolder = privateFileFolder;
         this.publicFileFolder = publicFileFolder;
         this.publicFilesBaseURL = publicFilesBaseURL;
+        this.serverURL = serverURL;
         this.tika = tika;
         
         checkFolders();       
@@ -61,16 +65,15 @@ public class FileServiceImpl implements FileService {
      * @param uri
      * @return 
      */
-    private String resolveUriToPath(String uri) throws UnhandledFileProtocol, URISyntaxException {
-        final URI parsedUri = new URI(uri);        
-        final String scheme = parsedUri.getScheme();
+    private String resolveUriToPath(URI uri) throws UnhandledFileProtocol, URISyntaxException {      
+        final String scheme = uri.getScheme();
         
         if (scheme.equals(PUBLIC_PROTOCOL)) {
-            return publicFileFolder + parsedUri.getPath();
+            return publicFileFolder + uri.getPath();
         }
         
         if (scheme.equals(PRIVATE_PROTOCOL)) {
-            return privateFileFolder + parsedUri.getPath();
+            return privateFileFolder + uri.getPath();
         }
         
         throw new UnhandledFileProtocol();
@@ -81,23 +84,22 @@ public class FileServiceImpl implements FileService {
      * @param uri
      * @return 
      */
-    private String resolveUriToUrl(String uri) throws UnhandledFileProtocol, URISyntaxException {
-        final URI parsedUri = new URI(uri);        
-        final String scheme = parsedUri.getScheme();
+    private URL resolveUriToUrl(URI uri) throws UnhandledFileProtocol, URISyntaxException, MalformedURLException {
+        final String scheme = uri.getScheme();
         
         if (scheme.equals(PUBLIC_PROTOCOL)) {
-            return publicFilesBaseURL + parsedUri.getPath();
+            return new URL(publicFilesBaseURL + uri.getPath());
         }
         
         if (scheme.equals(PRIVATE_PROTOCOL)) {
-            return PRIVATE_FILES_URL_PATH + parsedUri.getPath();
+            return new URL(serverURL + PRIVATE_FILES_URL_PATH + uri.getPath());
         }
         
         throw new UnhandledFileProtocol();
     }
 
     @Override
-    public File create(String uri) throws Exception {
+    public File create(URI uri) throws Exception {
         String filePath = resolveUriToPath(uri);
         Path folderPath = Paths.get(FilenameUtils.getFullPath(filePath));
         if (!Files.exists(folderPath)) {
@@ -107,7 +109,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public File get(String uri) throws Exception {
+    public File get(URI uri) throws Exception {
         final String stringPath = resolveUriToPath(uri);
         Path path = Paths.get(stringPath);
         
@@ -119,13 +121,8 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public String getUrl(String uri) throws Exception {
+    public URL getUrl(URI uri) throws Exception {
         return resolveUriToUrl(uri);
-    }
-
-    @Override
-    public String getPath(String uri) throws Exception {
-        return resolveUriToPath(uri);
     }
 
     @Override
@@ -134,9 +131,9 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public String save(File file, String folderUri) throws Exception {
-        final String folderStringPath = resolveUriToPath(folderUri);
-        final Path folderPath = Paths.get(folderStringPath);
+    public URI save(File file, URI folderUri) throws Exception {
+        final String folderFilesystemPath = resolveUriToPath(folderUri);
+        final Path folderPath = Paths.get(folderFilesystemPath);
         
         // Create folder if no exists
         if (!Files.exists(folderPath)) {
@@ -145,7 +142,7 @@ public class FileServiceImpl implements FileService {
         
         // Check colisions with other
         String fileName = file.getName();
-        String fileStringPath = folderStringPath + '/' + fileName;
+        String fileStringPath = folderFilesystemPath + '/' + fileName;
         Path filePath = Paths.get(fileStringPath);
 
         if (Files.exists(filePath)) {
@@ -157,27 +154,27 @@ public class FileServiceImpl implements FileService {
                 String fileBaseName = FilenameUtils.getBaseName(fileName);
                 tmpFileName = fileBaseName + '_' + i + '.' + fileExtension;
                 i++;
-            } while (Files.exists(Paths.get(folderStringPath + '/' + tmpFileName)));
+            } while (Files.exists(Paths.get(folderFilesystemPath + '/' + tmpFileName)));
             
             fileName = tmpFileName;
-            filePath = Paths.get(folderStringPath + '/' + tmpFileName);
+            filePath = Paths.get(folderFilesystemPath + '/' + tmpFileName);
         }
         
         Files.copy(new FileInputStream(file), filePath);
         
-        return folderUri + '/' + fileName;
+        return new URI(folderUri.toString() + '/' + fileName);
     }
 
     @Override
-    public void delete(String uri) throws Exception {
-        final String folderStringPath = resolveUriToPath(uri);
-        Path filePath = Paths.get(folderStringPath);
+    public void delete(URI uri) throws Exception {
+        final String filesystemStringPath = resolveUriToPath(uri);
+        Path filesystemPath = Paths.get(filesystemStringPath);
         
-        if (!Files.exists(filePath)) {
+        if (!Files.exists(filesystemPath)) {
             throw new FileNotFoundException();
         }
         
-        Files.delete(filePath);
+        Files.delete(filesystemPath);
     }
 
 }
