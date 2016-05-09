@@ -15,7 +15,8 @@ repositories {
 }
 
 dependencies {
-  ext.springVersion = '4.2.5.RELEASE'
+  ext.springVersion = '4.2.6.RELEASE'
+  ext.springSecurityVersion = '4.1.0.RELEASE'
   ext.hibernateVersion = '4.3.11.Final'
   
   compile 'ch.qos.logback:logback-classic:1.+'
@@ -45,9 +46,9 @@ dependencies {
   compile 'org.thymeleaf:thymeleaf-spring4:2.+'
   
   // spring security
-  compile 'org.springframework.security:spring-security-config:4.0.4.RELEASE'
-  compile 'org.springframework.security:spring-security-web:4.0.4.RELEASE'
-  compile 'org.springframework.security:spring-security-taglibs:4.0.4.RELEASE'
+  compile "org.springframework.security:spring-security-config:$springSecurityVersion"
+  compile "org.springframework.security:spring-security-web:$springSecurityVersion"
+  compile "org.springframework.security:spring-security-taglibs:$springSecurityVersion"
   
   // password validator
   compile 'org.passay:passay:1.+'
@@ -98,7 +99,27 @@ test {
   exclude 'org/earelin/ecclesia/bdd/**'
 }
 
-task testUI(type: Test) {
+task unitTest(type: Test) {
+    description 'Run only unit tests'
+    
+    include 'org/earelin/ecclesia/unit/**'
+    
+    reports.junitXml.destination = "$buildDir/unit-test-results"
+    reports.html.destination = "$buildDir/reports/unit-tests"
+}
+
+task integrationTest(type: Test) {
+    description 'Run only integration tests'
+    
+    include 'org/earelin/ecclesia/integration/**'
+    
+    reports.junitXml.destination = "$buildDir/integration-test-results"
+    reports.html.destination = "$buildDir/reports/integration-tests"
+}
+
+task uiTest(type: Test) {
+    description 'Run only user interface tests'
+    
   include 'org/earelin/ecclesia/bdd/**'
   
   reports.junitXml.destination = "$buildDir/ui-test-results"
