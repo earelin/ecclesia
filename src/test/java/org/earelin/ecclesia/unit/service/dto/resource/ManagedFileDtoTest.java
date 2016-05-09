@@ -14,7 +14,7 @@ import org.junit.Test;
  */
 public class ManagedFileDtoTest {
     
-    ManagedFileDto file;
+    private ManagedFileDto file;
     
     @Before
     public void initialize() throws MalformedURLException {

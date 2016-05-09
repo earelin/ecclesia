@@ -11,7 +11,7 @@ import org.junit.Test;
  */
 public class OrganizationRoleTest {
     
-    OrganizationRole role;
+    private OrganizationRole role;
     
     @Before
     public void initialize() {

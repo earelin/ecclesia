@@ -11,7 +11,7 @@ import org.junit.Test;
  */
 public class GroupTest {
     
-    Group group;
+    private Group group;
     
     @Before
     public void initialize() {

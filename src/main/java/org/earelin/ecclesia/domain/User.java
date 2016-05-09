@@ -62,10 +62,7 @@ public class User {
             return false;
         }
         final User other = (User) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        return this.id == other.id;
     }
 
     public boolean isEnabled() {

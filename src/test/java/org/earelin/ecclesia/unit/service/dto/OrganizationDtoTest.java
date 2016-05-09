@@ -11,7 +11,7 @@ import org.junit.Test;
  */
 public class OrganizationDtoTest {
     
-    OrganizationDto organization;
+    private OrganizationDto organization;
     
     @Before
     public void initialize() {

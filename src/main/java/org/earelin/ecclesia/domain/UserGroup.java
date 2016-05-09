@@ -44,10 +44,7 @@ public class UserGroup {
             return false;
         }
         final UserGroup other = (UserGroup) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        return this.id == other.id;
     }
 
     public long getId() {

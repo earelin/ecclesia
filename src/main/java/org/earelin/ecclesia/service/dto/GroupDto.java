@@ -33,10 +33,7 @@ public class GroupDto {
             return false;
         }
         final GroupDto other = (GroupDto) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        return this.id == other.id;
     }
 
     public long getId() {

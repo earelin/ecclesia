@@ -1,6 +1,5 @@
 package org.earelin.ecclesia.service.dto.resource;
 
-import java.net.URI;
 import java.net.URL;
 import java.util.Date;
 
@@ -40,10 +39,7 @@ public class ManagedFileDto {
             return false;
         }
         final ManagedFileDto other = (ManagedFileDto) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        return this.id == other.id;
     }
 
     public long getId() {

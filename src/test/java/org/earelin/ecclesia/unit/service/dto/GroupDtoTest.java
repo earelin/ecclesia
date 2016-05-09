@@ -11,7 +11,7 @@ import org.junit.Test;
  */
 public class GroupDtoTest {
     
-    GroupDto group;
+    private GroupDto group;
     
     @Before
     public void initialize() {

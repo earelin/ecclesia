@@ -1,9 +1,6 @@
 package org.earelin.ecclesia.unit.service.dto;
 
-import org.earelin.ecclesia.unit.domain.*;
-import org.earelin.ecclesia.domain.Group;
 import org.earelin.ecclesia.domain.Organization;
-import org.earelin.ecclesia.domain.User;
 import org.earelin.ecclesia.service.dto.UserDto;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -14,7 +11,7 @@ import org.junit.Test;
  */
 public class UserDtoTest {
     
-    UserDto user;
+    private UserDto user;
     
     @Before
     public void initialize() {

@@ -28,10 +28,7 @@ public class OrganizationRoleDto {
             return false;
         }
         final OrganizationRoleDto other = (OrganizationRoleDto) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        return this.id == other.id;
     }
 
     public long getId() {

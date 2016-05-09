@@ -32,10 +32,7 @@ public class UserGroupDto {
             return false;
         }
         final UserGroupDto other = (UserGroupDto) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        return this.id == other.id;
     }
 
     public long getId() {

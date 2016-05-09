@@ -44,10 +44,7 @@ public class ManagedFile {
             return false;
         }
         final ManagedFile other = (ManagedFile) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        return this.id == other.id;
     }
 
     public long getId() {

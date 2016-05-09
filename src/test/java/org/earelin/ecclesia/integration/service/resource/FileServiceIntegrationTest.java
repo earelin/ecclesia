@@ -32,7 +32,7 @@ public class FileServiceIntegrationTest {
     public static final String ILLEGAL_PROTOCOL_URI = "illegal:///folder/example.txt";
     public static final String SAMPLE_FILE = "src/test/resources/test-data/files/sample.txt";
             
-    FileServiceImpl instance;
+    private FileServiceImpl instance;
     
     @AfterClass
     public static void classCleanup() throws IOException {

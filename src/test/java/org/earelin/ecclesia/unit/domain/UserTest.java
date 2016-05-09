@@ -11,7 +11,7 @@ import org.junit.Test;
  */
 public class UserTest {
     
-    User user;
+    private User user;
     
     @Before
     public void initialize() {

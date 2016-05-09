@@ -45,10 +45,7 @@ public class Organization {
             return false;
         }
         final Organization other = (Organization) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        return this.id == other.id;
     }
 
     public long getId() {

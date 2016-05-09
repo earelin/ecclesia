@@ -11,7 +11,7 @@ import org.junit.Test;
  */
 public class UserGroupDtoTest {
     
-    UserGroupDto userGroup;
+    private UserGroupDto userGroup;
     
     @Before
     public void initialize() {

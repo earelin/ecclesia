@@ -11,7 +11,7 @@ import org.junit.Test;
  */
 public class ManagedFileTest {
     
-    ManagedFile file;
+    private ManagedFile file;
     
     @Before
     public void initialize() {

@@ -11,7 +11,7 @@ import org.junit.Test;
  */
 public class GroupRoleTest {
     
-    GroupRole role;
+    private GroupRole role;
     
     @Before
     public void initialize() {
