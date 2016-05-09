@@ -78,7 +78,7 @@ public class ManagedFileServiceImpl implements ManagedFileService {
         ManagedFile file = repository.get(id);
         
         if (file == null) {
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException("Trying to remove an unexisting ManagedFile with id " + id);
         }
                 
         fileService.delete(new URI(file.getUri()));
@@ -96,7 +96,7 @@ public class ManagedFileServiceImpl implements ManagedFileService {
         ManagedFile file = repository.get(id);
         
         if (file == null) {
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException("Trying to load an unexisting ManagedFile with id " + id);
         }
         
         return generateDto(file);

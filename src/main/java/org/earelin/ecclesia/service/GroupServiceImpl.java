@@ -53,12 +53,13 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public void update(GroupDto groupDto) {
+        
         Date now = new Date();
         groupDto.setUpdated(now);
         
         Group group = repository.get(groupDto.getId());        
         if (group == null) {
-            throw new EntityNotFoundException(groupDto.getId());
+            throw new EntityNotFoundException("Trying to update an unexisting Group with id " + groupDto.getId());
         }
         
         validate(groupDto);
@@ -73,7 +74,7 @@ public class GroupServiceImpl implements GroupService {
         Group group = repository.get(id);
         
         if (group == null) {
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException("Trying to remove an unexisting Group with id " + id);
         }
         
         repository.remove(group);
@@ -85,7 +86,7 @@ public class GroupServiceImpl implements GroupService {
         Group group = repository.get(id);
         
         if (group == null) {
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException("Trying to load an unexisting Group with id " + id);
         }
         
         return mapper.map(group, GroupDto.class);
@@ -120,7 +121,7 @@ public class GroupServiceImpl implements GroupService {
         }
         
         if (!organizationService.exists(organization.getId())) {
-            throw new EntityNotFoundException(organization.getId());
+            throw new EntityNotFoundException("Organization with id " + organization.getId() + " not found.");
         }
         
         GroupDto parentGroupDto = groupDto.getParent();

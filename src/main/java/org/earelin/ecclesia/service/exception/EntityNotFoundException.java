@@ -5,14 +5,8 @@ package org.earelin.ecclesia.service.exception;
  */
 public class EntityNotFoundException extends RuntimeException {
 
-    private long id;
-    
-    public EntityNotFoundException(long id) {
-        this.id = id;
-    }
-    
-    public long getId() {
-        return id;
+    public EntityNotFoundException(String message) {
+        super(message);
     }
 
 }

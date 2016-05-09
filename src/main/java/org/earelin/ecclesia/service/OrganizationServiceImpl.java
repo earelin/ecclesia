@@ -31,32 +31,32 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public void add(OrganizationDto organizationDTO) {
+    public void add(OrganizationDto organizationDto) {
         
-        if (organizationDTO.getId() != 0) {
+        if (organizationDto.getId() != 0) {
             throw new ValidationException("Error validating OrganizationDto: field id is not 0");
         } 
         
         Date now = new Date();
-        organizationDTO.setCreated(now);
-        organizationDTO.setUpdated(now);
+        organizationDto.setCreated(now);
+        organizationDto.setUpdated(now);
         
-        Organization organization = mapper.map(organizationDTO, Organization.class);
+        Organization organization = mapper.map(organizationDto, Organization.class);
         repository.add(organization);
         
-        organizationDTO.setId(organization.getId());
+        organizationDto.setId(organization.getId());
     }
 
     @Override
-    public void update(OrganizationDto organizationDTO) {
+    public void update(OrganizationDto organizationDto) {
         Date now = new Date();
-        organizationDTO.setUpdated(now);
+        organizationDto.setUpdated(now);
         
-        Organization organization = repository.get(organizationDTO.getId());        
+        Organization organization = repository.get(organizationDto.getId());        
         if (organization == null) {
-            throw new EntityNotFoundException(organizationDTO.getId());
+            throw new EntityNotFoundException("Trying to update an unexisting Group with id " + organizationDto.getId());
         }        
-        mapper.map(organizationDTO, organization);
+        mapper.map(organizationDto, organization);
         
         repository.update(organization);
     }
@@ -66,7 +66,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         Organization organization = repository.get(id);
         
         if (organization == null) {
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException("Trying to remove an unexisting Organization with id " + id);
         }
         
         repository.remove(organization);
@@ -78,7 +78,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         Organization organization = repository.get(id);
         
         if (organization == null) {
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException("Trying to load an unexisting Organization with id " + id);
         }
         
         return mapper.map(organization, OrganizationDto.class);

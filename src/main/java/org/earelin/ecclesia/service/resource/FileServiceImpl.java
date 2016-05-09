@@ -76,7 +76,7 @@ public class FileServiceImpl implements FileService {
             return privateFileFolder + uri.getPath();
         }
         
-        throw new UnhandledFileProtocol();
+        throw new UnhandledFileProtocol("The protocol " + uri.getScheme() + " is nor registered");
     }
     
     /**
@@ -95,7 +95,7 @@ public class FileServiceImpl implements FileService {
             return new URL(serverURL + PRIVATE_FILES_URL_PATH + uri.getPath());
         }
         
-        throw new UnhandledFileProtocol();
+        throw new UnhandledFileProtocol("The protocol " + uri.getScheme() + " is nor registered");
     }
 
     @Override
@@ -114,7 +114,7 @@ public class FileServiceImpl implements FileService {
         Path path = Paths.get(stringPath);
         
         if (!Files.exists(path)) {
-            throw new FileNotFoundException();
+            throw new FileNotFoundException("The file " + uri.toString() + " is not found");
         }
         
         return new File(stringPath);
@@ -171,7 +171,7 @@ public class FileServiceImpl implements FileService {
         Path filesystemPath = Paths.get(filesystemStringPath);
         
         if (!Files.exists(filesystemPath)) {
-            throw new FileNotFoundException();
+            throw new FileNotFoundException("The file " + uri.toString() + " is not found");
         }
         
         Files.delete(filesystemPath);

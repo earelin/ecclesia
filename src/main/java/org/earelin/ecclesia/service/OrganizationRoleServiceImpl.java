@@ -47,7 +47,7 @@ public class OrganizationRoleServiceImpl implements OrganizationRoleService {
     public void update(OrganizationRoleDto roleDto) {
         OrganizationRole role = repository.get(roleDto.getId());        
         if (role == null) {
-            throw new EntityNotFoundException(roleDto.getId());
+            throw new EntityNotFoundException("Trying to update an unexisting OrganizationRole with id " + roleDto.getId());
         }
         
         validate(roleDto);
@@ -62,7 +62,7 @@ public class OrganizationRoleServiceImpl implements OrganizationRoleService {
         OrganizationRole role = repository.get(id);
         
         if (role == null) {
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException("Trying to remove an unexisting OrganizationRole with id " + id);
         }
         
         repository.remove(role);
@@ -74,7 +74,7 @@ public class OrganizationRoleServiceImpl implements OrganizationRoleService {
         OrganizationRole role = repository.get(id);
         
         if (role == null) {
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException("Trying to load an unexisting OrganizationRole with id " + id);
         }
         
         return mapper.map(role, OrganizationRoleDto.class);
@@ -91,7 +91,7 @@ public class OrganizationRoleServiceImpl implements OrganizationRoleService {
         }
         
         if (!organizationService.exists(organization.getId())) {
-            throw new EntityNotFoundException(organization.getId());
+            throw new EntityNotFoundException("Organization with id " + organization.getId() + " not found.");
         }
     }
 

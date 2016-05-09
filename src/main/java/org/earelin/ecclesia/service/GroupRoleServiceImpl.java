@@ -35,7 +35,7 @@ public class GroupRoleServiceImpl implements GroupRoleService {
         validate(roleDto);
         
         if (roleDto.getId() != 0) {
-            throw new ValidationException("Error validating GroupRoleDto: field id is not 0");
+            throw new ValidationException("Error validating GroupRoleDto. Id is not 0");
         }
         
         GroupRole role = mapper.map(roleDto, GroupRole.class);
@@ -47,7 +47,7 @@ public class GroupRoleServiceImpl implements GroupRoleService {
     public void update(GroupRoleDto roleDto) {
         GroupRole role = repository.get(roleDto.getId());        
         if (role == null) {
-            throw new EntityNotFoundException(roleDto.getId());
+            throw new EntityNotFoundException("Trying to update an unexisting GroupRole with id " + roleDto.getId());
         }
         
         validate(roleDto);
@@ -62,7 +62,7 @@ public class GroupRoleServiceImpl implements GroupRoleService {
         GroupRole role = repository.get(id);
         
         if (role == null) {
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException("Trying to remove an unexisting GroupRole with id " + id);
         }
         
         repository.remove(role);
@@ -74,7 +74,7 @@ public class GroupRoleServiceImpl implements GroupRoleService {
         GroupRole role = repository.get(id);
         
         if (role == null) {
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException("Trying to load an unexisting GroupRole with id " + id);
         }
         
         return mapper.map(role, GroupRoleDto.class);
@@ -87,11 +87,11 @@ public class GroupRoleServiceImpl implements GroupRoleService {
     private void validate(GroupRoleDto roleDto) {
         GroupDto group = roleDto.getGroup();
         if (group == null) {
-            throw new ValidationException("Error validating GroupRoleDto: field group is null");
+            throw new ValidationException("Error validating GroupRoleDto. Field group is null");
         }
         
         if (!groupService.exists(group.getId())) {
-            throw new EntityNotFoundException(group.getId());
+            throw new EntityNotFoundException("GroupRole does not belong to an existing group. Group with id " + group.getId() + " does not exist");
         }
     }
 

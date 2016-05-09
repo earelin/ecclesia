@@ -59,16 +59,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(UserDto userDTO) {
-        long userId = userDTO.getId();
+    public void update(UserDto userDto) {
+        long userId = userDto.getId();
         User user = repository.get(userId);
         
         if (user == null) {
-            throw new EntityNotFoundException(userId);
+            throw new EntityNotFoundException("Trying to update an unexisting User with id " + userDto.getId());
         }
         
-        userDTO.setUpdated(new Date());
-        mapper.map(userDTO, user);
+        userDto.setUpdated(new Date());
+        mapper.map(userDto, user);
         repository.update(user);
     }
 
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
         User user = repository.get(id);
         
         if (user == null) {
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException("Trying to remove an unexisting User with id " + id);
         }
         
         repository.remove(user);
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
         User user = repository.get(id);
         
         if (user == null) {
-            throw new EntityNotFoundException(id);
+            throw new EntityNotFoundException("Trying to load an unexisting User with id " + id);
         }
         
         return mapper.map(user, UserDto.class);

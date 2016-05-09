@@ -5,8 +5,6 @@ package org.earelin.ecclesia.service.exception;
  */
 public class UnhandledFileProtocol extends RuntimeException {
 
-    public UnhandledFileProtocol() {}
-
     public UnhandledFileProtocol(String message) {
         super(message);
     }
