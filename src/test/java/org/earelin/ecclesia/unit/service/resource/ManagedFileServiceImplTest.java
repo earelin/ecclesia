@@ -1,41 +1,49 @@
-package org.earelin.ecclesia.integration.service.resource;
+package org.earelin.ecclesia.unit.service.resource;
 
 import java.io.File;
 import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import org.apache.commons.io.FilenameUtils;
-import org.codehaus.plexus.util.FileUtils;
+import org.earelin.ecclesia.repository.resource.ManagedFileRepository;
 import org.earelin.ecclesia.service.dto.resource.ManagedFileDto;
 import org.earelin.ecclesia.service.exception.EntityNotFoundException;
+import org.earelin.ecclesia.service.resource.FileService;
 import org.earelin.ecclesia.service.resource.ImageProcessingService;
 import org.earelin.ecclesia.service.resource.ManagedFileService;
+import org.earelin.ecclesia.service.resource.ManagedFileServiceImpl;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 /**
- * ManagedFileService integration test
+ * ManagedFileServiceImpl unit test
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/spring-test-config.xml"})
-public class ManagedFileServiceIntegrationTest {
+@RunWith(MockitoJUnitRunner.class)
+public class ManagedFileServiceImplTest {
     
     public static final String NORMAL_FILE_PATH = "src/test/resources/test-data/files/pdf-sample.pdf";
     public static final String IMAGE_FILE_PATH = "src/test/resources/test-data/files/jpg-sample.jpg";
     
-    @Autowired
     private ManagedFileService instance;
     
-    @Autowired
+    @Mock
+    private FileService fileService;
+    
+    @Mock
+    private ManagedFileRepository repository;
+    
+    @Mock
     private ImageProcessingService imageService;
+    
+    @Before
+    public void init() {
+        instance = new ManagedFileServiceImpl(repository, fileService, imageService);
+    }
 
     @Ignore
     @Test
@@ -97,7 +105,7 @@ public class ManagedFileServiceIntegrationTest {
     
     @Test(expected = EntityNotFoundException.class)
     public void removeNotExistingFile() throws Exception {
-        instance.remove(100000);
+        instance.remove(1);
     }
     
     @Ignore
@@ -114,7 +122,7 @@ public class ManagedFileServiceIntegrationTest {
     
     @Test(expected = EntityNotFoundException.class)
     public void getNotExistingFile() throws Exception {
-        instance.get(100000);
+        instance.get(1);
     }
     
 }

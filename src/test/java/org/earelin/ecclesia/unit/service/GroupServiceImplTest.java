@@ -1,8 +1,14 @@
-package org.earelin.ecclesia.integration.service;
+package org.earelin.ecclesia.unit.service;
 
 import java.util.Date;
 import javax.validation.ConstraintViolationException;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
+import org.earelin.ecclesia.domain.Group;
+import org.earelin.ecclesia.domain.Organization;
+import org.earelin.ecclesia.repository.GroupRepository;
 import org.earelin.ecclesia.service.GroupService;
+import org.earelin.ecclesia.service.GroupServiceImpl;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.dto.GroupDto;
 import org.earelin.ecclesia.service.dto.OrganizationDto;
@@ -11,42 +17,55 @@ import org.earelin.ecclesia.service.exception.ValidationException;
 import static org.junit.Assert.*;
 import static org.hamcrest.beans.SamePropertyValuesAs.*;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.mockito.Mock;
+import static org.mockito.Mockito.*;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 
 /**
- * GroupService integration test
+ * GroupServiceImpl unit test
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/spring-test-config.xml"})
-public class GroupServiceIntegrationTest {
-    
-    private static final String GROUP_NAME = "Testing group";
-    private static final String ORGANIZATION_NAME = "Testing groups organization";
-    
+@RunWith(MockitoJUnitRunner.class)
+public class GroupServiceImplTest {
+
     private OrganizationDto organization;
-    
-    @Autowired
+    private final Mapper mapper = new DozerBeanMapper();
     private GroupService instance;
     
-    @Autowired
+    @Mock
     private OrganizationService organizationService;
+    
+    @Mock
+    private GroupRepository repository;
     
     @Before
     public void init() {
         organization = new OrganizationDto();
-        organization.setName(ORGANIZATION_NAME);
-        organizationService.add(organization);
+        organization.setId(1);
+        
+        instance = new GroupServiceImpl(repository, organizationService, mapper);
     }
     
     @Test
     public void createNewGroup() {
+        doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) {
+                Object[] args = invocation.getArguments();
+                Group group = (Group) args[0];
+                group.setId(1);
+                return null;
+            } 
+        }).when(repository).add(any(Group.class));
+        
+        when(organizationService.exists(1)).thenReturn(true);
+        
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
-        group.setName(GROUP_NAME);
 
         Date beforeInsert = new Date();
         instance.add(group);
@@ -60,45 +79,63 @@ public class GroupServiceIntegrationTest {
                 group.getCreated(), group.getUpdated());
         assertEquals("Group should belong to defined Organization",
                 organization, group.getOrganization());
-    }
+        verify(repository).add(any(Group.class));
+    }   
     
     @Test
-    public void createNewGroupWithParent() {
-        GroupDto group = new GroupDto();
-        group.setOrganization(organization);
-        group.setName(GROUP_NAME);
+    public void createNewGroupWithParent() {        
+        doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) {
+                Object[] args = invocation.getArguments();
+                Group group = (Group) args[0];
+                group.setId(2);
+                return null;
+            } 
+        }).when(repository).add(any(Group.class));
         
         GroupDto parent = new GroupDto();
+        parent.setId(1);
         parent.setOrganization(organization);
-        parent.setName("Parent group name");
-        instance.add(parent);
         
-        group.setParent(parent);
-        instance.add(group);
-    }
-    
-    @Test(expected = ConstraintViolationException.class)
-    public void newGroupShouldHaveNotBlankName() {
+        Organization organizationEntity = new Organization();
+        organizationEntity.setId(1);
+        
+        Group parentGroupEntity = new Group();
+        parentGroupEntity.setId(1);
+        parentGroupEntity.setOrganization(organizationEntity);
+        
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
-        group.setName("  ");
+        group.setParent(parent);
+        
+        when(organizationService.exists(1)).thenReturn(true);
+        when(repository.get(1)).thenReturn(parentGroupEntity);
+        
+        instance.add(group);
+        
+        verify(repository).add(any(Group.class));
+    }
+    
+    @Test(expected = ValidationException.class)
+    public void anExistingGroupShouldNotBeCreated() {
+        GroupDto group = new GroupDto();
+        group.setId(1);
+        
         instance.add(group);
     }
     
     @Test(expected = ValidationException.class)
     public void newGroupShouldBelongToAnOrganization() {
         GroupDto group = new GroupDto();
-        group.setName(GROUP_NAME);
         instance.add(group);
     }
     
     @Test(expected = EntityNotFoundException.class)
     public void newGroupShouldBelongToAnExistingOrganization() {
-        OrganizationDto organization = new OrganizationDto();
-        organization.setName(ORGANIZATION_NAME);
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
-        group.setName(GROUP_NAME);
+        
         instance.add(group);
     }
     
@@ -106,62 +143,67 @@ public class GroupServiceIntegrationTest {
     public void newGroupParentShouldExists() {
         GroupDto parent = new GroupDto();
         parent.setOrganization(organization);
-        parent.setName("Parent group name");
         
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
-        group.setName(GROUP_NAME);
         group.setParent(parent);
+        
+        when(organizationService.exists(1)).thenReturn(true);
         
         instance.add(group);
     }
     
     @Test(expected = ValidationException.class)
     public void newGroupParentShouldBelongToTheSameOrganization() {
-        OrganizationDto organization1 = new OrganizationDto();
-        organization1.setName(ORGANIZATION_NAME);
-        organizationService.add(organization1);
+        OrganizationDto parentOrganization = new OrganizationDto();
+        parentOrganization.setId(2);
         
         GroupDto parent = new GroupDto();
-        parent.setOrganization(organization1);
-        parent.setName("Parent group name");
-        instance.add(parent);
+        parent.setId(1);
+        parent.setOrganization(parentOrganization);
+        
+        Organization parentOrganizationEntity = new Organization();
+        parentOrganizationEntity.setId(2);
+        
+        Group parentGroupEntity = new Group();
+        parentGroupEntity.setId(1);
+        parentGroupEntity.setOrganization(parentOrganizationEntity);
         
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
-        group.setName(GROUP_NAME);
         group.setParent(parent);
         
+        when(organizationService.exists(1)).thenReturn(true);
+        when(repository.get(1)).thenReturn(parentGroupEntity);
+        
         instance.add(group);
+        
+        verify(repository).add(any(Group.class));
     }
     
+    @Ignore
     @Test
     public void updateExistingGroup() {
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
-        group.setName(GROUP_NAME);
-        instance.add(group);
+        group.setId(1);
         
-        long groupId = group.getId();
-        String updatedName = "Testing group updated";
-        group.setName(updatedName);
         Date beforeUpdate = new Date();
         instance.update(group); 
         Date afterUpdate = new Date();
-        GroupDto updatedGroup = instance.get(groupId);
         
+        verify(repository).update(any(Group.class));
         assertTrue("Updated group updated field should have current date", 
-                updatedGroup.getUpdated().compareTo(beforeUpdate) >= 0
-                && updatedGroup.getUpdated().compareTo(afterUpdate) <= 0);
-        assertEquals(group.getId(), updatedGroup.getId());
-        assertEquals(updatedName, group.getName());
+                group.getUpdated().compareTo(beforeUpdate) >= 0
+                && group.getUpdated().compareTo(afterUpdate) <= 0);
     }
     
+    @Ignore
     @Test
     public void updateExistingGroupWithParent() {
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
-        group.setName(GROUP_NAME);
+        group.setName("Test group");
         instance.add(group);
         
         GroupDto parent = new GroupDto();
@@ -176,131 +218,125 @@ public class GroupServiceIntegrationTest {
     @Test(expected = EntityNotFoundException.class)
     public void updateNotExistingGroup() {
         GroupDto group = new GroupDto();
-        group.setId(100000);
+        group.setId(1);
         group.setOrganization(organization);
-        group.setName(GROUP_NAME);
-        instance.update(group);
-    }
-    
-    @Test(expected = ConstraintViolationException.class)
-    public void updatedGroupShouldHaveNotBlankName() {
-        GroupDto group = new GroupDto();
-        group.setOrganization(organization);
-        group.setName(GROUP_NAME);
-        instance.add(group);    
-        group.setName("   ");
+
         instance.update(group);
     }
     
     @Test(expected = ValidationException.class)
     public void updatedGroupShouldBelongToAnOrganization() {
         GroupDto group = new GroupDto();
-        group.setOrganization(organization);
-        group.setName(GROUP_NAME);
-        instance.add(group);    
-        group.setOrganization(null);
+        group.setId(1);                
+        
+        Group groupEntity = new Group();
+        groupEntity.setId(1);
+        
+        when(repository.get(1)).thenReturn(groupEntity);
+ 
         instance.update(group);
     }
     
     @Test(expected = EntityNotFoundException.class)
     public void updatedGroupShouldBelongToAnExistingOrganization() {
         GroupDto group = new GroupDto();
+        group.setId(1);
         group.setOrganization(organization);
-        group.setName(GROUP_NAME);
-        instance.add(group);
         
-        OrganizationDto organization1 = new OrganizationDto();
-        organization1.setName(ORGANIZATION_NAME);
-        group.setOrganization(organization1);
+        Group groupEntity = new Group();
+        groupEntity.setId(1);
         
+        when(repository.get(1)).thenReturn(groupEntity);
+ 
         instance.update(group);
     }
     
     @Test(expected = ValidationException.class)
     public void updatedGroupParentShouldExists() {
-        GroupDto group = new GroupDto();
-        group.setOrganization(organization);
-        group.setName(GROUP_NAME);
-        instance.add(group);
-        
         GroupDto parent = new GroupDto();
-        parent.setOrganization(organization);
-        parent.setName("Parent group name");
+        parent.setId(1);
         
+        GroupDto group = new GroupDto();
+        group.setId(2);
+        group.setOrganization(organization);
         group.setParent(parent);
         
+        Group groupEntity = new Group();
+        groupEntity.setId(2);
+        
+        when(repository.get(2)).thenReturn(groupEntity);
+        when(organizationService.exists(1)).thenReturn(true);
+ 
         instance.update(group);
     }
     
+    @Ignore
     @Test(expected = ValidationException.class)
     public void updatedGroupParentShouldBelongToTheSameOrganization() {
-        GroupDto group = new GroupDto();
-        group.setOrganization(organization);
-        group.setName(GROUP_NAME);
-        instance.add(group);
-        
-        OrganizationDto organization1 = new OrganizationDto();
-        organization1.setName(ORGANIZATION_NAME);
-        organizationService.add(organization1);
-        
         GroupDto parent = new GroupDto();
-        parent.setOrganization(organization1);
-        parent.setName("Parent group name");
-        instance.add(parent);
+        parent.setId(1);
         
+        GroupDto group = new GroupDto();
+        group.setId(2);
+        group.setOrganization(organization);
         group.setParent(parent);
         
+        Group groupEntity = new Group();
+        groupEntity.setId(2);
+        
+        when(repository.get(2)).thenReturn(groupEntity);
+        when(organizationService.exists(1)).thenReturn(true);
+ 
         instance.update(group);
-    }
-    
-    @Test(expected = EntityNotFoundException.class)
-    public void removeExistingGroup() {
-        GroupDto group = new GroupDto();
-        group.setOrganization(organization);
-        group.setName(GROUP_NAME);
-        instance.add(group);      
-        long groupId = group.getId();
-        
-        instance.remove(groupId);
-        
-        instance.get(groupId);
-    }
-    
-    @Test(expected = EntityNotFoundException.class)
-    public void removeNotExistingGroup() {
-        instance.remove(100000);
     }
     
     @Test
-    public void getExistingGroup() {
+    public void removeExistingGroup()
+            throws EntityNotFoundException, ValidationException {
         GroupDto group = new GroupDto();
-        group.setOrganization(organization);
-        group.setName(GROUP_NAME);
-        instance.add(group);
+        group.setId(1);
         
-        GroupDto gottenGroup = instance.get(group.getId());
+        Group groupEntity = new Group();
         
-        assertThat(group, samePropertyValuesAs(gottenGroup));
+        when(repository.get(1)).thenReturn(groupEntity);
+        
+        instance.remove(1);
+        
+        verify(repository).remove(groupEntity);
+    }
+    
+    @Test(expected = EntityNotFoundException.class)
+    public void removeNotExistingGroup() throws EntityNotFoundException {
+        instance.remove(1);
+    }
+    
+    @Test
+    public void getExistingGroup()
+            throws EntityNotFoundException, ValidationException {
+        when(repository.get(1)).thenReturn(new Group());
+        
+        instance.get(1);        
+        
+        verify(repository).get(1);
     }
     
     @Test(expected = EntityNotFoundException.class)
     public void getNotExistingGroup() {
-        instance.get(100000);
+        instance.get(1);
     }
     
     @Test
     public void checkThanAGroupExists() {
-        GroupDto group = new GroupDto();
-        group.setOrganization(organization);
-        group.setName(GROUP_NAME);
-        instance.add(group);
+        when(repository.get(1)).thenReturn(new Group());
         
-        assertTrue(instance.exists(group.getId()));
+        instance.exists(1);
+        
+        verify(repository).get(1);
     }
     
     @Test
     public void checkThanAGroupDoesNoExist() {
-        assertFalse(instance.exists(1000000));
+        assertFalse(instance.exists(1));
     }
     
 }

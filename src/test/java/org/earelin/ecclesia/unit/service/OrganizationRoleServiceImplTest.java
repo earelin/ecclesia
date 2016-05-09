@@ -1,87 +1,80 @@
-package org.earelin.ecclesia.integration.service;
+package org.earelin.ecclesia.unit.service;
 
-import javax.validation.ConstraintViolationException;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
+import org.earelin.ecclesia.domain.OrganizationRole;
+import org.earelin.ecclesia.repository.OrganizationRoleRepository;
 import org.earelin.ecclesia.service.OrganizationRoleService;
+import org.earelin.ecclesia.service.OrganizationRoleServiceImpl;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.dto.OrganizationDto;
 import org.earelin.ecclesia.service.dto.OrganizationRoleDto;
 import org.earelin.ecclesia.service.exception.EntityNotFoundException;
 import org.earelin.ecclesia.service.exception.ValidationException;
-import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
 import static org.junit.Assert.*;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.mockito.Mock;
+import static org.mockito.Mockito.*;
+import org.mockito.runners.MockitoJUnitRunner;
 
 /**
- * OrganizationRoleService integration test
+ * OrganizationRoleServiceImpl unit test
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/spring-test-config.xml"})
-public class OrganizationRoleServiceIntegrationTest {
-    
-    private static final String ORGANIZATION_NAME = "Testing organization";
-    private static final String ORGANIZATION_ROLE_NAME = "Testing organization role";
+@RunWith(MockitoJUnitRunner.class)
+public class OrganizationRoleServiceImplTest {
     
     private OrganizationDto organization;
-    
-    @Autowired
+    private final Mapper mapper = new DozerBeanMapper();
     private OrganizationRoleService instance;
     
-    @Autowired
+    @Mock
     private OrganizationService organizationService;
+    
+    @Mock
+    private OrganizationRoleRepository repository;
     
     @Before
     public void init() {
         organization = new OrganizationDto();
-        organization.setName(ORGANIZATION_NAME);
-        organizationService.add(organization);
+        organization.setId(1);
+        
+        instance = new OrganizationRoleServiceImpl(repository, organizationService, mapper);
     }
     
+    @Ignore
     @Test
     public void createNewOrganizationRole() {
         OrganizationRoleDto role = new OrganizationRoleDto();
         role.setOrganization(organization);
-        role.setName(ORGANIZATION_ROLE_NAME);
         
         assertNotSame("Created organization role id should not be 0", 0, role.getId());
         assertEquals("Role organization should belong to defined organization",
                 organization, role.getOrganization());
     }
     
-    @Test(expected = ConstraintViolationException.class)
-    public void newOrganizationRoleShouldHaveNotBlankName() {
-        OrganizationRoleDto role = new OrganizationRoleDto();
-        role.setOrganization(organization);
-        role.setName("  ");
-        instance.add(role);
-    }
-    
     @Test(expected = ValidationException.class)
     public void newOrganizationRoleShouldBelongToAnOrganization() {
         OrganizationRoleDto role = new OrganizationRoleDto();
-        role.setName(ORGANIZATION_ROLE_NAME);
         instance.add(role);
     }
     
+    @Ignore
     @Test(expected = EntityNotFoundException.class)
     public void newOrganizationRoleShouldBelongToAnExistingOrganization() {
         OrganizationDto organization = new OrganizationDto();
-        organization.setName(ORGANIZATION_NAME);
         OrganizationRoleDto role = new OrganizationRoleDto();
         role.setOrganization(organization);
-        role.setName(ORGANIZATION_ROLE_NAME);
         instance.add(role);
     }
     
+    @Ignore
     @Test
     public void updateExistingOrganizationRole() {
         OrganizationRoleDto role = new OrganizationRoleDto();
         role.setOrganization(organization);
-        role.setName(ORGANIZATION_ROLE_NAME);
         instance.add(role);
         
         long roleId = role.getId();
@@ -96,80 +89,67 @@ public class OrganizationRoleServiceIntegrationTest {
     @Test(expected = EntityNotFoundException.class)
     public void updateNotExistingOrganizationRole() {
         OrganizationRoleDto role = new OrganizationRoleDto();
-        role.setId(100000);
-        role.setOrganization(organization);
-        role.setName(ORGANIZATION_ROLE_NAME);
+        role.setId(1);
+        
         instance.update(role);
     }
     
-    @Test(expected = ConstraintViolationException.class)
-    public void updatedOrganizationRoleShouldHaveNotBlankName() {
-        OrganizationRoleDto role = new OrganizationRoleDto();
-        role.setOrganization(organization);
-        role.setName(ORGANIZATION_ROLE_NAME);
-        instance.add(role);    
-        role.setName("   ");
-        instance.update(role);
-    }
-    
+    @Ignore
     @Test(expected = ValidationException.class)
-    public void updatedOrganizationRoleShouldBelongToAGroup() {
+    public void updatedOrganizationRoleShouldBelongToAnOrganization() {
         OrganizationRoleDto role = new OrganizationRoleDto();
         role.setOrganization(organization);
-        role.setName(ORGANIZATION_ROLE_NAME);
         instance.add(role);
         
         role.setOrganization(null);
         instance.update(role);
     }
     
+    @Ignore
     @Test(expected = EntityNotFoundException.class)
-    public void updatedOrganizationRoleShouldBelongToAnExistingGroup() {
+    public void updatedOrganizationRoleShouldBelongToAnExistingOrganization() {
         OrganizationRoleDto role = new OrganizationRoleDto();
         role.setOrganization(organization);
-        role.setName(ORGANIZATION_ROLE_NAME);
         instance.add(role);
         
         OrganizationDto organization1 = new OrganizationDto();
-        organization1.setName(ORGANIZATION_NAME);
         role.setOrganization(organization1);
         
         instance.update(role);
     }
     
-    @Test(expected = EntityNotFoundException.class)
+    @Test
     public void removeExistingOrganizationRole() {
-        OrganizationRoleDto role = new OrganizationRoleDto();
-        role.setOrganization(organization);
-        role.setName(ORGANIZATION_ROLE_NAME);
-        instance.add(role);      
-        long roleId = role.getId();
+        OrganizationRole roleEntity = new OrganizationRole();
+        roleEntity.setId(1);
         
-        instance.remove(roleId);
+        when(repository.get(1)).thenReturn(roleEntity);
         
-        instance.get(roleId);
+        instance.remove(1);
+        
+        verify(repository).remove(roleEntity);
     }
     
     @Test(expected = EntityNotFoundException.class)
     public void removeNotExistingOrganizationRole() {
-        instance.remove(100000);
+        instance.remove(1);
     }
     
     @Test
     public void getExistingOrganizationRole() {
-        OrganizationRoleDto role = new OrganizationRoleDto();
-        role.setOrganization(organization);
-        role.setName(ORGANIZATION_ROLE_NAME);
-        instance.add(role);
+        OrganizationRole roleEntity = new OrganizationRole();
+        roleEntity.setId(1);
         
-        OrganizationRoleDto gottenRole = instance.get(role.getId());
+        when(repository.get(1)).thenReturn(roleEntity);
         
-        assertThat(role, samePropertyValuesAs(gottenRole));
+        instance.get(1);
+        
+        verify(repository).get(1);
     }
     
     @Test(expected = EntityNotFoundException.class)
     public void getNotExistingOrganizationRole() {
-        instance.get(100000);
+        instance.get(1);
     }
 
 }

@@ -38,6 +38,41 @@ public class ImageProcessingServiceImplTest {
     
     @Ignore
     @Test
+    public void shouldGenerateStyledImages() throws Exception {
+//        File file = new File(TEST_IMAGE);
+//        URI publicPath = fileService.save(file, new URI("public:///derived/images"));
+//        
+//        instance.processImage(publicPath);
+//        
+//        Map<String, URI> styledImages = instance.getGeneratedImagesPaths(publicPath);
+//        for (String style : styledImages.keySet()) {
+            // TODO implement tests
+//            String generatedImagePath = fileService.getPath(styledImages.get(style));
+//            assertEquals("Styled image should exists", true,
+//                    Files.exists(Paths.get(generatedImagePath)));
+//            assertEquals("Styled image should be regular files", true,
+//                    Files.isRegularFile(Paths.get(generatedImagePath)));
+//        }
+    }
+
+    @Ignore
+    @Test
+    public void shouldDeleteGenerateStyledImages() throws Exception {
+//        File file = new File(TEST_IMAGE);
+//        URI publicPath = fileService.save(file, new URI("public:///derived/delete"));
+//        
+//        instance.processImage(publicPath);
+//        instance.deleteGeneratedImages(publicPath);
+        
+//        Map<String, String> styledImages = instance.getGeneratedImagesPaths(publicPath);
+//        for (String style : styledImages.keySet()) {
+//            String generatedImagePath = fileService.getPath(styledImages.get(style));
+//            assertFalse("Generated image should be deleted", Files.exists(Paths.get(generatedImagePath)));
+//        }
+    }
+    
+    @Ignore
+    @Test
     public void shouldReturnDerivedImagesUrls() throws URISyntaxException {
         // TODO implement test
     }

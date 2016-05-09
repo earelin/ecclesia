@@ -32,7 +32,7 @@ public class OrganizationRoleServiceImpl implements OrganizationRoleService {
 
     @Override
     public void add(OrganizationRoleDto roleDto) {
-        validate(roleDto);
+        check(roleDto);
         
         if (roleDto.getId() != 0) {
             throw new ValidationException("Error validating OrganizationRoleDto: field id is not 0");
@@ -50,7 +50,7 @@ public class OrganizationRoleServiceImpl implements OrganizationRoleService {
             throw new EntityNotFoundException("Trying to update an unexisting OrganizationRole with id " + roleDto.getId());
         }
         
-        validate(roleDto);
+        check(roleDto);
         
         mapper.map(roleDto, role);
         
@@ -81,10 +81,10 @@ public class OrganizationRoleServiceImpl implements OrganizationRoleService {
     }
     
     /**
-     * Validates critical errors
+     * Check business rules
      * @param roleDto 
      */
-    private void validate(OrganizationRoleDto roleDto) {
+    private void check(OrganizationRoleDto roleDto) {
         OrganizationDto organization = roleDto.getOrganization();
         if (organization == null) {
             throw new ValidationException("Error validating OrganizationRoleDto: field organization is null");

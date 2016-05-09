@@ -31,12 +31,12 @@ public class GroupRoleServiceImpl implements GroupRoleService {
     }
 
     @Override
-    public void add(GroupRoleDto roleDto) {
-        validate(roleDto);
-        
+    public void add(GroupRoleDto roleDto) {        
         if (roleDto.getId() != 0) {
             throw new ValidationException("Error validating GroupRoleDto. Id is not 0");
         }
+        
+        check(roleDto);
         
         GroupRole role = mapper.map(roleDto, GroupRole.class);
         repository.add(role);
@@ -50,7 +50,7 @@ public class GroupRoleServiceImpl implements GroupRoleService {
             throw new EntityNotFoundException("Trying to update an unexisting GroupRole with id " + roleDto.getId());
         }
         
-        validate(roleDto);
+        check(roleDto);
         
         mapper.map(roleDto, role);
         
@@ -81,13 +81,13 @@ public class GroupRoleServiceImpl implements GroupRoleService {
     }
     
     /**
-     * Validates critical errors
+     * Check business rules
      * @param roleDto 
      */
-    private void validate(GroupRoleDto roleDto) {
+    private void check(GroupRoleDto roleDto) {
         GroupDto group = roleDto.getGroup();
         if (group == null) {
-            throw new ValidationException("Error validating GroupRoleDto. Field group is null");
+            throw new ValidationException("Error in GroupRoleDto. Field group is null");
         }
         
         if (!groupService.exists(group.getId())) {

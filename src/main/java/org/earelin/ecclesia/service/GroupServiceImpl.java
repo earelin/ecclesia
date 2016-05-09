@@ -39,7 +39,7 @@ public class GroupServiceImpl implements GroupService {
             throw new ValidationException("Error validating GroupDto: field id is not 0");
         }                
         
-        validate(groupDto);
+        check(groupDto);
         
         Date now = new Date();
         groupDto.setCreated(now);
@@ -53,16 +53,15 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public void update(GroupDto groupDto) {
-        
-        Date now = new Date();
-        groupDto.setUpdated(now);
-        
         Group group = repository.get(groupDto.getId());        
         if (group == null) {
             throw new EntityNotFoundException("Trying to update an unexisting Group with id " + groupDto.getId());
         }
         
-        validate(groupDto);
+        check(groupDto);
+        
+        Date now = new Date();
+        groupDto.setUpdated(now);               
         
         mapper.map(groupDto, group);
         
@@ -111,10 +110,10 @@ public class GroupServiceImpl implements GroupService {
     }
     
     /**
-     * Validates critical errors
+     * Check business rules
      * @param groupDto 
      */
-    private void validate(GroupDto groupDto) {
+    private void check(GroupDto groupDto) {
         OrganizationDto organization = groupDto.getOrganization();
         if (organization == null) {
             throw new ValidationException("Error validating GroupDto: field organization is null");
