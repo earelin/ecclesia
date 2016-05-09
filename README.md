@@ -2,7 +2,7 @@ Ecclesia
 ===============================
 
 [![Build Status](https://travis-ci.org/earelin/ecclesia.svg)](https://travis-ci.org/earelin/ecclesia)
-[![Code coverage](https://codecov.io/gh/earelin/ecclesia/branch/master/graph/badge.svg)](https://codecov.io/gh/earelin/ecclesia)
+[![codecov](https://codecov.io/gh/earelin/ecclesia/branch/master/graph/badge.svg)](https://codecov.io/gh/earelin/ecclesia)
 [![Dependency status](https://www.versioneye.com/user/projects/57207ef9fcd19a00415b297c/badge.svg)](https://www.versioneye.com/user/projects/57207ef9fcd19a00415b297c)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9b53dc57bcfa4a7d92610264f7f87eae)](https://www.codacy.com/app/xavier-carriba/ecclesia?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=earelin/ecclesia&amp;utm_campaign=Badge_Grade)
 
