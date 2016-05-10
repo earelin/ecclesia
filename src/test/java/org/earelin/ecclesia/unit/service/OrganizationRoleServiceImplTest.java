@@ -13,12 +13,13 @@ import org.earelin.ecclesia.service.exception.EntityNotFoundException;
 import org.earelin.ecclesia.service.exception.ValidationException;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 
 /**
  * OrganizationRoleServiceImpl unit test
@@ -44,15 +45,35 @@ public class OrganizationRoleServiceImplTest {
         instance = new OrganizationRoleServiceImpl(repository, organizationService, mapper);
     }
     
-    @Ignore
     @Test
     public void createNewOrganizationRole() {
+        doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) {
+                Object[] args = invocation.getArguments();
+                OrganizationRole role = (OrganizationRole) args[0];
+                role.setId(1);
+                return null;
+            } 
+        }).when(repository).add(any(OrganizationRole.class));
+        
         OrganizationRoleDto role = new OrganizationRoleDto();
         role.setOrganization(organization);
         
-        assertNotSame("Created organization role id should not be 0", 0, role.getId());
-        assertEquals("Role organization should belong to defined organization",
-                organization, role.getOrganization());
+        when(organizationService.exists(1)).thenReturn(true);
+        
+        instance.add(role);
+        
+        assertNotEquals(0, role.getId());
+        verify(repository).add(any(OrganizationRole.class));
+    }
+    
+    @Test(expected = ValidationException.class)
+    public void newOrganizationRoleShouldNotExists() {
+        OrganizationRoleDto role = new OrganizationRoleDto();
+        role.setId(1);
+        
+        instance.add(role);
     }
     
     @Test(expected = ValidationException.class)
@@ -61,29 +82,27 @@ public class OrganizationRoleServiceImplTest {
         instance.add(role);
     }
     
-    @Ignore
     @Test(expected = EntityNotFoundException.class)
     public void newOrganizationRoleShouldBelongToAnExistingOrganization() {
-        OrganizationDto organization = new OrganizationDto();
         OrganizationRoleDto role = new OrganizationRoleDto();
         role.setOrganization(organization);
         instance.add(role);
     }
     
-    @Ignore
     @Test
     public void updateExistingOrganizationRole() {
         OrganizationRoleDto role = new OrganizationRoleDto();
         role.setOrganization(organization);
-        instance.add(role);
+        role.setId(1);
         
-        long roleId = role.getId();
-        String updatedName = "Testing organization role updated";
-        role.setName(updatedName);
-        OrganizationRoleDto updatedRole = instance.get(roleId);
+        OrganizationRole organizationRole = new OrganizationRole();
         
-        assertEquals(role.getId(), updatedRole.getId());
-        assertEquals(updatedName, role.getName());
+        when(repository.get(1)).thenReturn(organizationRole);
+        when(organizationService.exists(1)).thenReturn(true);
+        
+        instance.update(role);
+        
+        verify(repository).update(organizationRole);
     }
     
     @Test(expected = EntityNotFoundException.class)
@@ -94,26 +113,27 @@ public class OrganizationRoleServiceImplTest {
         instance.update(role);
     }
     
-    @Ignore
     @Test(expected = ValidationException.class)
     public void updatedOrganizationRoleShouldBelongToAnOrganization() {
         OrganizationRoleDto role = new OrganizationRoleDto();
-        role.setOrganization(organization);
-        instance.add(role);
+        role.setId(1);
         
-        role.setOrganization(null);
-        instance.update(role);
+        OrganizationRole organizationRole = new OrganizationRole();
+        
+        when(repository.get(1)).thenReturn(organizationRole);
+        
+        instance.update(role);        
     }
     
-    @Ignore
     @Test(expected = EntityNotFoundException.class)
     public void updatedOrganizationRoleShouldBelongToAnExistingOrganization() {
         OrganizationRoleDto role = new OrganizationRoleDto();
         role.setOrganization(organization);
-        instance.add(role);
+        role.setId(1);
         
-        OrganizationDto organization1 = new OrganizationDto();
-        role.setOrganization(organization1);
+        OrganizationRole organizationRole = new OrganizationRole();
+        
+        when(repository.get(1)).thenReturn(organizationRole);
         
         instance.update(role);
     }

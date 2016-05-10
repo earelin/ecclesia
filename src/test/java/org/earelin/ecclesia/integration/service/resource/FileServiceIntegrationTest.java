@@ -16,7 +16,6 @@ import org.earelin.ecclesia.service.resource.FileServiceImpl;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -52,8 +51,8 @@ public class FileServiceIntegrationTest {
         final String[] mimeTypes = {"image/gif", "image/jpeg", "application/pdf", "image/png"};
         
         for (int i = 0; i < extensions.length; i++) {
-            for (int j = 0; j < extensions.length; j++) {
-                File testingFile = new File(TEST_FILES_FOLDER + "/" + extensions[i] + "-sample." + extensions[j]);
+            for (String extension : extensions) {
+                File testingFile = new File(TEST_FILES_FOLDER + "/" + extensions[i] + "-sample." + extension);
                 String detectedMimeType = instance.getMimeType(testingFile);
                 assertEquals("Mime type not match", mimeTypes[i], detectedMimeType);
             }

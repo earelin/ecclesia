@@ -71,7 +71,7 @@ public class GroupServiceImplTest {
         instance.add(group);
         Date afterInsert = new Date();
         
-        assertNotSame("Created group id should not be 0", 0, group.getId());
+        assertNotEquals("Created group id should not be 0", 0, group.getId());
         assertTrue("Created group created field should have current date", 
                 group.getCreated().compareTo(beforeInsert) >= 0
                 && group.getCreated().compareTo(afterInsert) <= 0);
@@ -361,5 +361,6 @@ public class GroupServiceImplTest {
     public void checkThanAGroupDoesNoExist() {
         assertFalse(instance.exists(1));
     }
+    
     
 }

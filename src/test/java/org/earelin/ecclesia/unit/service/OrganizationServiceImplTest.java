@@ -3,20 +3,22 @@ package org.earelin.ecclesia.unit.service;
 import java.util.Date;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
+import org.earelin.ecclesia.domain.Organization;
 import org.earelin.ecclesia.repository.OrganizationRepository;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.service.OrganizationServiceImpl;
 import org.earelin.ecclesia.service.dto.OrganizationDto;
 import org.earelin.ecclesia.service.exception.EntityNotFoundException;
+import org.earelin.ecclesia.service.exception.ValidationException;
 import static org.junit.Assert.*;
-import static org.hamcrest.beans.SamePropertyValuesAs.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 
 /**
  * OrganizationServiceImpl unit test
@@ -35,39 +37,53 @@ public class OrganizationServiceImplTest {
         instance = new OrganizationServiceImpl(repository, mapper);
     }
 
-    @Ignore
     @Test
     public void createNewOrganization() {
+        doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) {
+                Object[] args = invocation.getArguments();
+                Organization organization = (Organization) args[0];
+                organization.setId(1);
+                return null;
+            } 
+        }).when(repository).add(any(Organization.class));
+        
         OrganizationDto organization = new OrganizationDto();
         
         Date beforeInsert = new Date();
         instance.add(organization);
         Date afterInsert = new Date();
         
-        assertNotSame("Created organization id should not be 0", 0, organization.getId());
-        assertTrue("Created organization created field should have current date", 
-                organization.getCreated().compareTo(beforeInsert) >= 0
+        assertNotEquals(0, organization.getId());
+        assertTrue(organization.getCreated().compareTo(beforeInsert) >= 0
                 && organization.getCreated().compareTo(afterInsert) <= 0);
+        verify(repository).add(any(Organization.class));
+    }
+    
+    @Test(expected = ValidationException.class)
+    public void shouldNotCreateExistingOrganization() {
+        OrganizationDto organization = new OrganizationDto();
+        organization.setId(1);
+        
+        instance.add(organization);
     }
 
-    @Ignore
     @Test
     public void updateExistingOrganization() {
         OrganizationDto organization = new OrganizationDto();
-        instance.add(organization);
+        organization.setId(1);
         
-        long organizationId = organization.getId();
-        String updatedName = "Testing organization updated";
-        organization.setName(updatedName);
+        when(repository.get(1)).thenReturn(new Organization());
+                
         Date beforeUpdate = new Date();
         instance.update(organization); 
         Date afterUpdate = new Date();
-        organization = instance.get(organizationId);
         
         assertTrue("Updated organization updated field should have current date", 
                 organization.getUpdated().compareTo(beforeUpdate) >= 0
                 && organization.getUpdated().compareTo(afterUpdate) <= 0);
-        assertEquals(updatedName, organization.getName());
+        verify(repository).update(any(Organization.class));
     }
     
     @Test(expected = EntityNotFoundException.class)
@@ -78,16 +94,15 @@ public class OrganizationServiceImplTest {
         instance.update(organization);
     }
 
-    @Ignore
-    @Test(expected = EntityNotFoundException.class)
+    @Test
     public void removeExistingOrganization() {
-        OrganizationDto organization = new OrganizationDto();
-        instance.add(organization);      
-        long organizationId = organization.getId();
+        Organization organizationEntity = new Organization();
         
-        instance.remove(organizationId);
+        when(repository.get(1)).thenReturn(organizationEntity);
         
-        instance.get(organizationId);
+        instance.remove(1);
+        
+        verify(repository).remove(organizationEntity);
     }
     
     @Test(expected = EntityNotFoundException.class)
@@ -95,25 +110,30 @@ public class OrganizationServiceImplTest {
         instance.remove(1);
     }
 
-    @Ignore
     @Test
     public void getExistingOrganization() {
-        OrganizationDto organization = new OrganizationDto();
+        Organization organizationEntity = new Organization();
         
-        OrganizationDto gottenOrganization = instance.get(organization.getId());
+        when(repository.get(1)).thenReturn(organizationEntity);
         
-        assertThat(organization, samePropertyValuesAs(gottenOrganization));
+        instance.get(1);
+        
+        verify(repository).get(1);
     }
     
     @Test(expected = EntityNotFoundException.class)
     public void getNotExistingOrganization() {
-        instance.get(1);        
+        instance.get(1); 
+        verify(repository).get(1);
     }
     
-    @Ignore
     @Test
     public void checkThanAnOrganizationExists() {
+        when(repository.get(1)).thenReturn(new Organization());
         
+        instance.exists(1);
+        
+        verify(repository).get(1);
     }
     
     @Test

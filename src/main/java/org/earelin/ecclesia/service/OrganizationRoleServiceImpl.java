@@ -31,12 +31,12 @@ public class OrganizationRoleServiceImpl implements OrganizationRoleService {
     }
 
     @Override
-    public void add(OrganizationRoleDto roleDto) {
-        check(roleDto);
-        
+    public void add(OrganizationRoleDto roleDto) {                
         if (roleDto.getId() != 0) {
             throw new ValidationException("Error validating OrganizationRoleDto: field id is not 0");
         }
+        
+        check(roleDto);
         
         OrganizationRole role = mapper.map(roleDto, OrganizationRole.class);
         repository.add(role);

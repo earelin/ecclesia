@@ -1,8 +1,6 @@
 package org.earelin.ecclesia.service;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import org.dozer.Mapper;
 import org.earelin.ecclesia.domain.Group;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,24 +94,6 @@ public class GroupServiceImpl implements GroupService {
     public boolean exists(long id) {
         Group group = repository.get(id);
         return group != null;
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<GroupDto> findAll() {
-        List<Group> groups = repository.findAll();
-        List<GroupDto> groupDtos = new ArrayList();
-        mapper.map(groups, groupDtos); 
-        return groupDtos;
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<GroupDto> findAll(int limit, int offset) {
-        List<Group> groups = repository.findAll(limit, offset);
-        List<GroupDto> groupDtos = new ArrayList();
-        mapper.map(groups, groupDtos); 
-        return groupDtos;
     }
     
     /**
