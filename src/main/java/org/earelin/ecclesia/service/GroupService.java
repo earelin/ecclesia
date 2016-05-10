@@ -12,6 +12,6 @@ public interface GroupService {
     void remove(long id);
     GroupDto get(long id);
     boolean exists(long id);
-    List<GroupDto> list();
-    List<GroupDto> list(int limit, int offset);
+    List<GroupDto> findAll();
+    List<GroupDto> findAll(int limit, int offset);
 }

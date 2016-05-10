@@ -24,13 +24,13 @@ import org.junit.Test;
  */
 public class FileServiceIntegrationTest {
     
-    public static final String PRIVATE_FOLDER = "/tmp/ecclesia_test/private";
-    public static final String PUBLIC_FOLDER = "/tmp/ecclesia_test/public";
-    public static final String PUBLIC_FILE_SERVER = "http://www.example.com/public";
-    public static final String SERVER_URL = "http://localhost";
-    public static final String EXAMPLE_FILE_NAME = "example.txt";
-    public static final String ILLEGAL_PROTOCOL_URI = "illegal:///folder/example.txt";
-    public static final String SAMPLE_FILE = "src/test/resources/test-data/files/sample.txt";
+    private static final String PRIVATE_FOLDER = "/tmp/ecclesia_test/private";
+    private static final String PUBLIC_FOLDER = "/tmp/ecclesia_test/public";
+    private static final String PUBLIC_FILE_SERVER = "http://www.example.com/public";
+    private static final String SERVER_URL = "http://localhost";
+    private static final String ILLEGAL_PROTOCOL_URI = "illegal:///folder/example.txt";
+    private static final String SAMPLE_FILE = "src/test/resources/test-data/files/sample.txt";
+    private static final String TEST_FILES_FOLDER = "src/test/resources/test-data/files";
             
     private FileServiceImpl instance;
     
@@ -46,19 +46,18 @@ public class FileServiceIntegrationTest {
                 PUBLIC_FILE_SERVER, SERVER_URL, new Tika());
     }
     
-    @Ignore
     @Test
     public void fileTypeDetection() throws Exception {
-//        final String[] extensions = {"gif", "jpg", "pdf", "png"};
-//        final String[] mimeTypes = {"image/gif", "image/jpeg", "application/pdf", "image/png"};
-//        
-//        for (int i = 0; i < extensions.length; i++) {
-//            for (int j = 0; j < extensions.length; j++) {
-//                File testingFile = new File(TEST_FILES_FOLDER + "/" + extensions[i] + "-sample." + extensions[j]);
-//                String detectedMimeType = instance.getMimeType(testingFile);
-//                assertEquals("Mime type not match", mimeTypes[i], detectedMimeType);
-//            }
-//        }
+        final String[] extensions = {"gif", "jpg", "pdf", "png"};
+        final String[] mimeTypes = {"image/gif", "image/jpeg", "application/pdf", "image/png"};
+        
+        for (int i = 0; i < extensions.length; i++) {
+            for (int j = 0; j < extensions.length; j++) {
+                File testingFile = new File(TEST_FILES_FOLDER + "/" + extensions[i] + "-sample." + extensions[j]);
+                String detectedMimeType = instance.getMimeType(testingFile);
+                assertEquals("Mime type not match", mimeTypes[i], detectedMimeType);
+            }
+        }
     }
     
     @Test

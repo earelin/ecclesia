@@ -181,16 +181,18 @@ public class GroupServiceImplTest {
         verify(repository).add(any(Group.class));
     }
     
-    @Ignore
     @Test
     public void updateExistingGroup() {
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
-        group.setId(1);
+        group.setId(1);        
+        
+        when(repository.get(1)).thenReturn(new Group());
+        when(organizationService.exists(1)).thenReturn(true);
         
         Date beforeUpdate = new Date();
         instance.update(group); 
-        Date afterUpdate = new Date();
+        Date afterUpdate = new Date();        
         
         verify(repository).update(any(Group.class));
         assertTrue("Updated group updated field should have current date", 
@@ -198,21 +200,34 @@ public class GroupServiceImplTest {
                 && group.getUpdated().compareTo(afterUpdate) <= 0);
     }
     
-    @Ignore
     @Test
     public void updateExistingGroupWithParent() {
+        GroupDto parent = new GroupDto();
+        parent.setId(1);
+        parent.setOrganization(organization);
+        
+        Organization organizationEntity = new Organization();
+        organizationEntity.setId(1);
+        
+        Group parentEntity = new Group();
+        parentEntity.setId(1);
+        parentEntity.setOrganization(organizationEntity);
+        
         GroupDto group = new GroupDto();
         group.setOrganization(organization);
-        group.setName("Test group");
-        instance.add(group);
-        
-        GroupDto parent = new GroupDto();
-        parent.setOrganization(organization);
-        parent.setName("Parent group name");
-        instance.add(parent);
-        
+        group.setId(2);                         
         group.setParent(parent);
+        
+        Group groupEntity = new Group();
+        groupEntity.setId(2);
+        
+        when(repository.get(1)).thenReturn(parentEntity);
+        when(repository.get(2)).thenReturn(groupEntity);
+        when(organizationService.exists(1)).thenReturn(true);
+        
         instance.update(group);
+        
+        verify(repository).update(groupEntity);
     }
     
     @Test(expected = EntityNotFoundException.class)
@@ -270,23 +285,31 @@ public class GroupServiceImplTest {
         instance.update(group);
     }
     
-    @Ignore
     @Test(expected = ValidationException.class)
     public void updatedGroupParentShouldBelongToTheSameOrganization() {
         GroupDto parent = new GroupDto();
         parent.setId(1);
+        parent.setOrganization(organization);
+        
+        Organization parentOrganizationEntity = new Organization();
+        parentOrganizationEntity.setId(2);
+        
+        Group parentEntity = new Group();
+        parentEntity.setId(1);
+        parentEntity.setOrganization(parentOrganizationEntity);
         
         GroupDto group = new GroupDto();
-        group.setId(2);
         group.setOrganization(organization);
+        group.setId(2);                         
         group.setParent(parent);
         
         Group groupEntity = new Group();
         groupEntity.setId(2);
         
+        when(repository.get(1)).thenReturn(parentEntity);
         when(repository.get(2)).thenReturn(groupEntity);
         when(organizationService.exists(1)).thenReturn(true);
- 
+        
         instance.update(group);
     }
     

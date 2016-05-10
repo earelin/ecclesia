@@ -1,5 +1,6 @@
 package org.earelin.ecclesia.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.dozer.Mapper;
@@ -14,7 +15,7 @@ import org.earelin.ecclesia.service.exception.ValidationException;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
+ * Group service
  */
 @Service
 @Transactional
@@ -99,14 +100,20 @@ public class GroupServiceImpl implements GroupService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<GroupDto> list() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<GroupDto> findAll() {
+        List<Group> groups = repository.findAll();
+        List<GroupDto> groupDtos = new ArrayList();
+        mapper.map(groups, groupDtos); 
+        return groupDtos;
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<GroupDto> list(int limit, int offset) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<GroupDto> findAll(int limit, int offset) {
+        List<Group> groups = repository.findAll(limit, offset);
+        List<GroupDto> groupDtos = new ArrayList();
+        mapper.map(groups, groupDtos); 
+        return groupDtos;
     }
     
     /**
