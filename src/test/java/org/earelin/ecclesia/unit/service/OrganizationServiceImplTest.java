@@ -39,6 +39,8 @@ public class OrganizationServiceImplTest {
 
     @Test
     public void createNewOrganization() {
+        String organizationName = "Test organization";
+        
         doAnswer(new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) {
@@ -73,16 +75,20 @@ public class OrganizationServiceImplTest {
     public void updateExistingOrganization() {
         OrganizationDto organization = new OrganizationDto();
         organization.setId(1);
+        organization.setName("Test organization");
         
-        when(repository.get(1)).thenReturn(new Organization());
+        Organization organizationEntity = new Organization();
+        organizationEntity.setId(1);
+        
+        when(repository.get(1)).thenReturn(organizationEntity);
                 
         Date beforeUpdate = new Date();
         instance.update(organization); 
         Date afterUpdate = new Date();
         
-        assertTrue("Updated organization updated field should have current date", 
-                organization.getUpdated().compareTo(beforeUpdate) >= 0
+        assertTrue(organization.getUpdated().compareTo(beforeUpdate) >= 0
                 && organization.getUpdated().compareTo(afterUpdate) <= 0);
+        assertEquals(organization.getName(), organizationEntity.getName());
         verify(repository).update(any(Organization.class));
     }
     

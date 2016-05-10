@@ -53,5 +53,9 @@ public class ManagedFileDto {
     public Date getCreated() {
         return created;
     }
+
+    public URL getUrl() {
+        return url;
+    }
     
 }

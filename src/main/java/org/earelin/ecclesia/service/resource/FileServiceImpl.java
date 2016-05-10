@@ -41,62 +41,7 @@ public class FileServiceImpl implements FileService {
         this.tika = tika;
         
         checkFolders();       
-    }
-    
-    /**
-     * Checks if the folders exists and are writable if the folders does not
-     * exist it creates them.
-     */
-    private void checkFolders() throws IOException {
-        // Check private files folder
-        final Path privatePath = Paths.get(privateFileFolder);
-        if (!Files.exists(privatePath)) {
-            Files.createDirectories(privatePath);
-        }
-
-        final Path publicPath = Paths.get(publicFileFolder);
-        if (!Files.exists(publicPath)) {
-            Files.createDirectories(publicPath);
-        }
-    }
-    
-    /**
-     * Resolves an internal uri to a file system path
-     * @param uri
-     * @return 
-     */
-    private String resolveUriToPath(URI uri) throws UnhandledFileProtocol, URISyntaxException {      
-        final String scheme = uri.getScheme();
-        
-        if (scheme.equals(PUBLIC_PROTOCOL)) {
-            return publicFileFolder + uri.getPath();
-        }
-        
-        if (scheme.equals(PRIVATE_PROTOCOL)) {
-            return privateFileFolder + uri.getPath();
-        }
-        
-        throw new UnhandledFileProtocol("The protocol " + uri.getScheme() + " is nor registered");
-    }
-    
-    /**
-     * Resolves an internal uri to the public url
-     * @param uri
-     * @return 
-     */
-    private URL resolveUriToUrl(URI uri) throws UnhandledFileProtocol, URISyntaxException, MalformedURLException {
-        final String scheme = uri.getScheme();
-        
-        if (scheme.equals(PUBLIC_PROTOCOL)) {
-            return new URL(publicFilesBaseURL + uri.getPath());
-        }
-        
-        if (scheme.equals(PRIVATE_PROTOCOL)) {
-            return new URL(serverURL + PRIVATE_FILES_URL_PATH + uri.getPath());
-        }
-        
-        throw new UnhandledFileProtocol("The protocol " + uri.getScheme() + " is nor registered");
-    }
+    }    
 
     @Override
     public File create(URI uri) throws Exception {
@@ -175,6 +120,61 @@ public class FileServiceImpl implements FileService {
         }
         
         Files.delete(filesystemPath);
+    }
+    
+    /**
+     * Checks if the folders exists and are writable if the folders does not
+     * exist it creates them.
+     */
+    private void checkFolders() throws IOException {
+        // Check private files folder
+        final Path privatePath = Paths.get(privateFileFolder);
+        if (!Files.exists(privatePath)) {
+            Files.createDirectories(privatePath);
+        }
+
+        final Path publicPath = Paths.get(publicFileFolder);
+        if (!Files.exists(publicPath)) {
+            Files.createDirectories(publicPath);
+        }
+    }
+    
+    /**
+     * Resolves an internal uri to a file system path
+     * @param uri
+     * @return 
+     */
+    private String resolveUriToPath(URI uri) throws UnhandledFileProtocol, URISyntaxException {      
+        final String scheme = uri.getScheme();
+        
+        if (scheme.equals(PUBLIC_PROTOCOL)) {
+            return publicFileFolder + uri.getPath();
+        }
+        
+        if (scheme.equals(PRIVATE_PROTOCOL)) {
+            return privateFileFolder + uri.getPath();
+        }
+        
+        throw new UnhandledFileProtocol("The protocol " + uri.getScheme() + " is nor registered");
+    }
+    
+    /**
+     * Resolves an internal uri to the public url
+     * @param uri
+     * @return 
+     */
+    private URL resolveUriToUrl(URI uri) throws UnhandledFileProtocol, URISyntaxException, MalformedURLException {
+        final String scheme = uri.getScheme();
+        
+        if (scheme.equals(PUBLIC_PROTOCOL)) {
+            return new URL(publicFilesBaseURL + uri.getPath());
+        }
+        
+        if (scheme.equals(PRIVATE_PROTOCOL)) {
+            return new URL(serverURL + PRIVATE_FILES_URL_PATH + uri.getPath());
+        }
+        
+        throw new UnhandledFileProtocol("The protocol " + uri.getScheme() + " is nor registered");
     }
 
 }

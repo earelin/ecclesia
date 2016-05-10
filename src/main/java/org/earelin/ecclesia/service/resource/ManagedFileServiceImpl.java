@@ -24,7 +24,7 @@ import org.thymeleaf.util.ArrayUtils;
 @Transactional
 public class ManagedFileServiceImpl implements ManagedFileService {
     
-    public static final String[] IMAGE_MIME_TYPES
+    private static final String[] IMAGE_MIME_TYPES
             = {"image/gif", "image/jpeg", "image/png"};
     
     private final ManagedFileRepository repository;
@@ -60,14 +60,14 @@ public class ManagedFileServiceImpl implements ManagedFileService {
         fileEntity.setMime(fileService.getMimeType(file));
         
         final URI writtenFileUri = fileService.save(file, folderUri);
-        fileEntity.setUri(writtenFileUri.toString());
+        fileEntity.setUri(writtenFileUri);
         
         repository.add(fileEntity);
         
         ManagedFileDto fileDto = generateDto(fileEntity);
         
         if (fileDto instanceof ManagedImageDto) {
-            imageService.processImage(new URI(fileEntity.getUri()));
+            imageService.processImage(fileEntity.getUri());
         }
         
         return fileDto;
@@ -81,10 +81,10 @@ public class ManagedFileServiceImpl implements ManagedFileService {
             throw new EntityNotFoundException("Trying to remove an unexisting ManagedFile with id " + id);
         }
                 
-        fileService.delete(new URI(file.getUri()));
+        fileService.delete(file.getUri());
         
         if (isImage(file)) {
-            imageService.deleteGeneratedImages(new URI(file.getUri()));
+            imageService.deleteGeneratedImages(file.getUri());
         }
         
         repository.remove(file);      
@@ -105,7 +105,7 @@ public class ManagedFileServiceImpl implements ManagedFileService {
     private ManagedFileDto generateDto(ManagedFile fileEntity) throws Exception {
         ManagedFileDto fileDto;
         
-        final URI fileUri = new URI(fileEntity.getUri());
+        final URI fileUri = fileEntity.getUri();
         final URL fileUrl = fileService.getUrl(fileUri);
         
         if (isImage(fileEntity)) {

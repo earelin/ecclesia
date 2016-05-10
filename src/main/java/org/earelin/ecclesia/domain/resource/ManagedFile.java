@@ -1,5 +1,6 @@
 package org.earelin.ecclesia.domain.resource;
 
+import java.net.URI;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import org.hibernate.annotations.Type;
 
 /**
  * Managed file domain object
@@ -23,7 +25,8 @@ public class ManagedFile {
     private long id;
     private String mime;
     private Date created;
-    private String uri;
+    @Type(type="org.earelin.ecclesia.repository.resource.PersistentUri")
+    private URI uri;
 
     @Override
     public int hashCode() {
@@ -71,11 +74,11 @@ public class ManagedFile {
         this.created = created;
     }
 
-    public String getUri() {
+    public URI getUri() {
         return uri;
     }
 
-    public void setUri(String uri) {
+    public void setUri(URI uri) {
         this.uri = uri;
     }
 }

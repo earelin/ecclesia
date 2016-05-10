@@ -5,13 +5,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.apache.commons.io.FileUtils;
 import org.apache.tika.Tika;
 import org.earelin.ecclesia.service.exception.FileNotFoundException;
-import org.earelin.ecclesia.service.exception.UnhandledFileProtocol;
 import org.earelin.ecclesia.service.resource.FileServiceImpl;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
@@ -27,7 +25,6 @@ public class FileServiceIntegrationTest {
     private static final String PUBLIC_FOLDER = "/tmp/ecclesia_test/public";
     private static final String PUBLIC_FILE_SERVER = "http://www.example.com/public";
     private static final String SERVER_URL = "http://localhost";
-    private static final String ILLEGAL_PROTOCOL_URI = "illegal:///folder/example.txt";
     private static final String SAMPLE_FILE = "src/test/resources/test-data/files/sample.txt";
     private static final String TEST_FILES_FOLDER = "src/test/resources/test-data/files";
             
@@ -116,28 +113,7 @@ public class FileServiceIntegrationTest {
         assertTrue(Files.exists(Paths.get(savedFileExceptedPath)));
         savedFileExceptedPath = PRIVATE_FOLDER + "/testing/overwriting/sample_2.txt";
         assertTrue(Files.exists(Paths.get(savedFileExceptedPath)));
-    }
-    
-    @Test
-    public void shouldResolvePrivateUriToUrl() throws Exception {
-        URI privateFileUri = new URI("private:///folder/example.txt");
-        URL resolvedFileUrl = instance.getUrl(privateFileUri);
-        
-        assertEquals(SERVER_URL + "/files/folder/example.txt", resolvedFileUrl.toString());
-    }
-    
-    @Test
-    public void shouldResolvePublicUriToUrl() throws Exception {
-        URI publicFileUri = new URI("public:///folder/example.txt");
-        URL resolvedFileUrl = instance.getUrl(publicFileUri);
-        
-        assertEquals(PUBLIC_FILE_SERVER + "/folder/example.txt", resolvedFileUrl.toString());
-    }
-
-    @Test(expected = UnhandledFileProtocol.class)
-    public void shouldNotResolveNotHandledProtocolUriGettingUrl() throws Exception {
-        instance.getUrl(new URI(ILLEGAL_PROTOCOL_URI));
-    }
+    }        
 
     @Test
     public void shouldGetAPublicSavedFile() throws Exception {
