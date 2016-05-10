@@ -2,16 +2,15 @@ package org.earelin.ecclesia.unit.service.security;
 
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
+import org.earelin.ecclesia.domain.User;
 import org.earelin.ecclesia.repository.UserRepository;
-import org.earelin.ecclesia.service.UserService;
-import org.earelin.ecclesia.service.dto.UserDto;
 import org.earelin.ecclesia.service.security.EcclesiaUserDetailsService;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import static org.mockito.Mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,9 +22,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public class UserDetailsServiceTest {
 
     @Mock
-    private UserService userService;
-    
-    @Mock
     private UserRepository repository;
 
     private final Mapper mapper = new DozerBeanMapper();
@@ -36,13 +32,15 @@ public class UserDetailsServiceTest {
         instance = new EcclesiaUserDetailsService(repository, mapper);
     }
     
-    @Ignore
     @Test
     public void getExistingUser() {
-//        UserDto user = userService.register(USER_NAME, USER_EMAIL, USER_PASSWORD);
-//        UserDto gottenUser = (UserDto) instance.loadUserByUsername(USER_NAME);
-//        assertEquals("Register user id should be the same as loaded by username",
-//                user.getId(), gottenUser.getId());
+        User user = new User();
+        
+        when(repository.findByUsername("username")).thenReturn(user);
+        
+        instance.loadUserByUsername("username");
+        
+        verify(repository).findByUsername("username");
     }
 
     @Test(expected = UsernameNotFoundException.class)

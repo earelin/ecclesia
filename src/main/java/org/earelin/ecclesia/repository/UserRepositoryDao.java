@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
  * User data access object
  */
 @Repository
-public class UserRepositoryDao  extends GenericRepositoryDaoImpl<User>
+public class UserRepositoryDao extends GenericRepositoryDaoImpl<User>
         implements UserRepository {
 
     @Override

@@ -3,7 +3,6 @@ package org.earelin.ecclesia.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import org.dozer.Mapper;
 import org.earelin.ecclesia.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,18 +92,6 @@ public class UserServiceImpl implements UserService {
         }
         
         return mapper.map(user, UserDto.class);
-    }
-    
-    @Transactional(readOnly = true)
-    @Override
-    public List<UserDto> list() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<UserDto> list(int limit, int offset) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

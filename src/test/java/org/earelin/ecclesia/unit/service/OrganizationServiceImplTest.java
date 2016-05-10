@@ -38,9 +38,7 @@ public class OrganizationServiceImplTest {
     }
 
     @Test
-    public void createNewOrganization() {
-        String organizationName = "Test organization";
-        
+    public void createNewOrganization() {        
         doAnswer(new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) {

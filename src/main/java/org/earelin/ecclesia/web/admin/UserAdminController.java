@@ -21,10 +21,8 @@ public class UserAdminController {
     }
     
     @RequestMapping(value = "/admin/user", method = RequestMethod.GET)
-	public String index(Map<String, Object> model) {
-        model.put("users", service.list());
-		return "admin_user_index";
-	}
-    
+    public String index(Map<String, Object> model) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }
