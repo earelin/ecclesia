@@ -11,92 +11,90 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-  mavenCentral()
+    mavenCentral()
+    jcenter()
 }
 
 dependencies {
-  ext.springVersion = '4.2.6.RELEASE'
-  ext.springSecurityVersion = '4.1.0.RELEASE'
-  ext.hibernateVersion = '4.3.11.Final'
-  
-  compile 'ch.qos.logback:logback-classic:1.+'
+    ext.springVersion = '4.2.+'
+    ext.springSecurityVersion = '4.1.+'
+    ext.hibernateVersion = '4.3.+'
+
+    compile 'ch.qos.logback:logback-classic:1.+'
+
+    // spring
+    compile "org.springframework:spring-webmvc:$springVersion"
+    compile "org.springframework:spring-tx:$springVersion"
+    compile "org.springframework:spring-orm:$springVersion"
+    compile "org.springframework:spring-test:$springVersion"
+
+    // hibernate
+    compile "org.hibernate:hibernate-core:$hibernateVersion"
+    compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
+    compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.+'  
+    compile 'org.hibernate:hibernate-validator:5.2.+'
+
+    // jstl
+    compile 'javax.servlet:jstl:1.2'
+
+    // databases
+    compile 'org.apache.commons:commons-dbcp2:2.+'
+    compile 'mysql:mysql-connector-java:6.+'
+    compile 'com.h2database:h2:1.+'
+
+    // thymeleaf
+    compile 'org.thymeleaf:thymeleaf:2.+'
+    compile 'org.thymeleaf:thymeleaf-spring4:2.+'
+
+    // spring security
+    compile "org.springframework.security:spring-security-config:$springSecurityVersion"
+    compile "org.springframework.security:spring-security-web:$springSecurityVersion"
+    compile "org.springframework.security:spring-security-taglibs:$springSecurityVersion"
+
+    // password validator
+    compile 'org.passay:passay:1.+'
+
+    // object conversion
+    compile 'net.sf.dozer:dozer:5.+'
+
+    // file detection and parsing
+    compile 'org.apache.tika:tika-java7:1.+'
+
+    // file manipulation
+    compile 'commons-io:commons-io:2.+'
 	
-  // spring
-  compile "org.springframework:spring-webmvc:$springVersion"
-  compile "org.springframework:spring-tx:$springVersion"
-  compile "org.springframework:spring-orm:$springVersion"
-  compile "org.springframework:spring-test:$springVersion"
+    // include in compile only, exclude in the war
+    providedCompile 'javax.servlet:servlet-api:2.5'
+    providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1'
   
-  // hibernate
-  compile "org.hibernate:hibernate-core:$hibernateVersion"
-  compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
-  compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'  
-  compile 'org.hibernate:hibernate-validator:5.2.4.Final'
-	
-  // jstl
-  compile 'javax.servlet:jstl:1.2'
-  
-  // databases
-  compile 'org.apache.commons:commons-dbcp2:2.+'
-  compile 'mysql:mysql-connector-java:6.+'
-  compile 'com.h2database:h2:1.+'
-  
-  // thymeleaf
-  compile 'org.thymeleaf:thymeleaf:2.+'
-  compile 'org.thymeleaf:thymeleaf-spring4:2.+'
-  
-  // spring security
-  compile "org.springframework.security:spring-security-config:$springSecurityVersion"
-  compile "org.springframework.security:spring-security-web:$springSecurityVersion"
-  compile "org.springframework.security:spring-security-taglibs:$springSecurityVersion"
-  
-  // password validator
-  compile 'org.passay:passay:1.+'
-  
-  // object conversion
-  compile 'net.sf.dozer:dozer:5.+'
-  
-  // image transformation
-  compile 'net.coobird:thumbnailator:0.4.8'
-  
-  // file detection and parsing
-  compile 'org.apache.tika:tika-java7:1.+'
-  
-  // file manipulation
-  compile 'commons-io:commons-io:2.+'
-	
-	// include in compile only, exclude in the war
-	providedCompile 'javax.servlet:servlet-api:2.5'
-	providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1'
-  
-  // testing pile
-  testCompile 'net.serenity-bdd:serenity-core:1.+'
-  testCompile 'net.serenity-bdd:serenity-junit:1.+'
-  testCompile 'net.serenity-bdd:serenity-jbehave:1.+'
-  testCompile 'junit:junit:4.+'
-  testCompile 'org.mockito:mockito-core:1.+'
-  testCompile 'org.hamcrest:hamcrest-all:1.3'
+    // testing pile
+    testCompile 'net.serenity-bdd:serenity-core:1.+'
+    testCompile 'net.serenity-bdd:serenity-junit:1.+'
+    testCompile 'net.serenity-bdd:serenity-jbehave:1.+'
+    testCompile 'junit:junit:4.+'
+    testCompile 'org.mockito:mockito-core:1.+'
+    testCompile 'org.hamcrest:hamcrest-all:1.3'
 }
 
 buildscript {
-  repositories {
-    mavenCentral()
-    jcenter()
-  }
-  
-  dependencies {
-    classpath 'net.serenity-bdd:serenity-gradle-plugin:1.+'
-    classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.+'
-  }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'net.serenity-bdd:serenity-gradle-plugin:1.+'
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.+'
+    }
 }
 
 [jettyRun, jettyRunWar, jettyStop]*.stopPort = 8090
 [jettyRun, jettyRunWar, jettyStop]*.stopKey = 'stop-key'
 
 test {
-  include 'org/earelin/ecclesia/integration/**'
-  include 'org/earelin/ecclesia/unit/**'
-  exclude 'org/earelin/ecclesia/bdd/**'
+    include 'org/earelin/ecclesia/integration/**'
+    include 'org/earelin/ecclesia/unit/**'
+    exclude 'org/earelin/ecclesia/bdd/**'
 }
 
 task unitTest(type: Test) {
