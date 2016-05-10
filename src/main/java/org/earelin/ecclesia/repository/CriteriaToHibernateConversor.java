@@ -5,6 +5,7 @@ import org.earelin.ecclesia.criteria.FilteringNexus;
 import org.earelin.ecclesia.criteria.FilteringStatement;
 import org.earelin.ecclesia.criteria.OrderingCriteria;
 import org.earelin.ecclesia.criteria.OrderingDirection;
+import org.earelin.ecclesia.criteria.UnsupportedCriteriaOperation;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.Order;
@@ -55,6 +56,8 @@ public class CriteriaToHibernateConversor {
                 case LIKE:
                     junction.add(Restrictions.like(property, value));
                     break;
+                default:
+                    throw new UnsupportedCriteriaOperation("Criteria operation not supported");
             }
         }
         
