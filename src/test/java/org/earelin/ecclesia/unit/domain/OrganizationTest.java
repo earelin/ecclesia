@@ -59,8 +59,9 @@ public class OrganizationTest {
     
     @Test
     public void organizationsShouldNotBeEqualToNull() {
+        Organization organization1 = null;
         assertFalse("Organizations should not be equal to null",
-                organization.equals(null));
+                organization.equals(organization1));
     }
     
 }

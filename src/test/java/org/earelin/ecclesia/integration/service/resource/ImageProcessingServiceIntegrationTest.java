@@ -13,7 +13,6 @@ import org.earelin.ecclesia.service.resource.ImageProcessingServiceImpl;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**

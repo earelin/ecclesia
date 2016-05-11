@@ -1,6 +1,5 @@
 package org.earelin.ecclesia.web;
 
-import org.earelin.ecclesia.domain.Organization;
 import org.earelin.ecclesia.service.OrganizationService;
 import org.earelin.ecclesia.web.form.CreateOrganizationFormAdapter;
 import org.springframework.beans.factory.annotation.Autowired;

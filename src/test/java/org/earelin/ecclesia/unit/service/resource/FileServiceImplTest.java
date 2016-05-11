@@ -9,7 +9,6 @@ import org.earelin.ecclesia.service.resource.FileService;
 import org.earelin.ecclesia.service.resource.FileServiceImpl;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

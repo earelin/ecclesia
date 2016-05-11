@@ -6,7 +6,6 @@ import org.earelin.ecclesia.domain.User;
 import org.earelin.ecclesia.repository.UserRepository;
 import org.earelin.ecclesia.service.security.EcclesiaUserDetailsService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

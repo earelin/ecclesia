@@ -39,14 +39,11 @@ public class OrganizationServiceImplTest {
 
     @Test
     public void createNewOrganization() {        
-        doAnswer(new Answer() {
-            @Override
-            public Object answer(InvocationOnMock invocation) {
-                Object[] args = invocation.getArguments();
-                Organization organization = (Organization) args[0];
-                organization.setId(1);
-                return null;
-            } 
+        doAnswer((Answer) (InvocationOnMock invocation) -> {
+            Object[] args = invocation.getArguments();
+            Organization organization = (Organization) args[0];
+            organization.setId(1);
+            return null; 
         }).when(repository).add(any(Organization.class));
         
         OrganizationDto organization = new OrganizationDto();

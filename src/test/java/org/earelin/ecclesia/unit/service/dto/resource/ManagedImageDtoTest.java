@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.earelin.ecclesia.domain.Organization;
-import org.earelin.ecclesia.service.dto.resource.ManagedFileDto;
 import org.earelin.ecclesia.service.dto.resource.ManagedImageDto;
 import static org.junit.Assert.*;
 import org.junit.Before;

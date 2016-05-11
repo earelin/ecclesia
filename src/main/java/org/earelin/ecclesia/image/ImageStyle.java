@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class ImageStyle {
     
-    private String key;
-    private List<ImageProcessor> processors = new ArrayList();
+    private final String key;
+    private final List<ImageProcessor> processors = new ArrayList();
 
     public ImageStyle(String key) {
         this.key = key;
@@ -44,10 +44,11 @@ public class ImageStyle {
     }
     
     public BufferedImage process(BufferedImage image) {
+        BufferedImage processedImage = image;
         for (ImageProcessor processor : processors) {
-            image = processor.process(image);
+            processedImage = processor.process(processedImage);
         }
-        return image;
+        return processedImage;
     }
     
     public String getKey() {

@@ -47,14 +47,11 @@ public class OrganizationRoleServiceImplTest {
     
     @Test
     public void createNewOrganizationRole() {
-        doAnswer(new Answer() {
-            @Override
-            public Object answer(InvocationOnMock invocation) {
-                Object[] args = invocation.getArguments();
-                OrganizationRole role = (OrganizationRole) args[0];
-                role.setId(1);
-                return null;
-            } 
+        doAnswer((Answer) (InvocationOnMock invocation) -> {
+            Object[] args = invocation.getArguments();
+            OrganizationRole role = (OrganizationRole) args[0];
+            role.setId(1);
+            return null; 
         }).when(repository).add(any(OrganizationRole.class));
         
         OrganizationRoleDto role = new OrganizationRoleDto();

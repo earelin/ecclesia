@@ -59,8 +59,9 @@ public class GroupTest {
     
     @Test
     public void groupsShouldNotBeEqualToNull() {
+        Group group1 = null;
         assertFalse("Groups should not be equal to null",
-                group.equals(null));
+                group.equals(group1));
     }
     
 }

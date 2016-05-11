@@ -1,7 +1,6 @@
 package org.earelin.ecclesia.unit.service;
 
 import java.util.Date;
-import javax.validation.ConstraintViolationException;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.earelin.ecclesia.domain.Group;
@@ -15,9 +14,7 @@ import org.earelin.ecclesia.service.dto.OrganizationDto;
 import org.earelin.ecclesia.service.exception.EntityNotFoundException;
 import org.earelin.ecclesia.service.exception.ValidationException;
 import static org.junit.Assert.*;
-import static org.hamcrest.beans.SamePropertyValuesAs.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -52,14 +49,11 @@ public class GroupServiceImplTest {
     
     @Test
     public void createNewGroup() {
-        doAnswer(new Answer() {
-            @Override
-            public Object answer(InvocationOnMock invocation) {
-                Object[] args = invocation.getArguments();
-                Group group = (Group) args[0];
-                group.setId(1);
-                return null;
-            } 
+        doAnswer((Answer) (InvocationOnMock invocation) -> {
+            Object[] args = invocation.getArguments();
+            Group group = (Group) args[0];
+            group.setId(1);
+            return null; 
         }).when(repository).add(any(Group.class));
         
         when(organizationService.exists(1)).thenReturn(true);
@@ -84,14 +78,11 @@ public class GroupServiceImplTest {
     
     @Test
     public void createNewGroupWithParent() {        
-        doAnswer(new Answer() {
-            @Override
-            public Object answer(InvocationOnMock invocation) {
-                Object[] args = invocation.getArguments();
-                Group group = (Group) args[0];
-                group.setId(2);
-                return null;
-            } 
+        doAnswer((Answer) (InvocationOnMock invocation) -> {
+            Object[] args = invocation.getArguments();
+            Group group = (Group) args[0];
+            group.setId(2);
+            return null; 
         }).when(repository).add(any(Group.class));
         
         GroupDto parent = new GroupDto();
@@ -316,9 +307,6 @@ public class GroupServiceImplTest {
     @Test
     public void removeExistingGroup()
             throws EntityNotFoundException, ValidationException {
-        GroupDto group = new GroupDto();
-        group.setId(1);
-        
         Group groupEntity = new Group();
         
         when(repository.get(1)).thenReturn(groupEntity);

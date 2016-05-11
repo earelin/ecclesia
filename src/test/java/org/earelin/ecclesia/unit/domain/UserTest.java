@@ -59,8 +59,9 @@ public class UserTest {
     
     @Test
     public void usersShouldNotBeEqualToNull() {
+        User user1 = null;
         assertFalse("Users should not be equal to null",
-                user.equals(null));
+                user.equals(user1));
     }
     
 }

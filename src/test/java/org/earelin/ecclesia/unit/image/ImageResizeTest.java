@@ -10,12 +10,12 @@ public class ImageResizeTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void widthShouldBeGreatherThanZero() {
-        ImageResize imageScale = new ImageResize(0, 40, true);
+        new ImageResize(0, 40, true);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void heightShouldBeGreatherThanZero() {
-        ImageResize imageScale = new ImageResize(40, 0, true);
+        new ImageResize(40, 0, true);
     }
     
 }

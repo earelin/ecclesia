@@ -13,7 +13,6 @@ import org.earelin.ecclesia.service.dto.UserDto;
 import org.earelin.ecclesia.service.exception.EntityNotFoundException;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -32,7 +31,7 @@ public class UserServiceImplTest {
     
     private UserService instance;
     private final Mapper mapper = new DozerBeanMapper();
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     
     @Mock
     private UserRepository repository;
@@ -48,14 +47,11 @@ public class UserServiceImplTest {
         String email = "username@example.com";
         String password = "password";
         
-        doAnswer(new Answer() {
-            @Override
-            public Object answer(InvocationOnMock invocation) {
-                Object[] args = invocation.getArguments();
-                User user = (User) args[0];
-                user.setId(1);
-                return null;
-            } 
+        doAnswer((Answer) (InvocationOnMock invocation) -> {
+            Object[] args = invocation.getArguments();
+            User user = (User) args[0];
+            user.setId(1);
+            return null; 
         }).when(repository).add(any(User.class));                
         
         Date beforeRegister = new Date();

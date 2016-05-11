@@ -34,8 +34,6 @@ import org.mockito.stubbing.Answer;
 @RunWith(MockitoJUnitRunner.class)
 public class ManagedFileServiceImplTest {
     
-    private static final String NORMAL_FILE_PATH = "src/test/resources/test-data/files/pdf-sample.pdf";
-    
     private ManagedFileService instance;
     
     @Mock
@@ -54,14 +52,11 @@ public class ManagedFileServiceImplTest {
 
     @Test
     public void shouldStoreFilesInAGivenUriFolder() throws Exception {
-        doAnswer(new Answer() {
-            @Override
-            public Object answer(InvocationOnMock invocation) {
-                Object[] args = invocation.getArguments();
-                ManagedFile managedFile = (ManagedFile) args[0];
-                managedFile.setId(1);
-                return null;
-            } 
+        doAnswer((Answer) (InvocationOnMock invocation) -> {
+            Object[] args = invocation.getArguments();
+            ManagedFile managedFile = (ManagedFile) args[0];
+            managedFile.setId(1);
+            return null; 
         }).when(repository).add(any(ManagedFile.class));
         
         final URI folderUri = new URI("private:///managed-file/add/to/uri");
@@ -177,7 +172,6 @@ public class ManagedFileServiceImplTest {
         
         ManagedImageDto managedImage = (ManagedImageDto) instance.get(1);
         
-        assertTrue(managedImage instanceof ManagedImageDto);
         assertEquals(file.getId(), managedImage.getId());
         assertEquals(file.getMime(), managedImage.getMime());
         assertEquals(file.getCreated(), managedImage.getCreated());

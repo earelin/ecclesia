@@ -59,9 +59,11 @@ public class FileServiceIntegrationTest {
     @Test
     public void shouldCreateAFile() throws Exception {
         File file = instance.create(new URI("public:///creating/file/file.txt"));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-        writer.write("Testing file");
-        writer.close();
+        FileWriter fileWriter = new FileWriter(file);
+        BufferedWriter imageWriter = new BufferedWriter(fileWriter);
+        imageWriter.write("Testing file");
+        imageWriter.close();
+        fileWriter.close();
         assertTrue("File should be created", Files.exists(Paths.get(PUBLIC_FOLDER + "/creating/file/file.txt")));
     }
 

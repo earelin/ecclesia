@@ -51,14 +51,11 @@ public class GroupRoleServiceImplTest {
     
     @Test
     public void createNewGroupRole() {
-        doAnswer(new Answer() {
-            @Override
-            public Object answer(InvocationOnMock invocation) {
-                Object[] args = invocation.getArguments();
-                GroupRole role = (GroupRole) args[0];
-                role.setId(1);
-                return null;
-            } 
+        doAnswer((Answer) (InvocationOnMock invocation) -> {
+            Object[] args = invocation.getArguments();
+            GroupRole role = (GroupRole) args[0];
+            role.setId(1);
+            return null; 
         }).when(repository).add(any(GroupRole.class));
         
         when(groupService.exists(1)).thenReturn(true);

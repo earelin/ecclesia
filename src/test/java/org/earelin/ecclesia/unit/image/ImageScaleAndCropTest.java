@@ -10,12 +10,12 @@ public class ImageScaleAndCropTest {
     
     @Test(expected = IllegalArgumentException.class)
     public void widthShouldBeGreatherThanZero() {
-        ImageScaleAndCrop imageScaleAndCrop = new ImageScaleAndCrop(0, 40, true);
+        new ImageScaleAndCrop(0, 40, true);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void heightShouldBeGreatherThanZero() {
-        ImageScaleAndCrop imageScaleAndCrop = new ImageScaleAndCrop(40, 0, true);
+        new ImageScaleAndCrop(40, 0, true);
     }
     
 }
