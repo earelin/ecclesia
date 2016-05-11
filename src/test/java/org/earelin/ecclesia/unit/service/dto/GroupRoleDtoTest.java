@@ -59,8 +59,9 @@ public class GroupRoleDtoTest {
     
     @Test
     public void groupRolesShouldNotBeEqualToNull() {
+        GroupRoleDto role1 = null;
         assertFalse("Group roles should not be equal to null",
-                role.equals(null));
+                role.equals(role1));
     }
     
 }

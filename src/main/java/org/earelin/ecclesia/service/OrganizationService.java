@@ -14,7 +14,5 @@ public interface OrganizationService {
     void remove(long id);
     OrganizationDto get(long id);
     boolean exists(long id);
-    List<OrganizationDto> findAll();
-    List<OrganizationDto> findAll(int limit, int offset);
     List<OrganizationDto> findAll(FilteringCriteria filtering, OrderingCriteria order, int limit, int offset);
 }

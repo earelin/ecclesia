@@ -21,9 +21,8 @@ public class OrganizationAdminController {
     }
     
     @RequestMapping(value = "/admin/organization", method = RequestMethod.GET)
-	public String index(Map<String, Object> model) {
-        model.put("organizations", service.findAll());
-		return "admin_organization_index";
-	}
+    public String index(Map<String, Object> model) {
+        return "admin_organization_index";
+    }
     
 }

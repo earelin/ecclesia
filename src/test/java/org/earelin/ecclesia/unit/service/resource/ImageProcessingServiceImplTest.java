@@ -1,7 +1,10 @@
 package org.earelin.ecclesia.unit.service.resource;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Map;
 import org.earelin.ecclesia.service.resource.FileService;
 import org.earelin.ecclesia.service.resource.ImageProcessingServiceImpl;
@@ -9,72 +12,66 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import static org.mockito.Mockito.*;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 
 /**
  * ImageProcessingServiceImpl class unit test
  */
+@RunWith(MockitoJUnitRunner.class)
 public class ImageProcessingServiceImplTest {
     
-    public static final String SAMPLE_IMAGE_PATH = "public:///samples/image.png";
+    private ImageProcessingServiceImpl instance;
     
-    ImageProcessingServiceImpl instance;
+    @Mock
+    private FileService fileService;
     
     @Before
     public void initialize() {
-        FileService mockedFileService = mock(FileService.class);
-        instance = new ImageProcessingServiceImpl(mockedFileService);
+        instance = new ImageProcessingServiceImpl(fileService);
     }
     
     @Test
     public void shouldReturnDerivedImagesUri() throws URISyntaxException {
-        Map<String, URI> paths = instance.getGeneratedImagesPaths(new URI(SAMPLE_IMAGE_PATH));
+        Map<String, URI> paths = instance.getGeneratedImagesPaths(new URI("public:///samples/image.png"));
         for (String imageKey : paths.keySet()) {
             URI expectedPath = new URI("public://" + ImageProcessingServiceImpl.GENERATED_IMAGES_PATH
                     + "/" + imageKey + "/samples/image.png");
-            assertEquals("Expected generated image path does not match", expectedPath, paths.get(imageKey));
+            assertEquals(expectedPath, paths.get(imageKey));
         }
     }
     
-    @Ignore
     @Test
-    public void shouldGenerateStyledImages() throws Exception {
-//        File file = new File(TEST_IMAGE);
-//        URI publicPath = fileService.save(file, new URI("public:///derived/images"));
-//        
-//        instance.processImage(publicPath);
-//        
-//        Map<String, URI> styledImages = instance.getGeneratedImagesPaths(publicPath);
-//        for (String style : styledImages.keySet()) {
-            // TODO implement tests
-//            String generatedImagePath = fileService.getPath(styledImages.get(style));
-//            assertEquals("Styled image should exists", true,
-//                    Files.exists(Paths.get(generatedImagePath)));
-//            assertEquals("Styled image should be regular files", true,
-//                    Files.isRegularFile(Paths.get(generatedImagePath)));
-//        }
-    }
-
-    @Ignore
-    @Test
-    public void shouldDeleteGenerateStyledImages() throws Exception {
-//        File file = new File(TEST_IMAGE);
-//        URI publicPath = fileService.save(file, new URI("public:///derived/delete"));
-//        
-//        instance.processImage(publicPath);
-//        instance.deleteGeneratedImages(publicPath);
+    public void shouldReturnDerivedImagesUrls() throws URISyntaxException, Exception {
+        doAnswer(new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws MalformedURLException {
+                Object[] args = invocation.getArguments();
+                URI uri = (URI) args[0];                
+                return new URL("http://cdn.example.com" + uri.getPath());
+            } 
+        }).when(fileService).getUrl(any(URI.class));
         
-//        Map<String, String> styledImages = instance.getGeneratedImagesPaths(publicPath);
-//        for (String style : styledImages.keySet()) {
-//            String generatedImagePath = fileService.getPath(styledImages.get(style));
-//            assertFalse("Generated image should be deleted", Files.exists(Paths.get(generatedImagePath)));
-//        }
-    }
-    
-    @Ignore
+        Map<String, URL> urls = instance.getGeneratedImagesUrls(new URI("public:///samples/image.png"));
+        for (String imageKey : urls.keySet()) {
+            URL expectedURL = new URL("http://cdn.example.com" + ImageProcessingServiceImpl.GENERATED_IMAGES_PATH
+                    + "/" + imageKey + "/samples/image.png");
+            assertEquals(expectedURL, urls.get(imageKey));
+        }        
+    }        
+
     @Test
-    public void shouldReturnDerivedImagesUrls() throws URISyntaxException {
-        // TODO implement test
-    }
+    public void shouldDeleteGenerateStyledImages() throws Exception {                
+        instance.deleteGeneratedImages(new URI("public:///samples/image.png"));
+        
+        Map<String, URI> styledImages = instance.getGeneratedImagesPaths(new URI("public:///samples/image.png"));
+        for (URI uri : styledImages.values()) {
+            verify(fileService, atLeastOnce()).delete(uri);
+        }
+    }        
     
 }

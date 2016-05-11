@@ -62,8 +62,9 @@ public class ManagedFileDtoTest {
     
     @Test
     public void managedFilesShouldNotBeEqualToNull() {
+        ManagedFileDto file1 = null;
         assertFalse("Managed files should not be equal to null",
-                file.equals(null));
+                file.equals(file1));
     }
     
 }

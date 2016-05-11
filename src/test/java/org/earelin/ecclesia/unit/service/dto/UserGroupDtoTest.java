@@ -59,8 +59,9 @@ public class UserGroupDtoTest {
     
     @Test
     public void userGroupsShouldNotBeEqualToNull() {
+        UserGroupDto userGroup1 = null;
         assertFalse("User groups should not be equal to null",
-                userGroup.equals(null));
+                userGroup.equals(userGroup1));
     }
     
 }

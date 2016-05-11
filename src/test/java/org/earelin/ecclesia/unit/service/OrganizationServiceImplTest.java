@@ -58,6 +58,7 @@ public class OrganizationServiceImplTest {
         assertNotEquals(0, organization.getId());
         assertTrue(organization.getCreated().compareTo(beforeInsert) >= 0
                 && organization.getCreated().compareTo(afterInsert) <= 0);
+        assertEquals(organization.getCreated(), organization.getUpdated());
         verify(repository).add(any(Organization.class));
     }
     

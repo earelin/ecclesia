@@ -77,7 +77,7 @@ public class ImageProcessingServiceImpl implements ImageProcessingService {
         
         for (ImageStyle imageStyle : imageStyles.values()) {
             generatedImages.put(imageStyle.getKey(),
-                    fileService.getUrl(buildGeneratedImagePath(imageStyle, uri)));
+                fileService.getUrl(buildGeneratedImagePath(imageStyle, uri)));
         }
         
         return generatedImages;

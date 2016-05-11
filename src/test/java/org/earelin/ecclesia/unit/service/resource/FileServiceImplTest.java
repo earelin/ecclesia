@@ -58,4 +58,9 @@ public class FileServiceImplTest {
         instance.getUrl(new URI("illegal:///folder/example.txt"));
     }
     
+    @Test(expected = UnhandledFileProtocol.class)
+    public void shouldNotResolveNotHandledProtocolUriGettingPath() throws Exception {
+        instance.get(new URI("illegal:///folder/example.txt"));
+    }
+    
 }

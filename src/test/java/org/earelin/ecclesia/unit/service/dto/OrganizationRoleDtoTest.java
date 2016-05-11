@@ -59,8 +59,9 @@ public class OrganizationRoleDtoTest {
     
     @Test
     public void organizationRolesShouldNotBeEqualToNull() {
+        OrganizationRoleDto role1 = null;
         assertFalse("Organization roles should not be equal to null",
-                role.equals(null));
+                role.equals(role1));
     }
     
 }

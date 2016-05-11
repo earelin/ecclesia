@@ -93,17 +93,6 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<OrganizationDto> findAll() {
-        return mapper.map(repository.findAll(), List.class);
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<OrganizationDto> findAll(int limit, int offset) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<OrganizationDto> findAll(FilteringCriteria filtering, OrderingCriteria order, int limit, int offset) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
