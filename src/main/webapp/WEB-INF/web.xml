@@ -3,49 +3,49 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
-	<display-name>Ecclesia</display-name>
-	<description>Ecclesia web application</description>
+    <display-name>Ecclesia</display-name>
+    <description>Ecclesia web application</description>
 
 	<!-- For root context -->
 
-  <context-param>
-    <param-name>contextClass</param-name>
-    <param-value>
-        org.springframework.web.context.support.AnnotationConfigWebApplicationContext
-    </param-value>
-  </context-param>
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>
+            org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+        </param-value>
+    </context-param>
 
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>org.earelin.ecclesia.config.EcclesiaCoreConfig</param-value>
-	</context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>org.earelin.ecclesia.config.EcclesiaCoreConfig</param-value>
+    </context-param>
   
-  <listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
   
-  <!-- For web context -->
+    <!-- For web context -->
   
-	<servlet>
-		<servlet-name>ecclesia-dispatcher</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>
-      <param-name>contextClass</param-name>
-      <param-value>
-          org.springframework.web.context.support.AnnotationConfigWebApplicationContext
-      </param-value>
-    </init-param>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>org.earelin.ecclesia.config.EcclesiaMVCConfig</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
+    <servlet>
+        <servlet-name>ecclesia-dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextClass</param-name>
+            <param-value>
+                org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+            </param-value>
+        </init-param>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>org.earelin.ecclesia.config.EcclesiaMVCConfig</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
-	<servlet-mapping>
-		<servlet-name>ecclesia-dispatcher</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ecclesia-dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
   
   <!-- Security configuration -->
     

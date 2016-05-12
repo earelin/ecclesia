@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" lang="en">
 
   <head>
-    <title>Ecclesia</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Ecclesia</title>    
+    <link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.min.css"
+          th:href="@{/resources/css/bootstrap.min.css}" />
+    
   </head>
 
   <body>
-    <p th:text="#{home.welcome}">Welcome to our grocery store!</p>
+    <nav class="navbar navbar-full navbar-dark bg-primary">
+        <a class="navbar-brand" href="#" th:href="@{/}">Ecclesia</a>
+    </nav>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script th:src="@{/resources/css/bootstrap.min.css}" ></script>
   </body>
 
 </html>
