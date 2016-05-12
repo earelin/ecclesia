@@ -6,3 +6,4 @@ private/
 src/main/resources/import.sql
 target/
 phantomjsdriver.log
+/ecclesia_files/
