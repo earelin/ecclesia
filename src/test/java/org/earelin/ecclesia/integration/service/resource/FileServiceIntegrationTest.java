@@ -17,7 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * FileServiceImpl unit testing
+ * FileServiceImpl integration testing
  */
 public class FileServiceIntegrationTest {
     

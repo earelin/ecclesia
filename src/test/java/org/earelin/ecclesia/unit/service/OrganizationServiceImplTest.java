@@ -113,14 +113,18 @@ public class OrganizationServiceImplTest {
     }
 
     @Test
-    public void getExistingOrganization() {
+    public void shouldGetAnExistingOrganization() {
         Organization organizationEntity = new Organization();
+        organizationEntity.setId(1);
+        organizationEntity.setName("Organization name");
         
         when(repository.get(1)).thenReturn(organizationEntity);
         
-        instance.get(1);
+        OrganizationDto organization = instance.get(1);
         
         verify(repository).get(1);
+        assertEquals(organizationEntity.getId(), organization.getId());
+        assertEquals(organizationEntity.getName(), organization.getName());
     }
     
     @Test(expected = EntityNotFoundException.class)

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.earelin.ecclesia.domain.resource.ManagedFile;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -64,6 +65,21 @@ public class User {
         final User other = (User) obj;
         return this.id == other.id;
     }
+    
+    @Transient
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+    
+    @Transient
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Transient
+    public boolean isAccountNonLocked() {
+        return true;
+    } 
 
     public boolean isEnabled() {
         return enabled;
@@ -137,24 +153,12 @@ public class User {
         this.avatar = avatar;
     }
 
-    public boolean isAccountNonExpired() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public boolean isAccountNonLocked() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public boolean isCredentialsNonExpired() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public List<String> getSystemRoles() {
         return systemRoles;
     }
 
     public void setSystemRoles(List<String> systemRoles) {
         this.systemRoles = systemRoles;
-    }
+    }       
 
 }
