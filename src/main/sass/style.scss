@@ -1,0 +1,36 @@
+/*
+ * Customized bootstrap styles
+ */
+
+// Core variables and mixins
+@import "variables";
+@import "mixins";
+
+/* General layout */
+
+main {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+/* Forms */
+
+.form-group small {
+  font-size: 0.7em;
+}
+
+.form-control-message {
+  display: block;
+}
+
+.has-danger .form-control-message {
+  color: $brand-danger;
+}
+
+.has-warning .form-control-message {
+  color: $brand-warning;
+}
+
+.has-success .form-control-message {
+  color: $brand-success;
+}
