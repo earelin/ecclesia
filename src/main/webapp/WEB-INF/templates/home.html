@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" lang="en">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/public-layout">
 
   <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Ecclesia</title>    
-    <link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.min.css"
-          th:href="@{/resources/css/bootstrap.min.css}" />
-    
+    <title>Ecclesia</title>
   </head>
 
-  <body>
-    <nav class="navbar navbar-full navbar-dark bg-primary">
-        <a class="navbar-brand" href="#" th:href="@{/}">Ecclesia</a>
-    </nav>
-
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script th:src="@{/resources/css/bootstrap.min.css}" ></script>
+  <body>      
+    <main class="container" layout:fragment="content">
+      <div class="jumbotron">
+        <div class="row">
+          <div class="col-sm-8">
+            <h1 class="display-3">Hello, world!</h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+          </div>
+          <div class="col-sm-4">
+            <form action="#" th:action="@{/register}" th:object="${registerForm}" method="POST">
+              <fieldset class="form-group">
+                <input type="text" class="form-control" th:field="*{username}" placeholder="Pick a username" />
+              </fieldset>
+              <fieldset class="form-group">
+                <input type="email" class="form-control" th:field="*{email}" placeholder="Your email address" />
+              </fieldset>
+              <fieldset class="form-group">
+                <input type="password" class="form-control" th:field="*{password}" placeholder="Create a password" />
+                <small class="text-muted"> Use at least one letter, one numeral, and seven characters.</small>
+              </fieldset>
+              <fieldset class="form-group text-sm-center">
+                <button type="submit" class="btn btn-primary">Sing up for Ecclesia</button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
 
 </html>

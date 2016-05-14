@@ -8,7 +8,6 @@ public class RegisterForm {
     private String username;
     private String email;
     private String password;
-    private String repeatPassword;
 
     public String getUsername() {
         return username;
@@ -32,14 +31,6 @@ public class RegisterForm {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getRepeatPassword() {
-        return repeatPassword;
-    }
-
-    public void setRepeatPassword(String repeatPassword) {
-        this.repeatPassword = repeatPassword;
     }
             
 }

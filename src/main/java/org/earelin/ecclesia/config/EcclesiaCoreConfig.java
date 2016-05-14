@@ -1,6 +1,7 @@
 package org.earelin.ecclesia.config;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Properties;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -9,6 +10,13 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.earelin.ecclesia.service.resource.FileServiceImpl;
 import org.earelin.ecclesia.service.resource.FileService;
+import org.hibernate.SessionFactory;
+import org.passay.CharacterRule;
+import org.passay.EnglishCharacterData;
+import org.passay.LengthRule;
+import org.passay.PasswordValidator;
+import org.passay.WhitespaceRule;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,12 +24,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Main configuration class
+ * 
+ * @author Xavier Carriba
+ * @since 0.1
  */
 @Configuration
 @ImportResource("classpath:/spring-security-config.xml")
@@ -69,6 +82,11 @@ public class EcclesiaCoreConfig {
     private String publicFilesURL;
     
     @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+    
+    @Bean
     public Mapper mapper() {
         return new DozerBeanMapper();
     }
@@ -79,9 +97,28 @@ public class EcclesiaCoreConfig {
     }
     
     @Bean
+    public PasswordValidator passwordValidator() {
+	return new PasswordValidator(Arrays.asList(
+	    new LengthRule(7, 32),
+	    new CharacterRule(EnglishCharacterData.Alphabetical, 1),
+	    new CharacterRule(EnglishCharacterData.Digit, 1),
+	    new WhitespaceRule())
+	);
+    }
+    
+    @Bean
     public FileService fileService(Tika tika) throws IOException {
         return new FileServiceImpl(privateFilesFolder, publicFilesFolder,
                 publicFilesURL, serverUrl, tika);
+    }
+    
+    @Bean  
+    public ResourceBundleMessageSource messageSource() {  
+        ResourceBundleMessageSource source = new ResourceBundleMessageSource();  
+        source.setBasename("locale/messages");  
+        source.setUseCodeAsDefaultMessage(true);
+	source.setDefaultEncoding("UTF-8");
+        return source;  
     }
     
     @Bean
@@ -111,8 +148,11 @@ public class EcclesiaCoreConfig {
     }
     
     @Bean
-    public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
+    @Autowired
+    public HibernateTransactionManager transactionManager(SessionFactory s) {
+       HibernateTransactionManager txManager = new HibernateTransactionManager();
+       txManager.setSessionFactory(s);
+       return txManager;
     }
     
 }

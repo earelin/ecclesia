@@ -15,6 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * User service implementation
+ * 
+ * @author Xavier Carriba
+ * @since 0.1
  */
 @Service
 @Transactional
@@ -92,6 +95,12 @@ public class UserServiceImpl implements UserService {
         }
         
         return mapper.map(user, UserDto.class);
+    }
+
+    @Override
+    public boolean isUsernameUsed(String name) {
+	User user = repository.findByUsername(name);
+	return user != null;
     }
 
 }

@@ -5,6 +5,7 @@ apply plugin: 'java'
 apply plugin: 'jetty'
 apply plugin: 'net.serenity-bdd.aggregator'
 apply plugin: 'info.solidsoft.pitest'
+apply plugin: 'com.github.robfletcher.compass'
 
 // JDK 8
 sourceCompatibility = 1.8
@@ -45,6 +46,7 @@ dependencies {
     // thymeleaf
     compile 'org.thymeleaf:thymeleaf:2.+'
     compile 'org.thymeleaf:thymeleaf-spring4:2.+'
+    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.4.+'
 
     // spring security
     compile "org.springframework.security:spring-security-config:$springSecurityVersion"
@@ -62,6 +64,9 @@ dependencies {
 
     // file manipulation
     compile 'commons-io:commons-io:2.+'
+    
+    // validation
+    compile 'commons-validator:commons-validator:1.5.1'
 	
     // include in compile only, exclude in the war
     providedCompile 'javax.servlet:servlet-api:2.5'
@@ -85,11 +90,19 @@ buildscript {
     dependencies {
         classpath 'net.serenity-bdd:serenity-gradle-plugin:1.+'
         classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.+'
+        classpath 'com.github.robfletcher:compass-gradle-plugin:2.+'
     }
 }
 
 [jettyRun, jettyRunWar, jettyStop]*.stopPort = 8090
 [jettyRun, jettyRunWar, jettyStop]*.stopKey = 'stop-key'
+[jettyRun, jettyRunWar]*.scanIntervalSeconds = 1
+[jettyRun, jettyRunWar]*.reload = 'automatic'
+
+compass {
+  cssDir = file("src/main/webapp/resources/css")
+  sassDir = file("src/main/sass")
+}
 
 test {
     include 'org/earelin/ecclesia/integration/**'

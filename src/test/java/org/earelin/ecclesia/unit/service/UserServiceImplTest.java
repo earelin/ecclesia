@@ -25,6 +25,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * UserServiceImpl unit test
+ * 
+ * @author Xavier Carriba
+ * @since 0.1
  */
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceImplTest {
@@ -146,6 +149,26 @@ public class UserServiceImplTest {
     @Test(expected = EntityNotFoundException.class)
     public void removeNotExistingUser() {
         instance.remove(1);
+    }
+    
+    @Test
+    public void testIfAUsernameIsUsed() {
+	when(repository.findByUsername("username")).thenReturn(new User());
+	
+	boolean exists = instance.isUsernameUsed("username");
+	
+	verify(repository).findByUsername("username");
+	assertTrue(exists);
+    }
+    
+    @Test
+    public void testIfAUsernameIsNotUsed() {
+	when(repository.findByUsername("username")).thenReturn(null);
+	
+	boolean exists = instance.isUsernameUsed("username");
+	
+	verify(repository).findByUsername("username");
+	assertFalse(exists);
     }
     
 }

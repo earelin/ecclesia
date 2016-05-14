@@ -1,11 +1,35 @@
-body {
-  background-color: gray;
-}
-
-#page {
-  background-color: white;
-}
-
-#content {
+/*
+ * Customized bootstrap styles
+ */
+/* General layout */
+/* line 11, ../../../sass/style.scss */
+main {
+  padding-top: 25px;
   padding-bottom: 25px;
+}
+
+/* Forms */
+/* line 18, ../../../sass/style.scss */
+.form-group small {
+  font-size: 0.7em;
+}
+
+/* line 22, ../../../sass/style.scss */
+.form-control-message {
+  display: block;
+}
+
+/* line 26, ../../../sass/style.scss */
+.has-danger .form-control-message {
+  color: #d9534f;
+}
+
+/* line 30, ../../../sass/style.scss */
+.has-warning .form-control-message {
+  color: #f0ad4e;
+}
+
+/* line 34, ../../../sass/style.scss */
+.has-success .form-control-message {
+  color: #5cb85c;
 }
