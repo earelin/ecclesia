@@ -3,15 +3,19 @@
 pipeline {
     agent { label 'java' }
     stages {
+        stage('Merge master') {
+            steps {                
+                sh 'git merge origin/master'
+            }
+        }
         stage('Build') {
             steps {
-                sh 'git merge origin/master'
                 sh 'gradle check'
                 sh 'gradle war'
             }
             post {
                 always {
-                    junit 'build/reports/**/*.xml'                    
+                    junit 'build/test-results/test/*.xml'
                 }
             }
         }
