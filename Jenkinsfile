@@ -8,10 +8,14 @@ pipeline {
                 sh 'git merge origin/master'
             }
         }
-        stage('Build') {
+        stage('Static code analysis') {
+            steps {                
+                sh 'gradle checkstyleMain'
+            }
+        }
+        stage('Unit testing') {
             steps {
-                sh 'gradle check'
-                sh 'gradle war'
+                sh 'gradle test'
             }
             post {
                 always {
@@ -19,10 +23,15 @@ pipeline {
                 }
             }
         }
-        stage('Code QA') {
+        stage('Build') {
             steps {
-                sh 'echo "Code quality"'
-            }            
-        }
+                sh 'gradle war'
+            }
+            post {
+                always {
+                    archive 'build/libs/*.war'
+                }
+            }
+        }        
     }
 }
