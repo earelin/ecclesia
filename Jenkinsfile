@@ -1,32 +1,34 @@
 #!groovy
-
-pipeline {
-    agent { label 'java' }
+node {
     checkout scm
-    options { 
-        timestamps()
-    }
-    stages {
-        stage('Merge master') {
-            steps {                
-                sh 'git merge origin/master'
-            }
+    pipeline {
+        agent { label 'java' }
+
+        options { 
+            timestamps()
         }
-        stage('Build') {
-            steps {
-                sh 'gradle check'
-                sh 'gradle war'
-            }
-            post {
-                always {
-                    junit 'build/reports/**/*.xml'                    
+        stages {
+            stage('Merge master') {
+                steps {                
+                    sh 'git merge origin/master'
                 }
             }
-        }
-        stage('Code QA') {
-            steps {
-                sh 'echo "Code quality"'
-            }            
+            stage('Build') {
+                steps {
+                    sh 'gradle check'
+                    sh 'gradle war'
+                }
+                post {
+                    always {
+                        junit 'build/reports/**/*.xml'                    
+                    }
+                }
+            }
+            stage('Code QA') {
+                steps {
+                    sh 'echo "Code quality"'
+                }            
+            }
         }
     }
 }
