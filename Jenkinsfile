@@ -14,14 +14,16 @@ pipeline {
             }
             post {
                 always {
-                    def checkstyle = scanForIssues tool: [$class: 'CheckStyle'], pattern: 'build/reports/checkstyle/*.xml'
-                    publishIssues issues:[checkstyle], useStableBuildAsReference: true
-    
-                    def pmd = scanForIssues tool: [$class: 'Pmd'], pattern: 'build/reports/pmd/*.xml'
-                    publishIssues issues:[pmd], useStableBuildAsReference: true
-         
-                    def findbugs = scanForIssues tool: [$class: 'FindBugs'], pattern: 'build/reports/findbugs/*.xml'
-                    publishIssues issues:[findbugs], useStableBuildAsReference: true
+                    script {
+                        def checkstyle = scanForIssues tool: [$class: 'CheckStyle'], pattern: 'build/reports/checkstyle/*.xml'
+                        publishIssues issues:[checkstyle], useStableBuildAsReference: true
+
+                        def pmd = scanForIssues tool: [$class: 'Pmd'], pattern: 'build/reports/pmd/*.xml'
+                        publishIssues issues:[pmd], useStableBuildAsReference: true
+
+                        def findbugs = scanForIssues tool: [$class: 'FindBugs'], pattern: 'build/reports/findbugs/*.xml'
+                        publishIssues issues:[findbugs], useStableBuildAsReference: true
+                    }
                 }
             }
         }
