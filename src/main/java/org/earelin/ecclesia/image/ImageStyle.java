@@ -12,7 +12,7 @@ import java.util.List;
 public class ImageStyle {
     
     private final String key;
-    private final List<ImageProcessor> processors = new ArrayList();
+    private final List<ImageProcessor> processors = new ArrayList<>();
 
     public ImageStyle(String key) {
         this.key = key;

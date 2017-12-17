@@ -3,7 +3,10 @@ package org.earelin.ecclesia.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import org.dozer.Mapper;
+import org.earelin.ecclesia.criteria.FilteringCriteria;
+import org.earelin.ecclesia.criteria.OrderingCriteria;
 import org.earelin.ecclesia.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -97,10 +100,20 @@ public class UserServiceImpl implements UserService {
         return mapper.map(user, UserDto.class);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public boolean isUsernameUsed(String name) {
 	User user = repository.findByUsername(name);
 	return user != null;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<UserDto> findAll(FilteringCriteria filtering, OrderingCriteria ordering, int limit, int offset) {
+	List<User> users = repository.findAll(filtering, ordering, limit, offset);
+	List<UserDto> usersDto = new ArrayList<>();
+	mapper.map(users, usersDto);
+	return usersDto;
     }
 
 }

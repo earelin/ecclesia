@@ -54,7 +54,7 @@ public class ImageProcessingServiceImpl implements ImageProcessingService {
     
     @Override
     public Map<String, URI> getGeneratedImagesPaths(URI uri) throws URISyntaxException {
-        Map<String, URI> generatedImages = new HashMap();
+        Map<String, URI> generatedImages = new HashMap<>();
         
         for (ImageStyle imageStyle : imageStyles.values()) {
             generatedImages.put(imageStyle.getKey(),
@@ -73,7 +73,7 @@ public class ImageProcessingServiceImpl implements ImageProcessingService {
     
     @Override
     public Map<String, URL> getGeneratedImagesUrls(URI uri) throws Exception {
-        Map<String, URL> generatedImages = new HashMap();
+        Map<String, URL> generatedImages = new HashMap<>();
         
         for (ImageStyle imageStyle : imageStyles.values()) {
             generatedImages.put(imageStyle.getKey(),
@@ -92,7 +92,7 @@ public class ImageProcessingServiceImpl implements ImageProcessingService {
      * @return 
      */
     private Map<String, ImageStyle> generateImageStyles() {
-        Map<String, ImageStyle> imageStyles = new HashMap();
+        Map<String, ImageStyle> imageStyles = new HashMap<>();
         
         ImageStyle thumbnailStyle = new ImageStyle(THUMBNAIL_STYLE);
         thumbnailStyle.addProcessor(new ImageScaleAndCrop(150, 150, false));

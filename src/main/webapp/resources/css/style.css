@@ -8,28 +8,34 @@ main {
   padding-bottom: 25px;
 }
 
+/* line 16, ../../../sass/style.scss */
+.action-links {
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+
 /* Forms */
-/* line 18, ../../../sass/style.scss */
+/* line 23, ../../../sass/style.scss */
 .form-group small {
   font-size: 0.7em;
 }
 
-/* line 22, ../../../sass/style.scss */
+/* line 27, ../../../sass/style.scss */
 .form-control-message {
   display: block;
 }
 
-/* line 26, ../../../sass/style.scss */
+/* line 31, ../../../sass/style.scss */
 .has-danger .form-control-message {
   color: #d9534f;
 }
 
-/* line 30, ../../../sass/style.scss */
+/* line 35, ../../../sass/style.scss */
 .has-warning .form-control-message {
   color: #f0ad4e;
 }
 
-/* line 34, ../../../sass/style.scss */
+/* line 39, ../../../sass/style.scss */
 .has-success .form-control-message {
   color: #5cb85c;
 }

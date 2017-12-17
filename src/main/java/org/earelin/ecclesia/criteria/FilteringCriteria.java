@@ -9,7 +9,7 @@ import java.util.List;
 public class FilteringCriteria {
     
     private FilteringNexus nexus = FilteringNexus.AND;
-    private List<FilteringStatement> statements = new ArrayList();
+    private List<FilteringStatement> statements = new ArrayList<>();
 
     public FilteringCriteria() {}
     

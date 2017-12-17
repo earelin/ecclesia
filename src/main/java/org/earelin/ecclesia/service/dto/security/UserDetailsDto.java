@@ -1,8 +1,11 @@
 package org.earelin.ecclesia.service.dto.security;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import org.earelin.ecclesia.service.dto.UserDto;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -14,22 +17,26 @@ public class UserDetailsDto extends UserDto implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+	for (String role : getSystemRoles()) {
+	    authorities.add(new SimpleGrantedAuthority(role));
+	}
+	return authorities;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return isEnabled();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return true;
     }
 
 }

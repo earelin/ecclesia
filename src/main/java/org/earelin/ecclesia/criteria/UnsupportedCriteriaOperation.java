@@ -5,6 +5,8 @@ package org.earelin.ecclesia.criteria;
  */
 public class UnsupportedCriteriaOperation extends RuntimeException {
     
+    static final long serialVersionUID = 1L;
+    
     public UnsupportedCriteriaOperation(String message) {
         super(message);
     }

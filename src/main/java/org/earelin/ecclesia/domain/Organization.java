@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.earelin.ecclesia.domain.resource.ManagedFile;
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
@@ -21,6 +22,8 @@ public class Organization {
     private long id;
     @NotBlank
     private String name;
+    @Type(type="text")
+    private String description;
     @OneToOne
     private ManagedFile logo;
     private Date created;
@@ -62,6 +65,14 @@ public class Organization {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+	return description;
+    }
+
+    public void setDescription(String description) {
+	this.description = description;
     }
 
     public ManagedFile getLogo() {

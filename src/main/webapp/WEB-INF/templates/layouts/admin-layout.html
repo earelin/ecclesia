@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en">
+
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Ecclesia</title>    
+    <link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css"
+          th:href="@{/resources/css/bootstrap.css}" />    
+    <link rel="stylesheet" type="text/css" href="../../resources/css/style.css"
+          th:href="@{/resources/css/style.css}" /> 
+  </head>
+
+  <body>
+    <header class="mashead bg-primary">
+      <div class="container">
+        <nav class="navbar navbar-full navbar-dark">
+          <a class="navbar-brand" href="#" th:href="@{/}">Ecclesia</a>
+        </nav>
+      </div>
+    </header>
+      
+    <main class="container" layout:fragment="content">
+    </main>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script th:src="@{/resources/js/tether.min.js}" ></script>
+    <script th:src="@{/resources/js/bootstrap.min.js}" ></script>
+  </body>
+
+</html>

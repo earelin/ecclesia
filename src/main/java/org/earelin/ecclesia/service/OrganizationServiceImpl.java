@@ -1,5 +1,6 @@
 package org.earelin.ecclesia.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.dozer.Mapper;
@@ -94,7 +95,10 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Transactional(readOnly = true)
     @Override
     public List<OrganizationDto> findAll(FilteringCriteria filtering, OrderingCriteria order, int limit, int offset) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Organization> organizations = repository.findAll(filtering, order, limit, offset);
+	List<OrganizationDto> organizationsDto = new ArrayList<>();
+	mapper.map(organizations, organizationsDto);
+	return organizationsDto;
     }
     
 }

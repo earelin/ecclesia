@@ -6,6 +6,7 @@ import org.earelin.ecclesia.web.form.RegisterForm;
 import org.passay.PasswordData;
 import org.passay.PasswordValidator;
 import org.passay.RuleResult;
+import org.passay.RuleResultDetail;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -36,7 +37,7 @@ public class RegisterFormValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
 	RegisterForm registerForm = (RegisterForm) o;
-        
+	
 	// Check username
 	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "username.empty");
 	if (userService.isUsernameUsed(registerForm.getUsername())) {
@@ -44,15 +45,19 @@ public class RegisterFormValidator implements Validator {
 	}
 	
 	// Check email
-	if (!emailValidator.isValid(registerForm.getEmail())) {
+	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "email.empty");
+	if (!errors.hasFieldErrors("email") && !emailValidator.isValid(registerForm.getEmail())) {
 	    errors.rejectValue("email", "email.not.valid");
 	}
 	
 	// Check password
-	RuleResult result = passwordValidator.validate(new PasswordData(registerForm.getPassword()));
-	if (!result.isValid()) {
-	    for (String msg : passwordValidator.getMessages(result)) {
-		errors.rejectValue("password", msg);
+	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "password.empty");
+	if (!errors.hasFieldErrors("password")) {
+	    RuleResult result = passwordValidator.validate(new PasswordData(registerForm.getPassword()));
+	    if (!result.isValid()) {
+		for (RuleResultDetail resultDetail : result.getDetails()) {
+		    errors.rejectValue("password", resultDetail.getErrorCode());
+		}
 	    }
 	}
     }

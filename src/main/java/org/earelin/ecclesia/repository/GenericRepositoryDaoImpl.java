@@ -51,12 +51,12 @@ public abstract class GenericRepositoryDaoImpl<E> implements GenericRepository<E
 
     @Override
     public List<E> findAll() {
-        return currentSession().createCriteria(daoType).list();
+        return (List<E>) currentSession().createCriteria(daoType).list();
     }
 
     @Override
     public List<E> findAll(int limit, int offset) {
-        return currentSession().createCriteria(daoType)
+        return (List<E>) currentSession().createCriteria(daoType)
                 .setMaxResults(limit)
                 .setFirstResult(offset)
                 .list();
@@ -74,7 +74,7 @@ public abstract class GenericRepositoryDaoImpl<E> implements GenericRepository<E
             criteria.addOrder(CriteriaToHibernateConversor.orderingConvert(ordering));
         }
         
-        return criteria.list();
+        return (List<E>) criteria.list();
     }
 
     @Override
@@ -89,7 +89,7 @@ public abstract class GenericRepositoryDaoImpl<E> implements GenericRepository<E
             criteria.addOrder(CriteriaToHibernateConversor.orderingConvert(ordering));
         }
         
-        return criteria.setMaxResults(limit)
+        return (List<E>) criteria.setMaxResults(limit)
                 .setFirstResult(offset)
                 .list();
     }

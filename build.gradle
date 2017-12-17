@@ -1,15 +1,44 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:+'
+        classpath 'net.serenity-bdd:serenity-gradle-plugin:1.+'
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.+'
+        classpath 'com.github.robfletcher:compass-gradle-plugin:2.+'
+    }
+}
+
 apply plugin: 'war'
 apply plugin: 'findbugs'
 apply plugin: 'jacoco'
 apply plugin: 'java'
-apply plugin: 'jetty'
+apply plugin: 'org.akhikhl.gretty'
 apply plugin: 'net.serenity-bdd.aggregator'
 apply plugin: 'info.solidsoft.pitest'
 apply plugin: 'com.github.robfletcher.compass'
+apply plugin: 'pmd'
 
 // JDK 8
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+compileJava.options*.compilerArgs = [
+	"-Xlint:serial", "-Xlint:varargs", "-Xlint:cast", "-Xlint:classfile",
+	"-Xlint:dep-ann", "-Xlint:divzero", "-Xlint:empty", "-Xlint:finally",
+	"-Xlint:overrides", "-Xlint:path", "-Xlint:processing", "-Xlint:static",
+	"-Xlint:try", "-Xlint:fallthrough", "-Xlint:rawtypes", "-Xlint:deprecation",
+	"-Xlint:unchecked", "-Xlint:-options"]
+
+compileTestJava.options*.compilerArgs = [
+	"-Xlint:serial", "-Xlint:-varargs", "-Xlint:cast", "-Xlint:classfile",
+	"-Xlint:dep-ann", "-Xlint:divzero", "-Xlint:empty", "-Xlint:finally",
+	"-Xlint:overrides", "-Xlint:path", "-Xlint:processing", "-Xlint:static",
+	"-Xlint:try", "-Xlint:-fallthrough", "-Xlint:-rawtypes", "-Xlint:-deprecation",
+	"-Xlint:-unchecked", "-Xlint:-options"]
 
 repositories {
     mavenCentral()
@@ -81,24 +110,6 @@ dependencies {
     testCompile 'org.hamcrest:hamcrest-all:1.3'
 }
 
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'net.serenity-bdd:serenity-gradle-plugin:1.+'
-        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.+'
-        classpath 'com.github.robfletcher:compass-gradle-plugin:2.+'
-    }
-}
-
-[jettyRun, jettyRunWar, jettyStop]*.stopPort = 8090
-[jettyRun, jettyRunWar, jettyStop]*.stopKey = 'stop-key'
-[jettyRun, jettyRunWar]*.scanIntervalSeconds = 1
-[jettyRun, jettyRunWar]*.reload = 'automatic'
-
 compass {
   cssDir = file("src/main/webapp/resources/css")
   sassDir = file("src/main/sass")
@@ -129,7 +140,7 @@ task integrationTest(type: Test) {
 }
 
 task uiTest(type: Test) {
-    description 'Run only user interface tests'
+  description 'Run only user interface tests'
     
   include 'org/earelin/ecclesia/bdd/**'
   
@@ -137,12 +148,12 @@ task uiTest(type: Test) {
   reports.html.destination = "$buildDir/reports/ui-tests"
   
   doFirst {
-    jettyRun.daemon = true
-    tasks.jettyRun.execute()
+    grettyRun.daemon = true
+    tasks.grettyRun.execute()
   }
   
   doLast {
-    tasks.jettyStop.execute()
+    tasks.grettyStop.execute()
   }
 }
 
@@ -179,4 +190,16 @@ pitest {
     targetClasses = ['org.earelin.ecclesia.*']
     threads = 4
     outputFormats = ['XML', 'HTML']
+}
+
+gretty {
+  httpPort = 8080
+  host = '0.0.0.0'
+  scanInterval = 1
+  // scanDir = '${projectDir}/src/main/java'
+  recompileOnSourceChange = true
+  reloadOnClassChange = true
+  reloadOnConfigChange = true
+  reloadOnLibChange = true
+  managedClassReload = false
 }

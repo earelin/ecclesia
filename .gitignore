@@ -7,5 +7,9 @@ src/main/resources/import.sql
 target/
 phantomjsdriver.log
 /ecclesia_files/
-/.nb-gradle-properties
 /.sass-cache/
+._.DS_Store
+**/._.DS_Store
+**/._*
+.DS_Store
+**/.DS_Store

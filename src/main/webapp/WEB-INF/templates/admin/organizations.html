@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/admin-layout">
+
+  <head>
+    <title>Ecclesia</title>
+  </head>
+
+  <body>      
+    <main class="container" layout:fragment="content">
+      <h1>Organizations</h1>
+      <div class="action-links">
+        <a th:href="@{/admin/organizations/add}" class="btn btn-primary-outline">Add organization</a>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="organization : ${organizations}">
+            <td th:text="${organization.name}">Username</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </body>
+
+</html>
