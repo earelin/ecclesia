@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('Merge master') {
             steps {
+                checkout scm
                 sh 'git merge origin/master'
             }
         }
