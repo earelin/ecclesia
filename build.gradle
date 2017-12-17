@@ -21,6 +21,7 @@ apply plugin: 'net.serenity-bdd.aggregator'
 apply plugin: 'info.solidsoft.pitest'
 apply plugin: 'com.github.robfletcher.compass'
 apply plugin: 'pmd'
+apply plugin: 'checkstyle'
 
 // JDK 8
 sourceCompatibility = 1.8
@@ -184,6 +185,11 @@ findbugs {
   effort = 'max'
   ignoreFailures = true
   reportLevel = 'low'
+}
+
+checkstyle {
+  configFile = rootProject.file('checkstyle.xml')
+  toolVersion ="7.7"
 }
 
 pitest {
