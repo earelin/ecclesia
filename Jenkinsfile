@@ -2,13 +2,13 @@
 
 pipeline {
     agent { label 'java' }
+    checkout scm
     options { 
         timestamps()
     }
     stages {
         stage('Merge master') {
-            steps {
-                checkout scm
+            steps {                
                 sh 'git merge origin/master'
             }
         }
