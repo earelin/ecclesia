@@ -17,6 +17,7 @@ pipeline {
                     checkstyle pattern: 'build/reports/checkstyle/*.xml'
                     pmd pattern: 'build/reports/pmd/*.xml'
                     findbugs isRankActivated: true, pattern: 'build/reports/findbugs/*.xml'
+                    jacoco classPattern: 'build/target/classes'
                 }
             }
         }
