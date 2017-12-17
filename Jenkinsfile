@@ -4,14 +4,25 @@ pipeline {
     agent { label 'java' }
     stages {
         stage('Merge master') {
-            steps {                
+            steps {
                 sh 'git merge origin/master'
             }
         }
-        stage('Build') {
+        stage('Static code analysis') {
+            steps {                
+                sh 'gradle checkstyleMain pmdMain findbugsMain'
+            }
+            post {
+                always {
+                    checkstyle pattern: 'build/reports/checkstyle/*.xml'
+                    pmd pattern: 'build/reports/pmd/*.xml'
+                    findbugs isRankActivated: true, pattern: 'build/reports/findbugs/*.xml'
+                }
+            }
+        }
+        stage('Unit testing') {
             steps {
-                sh 'gradle check'
-                sh 'gradle war'
+                sh 'gradle test'
             }
             post {
                 always {
@@ -19,10 +30,15 @@ pipeline {
                 }
             }
         }
-        stage('Code QA') {
+        stage('Build') {
             steps {
-                sh 'echo "Code quality"'
-            }            
-        }
+                sh 'gradle war'
+            }
+            post {
+                success {
+                    archiveArtifacts 'build/libs/*.war'
+                }
+            }
+        }        
     }
 }
