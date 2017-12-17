@@ -16,18 +16,18 @@ pipeline {
                 always {
                     checkstyle pattern: 'build/reports/checkstyle/*.xml'
                     pmd pattern: 'build/reports/pmd/*.xml'
-                    findbugs isRankActivated: true, pattern: 'build/reports/findbugs/*.xml'
-                    jacoco classPattern: 'build/target/classes'
+                    findbugs isRankActivated: true, pattern: 'build/reports/findbugs/*.xml'                    
                 }
             }
         }
         stage('Unit testing') {
             steps {
-                sh 'gradle test'
+                sh 'gradle test '
             }
             post {
                 always {
                     junit 'build/test-results/test/*.xml'
+                    jacoco classPattern: '**/classes'
                 }
             }
         }
