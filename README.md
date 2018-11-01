@@ -2,7 +2,7 @@ Ecclesia
 ===============================
 
 [![Build Status](https://travis-ci.org/earelin/ecclesia.svg)](https://travis-ci.org/earelin/ecclesia)
-[![codecov](https://codecov.io/gh/earelin/ecclesia/branch/master/graph/badge.svg)](https://codecov.io/gh/earelin/ecclesia)
+[![codecov](https://codecov.io/gh/earelin/ecclesia/branch/2.x.x/graph/badge.svg)](https://codecov.io/gh/earelin/ecclesia)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9b53dc57bcfa4a7d92610264f7f87eae)](https://www.codacy.com/app/xavier-carriba/ecclesia?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=earelin/ecclesia&amp;utm_campaign=Badge_Grade)
 
 Ecclesia is a tool for participatory democracy. 
