@@ -27,6 +27,7 @@ subprojects {
     }
 
     apply plugin: "java"
+    apply plugin: "jacoco"
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -51,4 +52,12 @@ subprojects {
             url "https://repo.spring.io/libs-milestone"
         }
     }
+
+    jacocoTestReport {
+        reports {
+            xml.enabled = true
+            html.enabled = true
+        }
+    }
+    check.dependsOn jacocoTestReport
 }

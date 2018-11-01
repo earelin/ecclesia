@@ -1,6 +1,6 @@
-package org.ecclesia.directory.domain;
+package org.ecclesia.directory.entity;
 
-public class Location {
+public class LocationDto {
 
   private String address1;
   private String address2;

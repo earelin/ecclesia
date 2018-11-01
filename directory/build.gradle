@@ -6,6 +6,7 @@ buildscript {
 
 plugins {
     id "net.ltgt.apt" version "0.19"
+    id 'net.ltgt.apt-idea' version "0.19"
     id "io.spring.dependency-management"
 }
 
@@ -33,6 +34,9 @@ dependencies {
 
     compile "com.h2database:h2:${h2DatabaseVersion}"
     compile "mysql:mysql-connector-java:${mysqlConnectorVersion}"
+
+    compile "org.mapstruct:mapstruct-jdk8:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
     compile "org.springframework.boot:spring-boot-devtools"
     testCompile "org.springframework.boot:spring-boot-starter-test"
