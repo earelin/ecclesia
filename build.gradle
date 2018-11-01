@@ -1,211 +1,54 @@
 buildscript {
     repositories {
-        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
         jcenter()
     }
+}
 
-    dependencies {
-        classpath 'org.akhikhl.gretty:gretty:+'
-        classpath 'net.serenity-bdd:serenity-gradle-plugin:1.+'
-        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.+'
-        classpath 'com.github.robfletcher:compass-gradle-plugin:2.+'
+plugins {
+    id "com.github.ben-manes.versions" version "0.20.0"
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    id "org.jetbrains.intellij" version "0.3.3"
+}
+
+subprojects {
+
+    buildscript {
+        repositories {
+            maven {
+                url "https://repo.spring.io/libs-milestone"
+            }
+            maven {
+                url "https://plugins.gradle.org/m2/"
+            }
+        }
     }
-}
 
-apply plugin: 'war'
-apply plugin: 'findbugs'
-apply plugin: 'jacoco'
-apply plugin: 'java'
-apply plugin: 'org.akhikhl.gretty'
-apply plugin: 'net.serenity-bdd.aggregator'
-apply plugin: 'info.solidsoft.pitest'
-apply plugin: 'com.github.robfletcher.compass'
-apply plugin: 'pmd'
-apply plugin: 'checkstyle'
+    apply plugin: "java"
 
-// JDK 8
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
-compileJava.options*.compilerArgs = [
-	"-Xlint:serial", "-Xlint:varargs", "-Xlint:cast", "-Xlint:classfile",
-	"-Xlint:dep-ann", "-Xlint:divzero", "-Xlint:empty", "-Xlint:finally",
-	"-Xlint:overrides", "-Xlint:path", "-Xlint:processing", "-Xlint:static",
-	"-Xlint:try", "-Xlint:fallthrough", "-Xlint:rawtypes", "-Xlint:deprecation",
-	"-Xlint:unchecked", "-Xlint:-options"]
+    compileJava.options*.compilerArgs = [
+            "-Xlint:serial", "-Xlint:varargs", "-Xlint:cast", "-Xlint:classfile",
+            "-Xlint:dep-ann", "-Xlint:divzero", "-Xlint:empty", "-Xlint:finally",
+            "-Xlint:overrides", "-Xlint:path", "-Xlint:processing", "-Xlint:static",
+            "-Xlint:try", "-Xlint:fallthrough", "-Xlint:rawtypes", "-Xlint:deprecation",
+            "-Xlint:unchecked", "-Xlint:-options", "-Xlint:deprecation"]
 
-compileTestJava.options*.compilerArgs = [
-	"-Xlint:serial", "-Xlint:-varargs", "-Xlint:cast", "-Xlint:classfile",
-	"-Xlint:dep-ann", "-Xlint:divzero", "-Xlint:empty", "-Xlint:finally",
-	"-Xlint:overrides", "-Xlint:path", "-Xlint:processing", "-Xlint:static",
-	"-Xlint:try", "-Xlint:-fallthrough", "-Xlint:-rawtypes", "-Xlint:-deprecation",
-	"-Xlint:-unchecked", "-Xlint:-options"]
+    compileTestJava.options*.compilerArgs = [
+            "-Xlint:serial", "-Xlint:-varargs", "-Xlint:cast", "-Xlint:classfile",
+            "-Xlint:dep-ann", "-Xlint:divzero", "-Xlint:empty", "-Xlint:finally",
+            "-Xlint:overrides", "-Xlint:path", "-Xlint:processing", "-Xlint:static",
+            "-Xlint:try", "-Xlint:-fallthrough", "-Xlint:-rawtypes", "-Xlint:-deprecation",
+            "-Xlint:-unchecked", "-Xlint:-options", "-Xlint:deprecation"]
 
-repositories {
-    mavenCentral()
-    jcenter()
-}
-
-dependencies {
-    ext.springVersion = '4.2.+'
-    ext.springSecurityVersion = '4.1.+'
-    ext.hibernateVersion = '4.3.+'
-
-    compile 'ch.qos.logback:logback-classic:1.+'
-
-    // spring
-    compile "org.springframework:spring-webmvc:$springVersion"
-    compile "org.springframework:spring-tx:$springVersion"
-    compile "org.springframework:spring-orm:$springVersion"
-    compile "org.springframework:spring-test:$springVersion"
-
-    // hibernate
-    compile "org.hibernate:hibernate-core:$hibernateVersion"
-    compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
-    compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.+'  
-    compile 'org.hibernate:hibernate-validator:5.2.+'
-
-    // jstl
-    compile 'javax.servlet:jstl:1.2'
-
-    // databases
-    compile 'org.apache.commons:commons-dbcp2:2.+'
-    compile 'mysql:mysql-connector-java:6.+'
-    compile 'com.h2database:h2:1.+'
-
-    // thymeleaf
-    compile 'org.thymeleaf:thymeleaf:2.+'
-    compile 'org.thymeleaf:thymeleaf-spring4:2.+'
-    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.4.+'
-
-    // spring security
-    compile "org.springframework.security:spring-security-config:$springSecurityVersion"
-    compile "org.springframework.security:spring-security-web:$springSecurityVersion"
-    compile "org.springframework.security:spring-security-taglibs:$springSecurityVersion"
-
-    // password validator
-    compile 'org.passay:passay:1.+'
-
-    // object conversion
-    compile 'net.sf.dozer:dozer:5.+'
-
-    // file detection and parsing
-    compile 'org.apache.tika:tika-java7:1.+'
-
-    // file manipulation
-    compile 'commons-io:commons-io:2.+'
-    
-    // validation
-    compile 'commons-validator:commons-validator:1.5.1'
-	
-    // include in compile only, exclude in the war
-    providedCompile 'javax.servlet:servlet-api:2.5'
-    providedCompile 'javax.servlet.jsp:javax.servlet.jsp-api:2.3.1'
-  
-    // testing pile
-    testCompile 'net.serenity-bdd:serenity-core:1.+'
-    testCompile 'net.serenity-bdd:serenity-junit:1.+'
-    testCompile 'net.serenity-bdd:serenity-jbehave:1.+'
-    testCompile 'junit:junit:4.+'
-    testCompile 'org.mockito:mockito-core:1.+'
-    testCompile 'org.hamcrest:hamcrest-all:1.3'
-}
-
-compass {
-  cssDir = file("src/main/webapp/resources/css")
-  sassDir = file("src/main/sass")
-}
-
-test {
-    include 'org/earelin/ecclesia/integration/**'
-    include 'org/earelin/ecclesia/unit/**'
-    exclude 'org/earelin/ecclesia/bdd/**'
-}
-
-task unitTest(type: Test) {
-    description 'Run only unit tests'
-    
-    include 'org/earelin/ecclesia/unit/**'
-    
-    reports.junitXml.destination = "$buildDir/unit-test-results"
-    reports.html.destination = "$buildDir/reports/unit-tests"
-}
-
-task integrationTest(type: Test) {
-    description 'Run only integration tests'
-    
-    include 'org/earelin/ecclesia/integration/**'
-    
-    reports.junitXml.destination = "$buildDir/integration-test-results"
-    reports.html.destination = "$buildDir/reports/integration-tests"
-}
-
-task uiTest(type: Test) {
-  description 'Run only user interface tests'
-    
-  include 'org/earelin/ecclesia/bdd/**'
-  
-  reports.junitXml.destination = "$buildDir/ui-test-results"
-  reports.html.destination = "$buildDir/reports/ui-tests"
-  
-  doFirst {
-    grettyRun.daemon = true
-    tasks.grettyRun.execute()
-  }
-  
-  doLast {
-    tasks.grettyStop.execute()
-  }
-}
-
-//check.dependsOn testUI
-
-jacocoTestReport {
-  reports {
-    xml.enabled = true
-    html.enabled = true
-  }
-  afterEvaluate {
-    classDirectories = files(classDirectories.files.collect {
-      fileTree(dir: it, exclude: 'org/earelin/ecclesia/config')
-    })
-  }
-}
-
-check.dependsOn jacocoTestReport
-
-tasks.withType(FindBugs) {
-    reports {
-        xml.enabled = true
-        html.enabled = false
+    repositories {
+        jcenter()
+        maven {
+            url "https://repo.spring.io/libs-milestone"
+        }
     }
-}
-
-findbugs {
-  effort = 'max'
-  ignoreFailures = true
-  reportLevel = 'low'
-}
-
-checkstyle {
-  configFile = rootProject.file('checkstyle.xml')
-  toolVersion ="7.7"
-}
-
-pitest {
-    targetClasses = ['org.earelin.ecclesia.*']
-    threads = 4
-    outputFormats = ['XML', 'HTML']
-}
-
-gretty {
-  httpPort = 8080
-  host = '0.0.0.0'
-  scanInterval = 1
-  // scanDir = '${projectDir}/src/main/java'
-  recompileOnSourceChange = true
-  reloadOnClassChange = true
-  reloadOnConfigChange = true
-  reloadOnLibChange = true
-  managedClassReload = false
 }

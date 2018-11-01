@@ -1,15 +1,20 @@
+### Artifacts
 .gradle
-.nb-gradle
-nbproject
-build/
-private/
-src/main/resources/import.sql
-target/
-phantomjsdriver.log
-/ecclesia_files/
-/.sass-cache/
-._.DS_Store
-**/._.DS_Store
-**/._*
+build
+bin
+.scannerwork
+
+### IDEs
+.idea
+*.iws
+*.iml
+*.ipr
+.project
+.settings
+.vscode
+.classpath
+.metadata
+out
+
+### OS
 .DS_Store
-**/.DS_Store

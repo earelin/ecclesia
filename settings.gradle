@@ -1,0 +1,4 @@
+rootProject.name = 'ecclesia'
+include ':commons'
+include ':directory'
+include ':directory-domain'
