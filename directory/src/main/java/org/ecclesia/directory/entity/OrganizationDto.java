@@ -1,5 +1,8 @@
 package org.ecclesia.directory.entity;
 
+/**
+ * Represents an organization. Data transfer object.
+ */
 public class OrganizationDto {
 
   private long id;

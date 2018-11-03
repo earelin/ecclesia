@@ -2,20 +2,19 @@ package org.ecclesia.directory.entity.converter;
 
 import org.ecclesia.directory.domain.Location;
 import org.ecclesia.directory.entity.LocationDto;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = {LocationMapperImpl.class})
 public class LocationMapperTest {
 
-  @Autowired
   private LocationMapper locationMapper;
+
+  @Before
+  public void init() {
+    locationMapper = new LocationMapperImpl();
+  }
 
   @Test
   public void testDtoToDomain() {

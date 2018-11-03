@@ -2,6 +2,9 @@ package org.ecclesia.directory.entity;
 
 import org.ecclesia.directory.domain.Organization;
 
+/**
+ * Represents one person. Data transfer object.
+ */
 public class PersonDto {
 
   private long id;

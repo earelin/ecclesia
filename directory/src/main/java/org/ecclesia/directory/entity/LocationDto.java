@@ -1,5 +1,8 @@
 package org.ecclesia.directory.entity;
 
+/**
+ * Represents a physical location. Data transfer object.
+ */
 public class LocationDto {
 
   private String address1;

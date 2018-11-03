@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {PersonMapperImpl.class, LocationMapperImpl.class, OrganizationServiceImpl.class})
-public class PersonMapperTest {
+public class PersonMapperIntegrationTest {
 
   @Autowired
   private PersonMapper personMapper;
