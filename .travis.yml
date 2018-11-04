@@ -6,4 +6,5 @@ before_install:
 after_success:
   - curl -s https://codecov.io/bash | bash
   - export CODACY_PROJECT_TOKEN=432a153c54574f298bc92f4f5a13941a
-  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r build/reports/jacoco/test/jacocoTestReport.xml
+  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r directory/build/reports/jacoco/test/jacocoTestReport.xml --partial
+  - java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r directory-domain/build/reports/jacoco/test/jacocoTestReport.xml --partial
