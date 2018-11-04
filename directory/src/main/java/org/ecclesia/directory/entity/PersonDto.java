@@ -1,6 +1,6 @@
 package org.ecclesia.directory.entity;
 
-import org.ecclesia.directory.domain.Organization;
+import org.ecclesia.directory.domain.Location;
 
 import javax.persistence.*;
 
@@ -24,7 +24,7 @@ public class PersonDto {
   private String email;
 
   @Embedded
-  private LocationDto location;
+  private Location location;
 
   public long getId() {
     return id;
@@ -66,11 +66,11 @@ public class PersonDto {
     this.email = email;
   }
 
-  public LocationDto getLocation() {
+  public Location getLocation() {
     return location;
   }
 
-  public void setLocation(LocationDto location) {
+  public void setLocation(Location location) {
     this.location = location;
   }
 }

@@ -17,12 +17,17 @@ public class OrganizationRepositoryIntegrationTest {
   @Autowired
   private OrganizationRepository organizationRepository;
 
+  private OrganizationDto organizationDto;
+
+  @Before
+  public void init() {
+    organizationDto = new OrganizationDto();
+    organizationDto.setName("Greenpeace");
+  }
+
   @Test
   public void testDeleteById() {
-    OrganizationDto newOrganization = new OrganizationDto();
-    newOrganization.setName("Greenpeace");
-
-    OrganizationDto createdOrganization = organizationRepository.save(newOrganization);
+    OrganizationDto createdOrganization = organizationRepository.save(organizationDto);
 
     organizationRepository.deleteById(createdOrganization.getId());
     assertThat(organizationRepository.existsById(createdOrganization.getId())).isFalse();
@@ -30,21 +35,15 @@ public class OrganizationRepositoryIntegrationTest {
 
   @Test
   public void testExistsById() {
-    OrganizationDto newOrganization = new OrganizationDto();
-    newOrganization.setName("Greenpeace");
-
-    OrganizationDto createdOrganization = organizationRepository.save(newOrganization);
+    OrganizationDto createdOrganization = organizationRepository.save(organizationDto);
 
     assertThat(organizationRepository.existsById(createdOrganization.getId())).isTrue();
   }
 
   @Test
   public void testFindById() {
-    OrganizationDto newOrganization = new OrganizationDto();
-    newOrganization.setName("Greenpeace");
-
-    OrganizationDto createdOrganization = organizationRepository.save(newOrganization);
-    OrganizationDto loadedOrganization = organizationRepository.findById(newOrganization.getId());
+    OrganizationDto createdOrganization = organizationRepository.save(organizationDto);
+    OrganizationDto loadedOrganization = organizationRepository.findById(createdOrganization.getId());
 
     assertThat(loadedOrganization.getId()).isEqualTo(createdOrganization.getId());
     assertThat(loadedOrganization.getName()).isEqualTo("Greenpeace");

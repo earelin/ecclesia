@@ -2,7 +2,6 @@ package org.ecclesia.directory.service.converter;
 
 import org.ecclesia.directory.domain.Location;
 import org.ecclesia.directory.domain.Person;
-import org.ecclesia.directory.entity.LocationDto;
 import org.ecclesia.directory.entity.PersonDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,16 +20,16 @@ public class PersonMapperIntegrationTest {
 
   @Test
   public void testDtoToDomain() {
-    LocationDto locationDto = new LocationDto();
-    locationDto.setAddress1("66");
-    locationDto.setAddress2("Avonmore Road");
-    locationDto.setCountry("GB");
-    locationDto.setPostcode("W14 8RS");
-    locationDto.setTown("London");
+    Location location = new Location();
+    location.setAddress1("66");
+    location.setAddress2("Avonmore Road");
+    location.setCountry("GB");
+    location.setPostcode("W14 8RS");
+    location.setTown("London");
 
     PersonDto personDto = new PersonDto();
     personDto.setEmail("john.smith@company.com");
-    personDto.setLocation(locationDto);
+    personDto.setLocation(location);
     personDto.setName("John");
     personDto.setSurname("Smith");
 

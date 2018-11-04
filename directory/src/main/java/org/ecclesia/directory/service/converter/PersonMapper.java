@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Converts between person domain and dto objects.
  */
-@Mapper(componentModel = "spring", uses = {LocationMapper.class, OrganizationMapper.class})
+@Mapper(componentModel = "spring", uses = {OrganizationMapper.class})
 public abstract class PersonMapper {
 
   @Autowired
