@@ -1,10 +1,9 @@
-package org.ecclesia.directory.entity.converter;
+package org.ecclesia.directory.service.converter;
 
 import org.ecclesia.directory.domain.Location;
 import org.ecclesia.directory.domain.Person;
 import org.ecclesia.directory.entity.LocationDto;
 import org.ecclesia.directory.entity.PersonDto;
-import org.ecclesia.directory.service.OrganizationServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.assertj.core.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {PersonMapperImpl.class, LocationMapperImpl.class, OrganizationServiceImpl.class})
+@SpringBootTest
 public class PersonMapperIntegrationTest {
 
   @Autowired

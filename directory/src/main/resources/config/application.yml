@@ -1,0 +1,12 @@
+management:
+  health:
+    defaults:
+      enabled: true
+    diskspace:
+      enabled: false
+    db:
+      enabled: true
+
+spring:
+  jpa:
+    open-in-view: false

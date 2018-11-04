@@ -1,1 +1,6 @@
 apply plugin: 'java-library'
+
+dependencies {
+    testCompile "junit:junit:${jUnitVersion}"
+    testCompile "org.assertj:assertj-core:${assertJVersion}"
+}

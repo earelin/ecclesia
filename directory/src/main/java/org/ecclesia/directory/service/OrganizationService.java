@@ -8,8 +8,8 @@ import java.util.List;
  * Organization objects operations.
  */
 public interface OrganizationService {
-  void delete(long id);
-  Organization get(long id);
-  void save(Organization organization);
-  List<Organization> getAll();
+  void deleteById(long id) throws EntityDoesNotExists;
+  Organization findById(long id) throws EntityDoesNotExists;
+  List<Organization> findAll();
+  Organization save(Organization organization);
 }

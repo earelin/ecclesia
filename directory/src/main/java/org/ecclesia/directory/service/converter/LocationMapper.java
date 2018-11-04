@@ -1,4 +1,4 @@
-package org.ecclesia.directory.entity.converter;
+package org.ecclesia.directory.service.converter;
 
 import org.ecclesia.directory.domain.Location;
 import org.ecclesia.directory.entity.LocationDto;

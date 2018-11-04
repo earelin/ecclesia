@@ -9,6 +9,10 @@ public class Person {
   private String email;
   private Location location;
 
+  public boolean isNew() {
+    return id == 0;
+  }
+
   public long getId() {
     return id;
   }

@@ -2,16 +2,28 @@ package org.ecclesia.directory.entity;
 
 import org.ecclesia.directory.domain.Organization;
 
+import javax.persistence.*;
+
 /**
  * Represents one person. Data transfer object.
  */
+@Entity
+@Table(name = "person")
 public class PersonDto {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
-  private Organization organization;
+
+  @ManyToOne
+  @JoinColumn(name = "organization_id")
+  private OrganizationDto organization;
+
   private String name;
   private String surname;
   private String email;
+
+  @Embedded
   private LocationDto location;
 
   public long getId() {
@@ -22,11 +34,11 @@ public class PersonDto {
     this.id = id;
   }
 
-  public Organization getOrganization() {
+  public OrganizationDto getOrganization() {
     return organization;
   }
 
-  public void setOrganization(Organization organization) {
+  public void setOrganization(OrganizationDto organization) {
     this.organization = organization;
   }
 
