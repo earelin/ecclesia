@@ -22,4 +22,18 @@ public class OrganizationTest {
     assertThat(organization.isNew()).isFalse();
   }
 
+  @Test
+  public void testId() {
+    assertThat(organization.getId()).isEqualTo(0);
+    organization.setId(1);
+    assertThat(organization.getId()).isEqualTo(1);
+  }
+
+  @Test
+  public void testName() {
+    assertThat(organization.getName()).isNull();
+    organization.setName("Greenpeace");
+    assertThat(organization.getName()).isEqualTo("Greenpeace");
+  }
+
 }
