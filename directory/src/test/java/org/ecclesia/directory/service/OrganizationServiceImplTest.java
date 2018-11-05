@@ -10,6 +10,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -46,6 +49,40 @@ public class OrganizationServiceImplTest {
   }
 
   @Test
+  public void testFindAll() {
+    List<OrganizationDto> organizationDtos = new ArrayList<>();
+
+    OrganizationDto organizationDto = new OrganizationDto();
+    organizationDto.setId(1);
+    organizationDto.setName("Greenpeace");
+    organizationDtos.add(organizationDto);
+
+    organizationDto = new OrganizationDto();
+    organizationDto.setId(2);
+    organizationDto.setName("CeaseFire");
+    organizationDtos.add(organizationDto);
+
+    when(organizationRepository.findAll()).thenReturn(organizationDtos);
+
+    List<Organization> organizations = new ArrayList<>();
+
+    Organization organization = new Organization();
+    organization.setId(1);
+    organization.setName("Greenpeace");
+    organizations.add(organization);
+
+    organization = new Organization();
+    organization.setId(2);
+    organization.setName("Médecins Sans Frontières");
+    organizations.add(organization);
+
+    when(organizationMapper.dtoListToDomainList(organizationDtos)).thenReturn(organizations);
+
+    List<Organization> returnedOrganizations = organizationService.findAll();
+    assertThat(returnedOrganizations.size()).isEqualTo(2);
+  }
+
+  @Test
   public void testFindById() throws EntityDoesNotExists {
     when(organizationRepository.existsById(1)).thenReturn(true);
 
@@ -70,16 +107,6 @@ public class OrganizationServiceImplTest {
 
     organizationService.findById(1);
     verify(organizationRepository, never()).findById(1);
-  }
-
-  @Test
-  public void testFindAll() {
-
-    Organization organization = new Organization();
-    organization.setId(1);
-    organization.setName("Greenpeace");
-
-
   }
 
   @Test

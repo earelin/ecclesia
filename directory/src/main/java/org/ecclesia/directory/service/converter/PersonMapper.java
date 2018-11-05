@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 /**
  * Converts between person domain and dto objects.
  */
@@ -33,4 +35,10 @@ public abstract class PersonMapper {
   @Mapping(target = "organization", source = "organization.id")
   public abstract Person dtoToDomain(PersonDto dto);
 
+  /**
+   * Converts an person dto list to an person domain object list.
+   * @param dtos The dtos list
+   * @return The equivalent person domain object list
+   */
+  public abstract List<Person> dtoListToDomainList(List<PersonDto> dtos);
 }

@@ -44,7 +44,8 @@ public class OrganizationServiceImpl implements OrganizationService {
 
   @Override
   public List<Organization> findAll() {
-    return null;
+    List<OrganizationDto> organizationDtos = organizationRepository.findAll();
+    return organizationMapper.dtoListToDomainList(organizationDtos);
   }
 
   @Override

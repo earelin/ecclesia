@@ -1,6 +1,7 @@
 package org.ecclesia.directory.service;
 
 import org.ecclesia.directory.domain.Person;
+import org.ecclesia.directory.entity.PersonDto;
 import org.ecclesia.directory.repository.PersonRepository;
 import org.ecclesia.directory.service.converter.PersonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,21 @@ public class PersonServiceImpl implements PersonService {
 
   @Override
   public void deleteById(long id) throws EntityDoesNotExists {
+    if (!personRepository.existsById(id)) {
+      throw new EntityDoesNotExists(String.format("Person with id %d does not exists", id));
+    }
 
+    personRepository.deleteById(id);
   }
 
   @Override
   public Person findById(long id) throws EntityDoesNotExists {
-    return null;
+    if (!personRepository.existsById(id)) {
+      throw new EntityDoesNotExists(String.format("Person with id %d does not exists", id));
+    }
+
+    PersonDto personDto = personRepository.findById(id);
+    return personMapper.dtoToDomain(personDto);
   }
 
   @Override

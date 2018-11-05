@@ -4,6 +4,8 @@ import org.ecclesia.directory.domain.Organization;
 import org.ecclesia.directory.entity.OrganizationDto;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 /**
  * Converts between organization domain and dto objects.
  */
@@ -23,5 +25,12 @@ public abstract class OrganizationMapper {
    * @return The equivalent organization domain object
    */
   public abstract Organization dtoToDomain(OrganizationDto dto);
+
+  /**
+   * Converts an organization dto list to an organization domain object list.
+   * @param dtos The dtos list
+   * @return The equivalent organization domain object list
+   */
+  public abstract List<Organization> dtoListToDomainList(List<OrganizationDto> dtos);
 
 }
