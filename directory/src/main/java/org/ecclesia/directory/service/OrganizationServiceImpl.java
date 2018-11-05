@@ -54,10 +54,12 @@ public class OrganizationServiceImpl implements OrganizationService {
   }
 
   @Override
-  public Organization save(Organization organization) {
+  public Organization save(Organization organization) throws EntityDoesNotExists {
+    if (!organization.isNew() && !organizationRepository.existsById(organization.getId())) {
+      throw new EntityDoesNotExists(String.format("Organization with id %d does not exists, cannot be updated", organization.getId()));
+    }
     OrganizationDto organizationDto = organizationMapper.domainToDto(organization);
-    OrganizationDto savedOrganizationDto = organizationRepository.save(organizationDto);
-    return organizationMapper.dtoToDomain(savedOrganizationDto);
+    return organizationMapper.dtoToDomain(organizationRepository.save(organizationDto));
   }
 
 }

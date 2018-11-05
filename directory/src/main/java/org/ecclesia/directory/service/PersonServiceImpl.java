@@ -61,7 +61,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     if (!person.isNew() && !personRepository.existsById(person.getId())) {
-      throw new EntityDoesNotExists(String.format("Person with id %d does not exists, cannot be updated", person.getOrganization()));
+      throw new EntityDoesNotExists(String.format("Person with id %d does not exists, cannot be updated", person.getId()));
     }
     PersonDto personDto = personMapper.domainToDto(person);
     return personMapper.dtoToDomain(personRepository.save(personDto));

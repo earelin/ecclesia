@@ -119,7 +119,7 @@ public class OrganizationServiceImplTest {
   }
 
   @Test
-  public void testSave() {
+  public void testSave() throws EntityDoesNotExists {
     Organization organization = new Organization();
     organization.setName("Greenpeace");
 
@@ -142,4 +142,15 @@ public class OrganizationServiceImplTest {
     assertThat(testOrganization.getName()).isEqualTo("Greenpeace");
   }
 
+  @Test(expected = EntityDoesNotExists.class)
+  public void testSaveUpdateNotFound() throws EntityDoesNotExists {
+    when(organizationRepository.existsById(1)).thenReturn(false);
+
+    Organization organization = new Organization();
+    organization.setId(1);
+    organization.setName("Greenpeace");
+
+    organizationService.save(organization);
+    verify(organizationRepository, never()).save(any());
+  }
 }

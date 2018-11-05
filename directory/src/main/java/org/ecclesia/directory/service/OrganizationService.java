@@ -12,5 +12,5 @@ public interface OrganizationService {
   boolean existsById(long id);
   Organization findById(long id) throws EntityDoesNotExists;
   List<Organization> findAll();
-  Organization save(Organization organization);
+  Organization save(Organization organization) throws EntityDoesNotExists;
 }
