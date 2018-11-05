@@ -1,20 +1,21 @@
-package org.ecclesia.directory.entity.converter;
+package org.ecclesia.directory.service.converter;
 
 import org.ecclesia.directory.domain.Location;
 import org.ecclesia.directory.domain.Person;
-import org.ecclesia.directory.entity.LocationDto;
 import org.ecclesia.directory.entity.PersonDto;
-import org.ecclesia.directory.service.OrganizationServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {PersonMapperImpl.class, LocationMapperImpl.class, OrganizationServiceImpl.class})
+@SpringBootTest
 public class PersonMapperIntegrationTest {
 
   @Autowired
@@ -22,16 +23,16 @@ public class PersonMapperIntegrationTest {
 
   @Test
   public void testDtoToDomain() {
-    LocationDto locationDto = new LocationDto();
-    locationDto.setAddress1("66");
-    locationDto.setAddress2("Avonmore Road");
-    locationDto.setCountry("GB");
-    locationDto.setPostcode("W14 8RS");
-    locationDto.setTown("London");
+    Location location = new Location();
+    location.setAddress1("66");
+    location.setAddress2("Avonmore Road");
+    location.setCountry("GB");
+    location.setPostcode("W14 8RS");
+    location.setTown("London");
 
     PersonDto personDto = new PersonDto();
     personDto.setEmail("john.smith@company.com");
-    personDto.setLocation(locationDto);
+    personDto.setLocation(location);
     personDto.setName("John");
     personDto.setSurname("Smith");
 
@@ -70,6 +71,44 @@ public class PersonMapperIntegrationTest {
     personDto = personMapper.domainToDto(null);
 
     assertThat(personDto).isNull();
+  }
+
+  @Test
+  public void testDtoListToDomainList() {
+    List<PersonDto> personDtos = new ArrayList<>();
+
+    Location location = new Location();
+    location.setAddress1("66");
+    location.setAddress2("Avonmore Road");
+    location.setCountry("GB");
+    location.setPostcode("W14 8RS");
+    location.setTown("London");
+
+    PersonDto personDto = new PersonDto();
+    personDto.setEmail("john.smith@company.com");
+    personDto.setLocation(location);
+    personDto.setName("John");
+    personDto.setSurname("Smith");
+
+    personDtos.add(personDto);
+
+    location = new Location();
+    location.setAddress1("Shakespeare’s Globe");
+    location.setAddress2("21 New Globe Walk");
+    location.setCountry("GB");
+    location.setPostcode("SE1 9DT");
+    location.setTown("London");
+
+    personDto = new PersonDto();
+    personDto.setEmail("william.shakespeare@theglobe.com");
+    personDto.setLocation(location);
+    personDto.setName("William");
+    personDto.setSurname("Shakespeare");
+
+    personDtos.add(personDto);
+
+    List<Person> persons = personMapper.dtoListToDomainList(personDtos);
+    assertThat(persons.size()).isEqualTo(2);
   }
 
 }

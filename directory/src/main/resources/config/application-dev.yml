@@ -1,0 +1,25 @@
+eureka:
+  client:
+    enabled: false
+
+logging:
+  level:
+    com:
+      ubm:
+        uep:
+          eis:
+            exhibitor: DEBUG
+
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: false
+  flyway:
+    locations: classpath:/db/migration,classpath:/dev/db/migration
+  h2:
+    console:
+      enabled: true
+  output:
+    ansi:
+      enabled: always
