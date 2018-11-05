@@ -36,7 +36,7 @@ public class PersonServiceImpl implements PersonService {
   }
 
   @Override
-  public List<Person> findAll() {
+  public List<Person> findAllByOrganization(long organizationId) throws EntityDoesNotExists {
     return null;
   }
 

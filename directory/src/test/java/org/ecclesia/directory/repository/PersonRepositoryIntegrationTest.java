@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -51,6 +53,32 @@ public class PersonRepositoryIntegrationTest {
     personRepository.deleteById(savedPersonDto.getId());
 
     assertThat(personRepository.existsById(savedPersonDto.getId())).isFalse();
+  }
+
+  @Test
+  public void testFindAllByOrganizationId() {
+    OrganizationDto organizationDto = personDto.getOrganization();
+    personRepository.save(personDto);
+
+    personDto = new PersonDto();
+    personDto.setOrganization(organizationDto);
+    personDto.setName("John");
+    personDto.setSurname("Smith");
+    personDto.setEmail("john.smith@gmail.com");
+
+    Location location = new Location();
+    location.setAddress1("66");
+    location.setAddress2("Avonmore Road");
+    location.setCountry("GB");
+    location.setPostcode("W14 8RS");
+    location.setTown("London");
+    personDto.setLocation(location);
+
+    personRepository.save(personDto);
+
+    List<PersonDto> personDtos = personRepository.findAllByOrganizationId(organizationDto.getId());
+
+    assertThat(personDtos.size()).isEqualTo(2);
   }
 
   @Test

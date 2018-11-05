@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
@@ -34,10 +36,19 @@ public class OrganizationRepositoryIntegrationTest {
   }
 
   @Test
-  public void testExistsById() {
-    OrganizationDto createdOrganization = organizationRepository.save(organizationDto);
+  public void testFindAll() {
+    organizationRepository.save(organizationDto);
 
-    assertThat(organizationRepository.existsById(createdOrganization.getId())).isTrue();
+    organizationDto = new OrganizationDto();
+    organizationDto.setName("Médecins Sans Frontières");
+    organizationRepository.save(organizationDto);
+
+    organizationDto = new OrganizationDto();
+    organizationDto.setName("CeaseFire");
+    organizationRepository.save(organizationDto);
+
+    List<OrganizationDto> organizations = organizationRepository.findAll();
+    assertThat(organizations.size()).isEqualTo(3);
   }
 
   @Test
@@ -47,6 +58,13 @@ public class OrganizationRepositoryIntegrationTest {
 
     assertThat(loadedOrganization.getId()).isEqualTo(createdOrganization.getId());
     assertThat(loadedOrganization.getName()).isEqualTo("Greenpeace");
+  }
+
+  @Test
+  public void testSave() {
+    OrganizationDto createdOrganization = organizationRepository.save(organizationDto);
+
+    assertThat(organizationRepository.existsById(createdOrganization.getId())).isTrue();
   }
 
 }
