@@ -11,5 +11,5 @@ public interface PersonService {
   void deleteById(long id) throws EntityDoesNotExists;
   Person findById(long id) throws EntityDoesNotExists;
   List<Person> findAllByOrganization(long organizationId) throws EntityDoesNotExists;
-  Person save(Person person);
+  Person save(Person person) throws EntityDoesNotExists;
 }

@@ -49,6 +49,15 @@ public class OrganizationServiceImplTest {
   }
 
   @Test
+  public void testExistsById() {
+    when(organizationRepository.existsById(1)).thenReturn(true);
+    assertThat(organizationService.existsById(1)).isTrue();
+
+    when(organizationRepository.existsById(2)).thenReturn(false);
+    assertThat(organizationService.existsById(2)).isFalse();
+  }
+
+  @Test
   public void testFindAll() {
     List<OrganizationDto> organizationDtos = new ArrayList<>();
 

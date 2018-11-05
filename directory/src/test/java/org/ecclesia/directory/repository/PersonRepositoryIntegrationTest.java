@@ -60,19 +60,19 @@ public class PersonRepositoryIntegrationTest {
     OrganizationDto organizationDto = personDto.getOrganization();
     personRepository.save(personDto);
 
-    personDto = new PersonDto();
-    personDto.setOrganization(organizationDto);
-    personDto.setName("John");
-    personDto.setSurname("Smith");
-    personDto.setEmail("john.smith@gmail.com");
-
     Location location = new Location();
-    location.setAddress1("66");
-    location.setAddress2("Avonmore Road");
+    location.setAddress1("Shakespeare’s Globe");
+    location.setAddress2("21 New Globe Walk");
     location.setCountry("GB");
-    location.setPostcode("W14 8RS");
+    location.setPostcode("SE1 9DT");
     location.setTown("London");
+
+    personDto = new PersonDto();
+    personDto.setEmail("william.shakespeare@theglobe.com");
     personDto.setLocation(location);
+    personDto.setName("William");
+    personDto.setSurname("Shakespeare");
+    personDto.setOrganization(organizationDto);
 
     personRepository.save(personDto);
 

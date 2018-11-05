@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface OrganizationService {
   void deleteById(long id) throws EntityDoesNotExists;
+  boolean existsById(long id);
   Organization findById(long id) throws EntityDoesNotExists;
   List<Organization> findAll();
   Organization save(Organization organization);

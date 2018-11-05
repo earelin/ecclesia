@@ -47,11 +47,23 @@ public class PersonServiceImpl implements PersonService {
 
   @Override
   public List<Person> findAllByOrganization(long organizationId) throws EntityDoesNotExists {
-    return null;
+    if (!organizationService.existsById(organizationId)) {
+      throw new EntityDoesNotExists(String.format("Organization with id %d does not exists", organizationId));
+    }
+    List<PersonDto> peopleDtos = personRepository.findAllByOrganizationId(1);
+    return personMapper.dtoListToDomainList(peopleDtos);
   }
 
   @Override
-  public Person save(Person person) {
-    return null;
+  public Person save(Person person) throws EntityDoesNotExists {
+    if (!organizationService.existsById(person.getOrganization())) {
+      throw new EntityDoesNotExists(String.format("Organization with id %d does not exists", person.getOrganization()));
+    }
+
+    if (!person.isNew() && !personRepository.existsById(person.getId())) {
+      throw new EntityDoesNotExists(String.format("Person with id %d does not exists, cannot be updated", person.getOrganization()));
+    }
+    PersonDto personDto = personMapper.domainToDto(person);
+    return personMapper.dtoToDomain(personRepository.save(personDto));
   }
 }
