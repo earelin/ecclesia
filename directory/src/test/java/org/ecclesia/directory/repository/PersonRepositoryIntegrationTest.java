@@ -30,7 +30,7 @@ public class PersonRepositoryIntegrationTest {
   public void init() {
     OrganizationDto organizationDto = new OrganizationDto();
     organizationDto.setName("Greenpeace");
-    OrganizationDto createdOrganizationDto = organizationRepository.save(organizationDto);
+    OrganizationDto createdOrganizationDto = organizationRepository.save(organizationDto).get();
 
     personDto = new PersonDto();
     personDto.setOrganization(createdOrganizationDto);

@@ -29,7 +29,7 @@ public class OrganizationRepositoryIntegrationTest {
 
   @Test
   public void testDeleteById() {
-    OrganizationDto createdOrganization = organizationRepository.save(organizationDto);
+    OrganizationDto createdOrganization = organizationRepository.save(organizationDto).get();
 
     organizationRepository.deleteById(createdOrganization.getId());
     assertThat(organizationRepository.existsById(createdOrganization.getId())).isFalse();
@@ -53,8 +53,8 @@ public class OrganizationRepositoryIntegrationTest {
 
   @Test
   public void testFindById() {
-    OrganizationDto createdOrganization = organizationRepository.save(organizationDto);
-    OrganizationDto loadedOrganization = organizationRepository.findById(createdOrganization.getId());
+    OrganizationDto createdOrganization = organizationRepository.save(organizationDto).get();
+    OrganizationDto loadedOrganization = organizationRepository.findById(createdOrganization.getId()).get();
 
     assertThat(loadedOrganization.getId()).isEqualTo(createdOrganization.getId());
     assertThat(loadedOrganization.getName()).isEqualTo("Greenpeace");
@@ -62,7 +62,7 @@ public class OrganizationRepositoryIntegrationTest {
 
   @Test
   public void testSave() {
-    OrganizationDto createdOrganization = organizationRepository.save(organizationDto);
+    OrganizationDto createdOrganization = organizationRepository.save(organizationDto).get();
 
     assertThat(organizationRepository.existsById(createdOrganization.getId())).isTrue();
   }
