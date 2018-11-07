@@ -15,6 +15,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -175,7 +176,7 @@ public class PersonServiceImplTest {
     location.setTown("London");
     personDto.setLocation(location);
 
-    when(personRepository.findById(1)).thenReturn(personDto);
+    when(personRepository.findById(1)).thenReturn(Optional.of(personDto));
 
     Person person = new Person();
     person.setId(1);
@@ -186,9 +187,9 @@ public class PersonServiceImplTest {
 
     when(personMapper.dtoToDomain(personDto)).thenReturn(person);
 
-    Person returnedPerson = personService.findById(1);
-    assertThat(returnedPerson).isNotNull();
-    assertThat(returnedPerson.getId()).isEqualTo(1);
+    Optional<Person> returnedPerson = personService.findById(1);
+    assertThat(returnedPerson.isPresent()).isTrue();
+    assertThat(returnedPerson.get().getId()).isEqualTo(1);
   }
 
   @Test(expected = EntityDoesNotExists.class)
@@ -200,7 +201,7 @@ public class PersonServiceImplTest {
   }
 
   @Test
-  public void testSaveCreate() throws EntityDoesNotExists {
+  public void testSaveCreate() throws EntityDoesNotExists, ErrorSavingEntity {
     when(organizationService.existsById(1)).thenReturn(true);
 
     Location location = new Location();
@@ -238,7 +239,7 @@ public class PersonServiceImplTest {
     updatedPersonDto.setName("John");
     updatedPersonDto.setSurname("Smith");
 
-    when(personRepository.save(personDto)).thenReturn(updatedPersonDto);
+    when(personRepository.save(personDto)).thenReturn(Optional.of(updatedPersonDto));
 
     Person updatedPerson = new Person();
     updatedPerson.setId(1);
@@ -250,13 +251,13 @@ public class PersonServiceImplTest {
 
     when(personMapper.dtoToDomain(updatedPersonDto)).thenReturn(updatedPerson);
 
-    Person returnedPerson = personService.save(person);
-    assertThat(returnedPerson).isNotNull();
-    assertThat(returnedPerson.getId()).isEqualTo(1);
+    Optional<Person> returnedPerson = personService.save(person);
+    assertThat(returnedPerson.isPresent()).isTrue();
+    assertThat(returnedPerson.get().getId()).isEqualTo(1);
   }
 
   @Test
-  public void testSaveUpdate() throws EntityDoesNotExists {
+  public void testSaveUpdate() throws EntityDoesNotExists, ErrorSavingEntity {
     when(organizationService.existsById(1)).thenReturn(true);
     when(personRepository.existsById(1)).thenReturn(true);
 
@@ -297,7 +298,7 @@ public class PersonServiceImplTest {
     updatedPersonDto.setName("John");
     updatedPersonDto.setSurname("Smith");
 
-    when(personRepository.save(personDto)).thenReturn(updatedPersonDto);
+    when(personRepository.save(personDto)).thenReturn(Optional.of(updatedPersonDto));
 
     Person updatedPerson = new Person();
     updatedPerson.setId(1);
@@ -309,14 +310,13 @@ public class PersonServiceImplTest {
 
     when(personMapper.dtoToDomain(updatedPersonDto)).thenReturn(updatedPerson);
 
-    Person returnedPerson = personService.save(person);
-    assertThat(returnedPerson).isNotNull();
-    assertThat(returnedPerson.getId()).isEqualTo(1);
+    Optional<Person> returnedPerson = personService.save(person);
+    assertThat(returnedPerson.isPresent()).isTrue();
+    assertThat(returnedPerson.get().getId()).isEqualTo(1);
   }
 
   @Test(expected = EntityDoesNotExists.class)
-  public void testSaveUpdateNotFound() throws EntityDoesNotExists {
-    when(organizationService.existsById(1)).thenReturn(true);
+  public void testSaveUpdateNotFound() throws EntityDoesNotExists, ErrorSavingEntity {
     when(personRepository.existsById(1)).thenReturn(false);
 
     Location location = new Location();
@@ -339,7 +339,8 @@ public class PersonServiceImplTest {
   }
 
   @Test(expected = EntityDoesNotExists.class)
-  public void testSaveOrganizationNotFound() throws EntityDoesNotExists {
+  public void testSaveOrganizationNotFound() throws EntityDoesNotExists, ErrorSavingEntity {
+    when(personRepository.existsById(1)).thenReturn(true);
     when(organizationService.existsById(1)).thenReturn(false);
 
     Location location = new Location();
