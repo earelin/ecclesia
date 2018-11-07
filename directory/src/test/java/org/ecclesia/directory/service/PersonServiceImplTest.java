@@ -159,8 +159,6 @@ public class PersonServiceImplTest {
     organizationDto.setId(1);
     organizationDto.setName("Greenpeace");
 
-    List<PersonDto> personDtos = new ArrayList<>();
-
     PersonDto personDto = new PersonDto();
     personDto.setId(1);
     personDto.setOrganization(organizationDto);
