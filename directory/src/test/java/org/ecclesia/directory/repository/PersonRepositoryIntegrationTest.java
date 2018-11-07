@@ -30,7 +30,7 @@ public class PersonRepositoryIntegrationTest {
   public void init() {
     OrganizationDto organizationDto = new OrganizationDto();
     organizationDto.setName("Greenpeace");
-    OrganizationDto createdOrganizationDto = organizationRepository.save(organizationDto);
+    OrganizationDto createdOrganizationDto = organizationRepository.save(organizationDto).get();
 
     personDto = new PersonDto();
     personDto.setOrganization(createdOrganizationDto);
@@ -49,7 +49,7 @@ public class PersonRepositoryIntegrationTest {
 
   @Test
   public void testDeleteById() {
-    PersonDto savedPersonDto = personRepository.save(personDto);
+    PersonDto savedPersonDto = personRepository.save(personDto).get();
     personRepository.deleteById(savedPersonDto.getId());
 
     assertThat(personRepository.existsById(savedPersonDto.getId())).isFalse();
@@ -83,15 +83,15 @@ public class PersonRepositoryIntegrationTest {
 
   @Test
   public void testFindById() {
-    PersonDto savedPersonDto = personRepository.save(personDto);
-    PersonDto loadedPersonDto = personRepository.findById(savedPersonDto.getId());
+    PersonDto savedPersonDto = personRepository.save(personDto).get();
+    PersonDto loadedPersonDto = personRepository.findById(savedPersonDto.getId()).get();
     assertThat(loadedPersonDto.getId()).isEqualTo(savedPersonDto.getId());
     assertThat(loadedPersonDto.getName()).isEqualTo("John");
   }
 
   @Test
   public void testSave() {
-    PersonDto savedPersonDto = personRepository.save(personDto);
+    PersonDto savedPersonDto = personRepository.save(personDto).get();
 
     assertThat(personRepository.existsById(savedPersonDto.getId())).isTrue();
   }

@@ -12,6 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -98,16 +99,17 @@ public class OrganizationServiceImplTest {
     OrganizationDto organizationDto = new OrganizationDto();
     organizationDto.setId(1);
     organizationDto.setName("Greenpeace");
-    when(organizationRepository.findById(1)).thenReturn(organizationDto);
+    when(organizationRepository.findById(1)).thenReturn(Optional.of(organizationDto));
 
     Organization organization = new Organization();
     organization.setId(1);
     organization.setName("Greenpeace");
     when(organizationMapper.dtoToDomain(organizationDto)).thenReturn(organization);
 
-    Organization returnedOrganization = organizationService.findById(1);
-    assertThat(returnedOrganization.getId()).isEqualTo(1);
-    assertThat(returnedOrganization.getName()).isEqualTo("Greenpeace");
+    Optional<Organization> returnedOrganization = organizationService.findById(1);
+    assertThat(returnedOrganization.isPresent()).isTrue();
+    assertThat(returnedOrganization.get().getId()).isEqualTo(1);
+    assertThat(returnedOrganization.get().getName()).isEqualTo("Greenpeace");
   }
 
   @Test(expected = EntityDoesNotExists.class)
@@ -119,7 +121,7 @@ public class OrganizationServiceImplTest {
   }
 
   @Test
-  public void testSave() throws EntityDoesNotExists {
+  public void testSave() throws EntityDoesNotExists, ErrorSavingEntity {
     Organization organization = new Organization();
     organization.setName("Greenpeace");
 
@@ -130,20 +132,22 @@ public class OrganizationServiceImplTest {
     OrganizationDto createdOrganizationDto = new OrganizationDto();
     createdOrganizationDto.setId(1);
     createdOrganizationDto.setName("Greenpeace");
-    when(organizationRepository.save(organizationDto)).thenReturn(createdOrganizationDto);
+    when(organizationRepository.save(organizationDto)).thenReturn(Optional.of(createdOrganizationDto));
 
     Organization createdOrganization = new Organization();
     createdOrganization.setId(1);
     createdOrganization.setName("Greenpeace");
     when(organizationMapper.dtoToDomain(createdOrganizationDto)).thenReturn(createdOrganization);
 
-    Organization testOrganization = organizationService.save(organization);
-    assertThat(testOrganization.getId()).isEqualTo(1);
-    assertThat(testOrganization.getName()).isEqualTo("Greenpeace");
+    Optional<Organization> testOrganization = organizationService.save(organization);
+
+    assertThat(testOrganization.isPresent()).isTrue();
+    assertThat(testOrganization.get().getId()).isEqualTo(1);
+    assertThat(testOrganization.get().getName()).isEqualTo("Greenpeace");
   }
 
   @Test(expected = EntityDoesNotExists.class)
-  public void testSaveUpdateNotFound() throws EntityDoesNotExists {
+  public void testSaveUpdateNotFound() throws EntityDoesNotExists, ErrorSavingEntity {
     when(organizationRepository.existsById(1)).thenReturn(false);
 
     Organization organization = new Organization();

@@ -1,6 +1,7 @@
 package org.ecclesia.directory.service.converter;
 
 import org.ecclesia.directory.domain.Person;
+import org.ecclesia.directory.entity.OrganizationDto;
 import org.ecclesia.directory.entity.PersonDto;
 import org.ecclesia.directory.repository.OrganizationRepository;
 import org.mapstruct.Mapper;
@@ -8,6 +9,7 @@ import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Converts between person domain and dto objects.
@@ -24,7 +26,7 @@ public abstract class PersonMapper {
    * @return The equivalent person dto
    */
   @Mapping(target = "organization",
-      expression = "java(organizationRepository.findById(domain.getOrganization()))")
+      expression = "java(getOrganization(domain.getOrganization()))")
   public abstract PersonDto domainToDto(Person domain);
 
   /**
@@ -41,4 +43,14 @@ public abstract class PersonMapper {
    * @return The equivalent person domain object list
    */
   public abstract List<Person> dtoListToDomainList(List<PersonDto> dtos);
+
+  /**
+   * Loads organization from repository.
+   * @param id Organization id
+   * @return The organization
+   */
+  protected OrganizationDto getOrganization(long id) {
+    Optional<OrganizationDto> organizationDto = organizationRepository.findById(id);
+    return organizationDto.orElse(null);
+  }
 }
