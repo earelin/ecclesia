@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface PersonService {
   void deleteById(long id) throws EntityDoesNotExists;
   List<Person> findAllByOrganization(long organizationId) throws EntityDoesNotExists;
-  Optional<Person> findById(long id) throws EntityDoesNotExists;
-  Optional<Person> save(Person person) throws EntityDoesNotExists, ErrorSavingEntity;
+  Person findById(long id) throws EntityDoesNotExists;
+  Person save(Person person) throws EntityDoesNotExists, ErrorSavingEntity;
 }

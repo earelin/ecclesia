@@ -39,7 +39,7 @@ public class OrganizationServiceImpl implements OrganizationService {
   }
 
   @Override
-  public Optional<Organization> findById(long id) throws EntityDoesNotExists {
+  public Organization findById(long id) throws EntityDoesNotExists {
     if (!organizationRepository.existsById(id)) {
       throw new EntityDoesNotExists(String.format("Organization with id %d does not exists", id));
     }
@@ -49,8 +49,7 @@ public class OrganizationServiceImpl implements OrganizationService {
       throw new EntityDoesNotExists(String.format("Organization with id %d does not exists", id));
     }
 
-    Organization organization = organizationMapper.dtoToDomain(organizationDto.get());
-    return Optional.ofNullable(organization);
+    return organizationMapper.dtoToDomain(organizationDto.get());
   }
 
   @Override
@@ -60,7 +59,7 @@ public class OrganizationServiceImpl implements OrganizationService {
   }
 
   @Override
-  public Optional<Organization> save(Organization organization) throws EntityDoesNotExists, ErrorSavingEntity {
+  public Organization save(Organization organization) throws EntityDoesNotExists, ErrorSavingEntity {
     if (!organization.isNew() && !organizationRepository.existsById(organization.getId())) {
       throw new EntityDoesNotExists(String.format("Organization with id %d does not exists, cannot be updated", organization.getId()));
     }
@@ -71,8 +70,7 @@ public class OrganizationServiceImpl implements OrganizationService {
       throw new ErrorSavingEntity("Error saving organization");
     }
 
-    Organization savedOrganization = organizationMapper.dtoToDomain(savedOrganizationDto.get());
-    return Optional.ofNullable(savedOrganization);
+    return organizationMapper.dtoToDomain(savedOrganizationDto.get());
   }
 
 }

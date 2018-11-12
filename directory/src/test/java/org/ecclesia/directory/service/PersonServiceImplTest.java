@@ -185,9 +185,8 @@ public class PersonServiceImplTest {
 
     when(personMapper.dtoToDomain(personDto)).thenReturn(person);
 
-    Optional<Person> returnedPerson = personService.findById(1);
-    assertThat(returnedPerson.isPresent()).isTrue();
-    assertThat(returnedPerson.get().getId()).isEqualTo(1);
+    Person returnedPerson = personService.findById(1);
+    assertThat(returnedPerson.getId()).isEqualTo(1);
   }
 
   @Test(expected = EntityDoesNotExists.class)
@@ -249,9 +248,8 @@ public class PersonServiceImplTest {
 
     when(personMapper.dtoToDomain(updatedPersonDto)).thenReturn(updatedPerson);
 
-    Optional<Person> returnedPerson = personService.save(person);
-    assertThat(returnedPerson.isPresent()).isTrue();
-    assertThat(returnedPerson.get().getId()).isEqualTo(1);
+    Person returnedPerson = personService.save(person);
+    assertThat(returnedPerson.getId()).isEqualTo(1);
   }
 
   @Test
@@ -308,9 +306,8 @@ public class PersonServiceImplTest {
 
     when(personMapper.dtoToDomain(updatedPersonDto)).thenReturn(updatedPerson);
 
-    Optional<Person> returnedPerson = personService.save(person);
-    assertThat(returnedPerson.isPresent()).isTrue();
-    assertThat(returnedPerson.get().getId()).isEqualTo(1);
+    Person returnedPerson = personService.save(person);
+    assertThat(returnedPerson.getId()).isEqualTo(1);
   }
 
   @Test(expected = EntityDoesNotExists.class)
