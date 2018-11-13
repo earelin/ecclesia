@@ -37,7 +37,7 @@ public class PersonServiceImpl implements PersonService {
   }
 
   @Override
-  public Optional<Person> findById(long id) throws EntityDoesNotExists {
+  public Person findById(long id) throws EntityDoesNotExists {
     if (!personRepository.existsById(id)) {
       throw new EntityDoesNotExists(String.format("Person with id %d does not exists", id));
     }
@@ -47,8 +47,7 @@ public class PersonServiceImpl implements PersonService {
       throw new EntityDoesNotExists(String.format("Person with id %d does not exists", id));
     }
 
-    Person person = personMapper.dtoToDomain(personDto.get());
-    return Optional.ofNullable(person);
+    return personMapper.dtoToDomain(personDto.get());
   }
 
   @Override
@@ -61,7 +60,7 @@ public class PersonServiceImpl implements PersonService {
   }
 
   @Override
-  public Optional<Person> save(Person person) throws EntityDoesNotExists, ErrorSavingEntity {
+  public Person save(Person person) throws EntityDoesNotExists, ErrorSavingEntity {
     if (!person.isNew() && !personRepository.existsById(person.getId())) {
       throw new EntityDoesNotExists(String.format("Person with id %d does not exists, cannot be updated", person.getId()));
     }
@@ -76,7 +75,6 @@ public class PersonServiceImpl implements PersonService {
       throw new ErrorSavingEntity("Error saving person");
     }
 
-    Person savedPerson = personMapper.dtoToDomain(savedPersonDto.get());
-    return Optional.ofNullable(savedPerson);
+    return personMapper.dtoToDomain(savedPersonDto.get());
   }
 }

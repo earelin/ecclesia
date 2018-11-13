@@ -106,10 +106,9 @@ public class OrganizationServiceImplTest {
     organization.setName("Greenpeace");
     when(organizationMapper.dtoToDomain(organizationDto)).thenReturn(organization);
 
-    Optional<Organization> returnedOrganization = organizationService.findById(1);
-    assertThat(returnedOrganization.isPresent()).isTrue();
-    assertThat(returnedOrganization.get().getId()).isEqualTo(1);
-    assertThat(returnedOrganization.get().getName()).isEqualTo("Greenpeace");
+    Organization returnedOrganization = organizationService.findById(1);
+    assertThat(returnedOrganization.getId()).isEqualTo(1);
+    assertThat(returnedOrganization.getName()).isEqualTo("Greenpeace");
   }
 
   @Test(expected = EntityDoesNotExists.class)
@@ -139,11 +138,10 @@ public class OrganizationServiceImplTest {
     createdOrganization.setName("Greenpeace");
     when(organizationMapper.dtoToDomain(createdOrganizationDto)).thenReturn(createdOrganization);
 
-    Optional<Organization> testOrganization = organizationService.save(organization);
+    Organization testOrganization = organizationService.save(organization);
 
-    assertThat(testOrganization.isPresent()).isTrue();
-    assertThat(testOrganization.get().getId()).isEqualTo(1);
-    assertThat(testOrganization.get().getName()).isEqualTo("Greenpeace");
+    assertThat(testOrganization.getId()).isEqualTo(1);
+    assertThat(testOrganization.getName()).isEqualTo("Greenpeace");
   }
 
   @Test(expected = EntityDoesNotExists.class)
