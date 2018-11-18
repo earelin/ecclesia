@@ -7,6 +7,9 @@ management:
     db:
       enabled: true
 
+server:
+  port: ${PORT:8080}
+
 spring:
   jpa:
     open-in-view: false

@@ -18,3 +18,6 @@ out
 
 ### OS
 .DS_Store
+
+### Javascript
+node_modules
