@@ -1,12 +1,14 @@
 package org.ecclesia.directory.domain;
 
 import javax.persistence.*;
+import lombok.Data;
 
 /**
  * Represents one person. Data transfer object.
  */
 @Entity
 @Table(name = "person")
+@Data
 public class Person {
 
   @Id
@@ -24,51 +26,4 @@ public class Person {
   @Embedded
   private Location location;
 
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
-
-  public Organization getOrganization() {
-    return organization;
-  }
-
-  public void setOrganization(Organization organization) {
-    this.organization = organization;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getSurname() {
-    return surname;
-  }
-
-  public void setSurname(String surname) {
-    this.surname = surname;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public Location getLocation() {
-    return location;
-  }
-
-  public void setLocation(Location location) {
-    this.location = location;
-  }
 }

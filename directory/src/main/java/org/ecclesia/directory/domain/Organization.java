@@ -3,12 +3,14 @@ package org.ecclesia.directory.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * Represents an organization. Data transfer object.
  */
 @Entity
 @Table(name = "organization")
+@Data
 public class Organization implements Serializable {
 
   private static final long serialVersionUID = 719423610411393862L;
@@ -19,21 +21,5 @@ public class Organization implements Serializable {
 
   @NotBlank
   private String name;
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
 
 }
