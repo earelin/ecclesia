@@ -1,8 +1,8 @@
 package org.ecclesia.directory.repository;
 
 import org.ecclesia.directory.domain.Location;
-import org.ecclesia.directory.entity.OrganizationDto;
-import org.ecclesia.directory.entity.PersonDto;
+import org.ecclesia.directory.domain.Organization;
+import org.ecclesia.directory.domain.Person;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,19 +24,19 @@ public class PersonRepositoryIntegrationTest {
   @Autowired
   private OrganizationRepository organizationRepository;
 
-  private PersonDto personDto;
+  private Person person;
 
   @Before
   public void init() {
-    OrganizationDto organizationDto = new OrganizationDto();
-    organizationDto.setName("Greenpeace");
-    OrganizationDto createdOrganizationDto = organizationRepository.save(organizationDto).get();
+    Organization organization = new Organization();
+    organization.setName("Greenpeace");
+    Organization createdOrganization = organizationRepository.save(organization).get();
 
-    personDto = new PersonDto();
-    personDto.setOrganization(createdOrganizationDto);
-    personDto.setName("John");
-    personDto.setSurname("Smith");
-    personDto.setEmail("john.smith@gmail.com");
+    person = new Person();
+    person.setOrganization(createdOrganization);
+    person.setName("John");
+    person.setSurname("Smith");
+    person.setEmail("john.smith@gmail.com");
 
     Location location = new Location();
     location.setAddress1("66");
@@ -44,21 +44,21 @@ public class PersonRepositoryIntegrationTest {
     location.setCountry("GB");
     location.setPostcode("W14 8RS");
     location.setTown("London");
-    personDto.setLocation(location);
+    person.setLocation(location);
   }
 
   @Test
   public void testDeleteById() {
-    PersonDto savedPersonDto = personRepository.save(personDto).get();
-    personRepository.deleteById(savedPersonDto.getId());
+    Person savedPerson = personRepository.save(person).get();
+    personRepository.deleteById(savedPerson.getId());
 
-    assertThat(personRepository.existsById(savedPersonDto.getId())).isFalse();
+    assertThat(personRepository.existsById(savedPerson.getId())).isFalse();
   }
 
   @Test
   public void testFindAllByOrganizationId() {
-    OrganizationDto organizationDto = personDto.getOrganization();
-    personRepository.save(personDto);
+    Organization organization = person.getOrganization();
+    personRepository.save(person);
 
     Location location = new Location();
     location.setAddress1("Shakespeare’s Globe");
@@ -67,33 +67,33 @@ public class PersonRepositoryIntegrationTest {
     location.setPostcode("SE1 9DT");
     location.setTown("London");
 
-    personDto = new PersonDto();
-    personDto.setEmail("william.shakespeare@theglobe.com");
-    personDto.setLocation(location);
-    personDto.setName("William");
-    personDto.setSurname("Shakespeare");
-    personDto.setOrganization(organizationDto);
+    person = new Person();
+    person.setEmail("william.shakespeare@theglobe.com");
+    person.setLocation(location);
+    person.setName("William");
+    person.setSurname("Shakespeare");
+    person.setOrganization(organization);
 
-    personRepository.save(personDto);
+    personRepository.save(person);
 
-    List<PersonDto> personDtos = personRepository.findAllByOrganizationId(organizationDto.getId());
+    List<Person> people = personRepository.findAllByOrganizationId(organization.getId());
 
-    assertThat(personDtos.size()).isEqualTo(2);
+    assertThat(people.size()).isEqualTo(2);
   }
 
   @Test
   public void testFindById() {
-    PersonDto savedPersonDto = personRepository.save(personDto).get();
-    PersonDto loadedPersonDto = personRepository.findById(savedPersonDto.getId()).get();
-    assertThat(loadedPersonDto.getId()).isEqualTo(savedPersonDto.getId());
-    assertThat(loadedPersonDto.getName()).isEqualTo("John");
+    Person savedPerson = personRepository.save(person).get();
+    Person loadedPerson = personRepository.findById(savedPerson.getId()).get();
+    assertThat(loadedPerson.getId()).isEqualTo(savedPerson.getId());
+    assertThat(loadedPerson.getName()).isEqualTo("John");
   }
 
   @Test
   public void testSave() {
-    PersonDto savedPersonDto = personRepository.save(personDto).get();
+    Person savedPerson = personRepository.save(person).get();
 
-    assertThat(personRepository.existsById(savedPersonDto.getId())).isTrue();
+    assertThat(personRepository.existsById(savedPerson.getId())).isTrue();
   }
 
 }

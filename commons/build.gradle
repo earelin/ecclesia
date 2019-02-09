@@ -7,10 +7,9 @@ apply plugin: "java-library"
 description = "Common utilities"
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    compileOnly "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    compileOnly "org.slf4j:slf4j-api:1.7.25"
 
-    compile "org.slf4j:slf4j-api:1.7.25"
-
-    testCompile "junit:junit:${jUnitVersion}"
-    testCompile "org.assertj:assertj-core:${assertJVersion}"
+    testImplementation "junit:junit:${jUnitVersion}"
+    testImplementation "org.assertj:assertj-core:${assertJVersion}"
 }

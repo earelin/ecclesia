@@ -1,9 +1,8 @@
 package org.ecclesia.directory.service;
 
-import org.ecclesia.directory.domain.Organization;
 
 import java.util.List;
-import java.util.Optional;
+import org.ecclesia.directory.domain.Organization;
 
 /**
  * Organization objects operations.

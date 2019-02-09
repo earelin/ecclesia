@@ -1,16 +1,18 @@
 package org.ecclesia.directory.domain;
 
-public class Person {
+public class Group {
 
   private long id;
   private long organization;
   private String name;
-  private String surname;
-  private String email;
-  private Location location;
+  private long parent;
 
   public boolean isNew() {
     return id == 0;
+  }
+
+  public boolean hasParent() {
+    return parent != 0;
   }
 
   public long getId() {
@@ -37,27 +39,11 @@ public class Person {
     this.name = name;
   }
 
-  public String getSurname() {
-    return surname;
+  public long getParent() {
+    return parent;
   }
 
-  public void setSurname(String surname) {
-    this.surname = surname;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public Location getLocation() {
-    return location;
-  }
-
-  public void setLocation(Location location) {
-    this.location = location;
+  public void setParent(long parent) {
+    this.parent = parent;
   }
 }

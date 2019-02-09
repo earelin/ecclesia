@@ -1,4 +1,4 @@
-package org.ecclesia.directory.entity;
+package org.ecclesia.directory.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "organization")
-public class OrganizationDto implements Serializable {
+public class Organization implements Serializable {
 
   private static final long serialVersionUID = 719423610411393862L;
 

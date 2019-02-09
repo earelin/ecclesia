@@ -1,9 +1,7 @@
 package org.ecclesia.directory.service;
 
 import org.ecclesia.directory.domain.Person;
-import org.ecclesia.directory.entity.PersonDto;
 import org.ecclesia.directory.repository.PersonRepository;
-import org.ecclesia.directory.service.converter.PersonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +11,13 @@ import java.util.Optional;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-  private final PersonMapper personMapper;
   private final PersonRepository personRepository;
   private final OrganizationService organizationService;
 
   @Autowired
   public PersonServiceImpl(
-        PersonMapper personMapper,
         PersonRepository personRepository,
         OrganizationService organizationService) {
-    this.personMapper = personMapper;
     this.personRepository = personRepository;
     this.organizationService = organizationService;
   }
@@ -38,16 +33,12 @@ public class PersonServiceImpl implements PersonService {
 
   @Override
   public Person findById(long id) throws EntityDoesNotExists {
-    if (!personRepository.existsById(id)) {
+    Optional<Person> person = personRepository.findById(id);
+    if (!person.isPresent()) {
       throw new EntityDoesNotExists(String.format("Person with id %d does not exists", id));
     }
 
-    Optional<PersonDto> personDto = personRepository.findById(id);
-    if (!personDto.isPresent()) {
-      throw new EntityDoesNotExists(String.format("Person with id %d does not exists", id));
-    }
-
-    return personMapper.dtoToDomain(personDto.get());
+    return person.get();
   }
 
   @Override
@@ -55,26 +46,17 @@ public class PersonServiceImpl implements PersonService {
     if (!organizationService.existsById(organizationId)) {
       throw new EntityDoesNotExists(String.format("Organization with id %d does not exists", organizationId));
     }
-    List<PersonDto> peopleDtos = personRepository.findAllByOrganizationId(1);
-    return personMapper.dtoListToDomainList(peopleDtos);
+
+    return personRepository.findAllByOrganizationId(organizationId);
   }
 
   @Override
   public Person save(Person person) throws EntityDoesNotExists, ErrorSavingEntity {
-    if (!person.isNew() && !personRepository.existsById(person.getId())) {
-      throw new EntityDoesNotExists(String.format("Person with id %d does not exists, cannot be updated", person.getId()));
-    }
-
-    if (!organizationService.existsById(person.getOrganization())) {
-      throw new EntityDoesNotExists(String.format("Organization with id %d does not exists", person.getOrganization()));
-    }
-    PersonDto personDto = personMapper.domainToDto(person);
-
-    Optional<PersonDto> savedPersonDto = personRepository.save(personDto);
-    if (!savedPersonDto.isPresent()) {
+    Optional<Person> savedPerson = personRepository.save(person);
+    if (!savedPerson.isPresent()) {
       throw new ErrorSavingEntity("Error saving person");
     }
 
-    return personMapper.dtoToDomain(savedPersonDto.get());
+    return savedPerson.get();
   }
 }

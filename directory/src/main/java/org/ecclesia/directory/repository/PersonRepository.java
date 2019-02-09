@@ -1,15 +1,15 @@
 package org.ecclesia.directory.repository;
 
-import org.ecclesia.directory.entity.PersonDto;
+import org.ecclesia.directory.domain.Person;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface PersonRepository extends Repository<PersonDto, Long> {
+public interface PersonRepository extends Repository<Person, Long> {
   void deleteById(long id);
   boolean existsById(long id);
-  List<PersonDto> findAllByOrganizationId(long organizationId);
-  Optional<PersonDto> findById(long id);
-  Optional<PersonDto> save(PersonDto personDto);
+  List<Person> findAllByOrganizationId(long organizationId);
+  Optional<Person> findById(long id);
+  Optional<Person> save(Person person);
 }

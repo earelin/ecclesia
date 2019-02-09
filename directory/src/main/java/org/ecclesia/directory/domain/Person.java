@@ -1,6 +1,4 @@
-package org.ecclesia.directory.entity;
-
-import org.ecclesia.directory.domain.Location;
+package org.ecclesia.directory.domain;
 
 import javax.persistence.*;
 
@@ -9,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "person")
-public class PersonDto {
+public class Person {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +15,7 @@ public class PersonDto {
 
   @ManyToOne
   @JoinColumn(name = "organization_id")
-  private OrganizationDto organization;
+  private Organization organization;
 
   private String name;
   private String surname;
@@ -34,11 +32,11 @@ public class PersonDto {
     this.id = id;
   }
 
-  public OrganizationDto getOrganization() {
+  public Organization getOrganization() {
     return organization;
   }
 
-  public void setOrganization(OrganizationDto organization) {
+  public void setOrganization(Organization organization) {
     this.organization = organization;
   }
 

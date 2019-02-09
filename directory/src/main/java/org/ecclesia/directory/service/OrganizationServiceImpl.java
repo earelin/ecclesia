@@ -1,9 +1,7 @@
 package org.ecclesia.directory.service;
 
 import org.ecclesia.directory.domain.Organization;
-import org.ecclesia.directory.entity.OrganizationDto;
 import org.ecclesia.directory.repository.OrganizationRepository;
-import org.ecclesia.directory.service.converter.OrganizationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +12,10 @@ import java.util.Optional;
 public class OrganizationServiceImpl implements OrganizationService {
 
   private final OrganizationRepository organizationRepository;
-  private final OrganizationMapper organizationMapper;
 
   @Autowired
-  public OrganizationServiceImpl(
-        OrganizationRepository organizationRepository,
-        OrganizationMapper organizationMapper) {
+  public OrganizationServiceImpl(OrganizationRepository organizationRepository) {
     this.organizationRepository = organizationRepository;
-    this.organizationMapper = organizationMapper;
   }
 
   @Override
@@ -40,37 +34,28 @@ public class OrganizationServiceImpl implements OrganizationService {
 
   @Override
   public Organization findById(long id) throws EntityDoesNotExists {
-    if (!organizationRepository.existsById(id)) {
+    Optional<Organization> organization = organizationRepository.findById(id);
+
+    if (!organization.isPresent()) {
       throw new EntityDoesNotExists(String.format("Organization with id %d does not exists", id));
     }
 
-    Optional<OrganizationDto> organizationDto = organizationRepository.findById(id);
-    if (!organizationDto.isPresent()) {
-      throw new EntityDoesNotExists(String.format("Organization with id %d does not exists", id));
-    }
-
-    return organizationMapper.dtoToDomain(organizationDto.get());
+    return organization.get();
   }
 
   @Override
   public List<Organization> findAll() {
-    List<OrganizationDto> organizationDtos = organizationRepository.findAll();
-    return organizationMapper.dtoListToDomainList(organizationDtos);
+    return organizationRepository.findAll();
   }
 
   @Override
   public Organization save(Organization organization) throws EntityDoesNotExists, ErrorSavingEntity {
-    if (!organization.isNew() && !organizationRepository.existsById(organization.getId())) {
-      throw new EntityDoesNotExists(String.format("Organization with id %d does not exists, cannot be updated", organization.getId()));
-    }
-    OrganizationDto organizationDto = organizationMapper.domainToDto(organization);
-
-    Optional<OrganizationDto> savedOrganizationDto = organizationRepository.save(organizationDto);
-    if (!savedOrganizationDto.isPresent()) {
+    Optional<Organization> savedOrganization = organizationRepository.save(organization);
+    if (!savedOrganization.isPresent()) {
       throw new ErrorSavingEntity("Error saving organization");
     }
 
-    return organizationMapper.dtoToDomain(savedOrganizationDto.get());
+    return savedOrganization.get();
   }
 
 }

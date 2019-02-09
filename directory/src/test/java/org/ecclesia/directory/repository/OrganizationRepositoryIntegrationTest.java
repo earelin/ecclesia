@@ -1,6 +1,6 @@
 package org.ecclesia.directory.repository;
 
-import org.ecclesia.directory.entity.OrganizationDto;
+import org.ecclesia.directory.domain.Organization;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,17 +19,17 @@ public class OrganizationRepositoryIntegrationTest {
   @Autowired
   private OrganizationRepository organizationRepository;
 
-  private OrganizationDto organizationDto;
+  private Organization organization;
 
   @Before
   public void init() {
-    organizationDto = new OrganizationDto();
-    organizationDto.setName("Greenpeace");
+    organization = new Organization();
+    organization.setName("Greenpeace");
   }
 
   @Test
   public void testDeleteById() {
-    OrganizationDto createdOrganization = organizationRepository.save(organizationDto).get();
+    Organization createdOrganization = organizationRepository.save(organization).get();
 
     organizationRepository.deleteById(createdOrganization.getId());
     assertThat(organizationRepository.existsById(createdOrganization.getId())).isFalse();
@@ -37,24 +37,24 @@ public class OrganizationRepositoryIntegrationTest {
 
   @Test
   public void testFindAll() {
-    organizationRepository.save(organizationDto);
+    organizationRepository.save(organization);
 
-    organizationDto = new OrganizationDto();
-    organizationDto.setName("Médecins Sans Frontières");
-    organizationRepository.save(organizationDto);
+    organization = new Organization();
+    organization.setName("Médecins Sans Frontières");
+    organizationRepository.save(organization);
 
-    organizationDto = new OrganizationDto();
-    organizationDto.setName("CeaseFire");
-    organizationRepository.save(organizationDto);
+    organization = new Organization();
+    organization.setName("CeaseFire");
+    organizationRepository.save(organization);
 
-    List<OrganizationDto> organizations = organizationRepository.findAll();
+    List<Organization> organizations = organizationRepository.findAll();
     assertThat(organizations.size()).isEqualTo(3);
   }
 
   @Test
   public void testFindById() {
-    OrganizationDto createdOrganization = organizationRepository.save(organizationDto).get();
-    OrganizationDto loadedOrganization = organizationRepository.findById(createdOrganization.getId()).get();
+    Organization createdOrganization = organizationRepository.save(organization).get();
+    Organization loadedOrganization = organizationRepository.findById(createdOrganization.getId()).get();
 
     assertThat(loadedOrganization.getId()).isEqualTo(createdOrganization.getId());
     assertThat(loadedOrganization.getName()).isEqualTo("Greenpeace");
@@ -62,7 +62,7 @@ public class OrganizationRepositoryIntegrationTest {
 
   @Test
   public void testSave() {
-    OrganizationDto createdOrganization = organizationRepository.save(organizationDto).get();
+    Organization createdOrganization = organizationRepository.save(organization).get();
 
     assertThat(organizationRepository.existsById(createdOrganization.getId())).isTrue();
   }
