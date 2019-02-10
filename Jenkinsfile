@@ -1,4 +1,4 @@
-#!/usr/bin/env groovy
+ #!/usr/bin/env groovy
 
 pipeline {
     agent any
@@ -29,18 +29,18 @@ pipeline {
             }
         }
 
-        stage('Publish snapshot') {
-            when { branch "2.x.x" }
-            steps {
-
-            }
-        }
-
-        stage('Publish release') {
-            when { buildingTag() }
-            steps {
-
-            }
-        }
+//        stage('Publish snapshot') {
+//            when { branch "2.x.x" }
+//            steps {
+//
+//            }
+//        }
+//
+//        stage('Publish release') {
+//            when { buildingTag() }
+//            steps {
+//
+//            }
+//        }
     }
 }
