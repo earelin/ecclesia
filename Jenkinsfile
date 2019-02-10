@@ -38,7 +38,7 @@ pipeline {
             }
             steps {
                 ViolationsToGitHub([commentOnlyChangedContent: true,
-                                    createCommentWithAllSingleFileComments: true,
+                                    createSingleFileComments: true,
                                     credentialsId: 'jenkins-earelin-user',
                                     gitHubUrl: env.GIT_URL,
                                     pullRequestId: env.CHANGE_ID,
