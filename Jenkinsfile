@@ -5,6 +5,7 @@ pipeline {
     stages {
         stage('Cleanup') {
             steps {
+                echo sh(returnStdout: true, script: 'env')
                 sh 'sh gradlew clean'
             }
         }
@@ -30,21 +31,21 @@ pipeline {
             }
         }
 
-        stage('Comment pull request') {
-            when { branch "PR-*" }
-            steps {
-                ViolationsToGitHub([commentOnlyChangedContent: true,
-                                    createCommentWithAllSingleFileComments: true,
-                                    credentialsId: 'jenkins-earelin-user',
-                                    minSeverity: 'INFO',
-                                    violationConfigs: [
-                                        [parser: 'CHECKSTYLE', reporter: 'Checkstyle', pattern: '*/build/reports/checkstyle/*.xml'],
-                                        [parser: 'CPD', reporter: 'CPD', pattern: '*/build/reports/cpd/*.xml'],
-                                        [parser: 'FINDBUGS', reporter: 'Spotbugs', pattern: '*/build/reports/spotbugs/*.xml'],
-                                        [parser: 'PMD', reporter: 'PMD', pattern: '*/build/reports/pmd/*.xml']
-                                   ]])
-            }
-        }
+//        stage('Comment pull request') {
+//            when { branch "PR-*" }
+//            steps {
+//                ViolationsToGitHub([commentOnlyChangedContent: true,
+//                                    createCommentWithAllSingleFileComments: true,
+//                                    credentialsId: 'jenkins-earelin-user',
+//                                    minSeverity: 'INFO',
+//                                    violationConfigs: [
+//                                        [parser: 'CHECKSTYLE', reporter: 'Checkstyle', pattern: '*/build/reports/checkstyle/*.xml'],
+//                                        [parser: 'CPD', reporter: 'CPD', pattern: '*/build/reports/cpd/*.xml'],
+//                                        [parser: 'FINDBUGS', reporter: 'Spotbugs', pattern: '*/build/reports/spotbugs/*.xml'],
+//                                        [parser: 'PMD', reporter: 'PMD', pattern: '*/build/reports/pmd/*.xml']
+//                                   ]])
+//            }
+//        }
 
         stage('Build') {
             steps {
