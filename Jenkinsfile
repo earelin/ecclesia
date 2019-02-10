@@ -5,13 +5,13 @@ pipeline {
     stages {
         stage('Cleanup') {
             steps {
-                sh './gradlew clean'
+                sh 'sh gradlew clean'
             }
         }
 
         stage('Static code analysis and unit testing') {
             steps {
-                sh './gradlew check'
+                sh 'sh gradlew check'
             }
             post {
                 always {
@@ -25,7 +25,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh './gradlew build'
+                sh 'sh gradlew build'
             }
         }
 
