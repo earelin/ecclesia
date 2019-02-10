@@ -5,6 +5,9 @@ buildscript {
         }
         jcenter()
     }
+    dependencies {
+        classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:${gradleSpotbugsVersion}"
+    }
 }
 
 plugins {
@@ -24,9 +27,11 @@ subprojects {
         }
     }
 
-    apply plugin: "jacoco"
-    apply plugin: "java"
-    apply plugin: "jacoco"
+    apply plugin: 'checkstyle'
+    apply plugin: 'jacoco'
+    apply plugin: 'java'
+    apply plugin: 'pmd'
+    apply plugin: 'com.github.spotbugs'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -42,6 +47,14 @@ subprojects {
         }
     }
 
+    dependencies {
+        checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleToolVersion}"
+    }
+
+    checkstyle {
+        configFile = file("${project.rootDir}/checkstyle.xml")
+    }
+
     jacocoTestReport {
         reports {
             xml.enabled = true
@@ -49,4 +62,16 @@ subprojects {
         }
     }
     check.dependsOn jacocoTestReport
+
+    pmd {
+        ignoreFailures = true
+        sourceSets = [sourceSets.main]
+    }
+
+    spotbugs {
+        sourceSets = [sourceSets.main]
+        ignoreFailures = true
+        effort = "max"
+        reportLevel = "low"
+    }
 }
