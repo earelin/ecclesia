@@ -46,10 +46,10 @@ pipeline {
                                     repositoryName: env.REPOSITORY_NAME,
                                     repositoryOwner: env.REPOSITORY_OWNER,
                                     violationConfigs: [
-                                        [parser: 'CHECKSTYLE', reporter: 'Checkstyle', pattern: '*/build/reports/checkstyle/*.xml'],
-                                        [parser: 'CPD', reporter: 'CPD', pattern: '*/build/reports/cpd/*.xml'],
-                                        [parser: 'FINDBUGS', reporter: 'Spotbugs', pattern: '*/build/reports/spotbugs/*.xml'],
-                                        [parser: 'PMD', reporter: 'PMD', pattern: '*/build/reports/pmd/*.xml']
+                                        [parser: 'CHECKSTYLE', reporter: 'Checkstyle', pattern: '.*/build/reports/checkstyle/.*\\.xml'],
+                                        [parser: 'CPD', reporter: 'CPD', pattern: '.*/build/reports/cpd/.*\\.xml'],
+                                        [parser: 'FINDBUGS', reporter: 'Spotbugs', pattern: '.*/build/reports/spotbugs/.*\\.xml'],
+                                        [parser: 'PMD', reporter: 'PMD', pattern: '.*/build/reports/pmd/.*\\.xml']
                                    ]])
             }
         }
