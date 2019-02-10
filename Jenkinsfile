@@ -34,7 +34,7 @@ pipeline {
             when { changeRequest() }
             environment {
                 REPOSITORY_NAME = env.GIT_URL.tokenize('/')[3].split("\\.")[0]
-                REPOSITORY_OWNER = env.GIT_URL.tokenize('/')[2],
+                REPOSITORY_OWNER = env.GIT_URL.tokenize('/')[2]
             }
             steps {
                 ViolationsToGitHub([commentOnlyChangedContent: true,
