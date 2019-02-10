@@ -37,14 +37,30 @@ pipeline {
                 REPOSITORY_OWNER = "${env.GIT_URL.tokenize('/')[2]}"
             }
             steps {
-                ViolationsToGitHub([commentOnlyChangedContent: true,
-                                    createSingleFileComments: true,
-                                    credentialsId: 'jenkins-earelin-user',
-                                    gitHubUrl: env.GIT_URL,
-                                    pullRequestId: env.CHANGE_ID,
-                                    minSeverity: 'INFO',
+                ViolationsToGitHub([gitHubUrl: env.GIT_URL,
                                     repositoryName: env.REPOSITORY_NAME,
                                     repositoryOwner: env.REPOSITORY_OWNER,
+                                    pullRequestId: env.CHANGE_ID,
+                                    credentialsId: 'jenkins-earelin-user',
+
+                                    createCommentWithAllSingleFileComments: true,
+                                    createSingleFileComments: true,
+                                    commentOnlyChangedContent: true,
+                                    minSeverity: 'INFO',
+                                    keepOldComments: false,
+
+                                    commentTemplate: """
+                                        **Reporter**: {{violation.reporter}}{{#violation.rule}}
+                                        
+                                        **Rule**: {{violation.rule}}{{/violation.rule}}
+                                        **Severity**: {{violation.severity}}
+                                        **File**: {{violation.file}} L{{violation.startLine}}{{#violation.source}}
+                                        
+                                        **Source**: {{violation.source}}{{/violation.source}}
+                                        
+                                        {{violation.message}}
+                                        """,
+
                                     violationConfigs: [
                                         [parser: 'CHECKSTYLE', reporter: 'Checkstyle', pattern: '.*/build/reports/checkstyle/.*\\.xml'],
                                         [parser: 'CPD', reporter: 'CPD', pattern: '.*/build/reports/cpd/.*\\.xml'],
