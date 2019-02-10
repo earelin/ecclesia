@@ -33,7 +33,8 @@ pipeline {
         stage('Comment pull request') {
             when { changeRequest() }
             environment {
-
+                REPOSITORY_NAME = env.GIT_URL.tokenize('/')[3].split("\\.")[0]
+                REPOSITORY_OWNER = env.GIT_URL.tokenize('/')[2],
             }
             steps {
                 ViolationsToGitHub([commentOnlyChangedContent: true,
@@ -42,6 +43,8 @@ pipeline {
                                     gitHubUrl: env.GIT_URL,
                                     pullRequestId: env.CHANGE_ID,
                                     minSeverity: 'INFO',
+                                    repositoryName: env.REPOSITORY_NAME,
+                                    repositoryOwner: env.REPOSITORY_OWNER,
                                     violationConfigs: [
                                         [parser: 'CHECKSTYLE', reporter: 'Checkstyle', pattern: '*/build/reports/checkstyle/*.xml'],
                                         [parser: 'CPD', reporter: 'CPD', pattern: '*/build/reports/cpd/*.xml'],
