@@ -11,14 +11,17 @@ pipeline {
 
         stage('Static code analysis and unit testing') {
             steps {
-                sh 'sh gradlew check'
+                sh 'sh gradlew check | tee build.log'
             }
             post {
                 always {
                     junit '*/build/test-results/test/*.xml'
                     recordIssues aggregatingResults: true, tools: [
-                        java(),
-                        checkStyle()
+                        checkStyle(pattern: '*/build/reports/checkstyle/*.xml'),
+                        cpd(pattern: '*/build/reports/cpd/*.xml'),
+                        java(pattern: 'build.log'),
+                        pmdParser(pattern: '*/build/reports/pmd/*.xml'),
+                        spotBugs(pattern: '*/build/reports/spotbugs/*.xml', useRankAsPriority: true)
                     ]
                 }
                 success {

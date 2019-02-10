@@ -6,12 +6,10 @@ buildscript {
         jcenter()
     }
     dependencies {
+        classpath "de.aaschmid:gradle-cpd-plugin:${gradleCpdVersion}"
         classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:${gradleSpotbugsVersion}"
+        classpath "io.spring.gradle:dependency-management-plugin:${springDependencyManagementVersion}"
     }
-}
-
-plugins {
-    id "io.spring.dependency-management" version "1.0.6.RELEASE"
 }
 
 subprojects {
@@ -28,10 +26,12 @@ subprojects {
     }
 
     apply plugin: 'checkstyle'
+    apply plugin: 'com.github.spotbugs'
+    apply plugin: 'de.aaschmid.cpd'
+    apply plugin: 'io.spring.dependency-management'
     apply plugin: 'jacoco'
     apply plugin: 'java'
     apply plugin: 'pmd'
-    apply plugin: 'com.github.spotbugs'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -53,6 +53,10 @@ subprojects {
 
     checkstyle {
         configFile = file("${project.rootDir}/checkstyle.xml")
+    }
+
+    cpd {
+        ignoreFailures = true
     }
 
     jacocoTestReport {
