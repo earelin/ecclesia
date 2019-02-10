@@ -16,6 +16,10 @@ pipeline {
             post {
                 always {
                     junit '*/build/test-results/test/*.xml'
+                    recordIssues aggregatingResults: true, tools: [
+                        java(),
+                        checkStyle()
+                    ]
                 }
                 success {
                     jacoco execPattern: '*/build/jacoco/*.exec'
