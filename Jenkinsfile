@@ -16,7 +16,7 @@ pipeline {
             post {
                 always {
                     junit '*/build/test-results/test/*.xml'
-                    recordIssues aggregatingResults: true, tools: [
+                    recordIssues aggregatingResults: true, sourceCodeEncoding: 'UTF-8', tools: [
                         checkStyle(pattern: '*/build/reports/checkstyle/*.xml'),
                         cpd(pattern: '*/build/reports/cpd/*.xml'),
                         java(pattern: 'build.log'),
@@ -27,6 +27,22 @@ pipeline {
                 success {
                     jacoco execPattern: '*/build/jacoco/*.exec'
                 }
+            }
+        }
+
+        stage('Comment pull request') {
+            when { branch "PR-*" }
+            steps {
+                ViolationsToGitHub([commentOnlyChangedContent: true,
+                                    createCommentWithAllSingleFileComments: true,
+                                    credentialsId: 'jenkins-earelin-user',
+                                    minSeverity: 'INFO',
+                                    violationConfigs: [
+                                        [parser: 'CHECKSTYLE', reporter: 'Checkstyle', pattern: '*/build/reports/checkstyle/*.xml'],
+                                        [parser: 'CPD', reporter: 'CPD', pattern: '*/build/reports/cpd/*.xml'],
+                                        [parser: 'FINDBUGS', reporter: 'Spotbugs', pattern: '*/build/reports/spotbugs/*.xml'],
+                                        [parser: 'PMD', reporter: 'PMD', pattern: '*/build/reports/pmd/*.xml']
+                                   ]])
             }
         }
 
