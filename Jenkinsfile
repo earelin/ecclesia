@@ -43,7 +43,7 @@ pipeline {
                     repositoryOwner: env.REPOSITORY_OWNER,
                     pullRequestId: env.CHANGE_ID,
 
-                    createCommentWithAllSingleFileComments: true,
+                    createCommentWithAllSingleFileComments: false,
                     createSingleFileComments: true,
                     commentOnlyChangedContent: true,
                     minSeverity: 'INFO',
