@@ -5,10 +5,11 @@ buildscript {
         }
         jcenter()
     }
-}
-
-plugins {
-    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    dependencies {
+        classpath "de.aaschmid:gradle-cpd-plugin:${gradleCpdVersion}"
+        classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:${gradleSpotbugsVersion}"
+        classpath "io.spring.gradle:dependency-management-plugin:${springDependencyManagementVersion}"
+    }
 }
 
 subprojects {
@@ -24,9 +25,13 @@ subprojects {
         }
     }
 
-    apply plugin: "jacoco"
-    apply plugin: "java"
-    apply plugin: "jacoco"
+    apply plugin: 'checkstyle'
+    apply plugin: 'com.github.spotbugs'
+    apply plugin: 'de.aaschmid.cpd'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'jacoco'
+    apply plugin: 'java'
+    apply plugin: 'pmd'
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -42,6 +47,18 @@ subprojects {
         }
     }
 
+    dependencies {
+        checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleToolVersion}"
+    }
+
+    checkstyle {
+        configFile = file("${project.rootDir}/checkstyle.xml")
+    }
+
+    cpd {
+        ignoreFailures = true
+    }
+
     jacocoTestReport {
         reports {
             xml.enabled = true
@@ -49,4 +66,16 @@ subprojects {
         }
     }
     check.dependsOn jacocoTestReport
+
+    pmd {
+        ignoreFailures = true
+        sourceSets = [sourceSets.main]
+    }
+
+    spotbugs {
+        sourceSets = [sourceSets.main]
+        ignoreFailures = true
+        effort = "max"
+        reportLevel = "low"
+    }
 }
