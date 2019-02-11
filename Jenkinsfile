@@ -41,7 +41,7 @@ pipeline {
                                     repositoryName: env.REPOSITORY_NAME,
                                     repositoryOwner: env.REPOSITORY_OWNER,
                                     pullRequestId: env.CHANGE_ID,
-                                    credentialsId: 'jenkins-earelin-user',
+                                    //credentialsId: 'jenkins-earelin-user',
 
                                     createCommentWithAllSingleFileComments: true,
                                     createSingleFileComments: true,
