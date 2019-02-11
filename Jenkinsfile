@@ -37,36 +37,24 @@ pipeline {
                 REPOSITORY_OWNER = "${env.GIT_URL.tokenize('/')[2]}"
             }
             steps {
-                ViolationsToGitHub([gitHubUrl: env.GIT_URL,
-                                    repositoryName: env.REPOSITORY_NAME,
-                                    repositoryOwner: env.REPOSITORY_OWNER,
-                                    pullRequestId: env.CHANGE_ID,
-                                    //credentialsId: 'jenkins-earelin-user',
+                ViolationsToGitHub([
+                    gitHubUrl: env.GIT_URL,
+                    repositoryName: env.REPOSITORY_NAME,
+                    repositoryOwner: env.REPOSITORY_OWNER,
+                    pullRequestId: env.CHANGE_ID,
 
-                                    createCommentWithAllSingleFileComments: true,
-                                    createSingleFileComments: true,
-                                    commentOnlyChangedContent: true,
-                                    minSeverity: 'INFO',
-                                    keepOldComments: false,
+                    createCommentWithAllSingleFileComments: true,
+                    createSingleFileComments: true,
+                    commentOnlyChangedContent: true,
+                    minSeverity: 'INFO',
+                    keepOldComments: false,
 
-                                    commentTemplate: """
-                                        **Reporter**: {{violation.reporter}}{{#violation.rule}}
-                                        
-                                        **Rule**: {{violation.rule}}{{/violation.rule}}
-                                        **Severity**: {{violation.severity}}
-                                        **File**: {{violation.file}} L{{violation.startLine}}{{#violation.source}}
-                                        
-                                        **Source**: {{violation.source}}{{/violation.source}}
-                                        
-                                        {{violation.message}}
-                                        """,
-
-                                    violationConfigs: [
-                                        [parser: 'CHECKSTYLE', reporter: 'Checkstyle', pattern: '.*/build/reports/checkstyle/.*\\.xml'],
-                                        [parser: 'CPD', reporter: 'CPD', pattern: '.*/build/reports/cpd/.*\\.xml'],
-                                        [parser: 'FINDBUGS', reporter: 'Spotbugs', pattern: '.*/build/reports/spotbugs/.*\\.xml'],
-                                        [parser: 'PMD', reporter: 'PMD', pattern: '.*/build/reports/pmd/.*\\.xml']
-                                   ]])
+                    violationConfigs: [
+                        [parser: 'CHECKSTYLE', reporter: 'Checkstyle', pattern: '.*/build/reports/checkstyle/.*\\.xml'],
+                        [parser: 'CPD', reporter: 'CPD', pattern: '.*/build/reports/cpd/.*\\.xml'],
+                        [parser: 'FINDBUGS', reporter: 'Spotbugs', pattern: '.*/build/reports/spotbugs/.*\\.xml'],
+                        [parser: 'PMD', reporter: 'PMD', pattern: '.*/build/reports/pmd/.*\\.xml']
+                   ]])
             }
         }
 
