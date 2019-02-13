@@ -5,13 +5,13 @@ pipeline {
     stages {
         stage('Cleanup') {
             steps {
-                sh 'sh gradlew clean'
+                sh 'sh gradlew --no-daemon clean'
             }
         }
 
         stage('Static code analysis and unit testing') {
             steps {
-                sh 'sh gradlew check | tee build.log'
+                sh 'sh gradlew --no-daemon check | tee build.log'
             }
             post {
                 always {
@@ -60,7 +60,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'sh gradlew build'
+                sh 'sh gradlew --no-daemon build'
             }
         }
 
