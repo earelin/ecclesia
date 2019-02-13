@@ -1,15 +1,18 @@
 package org.ecclesia.directory.domain;
 
+import java.io.Serializable;
 import javax.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Represents one person. Data transfer object.
  */
 @Entity
 @Table(name = "person")
-@Data
-public class Person {
+@Getter @Setter @NoArgsConstructor
+public class Person implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
