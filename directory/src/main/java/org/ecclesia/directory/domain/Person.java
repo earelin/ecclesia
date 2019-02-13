@@ -1,5 +1,6 @@
 package org.ecclesia.directory.domain;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "person")
 @Getter @Setter @NoArgsConstructor
-public class Person {
+public class Person implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

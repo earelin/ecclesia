@@ -19,7 +19,9 @@ public class Organization implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private
+    long
+      id;
 
   @NotBlank
   private String name;
