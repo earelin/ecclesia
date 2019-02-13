@@ -1,14 +1,16 @@
 package org.ecclesia.directory.domain;
 
 import javax.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Represents one person. Data transfer object.
  */
 @Entity
 @Table(name = "person")
-@Data
+@Getter @Setter @NoArgsConstructor
 public class Person {
 
   @Id
