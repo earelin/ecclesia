@@ -40,6 +40,7 @@ pipeline {
                 ViolationsToGitHub([
                     gitHubUrl: env.GIT_URL,
                     repositoryName: env.REPOSITORY_NAME,
+                    repositoryOwner: env.REPOSITORY_OWNER,
                     pullRequestId: env.CHANGE_ID,
 
                     createCommentWithAllSingleFileComments: false,
