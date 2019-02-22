@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class Location {
 
   private String address1;
@@ -12,5 +14,4 @@ public class Location {
   private String town;
   private String country;
   private String postcode;
-
 }

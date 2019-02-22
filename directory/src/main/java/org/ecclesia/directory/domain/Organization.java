@@ -7,23 +7,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * Represents an organization. Data transfer object.
- */
+/** Represents an organization. */
 @Entity
 @Table(name = "organization")
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class Organization implements Serializable {
 
   private static final long serialVersionUID = 719423610411393862L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private
-    long
-      id;
+  private long id;
 
-  @NotBlank
-  private String name;
-
+  @NotBlank private String name;
 }

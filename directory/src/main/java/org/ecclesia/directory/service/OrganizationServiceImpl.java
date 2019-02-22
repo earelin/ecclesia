@@ -33,14 +33,8 @@ public class OrganizationServiceImpl implements OrganizationService {
   }
 
   @Override
-  public Organization findById(long id) throws EntityDoesNotExists {
-    Optional<Organization> organization = organizationRepository.findById(id);
-
-    if (!organization.isPresent()) {
-      throw new EntityDoesNotExists(String.format("Organization with id %d does not exists", id));
-    }
-
-    return organization.get();
+  public Optional<Organization> findById(long id) {
+    return organizationRepository.findById(id);
   }
 
   @Override

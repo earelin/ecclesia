@@ -4,10 +4,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class Group {
 
-  private long id;
+  private String id;
   private long organization;
   private String name;
   private long parent;

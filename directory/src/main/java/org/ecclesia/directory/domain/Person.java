@@ -6,12 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * Represents one person. Data transfer object.
- */
+/** Represents one person. */
 @Entity
 @Table(name = "person")
-@Getter @Setter @NoArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
 public class Person implements Serializable {
 
   @Id
@@ -26,7 +26,5 @@ public class Person implements Serializable {
   private String surname;
   private String email;
 
-  @Embedded
-  private Location location;
-
+  @Embedded private Location location;
 }
