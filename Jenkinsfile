@@ -46,7 +46,6 @@ pipeline {
                     createCommentWithAllSingleFileComments: false,
                     createSingleFileComments: true,
                     commentOnlyChangedContent: true,
-                    minSeverity: 'INFO',
                     keepOldComments: false,
 
                     violationConfigs: [
@@ -64,18 +63,18 @@ pipeline {
             }
         }
 
-//        stage('Publish snapshot') {
-//            when { branch "2.x.x" }
-//            steps {
-//
-//            }
-//        }
-//
-//        stage('Publish release') {
-//            when { buildingTag() }
-//            steps {
-//
-//            }
-//        }
+        stage('Publish snapshot') {
+            when { branch "2.x.x" }
+            steps {
+                echo 'Publish snapshot'
+            }
+        }
+
+        stage('Publish release') {
+            when { buildingTag() }
+            steps {
+                echo 'Publish release'
+            }
+        }
     }
 }
